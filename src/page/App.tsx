@@ -3,6 +3,7 @@ import './App.css';
 import {Route, Routes} from "react-router-dom";
 import {Home} from "./home/Home";
 import {AddItem} from "./addItem/AddItem";
+import {ItemTransaction} from "./itemTransaction/ItemTransaction";
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/item" element={<AddItem />} />
+                <Route path="/item/:id" element={<ItemTransaction />} />
             </Routes>
         </div>
     );
