@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {getAllItems} from "../../api/itemApis";
+import {getAllItems, deleteItem} from "../../api/itemApis";
 import {Item} from "../../model/item";
 import {Button, Container, Grid, List, Typography} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
@@ -25,6 +25,15 @@ export function Home () {
         navigate(`/item/${id}`)
     }
 
+    const deleteItemFromList = (id: string) => {
+        deleteItem(id)
+            .then(v => {
+                console.log(v);
+                setItemList(itemList.filter(value => value.id !== id))
+            })
+            .catch(reason => console.error(reason));
+    }
+
     return (
         <Container maxWidth="md">
             <Grid container columns={8}>
@@ -38,6 +47,7 @@ export function Home () {
                                 id={item.id}
                                 name={item.name}
                                 barcode={item.barcode}
+                                onButtonClick={() => deleteItemFromList(item.id)}
                                 onClick={() => goToItemTransaction(item.id)} />
                         })}
                     </List>

@@ -1,4 +1,6 @@
+import {useParams} from "react-router-dom";
 
 export function ItemTransaction() {
-    return <div></div>
+    const { itemId } = useParams();
+    return <div>{itemId}</div>
 }
