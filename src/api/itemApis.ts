@@ -30,14 +30,14 @@ export const deleteItem = async (id: string) => {
 }
 
 export const addTransactionToItem = async (itemId: string, transaction: Transaction) => {
-    const url = `${baseUrl}/item/${itemId}/transaction/`;
+    const url = `${baseUrl}/item/${itemId}/transaction`;
     const axiosResponse = await axios.post(url, transaction);
     const baseResponse: BaseResponse<Transaction> = axiosResponse.data;
     return baseResponse.body;
 }
 
 export const getAllItemTransaction = async (itemId: string) => {
-    const url = `${baseUrl}/item/${itemId}/transaction/`;
+    const url = `${baseUrl}/item/${itemId}/transaction`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Transaction[]> = axiosResponse.data;
     return baseResponse.body;
