@@ -26,10 +26,10 @@ export function AddItem () {
             <Grid container columns={8} sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}>
-                <Grid xs={8}>
+                <Grid item xs={8}>
                     <Typography variant="h2">Add food</Typography>
                 </Grid>
-                <Grid xs={8}>
+                <Grid item xs={8}>
                     <TextField
                         required
                         id="outlined-required"
@@ -38,7 +38,7 @@ export function AddItem () {
                         onChange={(event) => setName(event.target.value)}
                     />
                 </Grid>
-                <Grid xs={8}>
+                <Grid item xs={8}>
                     <TextField
                         required
                         id="outlined-required"
@@ -47,7 +47,7 @@ export function AddItem () {
                         onChange={(event) => setBarcode(event.target.value)}
                     />
                 </Grid>
-                <Grid xs={8}>
+                <Grid item xs={8}>
                     <Button variant="contained" onClick={() => sendItemToBe()}>Add food</Button>
                 </Grid>
             </Grid>

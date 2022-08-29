@@ -37,22 +37,24 @@ export function Home () {
     return (
         <Container maxWidth="md">
             <Grid container columns={8}>
-                <Grid xs={8}>
+                <Grid item xs={8}>
                     <Typography variant="h3">Food available</Typography>
                 </Grid>
-                <Grid xs={8}>
-                    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                <Grid item xs={8}>
+                    <List>
                         {itemList.map(item => {
                             return <ItemRowComponent
                                 id={item.id}
                                 name={item.name}
                                 barcode={item.barcode}
+                                quantity={item.quantity || 0}
+                                unit={item.unit || ""}
                                 onButtonClick={() => deleteItemFromList(item.id)}
                                 onClick={() => goToItemTransaction(item.id)} />
                         })}
                     </List>
                 </Grid>
-                <Grid xs={8}>
+                <Grid item xs={8}>
                     <Button variant="contained" onClick={goToAddItem}>
                         Add item
                     </Button>

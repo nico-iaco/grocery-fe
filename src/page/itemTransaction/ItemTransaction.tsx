@@ -2,12 +2,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Button, Container, Grid, List, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
-import {getAllItemTransaction} from "../../api/itemApis";
+import {deleteItemTransaction, getAllItemTransaction} from "../../api/itemApis";
+import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 
 export function ItemTransaction() {
     const { itemId } = useParams();
     const navigate = useNavigate();
     const [itemTransactionList, setItemTransactionList] = useState<Transaction[]>([])
+
     useEffect(() => {
         getAllItemTransaction(itemId || "")
             .then(itemTransactionList => setItemTransactionList(itemTransactionList || []))
@@ -18,19 +20,36 @@ export function ItemTransaction() {
         navigate(`/item/${itemId}/transaction`)
     }
 
+    const deleteTransactionFromList = (transactionId: string) => {
+        deleteItemTransaction(itemId || "", transactionId)
+            .then(result => {
+                console.log(result);
+                setItemTransactionList(itemTransactionList.filter(t => t.id !== transactionId));
+            })
+            .catch(reason => console.error(reason));
+    }
+
     return (<Container>
         <Grid container>
-            <Grid xs={12}>
-                <Typography variant="h3">Food details</Typography>
+            <Grid item xs={12}>
+                <Typography variant="h3"> details</Typography>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
                 <List>
                     {itemTransactionList.map(transaction => {
-                        return (<div><p>{`${transaction.id}  || ${transaction.quantity}  ||  ${transaction.expirationDate}`}</p></div>)
+                        return <TransactionRowComponent
+                            id={transaction.id}
+                            vendor={transaction.vendor}
+                            quantity={transaction.quantity}
+                            unit={transaction.unit}
+                            price={transaction.price}
+                            expirationDate={transaction.expirationDate}
+                            onTransactionClick={() => deleteTransactionFromList(transaction.id)}
+                        />
                     })}
                 </List>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
                 <Button variant="contained" onClick={goToAddTransactionPage}>Add transaction</Button>
             </Grid>
         </Grid>

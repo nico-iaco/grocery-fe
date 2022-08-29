@@ -39,10 +39,10 @@ export function AddTransactionPage() {
         <Grid container columns={8} sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}>
-            <Grid xs={8}>
+            <Grid item xs={8}>
                 <Typography variant="h2">Add Transaction</Typography>
             </Grid>
-            <Grid xs={8}>
+            <Grid item xs={8}>
                 <TextField
                     required
                     id="outlined"
@@ -51,7 +51,7 @@ export function AddTransactionPage() {
                     onChange={(event) => setVendor(event.target.value)}
                 />
             </Grid>
-            <Grid xs={8}>
+            <Grid item xs={8}>
                 <TextField
                     required
                     id="outlined"
@@ -61,7 +61,7 @@ export function AddTransactionPage() {
                     onChange={(event) => setQuantity(Number.parseFloat(event.target.value))}
                 />
             </Grid>
-            <Grid xs={8}>
+            <Grid item xs={8}>
                 <TextField
                     required
                     id="outlined"
@@ -70,7 +70,7 @@ export function AddTransactionPage() {
                     onChange={(event) => setUnit(event.target.value)}
                 />
             </Grid>
-            <Grid xs={8}>
+            <Grid item xs={8}>
                 <TextField
                     required
                     id="outlined"
@@ -80,7 +80,7 @@ export function AddTransactionPage() {
                     onChange={(event) => setPrice(Number.parseFloat(event.target.value))}
                 />
             </Grid>
-            <Grid xs={8}>
+            <Grid item xs={8}>
                 <TextField
                     required
                     id="outlined"
@@ -89,7 +89,7 @@ export function AddTransactionPage() {
                     onChange={(event) => setExpirationDate(new Date(event.target.value))}
                 />
             </Grid>
-            <Grid xs={8}>
+            <Grid item xs={8}>
                 <Button variant="contained" onClick={() => sendTransactionToBe()}>Add Transaction</Button>
             </Grid>
         </Grid>
