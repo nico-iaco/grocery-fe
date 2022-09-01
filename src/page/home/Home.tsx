@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {getAllItems, deleteItem} from "../../api/itemApis";
+import {deleteItem, getAllItems} from "../../api/itemApis";
 import {Item} from "../../model/item";
-import {Button, Container, Grid, List, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, List, Toolbar, Typography} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
 
-export function Home () {
+
+export function Home() {
     const [itemList, setItemList] = useState<Item[]>([])
     const navigate = useNavigate();
     useEffect(() => {
@@ -18,11 +19,11 @@ export function Home () {
     }, [])
 
     const goToAddItem = () => {
-        navigate("/item")
+        navigate("/item");
     }
 
-    const goToItemTransaction = (id: string) => {
-        navigate(`/item/${id}`)
+    const goToItemTransaction = (id: string, name: string) => {
+        navigate(`/item/${id}/${name}`);
     }
 
     const deleteItemFromList = (id: string) => {
@@ -35,10 +36,18 @@ export function Home () {
     }
 
     return (
-        <Container maxWidth="md">
+        <Container>
             <Grid container columns={8}>
                 <Grid item xs={8}>
-                    <Typography variant="h3">Food available</Typography>
+                    <Box sx={{ flexGrow: 1 }}>
+                        <AppBar position="sticky" className="AppBar">
+                            <Toolbar>
+                                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                                    Food available
+                                </Typography>
+                            </Toolbar>
+                        </AppBar>
+                    </Box>
                 </Grid>
                 <Grid item xs={8}>
                     <List>
@@ -50,7 +59,7 @@ export function Home () {
                                 quantity={item.quantity || 0}
                                 unit={item.unit || ""}
                                 onButtonClick={() => deleteItemFromList(item.id)}
-                                onClick={() => goToItemTransaction(item.id)} />
+                                onClick={() => goToItemTransaction(item.id, item.name)}/>
                         })}
                     </List>
                 </Grid>

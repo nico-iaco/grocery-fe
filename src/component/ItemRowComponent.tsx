@@ -14,22 +14,25 @@ export interface ItemRowComponentProps {
 
 export function ItemRowComponent(props: ItemRowComponentProps) {
     return (
-        <div key={props.id}>
-            <Paper elevation={1} variant="outlined">
+        <div key={props.id} style={{
+            paddingBottom: 8
+        }}>
+            <Paper variant="outlined" >
                 <Grid container columns={10}>
                     <Grid item xs={8} onClick={props.onClick}>
-                        <Grid container columns={10}>
-                            <Grid item xs={10}>
-                                <Typography variant="h3">{props.name}</Typography>
+                        <Grid container columns={8}>
+                            <Grid item xs={3} >
+                                <Typography variant="h5">{props.name}</Typography>
+                                <Typography variant="subtitle1">{props.barcode}</Typography>
                             </Grid>
-                            <Grid item xs={10}>
-                                <Typography variant="h3">{props.quantity}</Typography>
+                            <Grid item xs={5} className="center">
+                                <Typography variant="h5">{props.quantity} {props.unit}</Typography>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={2} className="center">
                         <IconButton edge="end" aria-label="delete" onClick={props.onButtonClick}>
-                            <DeleteIcon />
+                            <DeleteIcon/>
                         </IconButton>
                     </Grid>
                 </Grid>

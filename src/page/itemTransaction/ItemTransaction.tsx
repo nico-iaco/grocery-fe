@@ -1,12 +1,13 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {Button, Container, Grid, List, Typography} from "@mui/material";
-import {useEffect, useState} from "react";
+import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
+import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {deleteItemTransaction, getAllItemTransaction} from "../../api/itemApis";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
+import {ArrowBack} from "@mui/icons-material";
 
 export function ItemTransaction() {
-    const { itemId } = useParams();
+    const { itemId, itemName } = useParams();
     const navigate = useNavigate();
     const [itemTransactionList, setItemTransactionList] = useState<Transaction[]>([])
 
@@ -17,7 +18,7 @@ export function ItemTransaction() {
     }, [itemId]);
 
     const goToAddTransactionPage = () => {
-        navigate(`/item/${itemId}/transaction`)
+        navigate(`/item/${itemId}/${itemName}/transaction`);
     }
 
     const deleteTransactionFromList = (transactionId: string) => {
@@ -29,10 +30,33 @@ export function ItemTransaction() {
             .catch(reason => console.error(reason));
     }
 
+    const goBack = () => {
+        navigate(`/`);
+    }
+
     return (<Container>
         <Grid container>
             <Grid item xs={12}>
-                <Typography variant="h3"> details</Typography>
+                <Box sx={{ flexGrow: 1 }}>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="back"
+                                sx={{ mr: 2 }}
+                                onClick={goBack}
+                            >
+                                <ArrowBack />
+                            </IconButton>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                                {itemName} transactions
+                            </Typography>
+                            <Button disabled></Button>
+                        </Toolbar>
+                    </AppBar>
+                </Box>
             </Grid>
             <Grid item xs={12}>
                 <List>

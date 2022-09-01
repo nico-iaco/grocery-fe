@@ -1,5 +1,6 @@
 import {Grid, IconButton, Paper, Typography} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {format} from "date-fns";
 
 export interface TransactionRowComponentProps {
     id: string
@@ -12,29 +13,32 @@ export interface TransactionRowComponentProps {
 }
 
 export function TransactionRowComponent(props: TransactionRowComponentProps) {
-    return <div key={props.id}>
-        <Paper elevation={1} variant="outlined">
-            <Grid container columns={10}>
-                <Grid item xs={2}>
-                    <Typography variant="body1">{props.quantity} {props.unit}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                    <Grid container columns={10}>
-                        <Grid item xs={10}>
-                            <Typography variant="body1">{props.vendor} {props.price}</Typography>
-                        </Grid>
-                        <Grid item xs={10}>
-                            <Typography variant="body1">{props.expirationDate.toString()}</Typography>
+    const formattedDate = format(new Date(), "dd-MM-yyyy")
+    return (
+        <div key={props.id} style={{
+            paddingBottom: 8
+        }}>
+            <Paper variant="outlined">
+                <Grid container columns={10}>
+                    <Grid item xs={2} className="center">
+                        <Typography variant="h5">{props.quantity} {props.unit}</Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Grid container columns={10}>
+                            <Grid item xs={10}>
+                                <Typography variant="h5">{props.vendor} {props.price}€</Typography>
+                            </Grid>
+                            <Grid item xs={10}>
+                                <Typography variant="subtitle1">Expiration date: {formattedDate}</Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item xs={2} className="center">
+                        <IconButton edge="end" aria-label="delete" onClick={props.onTransactionClick}>
+                            <DeleteIcon/>
+                        </IconButton>
+                    </Grid>
                 </Grid>
-                <Grid item xs={2}>
-                    <IconButton edge="end" aria-label="delete" onClick={props.onTransactionClick}>
-                        <DeleteIcon />
-                    </IconButton>
-                </Grid>
-            </Grid>
-        </Paper>
-
-    </div>;
+            </Paper>
+        </div>);
 }

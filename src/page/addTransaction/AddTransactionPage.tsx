@@ -1,11 +1,15 @@
-import {Button, Container, Grid, TextField, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, IconButton, TextField, Toolbar, Typography} from "@mui/material";
 import React, {useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {useNavigate, useParams} from "react-router-dom";
 import {addTransactionToItem} from "../../api/itemApis";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {ArrowBack} from "@mui/icons-material";
+
 
 export function AddTransactionPage() {
-    const { itemId } = useParams();
+    const { itemId, itemName } = useParams();
     const navigate = useNavigate();
 
     const [vendor, setVendor] = useState("")
@@ -13,6 +17,10 @@ export function AddTransactionPage() {
     const [unit, setUnit] = useState("")
     const [price, setPrice] = useState(0)
     const [expirationDate, setExpirationDate] = useState(new Date())
+
+    const goBack = () => {
+        navigate(`/item/${itemId}/${itemName}`);
+    }
 
     const sendTransactionToBe = () => {
 
@@ -40,7 +48,26 @@ export function AddTransactionPage() {
             '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}>
             <Grid item xs={8}>
-                <Typography variant="h2">Add Transaction</Typography>
+                <Box sx={{ flexGrow: 1 }}>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="menu"
+                                sx={{ mr: 2 }}
+                                onClick={goBack}
+                            >
+                                <ArrowBack />
+                            </IconButton>
+                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                                Add transaction
+                            </Typography>
+                            <Button disabled></Button>
+                        </Toolbar>
+                    </AppBar>
+                </Box>
             </Grid>
             <Grid item xs={8}>
                 <TextField
@@ -81,13 +108,19 @@ export function AddTransactionPage() {
                 />
             </Grid>
             <Grid item xs={8}>
-                <TextField
-                    required
-                    id="outlined"
-                    label="Expiration date"
-                    value={expirationDate}
-                    onChange={(event) => setExpirationDate(new Date(event.target.value))}
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                        label="Expiration date"
+                        value={expirationDate}
+                        minDate={new Date()}
+                        onChange={(newValue) => {
+                            if (newValue !== null) {
+                                setExpirationDate(new Date(newValue));
+                            }
+                        }}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
             </Grid>
             <Grid item xs={8}>
                 <Button variant="contained" onClick={() => sendTransactionToBe()}>Add Transaction</Button>
