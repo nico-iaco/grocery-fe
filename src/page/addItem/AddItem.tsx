@@ -9,6 +9,11 @@ export function AddItem () {
     const [name, setName] = useState("");
     const [barcode, setBarcode] = useState("");
     const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(`/`);
+    }
+
     const sendItemToBe = () => {
       const item: Item = {
           id: "",
@@ -18,14 +23,11 @@ export function AddItem () {
       addItem(item)
           .then(value => {
               console.log(value);
-              navigate("/")
+              goBack();
           })
           .catch(reason => console.error(reason));
     };
 
-    const goBack = () => {
-        navigate(`/`);
-    }
 
     return (
         <Container>

@@ -36,7 +36,7 @@ export function AddTransactionPage() {
         addTransactionToItem(itemId || "", transaction)
             .then(value => {
                 console.log(value);
-                navigate(`/item/${itemId}`)
+                goBack();
             })
             .catch(reason => console.error(reason));
 
