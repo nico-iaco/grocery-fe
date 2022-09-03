@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: grocery-fe-deployment
+spec:
+    template:
+        spec:
+            containers:
+                - name: grocery-fe-container
+                  image: grocery-fe-image
+                  ports:
+                      - containerPort: 80
+                  env:
+                      - name: TZ
+                        value: Europe/Rome
+                  envFrom:
+                      -   configMapRef:
+                              name: grocery-fe-properties
+                      -   secretRef:
+                              name: grocery-fe-secrets

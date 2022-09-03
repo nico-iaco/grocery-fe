@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: grocery-fe-deployment
+spec:
+    replicas: 1
+    template:
+        spec:
+            containers:
+                - name: grocery-fe-container
+                  resources:
+                      limits:
+                          memory: "500Mi"
+                      requests:
+                          memory: "256Mi"

@@ -1,0 +1,9 @@
+resources:
+    - deployment.yaml
+    - service.yaml
+    - ingress.yaml
+commonLabels:
+    app: grocery-fe
+images:
+    - name: grocery-fe-image
+      newName: ghcr.io/nico-iaco/grocery-fe

@@ -1,0 +1,15 @@
+namespace: grocery
+resources:
+    - ../../base
+commonLabels:
+    app: grocery-fe
+configMapGenerator:
+    - name: grocery-fe-properties
+      literals:
+          - REACT_APP_BASE_URL=http://grocery-be-service
+secretGenerator:
+    - name: grocery-fe-secrets
+      literals:
+        -
+patchesStrategicMerge:
+    - deployment_patch.yaml
