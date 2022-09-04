@@ -6,6 +6,6 @@ commonLabels:
 configMapGenerator:
     - name: grocery-fe-properties
       literals:
-          - REACT_APP_BASE_URL=http://grocery-be-service
+          - REACT_APP_BASE_URL=http://grocery-be-service.grocery.svc.cluster.local:8000
 patchesStrategicMerge:
     - deployment_patch.yaml
