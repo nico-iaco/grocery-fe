@@ -3,7 +3,7 @@ import axios from "axios";
 import {BaseResponse} from "../model/baseResponse";
 import {Transaction} from "../model/transaction";
 
-export const baseUrl = process.env.REACT_APP_BASE_URL
+export const baseUrl = "/api";
 
 export const addItem = async (item: Item) => {
     const url = `${baseUrl}/item/`;
