@@ -10,3 +10,6 @@ spec:
                   image: grocery-fe-image
                   ports:
                       - containerPort: 80
+                  envFrom:
+                      -   configMapRef:
+                              name: grocery-fe-properties
