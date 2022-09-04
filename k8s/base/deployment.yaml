@@ -10,11 +10,6 @@ spec:
                   image: grocery-fe-image
                   ports:
                       - containerPort: 80
-                  env:
-                      - name: TZ
-                        value: Europe/Rome
                   envFrom:
                       -   configMapRef:
                               name: grocery-fe-properties
-                      -   secretRef:
-                              name: grocery-fe-secrets
