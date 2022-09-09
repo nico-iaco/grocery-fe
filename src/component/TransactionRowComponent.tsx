@@ -10,6 +10,7 @@ export interface TransactionRowComponentProps {
     price: number
     expirationDate: Date
     onTransactionClick: () => void
+    onTransactionButtonClick: () => void
 }
 
 export function TransactionRowComponent(props: TransactionRowComponentProps) {
@@ -20,10 +21,10 @@ export function TransactionRowComponent(props: TransactionRowComponentProps) {
         }}>
             <Paper variant="outlined">
                 <Grid container columns={10}>
-                    <Grid item xs={2} className="center">
+                    <Grid item xs={2} className="center" onClick={props.onTransactionClick}>
                         <Typography variant="h5">{props.quantity} {props.unit}</Typography>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} onClick={props.onTransactionClick}>
                         <Grid container columns={10}>
                             <Grid item xs={10}>
                                 <Typography variant="h5">{props.vendor} {props.price}€</Typography>
@@ -34,7 +35,7 @@ export function TransactionRowComponent(props: TransactionRowComponentProps) {
                         </Grid>
                     </Grid>
                     <Grid item xs={2} className="center">
-                        <IconButton edge="end" aria-label="delete" onClick={props.onTransactionClick}>
+                        <IconButton edge="end" aria-label="delete" onClick={props.onTransactionButtonClick}>
                             <DeleteIcon/>
                         </IconButton>
                     </Grid>

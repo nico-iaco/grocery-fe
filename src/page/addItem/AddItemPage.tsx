@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Item} from "../../model/item";
 import {addItem} from "../../api/itemApis";
-import {AppBar, Box, Button, Container, Grid, IconButton, TextField, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
+import {ItemDataComponent} from "../../component/ItemDataComponent";
 
-export function AddItem () {
+export function AddItemPage () {
     const [name, setName] = useState("");
     const [barcode, setBarcode] = useState("");
     const navigate = useNavigate();
@@ -56,27 +57,14 @@ export function AddItem () {
                         </AppBar>
                     </Box>
                 </Grid>
-                <Grid item xs={8}>
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                    />
-                </Grid>
-                <Grid item xs={8}>
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Barcode"
-                        value={barcode}
-                        onChange={(event) => setBarcode(event.target.value)}
-                    />
-                </Grid>
-                <Grid item xs={8}>
-                    <Button variant="contained" onClick={() => sendItemToBe()}>Add food</Button>
-                </Grid>
+                <ItemDataComponent
+                    name={name}
+                    onNameChange={(v) => setName(v)}
+                    barcode={barcode}
+                    onBarcodeChange={(v) => setBarcode(v)}
+                    buttonText="Add"
+                    onButtonClick={sendItemToBe}
+                />
             </Grid>
 
         </Container>

@@ -6,7 +6,7 @@ import {deleteItemTransaction, getAllItemTransaction} from "../../api/itemApis";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {ArrowBack} from "@mui/icons-material";
 
-export function ItemTransaction() {
+export function ItemTransactionPage() {
     const { itemId, itemName } = useParams();
     const navigate = useNavigate();
     const [itemTransactionList, setItemTransactionList] = useState<Transaction[]>([])
@@ -34,6 +34,14 @@ export function ItemTransaction() {
         navigate(`/`);
     }
 
+    const goToEditItemPage = () => {
+      navigate(`/item/${itemId}/${itemName}/edit`);
+    }
+
+    const goToEditTransactionPage = (transactionId: string) => {
+        navigate(`/item/${itemId}/${itemName}/transaction/${transactionId}/edit`);
+    }
+
     return (<Container>
         <Grid container>
             <Grid item xs={12}>
@@ -53,7 +61,7 @@ export function ItemTransaction() {
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                 {itemName} transactions
                             </Typography>
-                            <Button disabled></Button>
+                            <Button onClick={goToEditItemPage} color="inherit" >Edit</Button>
                         </Toolbar>
                     </AppBar>
                 </Box>
@@ -68,7 +76,8 @@ export function ItemTransaction() {
                             unit={transaction.unit}
                             price={transaction.price}
                             expirationDate={transaction.expirationDate}
-                            onTransactionClick={() => deleteTransactionFromList(transaction.id)}
+                            onTransactionClick={() => goToEditTransactionPage(transaction.id)}
+                            onTransactionButtonClick={() => deleteTransactionFromList(transaction.id)}
                         />
                     })}
                 </List>

@@ -1,11 +1,10 @@
-import {AppBar, Box, Button, Container, Grid, IconButton, TextField, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import React, {useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {useNavigate, useParams} from "react-router-dom";
 import {addTransactionToItem} from "../../api/itemApis";
-import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {ArrowBack} from "@mui/icons-material";
+import {TransactionDataComponent} from "../../component/TransactionDataComponent";
 
 
 export function AddTransactionPage() {
@@ -69,62 +68,19 @@ export function AddTransactionPage() {
                     </AppBar>
                 </Box>
             </Grid>
-            <Grid item xs={8}>
-                <TextField
-                    required
-                    id="outlined"
-                    label="Vendor"
-                    value={vendor}
-                    onChange={(event) => setVendor(event.target.value)}
-                />
-            </Grid>
-            <Grid item xs={8}>
-                <TextField
-                    required
-                    id="outlined"
-                    label="Quantity"
-                    type="number"
-                    value={quantity}
-                    onChange={(event) => setQuantity(Number.parseFloat(event.target.value))}
-                />
-            </Grid>
-            <Grid item xs={8}>
-                <TextField
-                    required
-                    id="outlined"
-                    label="Unit"
-                    value={unit}
-                    onChange={(event) => setUnit(event.target.value)}
-                />
-            </Grid>
-            <Grid item xs={8}>
-                <TextField
-                    required
-                    id="outlined"
-                    label="Price"
-                    type="number"
-                    value={price}
-                    onChange={(event) => setPrice(Number.parseFloat(event.target.value))}
-                />
-            </Grid>
-            <Grid item xs={8}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        label="Expiration date"
-                        value={expirationDate}
-                        minDate={new Date()}
-                        onChange={(newValue) => {
-                            if (newValue !== null) {
-                                setExpirationDate(new Date(newValue));
-                            }
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </LocalizationProvider>
-            </Grid>
-            <Grid item xs={8}>
-                <Button variant="contained" onClick={() => sendTransactionToBe()}>Add Transaction</Button>
-            </Grid>
+            <TransactionDataComponent
+                vendor={vendor}
+                onVendorChange={setVendor}
+                quantity={quantity}
+                onQuantityChange={setQuantity}
+                unit={unit}
+                onUnitChange={setUnit}
+                price={price}
+                onPriceChange={setPrice}
+                expirationDate={expirationDate}
+                onExpirationDateChange={setExpirationDate}
+                buttonText="Add"
+                onButtonClick={sendTransactionToBe} />
         </Grid>
     </Container>
 }
