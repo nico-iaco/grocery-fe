@@ -13,3 +13,10 @@ spec:
                   envFrom:
                       -   configMapRef:
                               name: grocery-fe-properties
+                  volumeMounts:
+                    - mountPath: /usr/nginx/
+                      name: cert
+            volumes:
+              - name: cert
+                configMap:
+                  name: grocery-fe-certs
