@@ -3,7 +3,10 @@ kind: Service
 metadata:
     name: grocery-fe-service
 spec:
+    selector:
+      app: grocery-fe
     ports:
         - port: 8000
           targetPort: 80
-    type: NodePort
+          protocol: TCP
+    type: LoadBalancer
