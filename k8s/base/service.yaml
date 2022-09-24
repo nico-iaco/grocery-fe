@@ -6,7 +6,7 @@ spec:
     selector:
       app: grocery-fe
     ports:
-        - port: 8000
+        - port: 10000
           targetPort: 443
           protocol: TCP
     type: LoadBalancer

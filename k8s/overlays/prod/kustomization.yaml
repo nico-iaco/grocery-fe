@@ -1,0 +1,15 @@
+namespace: grocery
+resources:
+    - ../../base
+commonLabels:
+    app: grocery-fe
+configMapGenerator:
+    - name: grocery-fe-properties
+      literals:
+          - REACT_APP_BASE_URL=http://grocery-be-service.grocery.svc.cluster.local:8000
+    - name: grocery-fe-certs
+      files:
+        - ssl.crt
+        - ssl.key
+patchesStrategicMerge:
+    - deployment_patch.yaml
