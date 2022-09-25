@@ -27,6 +27,7 @@ export function AddTransactionPage() {
             id: "",
             vendor,
             quantity,
+            availableQuantity: quantity,
             unit,
             price,
             expirationDate

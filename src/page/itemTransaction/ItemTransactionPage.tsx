@@ -73,6 +73,7 @@ export function ItemTransactionPage() {
                             id={transaction.id}
                             vendor={transaction.vendor}
                             quantity={transaction.quantity}
+                            availableQuantity={transaction.availableQuantity}
                             unit={transaction.unit}
                             price={transaction.price}
                             expirationDate={transaction.expirationDate}

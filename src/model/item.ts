@@ -4,5 +4,6 @@ export interface Item {
     name: string
     barcode: string
     quantity?: number
+    availableQuantity?: number
     unit?: string
 }

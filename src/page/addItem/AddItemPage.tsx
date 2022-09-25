@@ -23,8 +23,7 @@ export function AddItemPage () {
       };
       addItem(item)
           .then(value => {
-              console.log(value);
-              goBack();
+              navigate(`/item/:itemId/${value?.id}`);
           })
           .catch(reason => console.error(reason));
     };

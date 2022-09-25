@@ -56,7 +56,7 @@ export function Home() {
                                 id={item.id}
                                 name={item.name}
                                 barcode={item.barcode}
-                                quantity={item.quantity || 0}
+                                quantity={item.availableQuantity || 0}
                                 unit={item.unit || ""}
                                 onButtonClick={() => deleteItemFromList(item.id)}
                                 onClick={() => goToItemTransaction(item.id, item.name)}/>

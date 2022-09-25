@@ -6,6 +6,7 @@ export interface TransactionRowComponentProps {
     id: string
     vendor: string
     quantity: number
+    availableQuantity: number
     unit: string
     price: number
     expirationDate: Date
@@ -22,7 +23,7 @@ export function TransactionRowComponent(props: TransactionRowComponentProps) {
             <Paper variant="outlined">
                 <Grid container columns={10}>
                     <Grid item xs={2} className="center" onClick={props.onTransactionClick}>
-                        <Typography variant="h5">{props.quantity} {props.unit}</Typography>
+                        <Typography variant="subtitle1">{props.availableQuantity}/{props.quantity} {props.unit}</Typography>
                     </Grid>
                     <Grid item xs={6} onClick={props.onTransactionClick}>
                         <Grid container columns={10}>
