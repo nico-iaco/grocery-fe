@@ -70,11 +70,10 @@ export const ItemDataComponent = (props: ItemDataComponentProps) => {
             open={isBarcodeReaderVisible}
             onClose={() => setIsBarcodeReaderVisible(false)}
         >
-            <Box
-            >
+            <Box>
                 <BarcodeComponent
-                    fps={30}
-                    qrbox={480}
+                    fps={15}
+                    qrbox={240}
                     qrCodeSuccessCallback={(decodedText, result) => {
                         props.onBarcodeChange(decodedText)
                         setIsBarcodeReaderVisible(false)
