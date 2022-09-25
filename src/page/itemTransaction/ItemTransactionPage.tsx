@@ -2,16 +2,23 @@ import {useNavigate, useParams} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
-import {deleteItemTransaction, getAllItemTransaction} from "../../api/itemApis";
+import {deleteItemTransaction, getAllItemTransaction, getItemDetail} from "../../api/itemApis";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
-import {ArrowBack} from "@mui/icons-material";
+import {ArrowBack, Image} from "@mui/icons-material";
+import {FoodDetail} from "../../model/foodDetails";
+import "./ItemTransactionPage.css";
 
 export function ItemTransactionPage() {
     const { itemId, itemName } = useParams();
     const navigate = useNavigate();
     const [itemTransactionList, setItemTransactionList] = useState<Transaction[]>([])
+    const [itemDetails, setItemDetails] = useState<FoodDetail>();
 
     useEffect(() => {
+        getItemDetail(itemId || "")
+            .then(value => {
+                setItemDetails(value || {});
+            }).catch(reason => console.error(reason));
         getAllItemTransaction(itemId || "")
             .then(itemTransactionList => setItemTransactionList(itemTransactionList || []))
             .catch(reason => console.log(reason));
@@ -67,6 +74,7 @@ export function ItemTransactionPage() {
                 </Box>
             </Grid>
             <Grid item xs={12}>
+                <img src={itemDetails?.image_nutrition_url} className="content-image" />
                 <List>
                     {itemTransactionList.map(transaction => {
                         return <TransactionRowComponent

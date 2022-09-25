@@ -12,7 +12,6 @@ export function Home() {
     useEffect(() => {
         getAllItems()
             .then(value => {
-                console.log(value)
                 setItemList(value || [])
             })
             .catch(reason => console.error(reason));
