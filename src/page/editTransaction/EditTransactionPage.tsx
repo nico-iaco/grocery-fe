@@ -1,39 +1,34 @@
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {TransactionDataComponent} from "../../component/TransactionDataComponent";
-import React, {useEffect} from "react";
+import React from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {getItemTransaction, updateItemTransaction} from "../../api/itemApis";
+import {updateItemTransaction} from "../../api/itemApis";
 import {Transaction} from "../../model/transaction";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrentTransaction} from "../../selector/Selector";
+import {setCurrentTransaction} from "../../action/Action";
 
 export const EditTransactionPage = () => {
-  const { itemId, itemName, transactionId } = useParams();
-  const [vendor, setVendor] = React.useState("");
-  const [quantity, setQuantity] = React.useState(0);
-  const [unit, setUnit] = React.useState("");
-  const [price, setPrice] = React.useState(0);
-  const [expirationDate, setExpirationDate] = React.useState(new Date());
+  const { itemId } = useParams();
+  const currentTransaction = useSelector(getCurrentTransaction);
+  const dispatch = useDispatch();
+  const [vendor, setVendor] = React.useState(currentTransaction?.vendor || "");
+  const [quantity, setQuantity] = React.useState(currentTransaction?.quantity || 0);
+  const [unit, setUnit] = React.useState(currentTransaction?.unit || "");
+  const [price, setPrice] = React.useState(currentTransaction?.price || 0);
+  const [expirationDate, setExpirationDate] = React.useState(currentTransaction?.expirationDate || new Date());
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getItemTransaction(itemId || "", transactionId || "")
-        .then(value => {
-            setVendor(value.vendor);
-            setQuantity(value.quantity);
-            setUnit(value.unit);
-            setPrice(value.price);
-            setExpirationDate(value.expirationDate);
-        })
-        .catch(reason => console.error(reason));
-  }, [itemId, transactionId]);
 
   const goBack = () => {
-    navigate(`/item/${itemId}/${itemName}`);
+    dispatch(setCurrentTransaction(undefined));
+    navigate(`/item/${itemId}`);
   }
 
   const updateTransactionToBe = () => {
     const updatedTransaction: Transaction = {
-      id: transactionId || "",
+      id: currentTransaction?.id || "",
       vendor,
       quantity,
       availableQuantity: quantity,

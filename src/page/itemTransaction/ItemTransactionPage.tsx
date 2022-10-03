@@ -4,28 +4,33 @@ import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {deleteItemTransaction, getAllItemTransaction, getItemDetail} from "../../api/itemApis";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
-import {ArrowBack, Image} from "@mui/icons-material";
+import {ArrowBack} from "@mui/icons-material";
 import {FoodDetail} from "../../model/foodDetails";
 import "./ItemTransactionPage.css";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrentItem} from "../../selector/Selector";
+import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 
 export function ItemTransactionPage() {
-    const { itemId, itemName } = useParams();
+    const { itemId } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const currentItem = useSelector(getCurrentItem);
     const [itemTransactionList, setItemTransactionList] = useState<Transaction[]>([])
     const [itemDetails, setItemDetails] = useState<FoodDetail>();
 
     useEffect(() => {
-        getItemDetail(itemId || "")
+        getItemDetail(currentItem?.id || "")
             .then(value => {
                 setItemDetails(value || {});
             }).catch(reason => console.error(reason));
-        getAllItemTransaction(itemId || "")
+        getAllItemTransaction(currentItem?.id || "")
             .then(itemTransactionList => setItemTransactionList(itemTransactionList || []))
             .catch(reason => console.log(reason));
-    }, [itemId]);
+    }, [currentItem?.id]);
 
     const goToAddTransactionPage = () => {
-        navigate(`/item/${itemId}/${itemName}/transaction`);
+        navigate(`/item/${currentItem?.id}/transaction`);
     }
 
     const deleteTransactionFromList = (transactionId: string) => {
@@ -38,15 +43,17 @@ export function ItemTransactionPage() {
     }
 
     const goBack = () => {
+        dispatch(setCurrentItem(undefined));
         navigate(`/`);
     }
 
     const goToEditItemPage = () => {
-      navigate(`/item/${itemId}/${itemName}/edit`);
+      navigate(`/item/${itemId}/edit`);
     }
 
-    const goToEditTransactionPage = (transactionId: string) => {
-        navigate(`/item/${itemId}/${itemName}/transaction/${transactionId}/edit`);
+    const goToEditTransactionPage = (transaction: Transaction) => {
+        dispatch(setCurrentTransaction(transaction));
+        navigate(`/item/${itemId}/transaction/${transaction.id}/edit`);
     }
 
     return (<Container>
@@ -66,7 +73,7 @@ export function ItemTransactionPage() {
                                 <ArrowBack />
                             </IconButton>
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                {itemName} transactions
+                                {currentItem?.name} transactions
                             </Typography>
                             <Button onClick={goToEditItemPage} color="inherit" >Edit</Button>
                         </Toolbar>
@@ -74,10 +81,11 @@ export function ItemTransactionPage() {
                 </Box>
             </Grid>
             <Grid item xs={12}>
-                <img src={itemDetails?.image_nutrition_url} className="content-image" />
+                <img src={itemDetails?.image_nutrition_url} className="content-image"  alt="nutrition-table"/>
                 <List>
                     {itemTransactionList.map(transaction => {
                         return <TransactionRowComponent
+                            key={transaction.id}
                             id={transaction.id}
                             vendor={transaction.vendor}
                             quantity={transaction.quantity}
@@ -85,7 +93,7 @@ export function ItemTransactionPage() {
                             unit={transaction.unit}
                             price={transaction.price}
                             expirationDate={transaction.expirationDate}
-                            onTransactionClick={() => goToEditTransactionPage(transaction.id)}
+                            onTransactionClick={() => goToEditTransactionPage(transaction)}
                             onTransactionButtonClick={() => deleteTransactionFromList(transaction.id)}
                         />
                     })}

@@ -14,10 +14,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/item" element={<AddItemPage/>}/>
-                <Route path="/item/:itemId/:itemName" element={<ItemTransactionPage/>}/>
-                <Route path="/item/:itemId/:itemName/transaction" element={<AddTransactionPage/>}/>
-                <Route path="/item/:itemId/:itemName/edit" element={<EditItemPage/>}/>
-                <Route path="/item/:itemId/:itemName/transaction/:transactionId/edit" element={<EditTransactionPage/>}/>
+                <Route path="/item/:itemId" element={<ItemTransactionPage/>}/>
+                <Route path="/item/:itemId/transaction" element={<AddTransactionPage/>}/>
+                <Route path="/item/:itemId/edit" element={<EditItemPage/>}/>
+                <Route path="/item/:itemId/transaction/:transactionId/edit" element={<EditTransactionPage/>}/>
             </Routes>
         </div>
     );

@@ -5,8 +5,11 @@ import {addItem} from "../../api/itemApis";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
+import {useDispatch} from "react-redux";
+import {setCurrentItem} from "../../action/Action";
 
 export function AddItemPage () {
+    const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [barcode, setBarcode] = useState("");
     const navigate = useNavigate();
@@ -23,7 +26,8 @@ export function AddItemPage () {
       };
       addItem(item)
           .then(value => {
-              navigate(`/item/:itemId/${value?.id}`);
+              dispatch(setCurrentItem(value));
+              navigate(`/item/${value?.id}`);
           })
           .catch(reason => console.error(reason));
     };
