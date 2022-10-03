@@ -8,7 +8,7 @@ import {TransactionDataComponent} from "../../component/TransactionDataComponent
 
 
 export function AddTransactionPage() {
-    const { itemId, itemName } = useParams();
+    const { itemId } = useParams();
     const navigate = useNavigate();
 
     const [vendor, setVendor] = useState("")
@@ -18,7 +18,7 @@ export function AddTransactionPage() {
     const [expirationDate, setExpirationDate] = useState(new Date())
 
     const goBack = () => {
-        navigate(`/item/${itemId}/${itemName}`);
+        navigate(`/item/${itemId}`);
     }
 
     const sendTransactionToBe = () => {

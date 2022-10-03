@@ -1,18 +1,23 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {deleteItem, getAllItems} from "../../api/itemApis";
-import {Item} from "../../model/item";
 import {AppBar, Box, Button, Container, Grid, List, Toolbar, Typography} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
+import {useDispatch} from "react-redux";
+import {Item} from "../../model/item";
+import {setCurrentItem} from "../../action/Action";
 
 
 export function Home() {
+    const dispatch = useDispatch();
     const [itemList, setItemList] = useState<Item[]>([])
     const navigate = useNavigate();
     useEffect(() => {
         getAllItems()
             .then(value => {
-                setItemList(value || [])
+                if (value) {
+                    setItemList(value)
+                }
             })
             .catch(reason => console.error(reason));
     }, [])
@@ -21,8 +26,9 @@ export function Home() {
         navigate("/item");
     }
 
-    const goToItemTransaction = (id: string, name: string) => {
-        navigate(`/item/${id}/${name}`);
+    const goToItemTransaction = (item: Item) => {
+        dispatch(setCurrentItem(item))
+        navigate(`/item/${item.id}/`);
     }
 
     const deleteItemFromList = (id: string) => {
@@ -52,13 +58,14 @@ export function Home() {
                     <List>
                         {itemList.map(item => {
                             return <ItemRowComponent
+                                key={item.id}
                                 id={item.id}
                                 name={item.name}
                                 barcode={item.barcode}
                                 quantity={item.availableQuantity || 0}
                                 unit={item.unit || ""}
                                 onButtonClick={() => deleteItemFromList(item.id)}
-                                onClick={() => goToItemTransaction(item.id, item.name)}/>
+                                onClick={() => goToItemTransaction(item)}/>
                         })}
                     </List>
                 </Grid>

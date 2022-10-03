@@ -5,24 +5,18 @@ import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} f
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {Item} from "../../model/item";
+import {useSelector} from "react-redux";
+import {getCurrentItem} from "../../selector/Selector";
 
 export const EditItemPage = () => {
-    const {itemId, itemName} = useParams();
-    const [name, setName] = useState(itemName || "");
-    const [barcode, setBarcode] = useState("");
+    const currentItem = useSelector(getCurrentItem);
+    const [name, setName] = useState(currentItem?.name || "");
+    const [barcode, setBarcode] = useState(currentItem?.barcode || "");
     const navigate = useNavigate();
-
-    useEffect(() => {
-        getItem(itemId || "")
-            .then(i => {
-                setName(i.name);
-                setBarcode(i.barcode);
-            })
-    }, [itemId]);
 
     const updateItemToBe = () => {
         const updatedItem: Item = {
-            id: itemId || "",
+            id: currentItem?.id || "",
             name,
             barcode
         }
@@ -35,7 +29,7 @@ export const EditItemPage = () => {
     }
 
     const goBack = () => {
-        navigate(`/item/${itemId}/${name}`);
+        navigate(`/item/${currentItem?.id}`);
     }
 
     return <Container>
@@ -57,7 +51,7 @@ export const EditItemPage = () => {
                                 <ArrowBack />
                             </IconButton>
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                Edit {itemName}
+                                Edit {currentItem?.name}
                             </Typography>
                             <Button disabled></Button>
                         </Toolbar>
