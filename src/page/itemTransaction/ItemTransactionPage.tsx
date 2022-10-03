@@ -44,7 +44,7 @@ export function ItemTransactionPage() {
 
     const goBack = () => {
         dispatch(setCurrentItem(undefined));
-        navigate(`/`);
+        navigate(`/item`);
     }
 
     const goToEditItemPage = () => {
