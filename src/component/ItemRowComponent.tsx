@@ -14,19 +14,18 @@ export interface ItemRowComponentProps {
 
 export function ItemRowComponent(props: ItemRowComponentProps) {
     return (
-        <div key={props.id} style={{
+        <div style={{
             paddingBottom: 8
         }}>
             <Paper variant="outlined" >
                 <Grid container columns={10}>
                     <Grid item xs={8} onClick={props.onClick}>
                         <Grid container columns={8}>
-                            <Grid item xs={3} >
+                            <Grid item xs={8} >
                                 <Typography variant="h5">{props.name}</Typography>
-                                <Typography variant="subtitle1">{props.barcode}</Typography>
                             </Grid>
-                            <Grid item xs={5} className="center">
-                                <Typography variant="h5">{props.quantity} {props.unit}</Typography>
+                            <Grid item xs={8} className="center">
+                                <Typography variant="subtitle1">{props.barcode} § {props.quantity} {props.unit}</Typography>
                             </Grid>
                         </Grid>
                     </Grid>

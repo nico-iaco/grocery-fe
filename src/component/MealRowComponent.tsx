@@ -17,7 +17,7 @@ export const MealRowComponent = (props: MealRowComponentProps) => {
     const formattedDate = format(new Date(props.date), "dd-MM-yyyy")
 
     return (
-        <div key={props.id} style={{
+        <div style={{
             paddingBottom: 8
         }}>
             <Paper variant="outlined" >

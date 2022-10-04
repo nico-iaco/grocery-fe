@@ -34,7 +34,6 @@ export function AddItemPage () {
 
 
     return (
-        <Container>
             <Grid container columns={8} sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}>
@@ -60,16 +59,16 @@ export function AddItemPage () {
                         </AppBar>
                     </Box>
                 </Grid>
-                <ItemDataComponent
-                    name={name}
-                    onNameChange={(v) => setName(v)}
-                    barcode={barcode}
-                    onBarcodeChange={(v) => setBarcode(v)}
-                    buttonText="Add"
-                    onButtonClick={sendItemToBe}
-                />
+                <Container>
+                    <ItemDataComponent
+                        name={name}
+                        onNameChange={(v) => setName(v)}
+                        barcode={barcode}
+                        onBarcodeChange={(v) => setBarcode(v)}
+                        buttonText="Add"
+                        onButtonClick={sendItemToBe}
+                    />
+                </Container>
             </Grid>
-
-        </Container>
     );
 }

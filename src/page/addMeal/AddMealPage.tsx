@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom";
 import {setCurrentMeal} from "../../action/Action";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
-import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {MealDataComponent} from "../../component/MealDataComponent";
 
 export const AddMealPage = () => {
@@ -27,8 +26,7 @@ export const AddMealPage = () => {
         addMeal(meal)
             .then(value => {
                 dispatch(setCurrentMeal(value));
-                // navigate(`/meal/${value?.id}`);
-                navigate(`/meal`); //FIXME: navigate to meal detail page
+                navigate(`/meal/${value?.id}/consumption`);
             })
             .catch(reason => console.error(reason));
     }
@@ -38,7 +36,6 @@ export const AddMealPage = () => {
     }
 
     return (
-        <Container>
             <Grid container columns={8} sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}>
@@ -64,20 +61,21 @@ export const AddMealPage = () => {
                         </AppBar>
                     </Box>
                 </Grid>
-                <MealDataComponent
-                    name={name}
-                    onNameChange={setName}
-                    description={description}
-                    onDescriptionChange={setDescription}
-                    mealType={mealType}
-                    onMealTypeChange={setMealType}
-                    date={date}
-                    onDateChange={setDate}
-                    buttonText="Add meal"
-                    onButtonClick={sendMealToBe}
-                />
+                <Container>
+                    <MealDataComponent
+                        name={name}
+                        onNameChange={setName}
+                        description={description}
+                        onDescriptionChange={setDescription}
+                        mealType={mealType}
+                        onMealTypeChange={setMealType}
+                        date={date}
+                        onDateChange={setDate}
+                        buttonText="Add meal"
+                        onButtonClick={sendMealToBe}
+                    />
+                </Container>
             </Grid>
-        </Container>
     );
 
 }

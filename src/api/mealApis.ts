@@ -52,7 +52,7 @@ export const getMealFoodConsumptions = async (mealId: string) => {
     const url = `${baseUrl}/meal/${mealId}/consumption`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<FoodConsumption[]> = axiosResponse.data;
-    if (baseResponse.body !== undefined) {
+    if (baseResponse.body !== undefined && baseResponse.errorMessage === "") {
         return baseResponse.body;
     } else {
         throw Error(baseResponse.errorMessage);

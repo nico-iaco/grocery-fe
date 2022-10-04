@@ -5,11 +5,15 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
 import {ArrowBack} from "@mui/icons-material";
+import {useDispatch} from "react-redux";
+import {setCurrentMeal} from "../../action/Action";
 
 
-export const MealDashboardPage = (props: any) => {
+export const MealDashboardPage = () => {
     const [mealList, setMealList] = useState<Meal[]>([])
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     useEffect(() => {
         getAllMeals()
             .then(value => {
@@ -25,7 +29,8 @@ export const MealDashboardPage = (props: any) => {
     }
 
     const goToMealTransaction = (meal: Meal) => {
-        navigate(`/meal/${meal.id}/`);
+        dispatch(setCurrentMeal(meal))
+        navigate(`/meal/${meal.id}/consumption`);
     }
 
     const deleteMealFromList = (id: string) => {
@@ -42,7 +47,6 @@ export const MealDashboardPage = (props: any) => {
     }
 
     return (
-        <Container>
             <Grid container columns={8}>
                 <Grid item xs={8}>
                     <Box sx={{ flexGrow: 1 }}>
@@ -66,27 +70,28 @@ export const MealDashboardPage = (props: any) => {
                         </AppBar>
                     </Box>
                 </Grid>
-                <Grid item xs={8}>
-                    <List>
-                        {mealList.map(meal => {
-                            return <MealRowComponent
-                                key={meal.id}
-                                id={meal.id || ""}
-                                name={meal.name}
-                                description={meal.description}
-                                mealType={meal.mealType}
-                                date={meal.date}
-                                onClick={() => goToMealTransaction(meal)}
-                                onButtonClick={() => deleteMealFromList(meal.id || "")}
-                            />
-                        })}
-                    </List>
-                </Grid>
-                <Grid item xs={8}>
-                    <Button variant="contained" onClick={goToAddMeal}>Add meal</Button>
-                </Grid>
+                <Container>
+                    <Grid item xs={8}>
+                        <List>
+                            {mealList.map(meal => {
+                                return <MealRowComponent
+                                    key={meal.id}
+                                    id={meal.id || ""}
+                                    name={meal.name}
+                                    description={meal.description}
+                                    mealType={meal.mealType}
+                                    date={meal.date}
+                                    onClick={() => goToMealTransaction(meal)}
+                                    onButtonClick={() => deleteMealFromList(meal.id || "")}
+                                />
+                            })}
+                        </List>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Button variant="contained" onClick={goToAddMeal}>Add meal</Button>
+                    </Grid>
+                </Container>
             </Grid>
-        </Container>
     )
 
 }

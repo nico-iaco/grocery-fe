@@ -8,7 +8,7 @@ import {TransactionDataComponent} from "../../component/TransactionDataComponent
 
 
 export function AddTransactionPage() {
-    const { itemId } = useParams();
+    const {itemId} = useParams();
     const navigate = useNavigate();
 
     const [vendor, setVendor] = useState("")
@@ -18,7 +18,7 @@ export function AddTransactionPage() {
     const [expirationDate, setExpirationDate] = useState(new Date())
 
     const goBack = () => {
-        navigate(`/item/${itemId}`);
+        navigate(`/item/${itemId}/transaction`);
     }
 
     const sendTransactionToBe = () => {
@@ -43,32 +43,32 @@ export function AddTransactionPage() {
 
     }
 
-    return <Container>
-        <Grid container columns={8} sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}>
-            <Grid item xs={8}>
-                <Box sx={{ flexGrow: 1 }}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{ mr: 2 }}
-                                onClick={goBack}
-                            >
-                                <ArrowBack />
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                Add transaction
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
-            </Grid>
+    return <Grid container columns={8} sx={{
+        '& .MuiTextField-root': {m: 1, width: '25ch'},
+    }}>
+        <Grid item xs={8}>
+            <Box sx={{flexGrow: 1}}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{mr: 2}}
+                            onClick={goBack}
+                        >
+                            <ArrowBack/>
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            Add transaction
+                        </Typography>
+                        <Button disabled></Button>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        </Grid>
+        <Container>
             <TransactionDataComponent
                 vendor={vendor}
                 onVendorChange={setVendor}
@@ -81,7 +81,8 @@ export function AddTransactionPage() {
                 expirationDate={expirationDate}
                 onExpirationDateChange={setExpirationDate}
                 buttonText="Add"
-                onButtonClick={sendTransactionToBe} />
-        </Grid>
-    </Container>
+                onButtonClick={sendTransactionToBe}/>
+        </Container>
+
+    </Grid>
 }

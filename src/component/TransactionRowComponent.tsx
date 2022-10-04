@@ -17,7 +17,7 @@ export interface TransactionRowComponentProps {
 export function TransactionRowComponent(props: TransactionRowComponentProps) {
     const formattedDate = format(new Date(props.expirationDate), "dd-MM-yyyy")
     return (
-        <div key={props.id} style={{
+        <div style={{
             paddingBottom: 8
         }}>
             <Paper variant="outlined">

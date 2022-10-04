@@ -1,5 +1,5 @@
 import {MealType} from "../model/meal";
-import {Button, Grid, MenuItem, Select, TextField} from "@mui/material";
+import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import React from "react";
@@ -38,25 +38,30 @@ export const MealDataComponent = (props: TransactionDataComponentProps) => {
             />
         </Grid>
         <Grid item xs={8}>
-            <Select
-                required
-                id="outlined"
-                label="Meal Type"
-                value={props.mealType}
-                onChange={(event) => props.onMealTypeChange(event.target.value as MealType)}
-            >
-                <MenuItem value={MealType.BREAKFAST}>Breakfast</MenuItem>
-                <MenuItem value={MealType.LUNCH}>Lunch</MenuItem>
-                <MenuItem value={MealType.DINNER}>Dinner</MenuItem>
-                <MenuItem value={MealType.OTHERS}>Other</MenuItem>
-            </Select>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                <InputLabel id="meal-type-select-label">Meal type</InputLabel>
+                <Select
+                    required
+                    labelId="meal-type-select-label"
+                    id="outlined"
+                    label="Meal Type"
+                    value={props.mealType}
+                    onChange={(event) => props.onMealTypeChange(event.target.value as MealType)}
+                >
+                    <MenuItem value={MealType.BREAKFAST}>Breakfast</MenuItem>
+                    <MenuItem value={MealType.LUNCH}>Lunch</MenuItem>
+                    <MenuItem value={MealType.DINNER}>Dinner</MenuItem>
+                    <MenuItem value={MealType.OTHERS}>Other</MenuItem>
+                </Select>
+            </FormControl>
+
         </Grid>
         <Grid item xs={8}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     label="Meal date"
                     value={props.date}
-                    minDate={new Date()}
+                    maxDate={new Date()}
                     onChange={(newValue) => {
                         if (newValue !== null) {
                             props.onDateChange(new Date(newValue));

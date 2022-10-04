@@ -30,7 +30,7 @@ export function ItemTransactionPage() {
     }, [currentItem?.id]);
 
     const goToAddTransactionPage = () => {
-        navigate(`/item/${currentItem?.id}/transaction`);
+        navigate(`/item/${currentItem?.id}/transaction/add`);
     }
 
     const deleteTransactionFromList = (transactionId: string) => {
@@ -56,7 +56,7 @@ export function ItemTransactionPage() {
         navigate(`/item/${itemId}/transaction/${transaction.id}/edit`);
     }
 
-    return (<Container>
+    return (
         <Grid container>
             <Grid item xs={12}>
                 <Box sx={{ flexGrow: 1 }}>
@@ -80,28 +80,29 @@ export function ItemTransactionPage() {
                     </AppBar>
                 </Box>
             </Grid>
-            <Grid item xs={12}>
-                <img src={itemDetails?.image_nutrition_url} className="content-image"  alt="nutrition-table"/>
-                <List>
-                    {itemTransactionList.map(transaction => {
-                        return <TransactionRowComponent
-                            key={transaction.id}
-                            id={transaction.id}
-                            vendor={transaction.vendor}
-                            quantity={transaction.quantity}
-                            availableQuantity={transaction.availableQuantity}
-                            unit={transaction.unit}
-                            price={transaction.price}
-                            expirationDate={transaction.expirationDate}
-                            onTransactionClick={() => goToEditTransactionPage(transaction)}
-                            onTransactionButtonClick={() => deleteTransactionFromList(transaction.id)}
-                        />
-                    })}
-                </List>
-            </Grid>
-            <Grid item xs={12}>
-                <Button variant="contained" onClick={goToAddTransactionPage}>Add transaction</Button>
-            </Grid>
-        </Grid>
-    </Container>);
+            <Container>
+                <Grid item xs={12}>
+                    <img src={itemDetails?.image_nutrition_url} className="content-image"  alt="nutrition-table"/>
+                    <List>
+                        {itemTransactionList.map(transaction => {
+                            return <TransactionRowComponent
+                                key={transaction.id}
+                                id={transaction.id}
+                                vendor={transaction.vendor}
+                                quantity={transaction.quantity}
+                                availableQuantity={transaction.availableQuantity}
+                                unit={transaction.unit}
+                                price={transaction.price}
+                                expirationDate={transaction.expirationDate}
+                                onTransactionClick={() => goToEditTransactionPage(transaction)}
+                                onTransactionButtonClick={() => deleteTransactionFromList(transaction.id)}
+                            />
+                        })}
+                    </List>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button variant="contained" onClick={goToAddTransactionPage}>Add transaction</Button>
+                </Grid>
+            </Container>
+        </Grid>);
 }

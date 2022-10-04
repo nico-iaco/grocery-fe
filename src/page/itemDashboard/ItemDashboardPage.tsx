@@ -28,7 +28,7 @@ export const ItemDashboardPage = (props: any) => {
 
     const goToItemTransaction = (item: Item) => {
         dispatch(setCurrentItem(item))
-        navigate(`/item/${item.id}/`);
+        navigate(`/item/${item.id}/transaction`);
     }
 
     const deleteItemFromList = (id: string) => {
@@ -45,7 +45,6 @@ export const ItemDashboardPage = (props: any) => {
     }
 
     return (
-        <Container>
             <Grid container columns={8}>
                 <Grid item xs={8}>
                     <Box sx={{ flexGrow: 1 }}>
@@ -69,27 +68,28 @@ export const ItemDashboardPage = (props: any) => {
                         </AppBar>
                     </Box>
                 </Grid>
-                <Grid item xs={8}>
-                    <List>
-                        {itemList.map(item => {
-                            return <ItemRowComponent
-                                key={item.id}
-                                id={item.id}
-                                name={item.name}
-                                barcode={item.barcode}
-                                quantity={item.availableQuantity || 0}
-                                unit={item.unit || ""}
-                                onButtonClick={() => deleteItemFromList(item.id)}
-                                onClick={() => goToItemTransaction(item)}/>
-                        })}
-                    </List>
-                </Grid>
-                <Grid item xs={8}>
-                    <Button variant="contained" onClick={goToAddItem}>
-                        Add item
-                    </Button>
-                </Grid>
+                <Container>
+                    <Grid item xs={8}>
+                        <List>
+                            {itemList.map(item => {
+                                return <ItemRowComponent
+                                    key={item.id}
+                                    id={item.id}
+                                    name={item.name}
+                                    barcode={item.barcode}
+                                    quantity={item.availableQuantity || 0}
+                                    unit={item.unit || ""}
+                                    onButtonClick={() => deleteItemFromList(item.id)}
+                                    onClick={() => goToItemTransaction(item)}/>
+                            })}
+                        </List>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Button variant="contained" onClick={goToAddItem}>
+                            Add item
+                        </Button>
+                    </Grid>
+                </Container>
             </Grid>
-        </Container>
     );
 }

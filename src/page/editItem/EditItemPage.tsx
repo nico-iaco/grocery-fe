@@ -1,6 +1,6 @@
-import {useNavigate, useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
-import {getItem, updateItem} from "../../api/itemApis";
+import {useNavigate} from "react-router-dom";
+import React, {useState} from "react";
+import {updateItem} from "../../api/itemApis";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
@@ -29,35 +29,35 @@ export const EditItemPage = () => {
     }
 
     const goBack = () => {
-        navigate(`/item/${currentItem?.id}`);
+        navigate(`/item/${currentItem?.id}/transaction`);
     }
 
-    return <Container>
-        <Grid container columns={8} sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}>
-            <Grid item xs={8}>
-                <Box sx={{ flexGrow: 1 }}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{ mr: 2 }}
-                                onClick={goBack}
-                            >
-                                <ArrowBack />
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                Edit {currentItem?.name}
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
-            </Grid>
+    return <Grid container columns={8} sx={{
+        '& .MuiTextField-root': {m: 1, width: '25ch'},
+    }}>
+        <Grid item xs={8}>
+            <Box sx={{flexGrow: 1}}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{mr: 2}}
+                            onClick={goBack}
+                        >
+                            <ArrowBack/>
+                        </IconButton>
+                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            Edit {currentItem?.name}
+                        </Typography>
+                        <Button disabled></Button>
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        </Grid>
+        <Container>
             <ItemDataComponent
                 name={name}
                 onNameChange={(v) => setName(v)}
@@ -66,6 +66,6 @@ export const EditItemPage = () => {
                 buttonText="Update"
                 onButtonClick={updateItemToBe}
             />
-        </Grid>
-    </Container>
+        </Container>
+    </Grid>
 }

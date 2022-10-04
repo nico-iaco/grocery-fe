@@ -10,6 +10,7 @@ import {EditTransactionPage} from "./editTransaction/EditTransactionPage";
 import {MealDashboardPage} from "./mealDashboard/MealDashboardPage";
 import {ItemDashboardPage} from "./itemDashboard/ItemDashboardPage";
 import {AddMealPage} from "./addMeal/AddMealPage";
+import {MealFoodConsumptionPage} from "./mealFoodConsumption/MealFoodConsumptionPage";
 
 function App() {
     return (
@@ -18,12 +19,13 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/item" element={<ItemDashboardPage/>}/>
                 <Route path="/item/add" element={<AddItemPage/>}/>
-                <Route path="/item/:itemId" element={<ItemTransactionPage/>}/>
-                <Route path="/item/:itemId/transaction" element={<AddTransactionPage/>}/>
+                <Route path="/item/:itemId/transaction" element={<ItemTransactionPage/>}/>
+                <Route path="/item/:itemId/transaction/add" element={<AddTransactionPage/>}/>
                 <Route path="/item/:itemId/edit" element={<EditItemPage/>}/>
                 <Route path="/item/:itemId/transaction/:transactionId/edit" element={<EditTransactionPage/>}/>
                 <Route path="/meal" element={<MealDashboardPage/>}/>
                 <Route path="/meal/add" element={<AddMealPage/>}/>
+                <Route path="/meal/:mealId/consumption" element={<MealFoodConsumptionPage/>}/>
             </Routes>
         </div>
     );
