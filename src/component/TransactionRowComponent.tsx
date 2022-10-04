@@ -17,10 +17,12 @@ export interface TransactionRowComponentProps {
 export function TransactionRowComponent(props: TransactionRowComponentProps) {
     const formattedDate = format(new Date(props.expirationDate), "dd-MM-yyyy")
     return (
-        <div key={props.id} style={{
+        <div style={{
             paddingBottom: 8
         }}>
-            <Paper variant="outlined">
+            <Paper variant="outlined" style={{
+                padding: 8
+            }}>
                 <Grid container columns={10}>
                     <Grid item xs={2} className="center" onClick={props.onTransactionClick}>
                         <Typography variant="subtitle1">{props.availableQuantity}/{props.quantity} {props.unit}</Typography>

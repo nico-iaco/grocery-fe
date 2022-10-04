@@ -1,37 +1,39 @@
+import {useDispatch} from "react-redux";
 import React, {useState} from "react";
+import {Meal, MealType} from "../../model/meal";
+import {addMeal} from "../../api/mealApis";
 import {useNavigate} from "react-router-dom";
-import {Item} from "../../model/item";
-import {addItem} from "../../api/itemApis";
+import {setCurrentMeal} from "../../action/Action";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
-import {ItemDataComponent} from "../../component/ItemDataComponent";
-import {useDispatch} from "react-redux";
-import {setCurrentItem} from "../../action/Action";
+import {MealDataComponent} from "../../component/MealDataComponent";
 
-export function AddItemPage () {
+export const AddMealPage = () => {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [barcode, setBarcode] = useState("");
     const navigate = useNavigate();
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [mealType, setMealType] = useState(MealType.OTHERS);
+    const [date, setDate] = useState(new Date());
 
-    const goBack = () => {
-        navigate(`/item`);
+    const sendMealToBe = () => {
+        const meal: Meal = {
+            name,
+            description,
+            mealType,
+            date
+        };
+        addMeal(meal)
+            .then(value => {
+                dispatch(setCurrentMeal(value));
+                navigate(`/meal/${value?.id}/consumption`);
+            })
+            .catch(reason => console.error(reason));
     }
 
-    const sendItemToBe = () => {
-      const item: Item = {
-          id: "",
-          name,
-          barcode
-      };
-      addItem(item)
-          .then(value => {
-              dispatch(setCurrentItem(value));
-              navigate(`/item/${value?.id}`);
-          })
-          .catch(reason => console.error(reason));
-    };
-
+    const goBack = () => {
+        navigate(`/meal`);
+    }
 
     return (
             <Grid container columns={8} sx={{
@@ -52,7 +54,7 @@ export function AddItemPage () {
                                     <ArrowBack />
                                 </IconButton>
                                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                    Add food
+                                    Add meal
                                 </Typography>
                                 <Button disabled></Button>
                             </Toolbar>
@@ -60,15 +62,20 @@ export function AddItemPage () {
                     </Box>
                 </Grid>
                 <Container>
-                    <ItemDataComponent
+                    <MealDataComponent
                         name={name}
-                        onNameChange={(v) => setName(v)}
-                        barcode={barcode}
-                        onBarcodeChange={(v) => setBarcode(v)}
-                        buttonText="Add"
-                        onButtonClick={sendItemToBe}
+                        onNameChange={setName}
+                        description={description}
+                        onDescriptionChange={setDescription}
+                        mealType={mealType}
+                        onMealTypeChange={setMealType}
+                        date={date}
+                        onDateChange={setDate}
+                        buttonText="Add meal"
+                        onButtonClick={sendMealToBe}
                     />
                 </Container>
             </Grid>
     );
+
 }
