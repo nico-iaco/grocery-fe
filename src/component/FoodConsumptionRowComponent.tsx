@@ -14,7 +14,9 @@ export const FoodConsumptionRowComponent = (props: FoodConsumptionRowComponentPr
     return <div style={{
         paddingBottom: 8
     }}>
-        <Paper variant="outlined">
+        <Paper variant="outlined" style={{
+            padding: 8
+        }}>
             <Grid container columns={10}>
                 <Grid item xs={8} onClick={props.onItemClicked}>
                     <Grid container columns={8}>

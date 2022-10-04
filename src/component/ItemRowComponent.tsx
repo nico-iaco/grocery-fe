@@ -17,7 +17,9 @@ export function ItemRowComponent(props: ItemRowComponentProps) {
         <div style={{
             paddingBottom: 8
         }}>
-            <Paper variant="outlined" >
+            <Paper variant="outlined" style={{
+                padding: 8
+            }}>
                 <Grid container columns={10}>
                     <Grid item xs={8} onClick={props.onClick}>
                         <Grid container columns={8}>
