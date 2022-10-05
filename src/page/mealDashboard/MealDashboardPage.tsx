@@ -70,7 +70,7 @@ export const MealDashboardPage = () => {
                         </AppBar>
                     </Box>
                 </Grid>
-                <Container>
+                <Container className="container">
                     <Grid item xs={8}>
                         <List>
                             {mealList.map(meal => {

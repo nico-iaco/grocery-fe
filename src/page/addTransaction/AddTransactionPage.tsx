@@ -68,7 +68,7 @@ export function AddTransactionPage() {
                 </AppBar>
             </Box>
         </Grid>
-        <Container>
+        <Container className="container">
             <TransactionDataComponent
                 vendor={vendor}
                 onVendorChange={setVendor}

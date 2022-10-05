@@ -57,7 +57,7 @@ export const EditItemPage = () => {
                 </AppBar>
             </Box>
         </Grid>
-        <Container>
+        <Container className="container">
             <ItemDataComponent
                 name={name}
                 onNameChange={(v) => setName(v)}

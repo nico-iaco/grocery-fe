@@ -59,7 +59,7 @@ export function AddItemPage () {
                         </AppBar>
                     </Box>
                 </Grid>
-                <Container>
+                <Container className="container">
                     <ItemDataComponent
                         name={name}
                         onNameChange={(v) => setName(v)}

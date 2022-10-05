@@ -1,5 +1,6 @@
 import {Grid, IconButton, Paper, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 
 
 export interface ItemRowComponentProps {
@@ -21,16 +22,11 @@ export function ItemRowComponent(props: ItemRowComponentProps) {
                 padding: 8
             }}>
                 <Grid container columns={10}>
-                    <Grid item xs={8} onClick={props.onClick}>
-                        <Grid container columns={8}>
-                            <Grid item xs={8} >
-                                <Typography variant="h5">{props.name}</Typography>
-                            </Grid>
-                            <Grid item xs={8} className="center">
-                                <Typography variant="subtitle1">{props.barcode} § {props.quantity} {props.unit}</Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                    <SimpleItemRowComponent
+                        mainText={props.name}
+                        subText={`${props.barcode} § ${props.quantity} ${props.unit}`}
+                        onClick={props.onClick}
+                    />
                     <Grid item xs={2} className="center">
                         <IconButton edge="end" aria-label="delete" onClick={props.onButtonClick}>
                             <DeleteIcon/>

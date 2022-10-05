@@ -70,7 +70,7 @@ export const EditTransactionPage = () => {
                 </AppBar>
             </Box>
         </Grid>
-        <Container>
+        <Container className="container">
             <TransactionDataComponent
                 vendor={vendor}
                 onVendorChange={setVendor}

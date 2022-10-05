@@ -16,8 +16,8 @@ export const addItem = async (item: Item) => {
     return baseResponse.body;
 }
 
-export const getAllItems = async () => {
-    const url = `${baseUrl}/item/`;
+export const getAllItems = async (onlyAvailable: boolean = false) => {
+    const url = `${baseUrl}/item/?onlyAvailable=${onlyAvailable}`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Item[]> = axiosResponse.data;
     return baseResponse.body;
@@ -66,8 +66,8 @@ export const addTransactionToItem = async (itemId: string, transaction: Transact
     return baseResponse.body;
 }
 
-export const getAllItemTransaction = async (itemId: string) => {
-    const url = `${baseUrl}/item/${itemId}/transaction`;
+export const getAllItemTransaction = async (itemId: string, onlyAvailable: boolean = false) => {
+    const url = `${baseUrl}/item/${itemId}/transaction?onlyAvailable=${onlyAvailable}`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Transaction[]> = axiosResponse.data;
     return baseResponse.body;
@@ -91,7 +91,7 @@ export const updateItemTransaction = async (itemId: string, transaction: Transac
     return baseResponse.body;
 }
 
-export const deleteItemTransaction= async (itemId: string, transactionId: string) => {
+export const deleteItemTransaction = async (itemId: string, transactionId: string) => {
     const url = `${baseUrl}/item/${itemId}/transaction/${transactionId}`;
     const axiosResponse = await axios.delete(url);
     const baseResponse: BaseResponse<string> = axiosResponse.data;

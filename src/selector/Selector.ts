@@ -11,3 +11,7 @@ export const getCurrentTransaction = (state: GroceryState) => {
 export const getCurrentMeal = (state: GroceryState) => {
     return state.currentMeal;
 }
+
+export const getCurrentFoodConsumption = (state: GroceryState) => {
+    return state.currentFoodConsumption;
+}

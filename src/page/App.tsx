@@ -12,6 +12,8 @@ import {ItemDashboardPage} from "./itemDashboard/ItemDashboardPage";
 import {AddMealPage} from "./addMeal/AddMealPage";
 import {MealFoodConsumptionPage} from "./mealFoodConsumption/MealFoodConsumptionPage";
 import {EditMealPage} from "./editMeal/EditMealPage";
+import {AddFoodConsumptionPage} from "./addFoodConsumption/AddFoodConsumptionPage";
+import {EditFoodConsumptionPage} from "./editFoodConsumption/EditFoodConsumptionPage";
 
 function App() {
     return (
@@ -27,6 +29,8 @@ function App() {
                 <Route path="/meal" element={<MealDashboardPage/>}/>
                 <Route path="/meal/add" element={<AddMealPage/>}/>
                 <Route path="/meal/:mealId/consumption" element={<MealFoodConsumptionPage/>}/>
+                <Route path="/meal/:mealId/consumption/add" element={<AddFoodConsumptionPage/>}/>
+                <Route path="/meal/:mealId/consumption/:consumptionId/edit" element={<EditFoodConsumptionPage/>}/>
                 <Route path="/meal/:mealId/edit" element={<EditMealPage/>}/>
             </Routes>
         </div>

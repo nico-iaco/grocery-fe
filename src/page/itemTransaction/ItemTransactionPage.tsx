@@ -80,7 +80,7 @@ export function ItemTransactionPage() {
                     </AppBar>
                 </Box>
             </Grid>
-            <Container>
+            <Container className="container">
                 <Grid item xs={12}>
                     <img src={itemDetails?.image_nutrition_url} className="content-image"  alt="nutrition-table"/>
                     <List>

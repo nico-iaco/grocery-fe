@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal} from "../../selector/Selector";
 import {ArrowBack} from "@mui/icons-material";
 import React, {useEffect, useState} from "react";
-import {setCurrentMeal} from "../../action/Action";
+import {setCurrentFoodConsumption, setCurrentMeal} from "../../action/Action";
 import {useNavigate} from "react-router-dom";
 import {FoodConsumption} from "../../model/foodConsumption";
 import {deleteMealFoodConsumption, getMealFoodConsumptions} from "../../api/mealApis";
@@ -35,6 +35,7 @@ export const MealFoodConsumptionPage = () => {
     }
 
     const goToEditFoodConsumptionPage = (foodConsumption: FoodConsumption) => {
+        dispatch(setCurrentFoodConsumption(foodConsumption));
         navigate(`/meal/${currentMeal?.id}/consumption/${foodConsumption.id}/edit`);
     }
 
@@ -70,12 +71,13 @@ export const MealFoodConsumptionPage = () => {
                 </AppBar>
             </Box>
         </Grid>
-        <Container>
+        <Container className="container">
             <Grid item xs={8}>
                 <List>
                     {
                         mealFoodConsumptionList.map(value =>
                             <FoodConsumptionRowComponent
+                                key={value.id}
                                 foodName={value.foodName}
                                 quantityUsed={value.quantityUsed}
                                 unit={value.unit}
