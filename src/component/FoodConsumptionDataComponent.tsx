@@ -24,7 +24,8 @@ export interface FoodConsumptionDataComponentProps {
 export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponentProps) => {
 
     const getKcals = () => {
-        getFoodKcal(props.barcode || "", props.quantityGram)
+        const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
+        getFoodKcal(props.barcode || "", quantity)
             .then((response) => {
                 props.onKcalsChanged(response || 0)
             })
