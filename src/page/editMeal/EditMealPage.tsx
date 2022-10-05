@@ -60,7 +60,7 @@ export const EditMealPage = () => {
                     </AppBar>
                 </Box>
             </Grid>
-            <Container>
+            <Container className="container">
                 <MealDataComponent
                     name={mealName}
                     onNameChange={setMealName}

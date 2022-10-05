@@ -16,6 +16,9 @@ export const UPDATE_CURRENT_TRANSACTION_TYPE = "UPDATE_CURRENT_TRANSACTION";
 export const SET_CURRENT_MEAL_TYPE = "SET_CURRENT_MEAL";
 export const UPDATE_CURRENT_MEAL_TYPE = "UPDATE_CURRENT_MEAL";
 
+export const SET_CURRENT_FOOD_CONSUMPTION_TYPE = "SET_CURRENT_FOOD_CONSUMPTION";
+export const UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE = "UPDATE_CURRENT_FOOD_CONSUMPTION";
+
 
 export const setCurrentItem = (item?: Item): Action => {
     return {
@@ -56,6 +59,20 @@ export const updateMealToState = (meal: Meal): Action => {
     return {
         type: UPDATE_CURRENT_MEAL_TYPE,
         payload: meal
+    };
+}
+
+export const setCurrentFoodConsumption = (foodConsumption?: any): Action => {
+    return {
+        type: SET_CURRENT_FOOD_CONSUMPTION_TYPE,
+        payload: foodConsumption
+    };
+}
+
+export const updateFoodConsumptionToState = (foodConsumption: any): Action => {
+    return {
+        type: UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
+        payload: foodConsumption
     };
 }
 

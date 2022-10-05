@@ -68,7 +68,7 @@ export const ItemDashboardPage = (props: any) => {
                         </AppBar>
                     </Box>
                 </Grid>
-                <Container>
+                <Container className="container">
                     <Grid item xs={8}>
                         <List>
                             {itemList.map(item => {

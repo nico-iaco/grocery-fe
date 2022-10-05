@@ -28,7 +28,7 @@ export function Home() {
                         </AppBar>
                     </Box>
                 </Grid>
-                <Container>
+                <Container className="container">
                     <Grid item xs={8}>
                         <Button variant="contained" onClick={goToMealsDashboard}>
                             Meals dashboard
