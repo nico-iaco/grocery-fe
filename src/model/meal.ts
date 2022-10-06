@@ -5,7 +5,8 @@ export interface Meal {
     description: string;
     mealType: MealType;
     date: Date;
-
+    kcal?: number;
+    cost?: number;
 }
 
 export enum MealType {

@@ -9,4 +9,5 @@ export interface FoodConsumption {
     quantityUsedStd: number;
     unit: string;
     kcal: number;
+    cost?: number;
 }

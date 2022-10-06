@@ -8,7 +8,9 @@ export interface MealRowComponentProps {
     name: string
     description: string
     mealType: MealType
-    date: Date
+    date: Date,
+    kcal?: number,
+    cost?: number,
     onClick: () => void
     onButtonClick: () => void
 }
@@ -27,8 +29,8 @@ export const MealRowComponent = (props: MealRowComponentProps) => {
                     <Grid item xs={8} onClick={props.onClick}>
                         <Grid container columns={8}>
                             <Grid item xs={8} >
-                                <Typography variant="h5">{props.name}</Typography>
-                                <Typography variant="subtitle1">{props.description} § {formattedDate}</Typography>
+                                <Typography variant="h5">{props.name} § {formattedDate}</Typography>
+                                <Typography variant="subtitle1">{props.description} {props.kcal ? `§ ${props.kcal} kcal` : ""} {props.cost ? `§ ${props.cost} €` : ""}</Typography>
                             </Grid>
                             <Grid item xs={8} className="center">
                                 <Chip label={props.mealType} color="primary" variant="filled" size="small" />

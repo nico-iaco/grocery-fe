@@ -81,6 +81,8 @@ export const MealDashboardPage = () => {
                                     description={meal.description}
                                     mealType={meal.mealType}
                                     date={meal.date}
+                                    kcal={meal.kcal}
+                                    cost={meal.cost}
                                     onClick={() => goToMealTransaction(meal)}
                                     onButtonClick={() => deleteMealFromList(meal.id || "")}
                                 />
