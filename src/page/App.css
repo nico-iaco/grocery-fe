@@ -22,3 +22,7 @@
   align-items: center;
 }
 
+.horizontally-center {
+  margin: 0 auto;
+}
+
