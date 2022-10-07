@@ -33,13 +33,9 @@ export const MealDashboardPage = () => {
         navigate(`/meal/${meal.id}/consumption`);
     }
 
-    const deleteMealFromList = (id: string) => {
-        deleteMeal(id)
-            .then(v => {
-                console.log(v);
-                setMealList(mealList.filter(value => value.id !== id))
-            })
-            .catch(reason => console.error(reason));
+    const goToEditMeal = (meal: Meal) => {
+        dispatch(setCurrentMeal(meal));
+        navigate(`/meal/${meal.id}/edit`);
     }
 
     const goBack = () => {
@@ -84,7 +80,7 @@ export const MealDashboardPage = () => {
                                     kcal={meal.kcal}
                                     cost={meal.cost}
                                     onClick={() => goToMealTransaction(meal)}
-                                    onButtonClick={() => deleteMealFromList(meal.id || "")}
+                                    onButtonClick={() => goToEditMeal(meal)}
                                 />
                             })}
                         </List>

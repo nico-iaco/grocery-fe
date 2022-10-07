@@ -3,7 +3,7 @@ import {ArrowBack} from "@mui/icons-material";
 import {TransactionDataComponent} from "../../component/TransactionDataComponent";
 import React from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {updateItemTransaction} from "../../api/itemApis";
+import {deleteItemTransaction, updateItemTransaction} from "../../api/itemApis";
 import {Transaction} from "../../model/transaction";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTransaction} from "../../selector/Selector";
@@ -45,6 +45,16 @@ export const EditTransactionPage = () => {
             .catch(reason => console.error(reason));
     }
 
+    const deleteCurrentTransaction = () => {
+        deleteItemTransaction(itemId || "", currentTransaction?.id || "")
+            .then(result => {
+                console.log(result);
+                dispatch(setCurrentTransaction(undefined));
+                navigate(`/item/${itemId}/transaction`);
+            })
+            .catch(reason => console.error(reason));
+    }
+
     return <Grid container columns={8} sx={{
         '& .MuiTextField-root': {m: 1, width: '25ch'},
     }}>
@@ -65,7 +75,7 @@ export const EditTransactionPage = () => {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             Edit transaction
                         </Typography>
-                        <Button disabled></Button>
+                        <Button onClick={deleteCurrentTransaction} color="inherit">Delete</Button>
                     </Toolbar>
                 </AppBar>
             </Box>

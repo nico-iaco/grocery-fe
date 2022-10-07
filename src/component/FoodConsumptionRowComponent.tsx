@@ -1,6 +1,7 @@
 import {Grid, IconButton, Paper, Typography} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
+import {Edit} from "@mui/icons-material";
 
 export interface FoodConsumptionRowComponentProps {
     foodName: string;
@@ -26,7 +27,7 @@ export const FoodConsumptionRowComponent = (props: FoodConsumptionRowComponentPr
                 />
                 <Grid item xs={2} className="center">
                     <IconButton edge="end" aria-label="delete" onClick={props.onButtonClicked}>
-                        <DeleteIcon/>
+                        <Edit/>
                     </IconButton>
                 </Grid>
             </Grid>

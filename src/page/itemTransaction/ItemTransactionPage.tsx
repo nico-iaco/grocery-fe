@@ -47,10 +47,6 @@ export function ItemTransactionPage() {
         navigate(`/item`);
     }
 
-    const goToEditItemPage = () => {
-      navigate(`/item/${itemId}/edit`);
-    }
-
     const goToEditTransactionPage = (transaction: Transaction) => {
         dispatch(setCurrentTransaction(transaction));
         navigate(`/item/${itemId}/transaction/${transaction.id}/edit`);
@@ -75,7 +71,7 @@ export function ItemTransactionPage() {
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                 {currentItem?.name} transactions
                             </Typography>
-                            <Button onClick={goToEditItemPage} color="inherit" >Edit</Button>
+                            <Button disabled ></Button>
                         </Toolbar>
                     </AppBar>
                 </Box>
@@ -94,8 +90,8 @@ export function ItemTransactionPage() {
                                 unit={transaction.unit}
                                 price={transaction.price}
                                 expirationDate={transaction.expirationDate}
-                                onTransactionClick={() => goToEditTransactionPage(transaction)}
-                                onTransactionButtonClick={() => deleteTransactionFromList(transaction.id)}
+                                onTransactionClick={() => {}}
+                                onTransactionButtonClick={() => goToEditTransactionPage(transaction)}
                             />
                         })}
                     </List>
