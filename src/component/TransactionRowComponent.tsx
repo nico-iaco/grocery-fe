@@ -1,6 +1,7 @@
 import {Grid, IconButton, Paper, Typography} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {format} from "date-fns";
+import {Edit} from "@mui/icons-material";
 
 export interface TransactionRowComponentProps {
     id: string
@@ -39,7 +40,7 @@ export function TransactionRowComponent(props: TransactionRowComponentProps) {
                     </Grid>
                     <Grid item xs={2} className="center">
                         <IconButton edge="end" aria-label="delete" onClick={props.onTransactionButtonClick}>
-                            <DeleteIcon/>
+                            <Edit/>
                         </IconButton>
                     </Grid>
                 </Grid>

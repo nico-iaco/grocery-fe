@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {FoodConsumptionDataComponent} from "../../component/FoodConsumptionDataComponent";
 import React from "react";
-import {updateMealFoodConsumption} from "../../api/mealApis";
+import {deleteMealFoodConsumption, updateMealFoodConsumption} from "../../api/mealApis";
 import {FoodConsumption} from "../../model/foodConsumption";
 import {ArrowBack} from "@mui/icons-material";
 
@@ -42,6 +42,15 @@ export const EditFoodConsumptionPage = () => {
         }
     }
 
+    const deleteFoodConsumptionFromServer = () => {
+        deleteMealFoodConsumption(currentMeal?.id || "", currentFoodConsumption?.id || "")
+            .then(v => {
+                console.log(v);
+                goBack();
+            })
+            .catch(reason => console.error(reason));
+    }
+
 
     return <Grid container columns={8}>
         <Grid item xs={8}>
@@ -61,7 +70,7 @@ export const EditFoodConsumptionPage = () => {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             Edit food consumption
                         </Typography>
-                        <Button disabled></Button>
+                        <Button onClick={deleteFoodConsumptionFromServer} color="inherit">Delete</Button>
                     </Toolbar>
                 </AppBar>
             </Box>

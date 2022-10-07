@@ -39,15 +39,6 @@ export const MealFoodConsumptionPage = () => {
         navigate(`/meal/${currentMeal?.id}/consumption/${foodConsumption.id}/edit`);
     }
 
-    const deleteFoodConsumptionFromList = (foodConsumptionId: string) => {
-        deleteMealFoodConsumption(currentMeal?.id || "", foodConsumptionId)
-            .then(result => {
-                console.log(result);
-                setMealFoodConsumptionList(mealFoodConsumptionList.filter(t => t.id !== foodConsumptionId));
-            })
-            .catch(reason => console.error(reason));
-    }
-
     return <Grid container columns={8}>
         <Grid item xs={8}>
             <Box sx={{flexGrow: 1}}>
@@ -66,7 +57,7 @@ export const MealFoodConsumptionPage = () => {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             Meal consumption
                         </Typography>
-                        <Button onClick={goToEditItemPage} color="inherit">Edit</Button>
+                        <Button disabled></Button>
                     </Toolbar>
                 </AppBar>
             </Box>
@@ -82,8 +73,8 @@ export const MealFoodConsumptionPage = () => {
                                 quantityUsed={value.quantityUsed}
                                 unit={value.unit}
                                 kcal={value.kcal}
-                                onItemClicked={() => goToEditFoodConsumptionPage(value)}
-                                onButtonClicked={() => deleteFoodConsumptionFromList(value.id || "")}
+                                onItemClicked={() => {}}
+                                onButtonClicked={() => goToEditFoodConsumptionPage(value)}
                             />)
                     }
                 </List>

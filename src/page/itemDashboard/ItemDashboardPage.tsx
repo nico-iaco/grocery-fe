@@ -31,13 +31,10 @@ export const ItemDashboardPage = (props: any) => {
         navigate(`/item/${item.id}/transaction`);
     }
 
-    const deleteItemFromList = (id: string) => {
-        deleteItem(id)
-            .then(v => {
-                console.log(v);
-                setItemList(itemList.filter(value => value.id !== id))
-            })
-            .catch(reason => console.error(reason));
+    const goToEditItem = (item: Item) => {
+        dispatch(setCurrentItem(item))
+        navigate(`/item/${item.id}/edit`);
+        /**/
     }
 
     const goBack = () => {
@@ -79,7 +76,7 @@ export const ItemDashboardPage = (props: any) => {
                                     barcode={item.barcode}
                                     quantity={item.availableQuantity || 0}
                                     unit={item.unit || ""}
-                                    onButtonClick={() => deleteItemFromList(item.id)}
+                                    onButtonClick={() => goToEditItem(item)}
                                     onClick={() => goToItemTransaction(item)}/>
                             })}
                         </List>

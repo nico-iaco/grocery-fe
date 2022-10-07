@@ -1,7 +1,7 @@
 import {MealType} from "../model/meal";
 import {Chip, Grid, IconButton, Paper, Typography} from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
 import {format} from "date-fns";
+import {Edit} from "@mui/icons-material";
 
 export interface MealRowComponentProps {
     id: string
@@ -39,7 +39,7 @@ export const MealRowComponent = (props: MealRowComponentProps) => {
                     </Grid>
                     <Grid item xs={2} className="center">
                         <IconButton edge="end" aria-label="delete" onClick={props.onButtonClick}>
-                            <DeleteIcon/>
+                            <Edit/>
                         </IconButton>
                     </Grid>
                 </Grid>
