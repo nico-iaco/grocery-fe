@@ -59,6 +59,13 @@ export const deleteItem = async (id: string) => {
     return baseResponse.body;
 }
 
+export const getFoodKcal = async (foodId: string, quantity: number) => {
+    const url = `${baseUrl}/item/${foodId}/kcal?quantity=${quantity}`;
+    const axiosResponse = await axios.get(url);
+    const baseResponse: BaseResponse<number> = axiosResponse.data;
+    return baseResponse.body;
+}
+
 export const addTransactionToItem = async (itemId: string, transaction: Transaction) => {
     const url = `${baseUrl}/item/${itemId}/transaction`;
     const axiosResponse = await axios.post(url, transaction);

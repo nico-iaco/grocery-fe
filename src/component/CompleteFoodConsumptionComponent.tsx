@@ -47,7 +47,7 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <FoodConsumptionDataComponent
-                    barcode={currentFood?.barcode}
+                    foodId={currentFood?.id || ""}
                     quantity={quantity}
                     unit={currentTransaction?.unit || ""}
                     quantityGram={quantityGram}

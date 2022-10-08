@@ -8,10 +8,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import {Calculate} from "@mui/icons-material";
-import {getFoodKcal} from "../api/mealApis";
+import {getFoodKcal} from "../api/itemApis";
 
 export interface FoodConsumptionDataComponentProps {
-    barcode?: string
+    foodId?: string
     quantity: number
     unit: string
     quantityGram: number
@@ -25,7 +25,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
-        getFoodKcal(props.barcode || "", quantity)
+        getFoodKcal(props.foodId || "", quantity)
             .then((response) => {
                 props.onKcalsChanged(response || 0)
             })
