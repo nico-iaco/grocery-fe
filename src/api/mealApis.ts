@@ -83,11 +83,4 @@ export const deleteMealFoodConsumption = async (mealId: string, foodConsumptionI
     return baseResponse.body;
 }
 
-export const getFoodKcal = async (barcode: string, quantity: number) => {
-    const url = `${baseUrl}/meal/detail/${barcode}?quantity=${quantity}`;
-    const axiosResponse = await axios.get(url);
-    const baseResponse: BaseResponse<number> = axiosResponse.data;
-    return baseResponse.body;
-}
-
 
