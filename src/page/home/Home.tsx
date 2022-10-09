@@ -10,10 +10,13 @@ import {getMealStatistics} from "../../api/mealApis";
 import {getItemStatistics} from "../../api/itemApis";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
+import {useDispatch} from "react-redux";
+import {setCurrentTabIndex} from "../../action/Action";
 
 
 export function Home() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [mealStatistics, setMealStatistics] = React.useState<MealStatistic>({
         averageWeekFoodCost: 0,
         averageWeekCaloriesPerMealType: [],
@@ -43,10 +46,12 @@ export function Home() {
     }, [])
 
     const goToAddFood = () => {
+        dispatch(setCurrentTabIndex(2));
         navigate(`/item/add`);
     }
 
     const goToAddMeal = () => {
+        dispatch(setCurrentTabIndex(1));
         navigate(`/meal/add`);
     }
 
