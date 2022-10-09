@@ -2,6 +2,7 @@ import axios from "axios";
 import {BaseResponse} from "../model/baseResponse";
 import {Meal} from "../model/meal";
 import {FoodConsumption} from "../model/foodConsumption";
+import {MealStatistic} from "../model/mealStatistic";
 
 
 export const baseUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_BASE_URL_FT : process.env.REACT_APP_BASE_URL;
@@ -20,6 +21,13 @@ export const getAllMeals = async () => {
     const url = `${baseUrl}/meal`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Meal[]> = axiosResponse.data;
+    return baseResponse.body;
+}
+
+export const getMealStatistics = async () => {
+    const url = `${baseUrl}/meal/statistics`;
+    const axiosResponse = await axios.get(url);
+    const baseResponse: BaseResponse<MealStatistic> = axiosResponse.data;
     return baseResponse.body;
 }
 

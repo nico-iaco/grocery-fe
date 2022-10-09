@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {
     AppBar,
@@ -15,10 +15,42 @@ import {
 import {Action, Fab} from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 import {Add, Fastfood, LocalGroceryStore} from "@mui/icons-material";
+import {MealStatistic} from "../../model/mealStatistic";
+import {ItemStatistics} from "../../model/itemStatistics";
+import {getMealStatistics} from "../../api/mealApis";
+import {getItemStatistics} from "../../api/itemApis";
+import {MealStatisticsComponent} from "../../component/mealStatisticsComponent";
 
 
 export function Home() {
     const navigate = useNavigate();
+    const [mealStatistics, setMealStatistics] = React.useState<MealStatistic>({
+        averageWeekFoodCost: 0,
+        averageWeekCaloriesPerMealType: [],
+        averageWeekCalories: 0,
+        sumWeekCost: 0,
+    });
+    const [itemStatistics, setItemStatistics] = React.useState<ItemStatistics>({
+        itemsAlmostFinished: [],
+        ItemsInExpiration: [],
+    });
+
+    useEffect(() => {
+        getMealStatistics()
+            .then(value => {
+                if (value) {
+                    setMealStatistics(value);
+                }
+            })
+            .catch(reason => console.error(reason));
+        getItemStatistics()
+            .then(value => {
+                if (value) {
+                    setItemStatistics(value);
+                }
+            })
+            .catch(reason => console.error(reason));
+    },[])
 
     const goToMealsDashboard = () => {
         navigate("/meal");
@@ -51,6 +83,9 @@ export function Home() {
                     </Box>
                 </Grid>
                 <Container className="container">
+                    <Grid item xs={8} className="container">
+                        <MealStatisticsComponent mealStatistics={mealStatistics}/>
+                    </Grid>
                     <Grid item xs={8} className="container">
                         <Card sx={{ maxWidth: 360 }} onClick={goToMealsDashboard} className={"horizontally-center"}>
                             <CardActionArea>
