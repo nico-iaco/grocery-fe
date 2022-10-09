@@ -4,12 +4,13 @@ import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {getAllItemTransaction, getItemDetail} from "../../api/itemApis";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
-import {ArrowBack} from "@mui/icons-material";
+import {Add, ArrowBack} from "@mui/icons-material";
 import {FoodDetail} from "../../model/foodDetails";
 import "./ItemTransactionPage.css";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem} from "../../selector/Selector";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
+import {Fab} from "react-tiny-fab";
 
 export function ItemTransactionPage() {
     const { itemId } = useParams();
@@ -87,9 +88,14 @@ export function ItemTransactionPage() {
                         })}
                     </List>
                 </Grid>
-                <Grid item xs={12}>
-                    <Button variant="contained" onClick={goToAddTransactionPage}>Add transaction</Button>
-                </Grid>
+                <Fab
+                    mainButtonStyles={{backgroundColor: '#1677d7'}}
+                    icon={<Add/>}
+                    alwaysShowTitle={true}
+                    event="click"
+                    onClick={goToAddTransactionPage}
+                >
+                </Fab>
             </Container>
         </Grid>);
 }

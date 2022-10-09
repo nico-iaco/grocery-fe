@@ -6,7 +6,8 @@ import {getAllItems} from "../../api/itemApis";
 import {setCurrentItem} from "../../action/Action";
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
-import {ArrowBack} from "@mui/icons-material";
+import {Add, ArrowBack} from "@mui/icons-material";
+import {Fab} from "react-tiny-fab";
 
 export const ItemDashboardPage = (props: any) => {
     const dispatch = useDispatch();
@@ -81,11 +82,14 @@ export const ItemDashboardPage = (props: any) => {
                             })}
                         </List>
                     </Grid>
-                    <Grid item xs={8}>
-                        <Button variant="contained" onClick={goToAddItem}>
-                            Add item
-                        </Button>
-                    </Grid>
+                    <Fab
+                        mainButtonStyles={{backgroundColor: '#1677d7'}}
+                        icon={<Add/>}
+                        alwaysShowTitle={true}
+                        event="click"
+                        onClick={goToAddItem}
+                    >
+                    </Fab>
                 </Container>
             </Grid>
     );

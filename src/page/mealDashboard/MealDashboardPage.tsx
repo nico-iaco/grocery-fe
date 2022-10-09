@@ -4,9 +4,10 @@ import {Meal} from "../../model/meal";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
-import {ArrowBack} from "@mui/icons-material";
+import {Add, ArrowBack} from "@mui/icons-material";
 import {useDispatch} from "react-redux";
 import {setCurrentMeal} from "../../action/Action";
+import {Fab} from "react-tiny-fab";
 
 
 export const MealDashboardPage = () => {
@@ -85,9 +86,14 @@ export const MealDashboardPage = () => {
                             })}
                         </List>
                     </Grid>
-                    <Grid item xs={8}>
-                        <Button variant="contained" onClick={goToAddMeal}>Add meal</Button>
-                    </Grid>
+                    <Fab
+                        mainButtonStyles={{backgroundColor: '#1677d7'}}
+                        icon={<Add/>}
+                        alwaysShowTitle={true}
+                        event="click"
+                        onClick={goToAddMeal}
+                    >
+                    </Fab>
                 </Container>
             </Grid>
     )
