@@ -3,7 +3,7 @@ import {Container, Grid, List, Paper, Typography} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import React from "react";
 import {Item} from "../model/item";
-import {setCurrentItem} from "../action/Action";
+import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
@@ -18,6 +18,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
 
     const goToItemTransactionPage = (item: Item) => {
         dispatch(setCurrentItem(item));
+        dispatch(setCurrentTabIndex(2));
         navigate(`/item/${item.id}/transaction`);
     }
 
@@ -27,7 +28,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
             <Grid item xs={12} md={6} className="container">
                 <Container>
                     <Typography variant="h5" component="div">
-                        Food in expiration
+                        <b>Food in expiration</b>
                     </Typography>
                     <List>
                         {props.itemStatistics.itemsInExpiration ? props.itemStatistics.itemsInExpiration.map(item => {
@@ -46,7 +47,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
             <Grid item xs={12} md={6} className="container">
                 <Container>
                     <Typography variant="h5" component="div">
-                        Food almost finished
+                        <b>Food almost finished</b>
                     </Typography>
                     <List>
                         {props.itemStatistics.itemsAlmostFinished ? props.itemStatistics.itemsAlmostFinished.map(item => {

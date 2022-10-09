@@ -29,7 +29,7 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
         <Grid container>
             <Grid item xs={12} md={6} className={"container"}>
                 <Typography variant="h5" component="div">
-                    Average kcal per meal type
+                    <b>Average kcal per meal type</b>
                 </Typography>
                 <Doughnut data={mealDataset}/>
             </Grid>

@@ -19,6 +19,8 @@ export const UPDATE_CURRENT_MEAL_TYPE = "UPDATE_CURRENT_MEAL";
 export const SET_CURRENT_FOOD_CONSUMPTION_TYPE = "SET_CURRENT_FOOD_CONSUMPTION";
 export const UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE = "UPDATE_CURRENT_FOOD_CONSUMPTION";
 
+export const SET_CURRENT_TAB_INDEX_TYPE = "SET_CURRENT_TAB_INDEX";
+
 
 export const setCurrentItem = (item?: Item): Action => {
     return {
@@ -73,6 +75,13 @@ export const updateFoodConsumptionToState = (foodConsumption: any): Action => {
     return {
         type: UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
         payload: foodConsumption
+    };
+}
+
+export const setCurrentTabIndex = (index: number): Action => {
+    return {
+        type: SET_CURRENT_TAB_INDEX_TYPE,
+        payload: index
     };
 }
 

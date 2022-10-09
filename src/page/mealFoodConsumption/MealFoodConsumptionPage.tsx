@@ -78,6 +78,7 @@ export const MealFoodConsumptionPage = () => {
             </Grid>
             <Fab
                 mainButtonStyles={{backgroundColor: '#1677d7'}}
+                style={{bottom: 50, right: 12}}
                 icon={<Add/>}
                 alwaysShowTitle={true}
                 event="click"

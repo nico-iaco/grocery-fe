@@ -1,10 +1,10 @@
-import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, List, Toolbar, Typography} from "@mui/material";
 import {getAllMeals} from "../../api/mealApis";
 import {Meal} from "../../model/meal";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
-import {Add, ArrowBack} from "@mui/icons-material";
+import {Add} from "@mui/icons-material";
 import {useDispatch} from "react-redux";
 import {setCurrentMeal} from "../../action/Action";
 import {Fab} from "react-tiny-fab";
@@ -39,9 +39,6 @@ export const MealDashboardPage = () => {
         navigate(`/meal/${meal.id}/edit`);
     }
 
-    const goBack = () => {
-        navigate("/");
-    }
 
     return (
             <Grid container columns={8}>
@@ -49,16 +46,7 @@ export const MealDashboardPage = () => {
                     <Box sx={{ flexGrow: 1 }}>
                         <AppBar position="sticky" className="AppBar">
                             <Toolbar>
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    sx={{ mr: 2 }}
-                                    onClick={goBack}
-                                >
-                                    <ArrowBack />
-                                </IconButton>
+                                <Button disabled></Button>
                                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                     Meals available
                                 </Typography>
@@ -88,6 +76,7 @@ export const MealDashboardPage = () => {
                     </Grid>
                     <Fab
                         mainButtonStyles={{backgroundColor: '#1677d7'}}
+                        style={{bottom: 50, right: 12}}
                         icon={<Add/>}
                         alwaysShowTitle={true}
                         event="click"

@@ -71,7 +71,7 @@ export function ItemTransactionPage() {
             <Container className="container">
                 <Grid item xs={12}>
                     <img src={itemDetails?.image_nutrition_url} className="content-image"  alt="nutrition-table"/>
-                    <List>
+                    <List className="list-container">
                         {itemTransactionList.map(transaction => {
                             return <TransactionRowComponent
                                 key={transaction.id}
@@ -90,6 +90,7 @@ export function ItemTransactionPage() {
                 </Grid>
                 <Fab
                     mainButtonStyles={{backgroundColor: '#1677d7'}}
+                    style={{bottom: 50, right: 12}}
                     icon={<Add/>}
                     alwaysShowTitle={true}
                     event="click"
