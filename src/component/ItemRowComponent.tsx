@@ -1,5 +1,4 @@
-import {Grid, IconButton, Paper, Typography} from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import {Grid, IconButton, Paper} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {Edit} from "@mui/icons-material";
 

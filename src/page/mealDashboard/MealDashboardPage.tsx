@@ -1,5 +1,5 @@
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
-import {deleteMeal, getAllMeals} from "../../api/mealApis";
+import {getAllMeals} from "../../api/mealApis";
 import {Meal} from "../../model/meal";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";

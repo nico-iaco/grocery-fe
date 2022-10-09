@@ -2,7 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
-import {deleteItemTransaction, getAllItemTransaction, getItemDetail} from "../../api/itemApis";
+import {getAllItemTransaction, getItemDetail} from "../../api/itemApis";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {ArrowBack} from "@mui/icons-material";
 import {FoodDetail} from "../../model/foodDetails";
@@ -31,15 +31,6 @@ export function ItemTransactionPage() {
 
     const goToAddTransactionPage = () => {
         navigate(`/item/${currentItem?.id}/transaction/add`);
-    }
-
-    const deleteTransactionFromList = (transactionId: string) => {
-        deleteItemTransaction(itemId || "", transactionId)
-            .then(result => {
-                console.log(result);
-                setItemTransactionList(itemTransactionList.filter(t => t.id !== transactionId));
-            })
-            .catch(reason => console.error(reason));
     }
 
     const goBack = () => {

@@ -64,6 +64,7 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
                   label="Expiration date"
                   value={props.expirationDate}
                   minDate={new Date()}
+                  inputFormat="DD/MM/YYYY"
                   onChange={(newValue) => {
                       if (newValue !== null) {
                           props.onExpirationDateChange(new Date(newValue));

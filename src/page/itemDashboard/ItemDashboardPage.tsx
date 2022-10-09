@@ -2,7 +2,7 @@ import {useDispatch} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
-import {deleteItem, getAllItems} from "../../api/itemApis";
+import {getAllItems} from "../../api/itemApis";
 import {setCurrentItem} from "../../action/Action";
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
