@@ -4,9 +4,10 @@ import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
 import {getAllItems} from "../../api/itemApis";
 import {setCurrentItem} from "../../action/Action";
-import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, List, Toolbar, Typography} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
-import {ArrowBack} from "@mui/icons-material";
+import {Add} from "@mui/icons-material";
+import {Fab} from "react-tiny-fab";
 
 export const ItemDashboardPage = (props: any) => {
     const dispatch = useDispatch();
@@ -34,12 +35,8 @@ export const ItemDashboardPage = (props: any) => {
     const goToEditItem = (item: Item) => {
         dispatch(setCurrentItem(item))
         navigate(`/item/${item.id}/edit`);
-        /**/
     }
 
-    const goBack = () => {
-        navigate("/");
-    }
 
     return (
             <Grid container columns={8}>
@@ -47,16 +44,7 @@ export const ItemDashboardPage = (props: any) => {
                     <Box sx={{ flexGrow: 1 }}>
                         <AppBar position="sticky" className="AppBar">
                             <Toolbar>
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    sx={{ mr: 2 }}
-                                    onClick={goBack}
-                                >
-                                    <ArrowBack />
-                                </IconButton>
+                                <Button disabled></Button>
                                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                     Food available
                                 </Typography>
@@ -67,7 +55,7 @@ export const ItemDashboardPage = (props: any) => {
                 </Grid>
                 <Container className="container">
                     <Grid item xs={8}>
-                        <List>
+                        <List className="list-container">
                             {itemList.map(item => {
                                 return <ItemRowComponent
                                     key={item.id}
@@ -81,11 +69,15 @@ export const ItemDashboardPage = (props: any) => {
                             })}
                         </List>
                     </Grid>
-                    <Grid item xs={8}>
-                        <Button variant="contained" onClick={goToAddItem}>
-                            Add item
-                        </Button>
-                    </Grid>
+                    <Fab
+                        mainButtonStyles={{backgroundColor: '#1677d7'}}
+                        style={{bottom: 50, right: 12}}
+                        icon={<Add/>}
+                        alwaysShowTitle={true}
+                        event="click"
+                        onClick={goToAddItem}
+                    >
+                    </Fab>
                 </Container>
             </Grid>
     );

@@ -3,6 +3,7 @@ import axios from "axios";
 import {BaseResponse} from "../model/baseResponse";
 import {Transaction} from "../model/transaction";
 import {FoodDetail} from "../model/foodDetails";
+import {ItemStatistics} from "../model/itemStatistics";
 
 export const baseUrl = process.env.REACT_APP_BASE_URL
 
@@ -20,6 +21,13 @@ export const getAllItems = async (onlyAvailable: boolean = false) => {
     const url = `${baseUrl}/item/?onlyAvailable=${onlyAvailable}`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Item[]> = axiosResponse.data;
+    return baseResponse.body;
+}
+
+export const getItemStatistics = async () => {
+    const url = `${baseUrl}/item/statistics`;
+    const axiosResponse = await axios.get(url);
+    const baseResponse: BaseResponse<ItemStatistics> = axiosResponse.data;
     return baseResponse.body;
 }
 

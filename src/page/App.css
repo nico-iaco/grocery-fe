@@ -1,28 +1,38 @@
 .App {
-  text-align: center;
-  padding-bottom: 24px;
+    text-align: center;
+    margin-bottom: 74px!important;
 }
 
 .container {
-  padding-top: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .list-item {
-  padding: 8px;
+    padding: 8px;
+    margin-top: 4px;
 }
 
 .list-item-selected {
-  padding: 8px;
-  border: 3px solid #39c922!important;
+    padding: 8px;
+    border: 3px solid #39c922 !important;
+}
+
+.list-container {
+
 }
 
 .center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .horizontally-center {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 

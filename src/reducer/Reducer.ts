@@ -1,8 +1,13 @@
 import {
-    Action, SET_CURRENT_FOOD_CONSUMPTION_TYPE,
-    SET_CURRENT_ITEM_TYPE, SET_CURRENT_MEAL_TYPE,
-    SET_CURRENT_TRANSACTION_TYPE, UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
-    UPDATE_CURRENT_ITEM_TYPE, UPDATE_CURRENT_MEAL_TYPE,
+    Action,
+    SET_CURRENT_FOOD_CONSUMPTION_TYPE,
+    SET_CURRENT_ITEM_TYPE,
+    SET_CURRENT_MEAL_TYPE,
+    SET_CURRENT_TAB_INDEX_TYPE,
+    SET_CURRENT_TRANSACTION_TYPE,
+    UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
+    UPDATE_CURRENT_ITEM_TYPE,
+    UPDATE_CURRENT_MEAL_TYPE,
     UPDATE_CURRENT_TRANSACTION_TYPE
 } from "../action/Action";
 import {Item} from "../model/item";
@@ -15,13 +20,15 @@ export interface GroceryState {
     currentTransaction: Transaction | undefined;
     currentMeal: Meal | undefined;
     currentFoodConsumption: FoodConsumption | undefined;
+    currentTabIndex: number;
 }
 
 export const initialState: GroceryState = {
     currentItem: undefined,
     currentTransaction: undefined,
     currentMeal: undefined,
-    currentFoodConsumption: undefined
+    currentFoodConsumption: undefined,
+    currentTabIndex: 0
 }
 
 export function eventReducer(state: GroceryState = initialState, action: Action): GroceryState {
@@ -65,6 +72,11 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
             return {
                 ...state,
                 currentFoodConsumption: action.payload
+            }
+        case SET_CURRENT_TAB_INDEX_TYPE:
+            return {
+                ...state,
+                currentTabIndex: action.payload
             }
         default:
             return state;
