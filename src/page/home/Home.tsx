@@ -4,13 +4,17 @@ import {
     AppBar,
     Box,
     Card,
-    CardActionArea, CardContent,
+    CardActionArea,
+    CardContent,
     CardMedia,
     Container,
     Grid,
     Toolbar,
     Typography
 } from "@mui/material";
+import {Action, Fab} from 'react-tiny-fab';
+import 'react-tiny-fab/dist/styles.css';
+import {Add, Fastfood, LocalGroceryStore} from "@mui/icons-material";
 
 
 export function Home() {
@@ -22,6 +26,14 @@ export function Home() {
 
     const goToItemDashboard = () => {
         navigate(`/item`);
+    }
+
+    const goToAddFood = () => {
+        navigate(`/item/add`);
+    }
+
+    const goToAddMeal = () => {
+        navigate(`/meal/add`);
     }
 
 
@@ -73,6 +85,26 @@ export function Home() {
                             </CardActionArea>
                         </Card>
                     </Grid>
+                    <Fab
+                        mainButtonStyles={{ backgroundColor: '#1677d7' }}
+                        icon={<Add />}
+                        alwaysShowTitle={true}
+                    >
+                        <Action
+                            style={{ backgroundColor: '#1677d7' }}
+                            text="Add meal"
+                            onClick={goToAddMeal}
+                        >
+                            <Fastfood />
+                        </Action>
+                        <Action
+                            style={{ backgroundColor: '#1677d7' }}
+                            text="Add food"
+                            onClick={goToAddFood}
+                        >
+                            <LocalGroceryStore />
+                        </Action>
+                    </Fab>
                 </Container>
             </Grid>
     );

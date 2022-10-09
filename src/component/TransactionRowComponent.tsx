@@ -1,5 +1,4 @@
 import {Grid, IconButton, Paper, Typography} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import {format} from "date-fns";
 import {Edit} from "@mui/icons-material";
 

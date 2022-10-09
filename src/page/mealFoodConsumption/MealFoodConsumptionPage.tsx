@@ -6,7 +6,7 @@ import React, {useEffect, useState} from "react";
 import {setCurrentFoodConsumption, setCurrentMeal} from "../../action/Action";
 import {useNavigate} from "react-router-dom";
 import {FoodConsumption} from "../../model/foodConsumption";
-import {deleteMealFoodConsumption, getMealFoodConsumptions} from "../../api/mealApis";
+import {getMealFoodConsumptions} from "../../api/mealApis";
 import {FoodConsumptionRowComponent} from "../../component/FoodConsumptionRowComponent";
 
 export const MealFoodConsumptionPage = () => {
@@ -24,10 +24,6 @@ export const MealFoodConsumptionPage = () => {
     const goBack = () => {
         dispatch(setCurrentMeal(undefined));
         navigate(`/meal`);
-    }
-
-    const goToEditItemPage = () => {
-        navigate(`/meal/${currentMeal?.id}/edit`);
     }
 
     const goToAddFoodConsumptionPage = () => {
