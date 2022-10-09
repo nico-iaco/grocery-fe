@@ -27,7 +27,7 @@ export function AddItemPage () {
       addItem(item)
           .then(value => {
               dispatch(setCurrentItem(value));
-              navigate(`/item/${value?.id}`);
+              navigate(`/item/${value?.id}/transaction`);
           })
           .catch(reason => console.error(reason));
     };
