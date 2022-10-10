@@ -7,7 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {eventReducer} from "./reducer/Reducer";
 import {configureStore} from "@reduxjs/toolkit";
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 
 const root = ReactDOM.createRoot(
@@ -31,4 +30,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-serviceWorkerRegistration.register();
