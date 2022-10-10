@@ -36,6 +36,10 @@ export const MealFoodConsumptionPage = () => {
         navigate(`/meal/${currentMeal?.id}/consumption/${foodConsumption.id}/edit`);
     }
 
+    const goToEditMealPage = () => {
+        navigate(`/meal/${currentMeal?.id}/edit`);
+    }
+
     return <Grid container columns={8}>
         <Grid item xs={8}>
             <Box sx={{flexGrow: 1}}>
@@ -54,7 +58,7 @@ export const MealFoodConsumptionPage = () => {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             Meal consumption
                         </Typography>
-                        <Button disabled></Button>
+                        <Button onClick={goToEditMealPage} color="inherit">Delete</Button>
                     </Toolbar>
                 </AppBar>
             </Box>

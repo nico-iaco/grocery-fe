@@ -31,7 +31,7 @@ export const EditTransactionPage = () => {
             id: currentTransaction?.id || "",
             vendor,
             quantity,
-            availableQuantity: quantity,
+            availableQuantity: currentTransaction?.availableQuantity || 0,
             unit,
             price,
             expirationDate

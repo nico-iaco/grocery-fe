@@ -20,7 +20,7 @@ export const EditMealPage = () => {
     const [mealDate, setMealDate] = React.useState(currentMeal?.date || new Date());
 
     const goBack = () => {
-        navigate(`/meal`);
+        navigate(`/meal/${currentMeal?.id}/consumption`);
     }
 
     const saveMeal = () => {
