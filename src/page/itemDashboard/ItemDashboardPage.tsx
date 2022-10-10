@@ -4,14 +4,29 @@ import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
 import {getAllItems} from "../../api/itemApis";
 import {setCurrentItem} from "../../action/Action";
-import {AppBar, Box, Button, Container, Grid, List, Toolbar, Typography} from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    FormControl,
+    Grid,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    List,
+    OutlinedInput,
+    Toolbar,
+    Typography
+} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
-import {Add} from "@mui/icons-material";
+import {Add, Search} from "@mui/icons-material";
 import {Fab} from "react-tiny-fab";
 
 export const ItemDashboardPage = (props: any) => {
     const dispatch = useDispatch();
     const [itemList, setItemList] = useState<Item[]>([])
+    const [search, setSearch] = useState("");
     const navigate = useNavigate();
     useEffect(() => {
         getAllItems()
@@ -55,8 +70,31 @@ export const ItemDashboardPage = (props: any) => {
                 </Grid>
                 <Container className="container">
                     <Grid item xs={8}>
+                        <FormControl  variant="outlined" fullWidth>
+                            <InputLabel htmlFor="outlined-adornment-search">Search</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-search"
+                                type={'text'}
+                                value={search}
+                                onChange={(event) => setSearch(event.target.value)}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            edge="end"
+                                        >
+                                            <Search/>
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={8}>
                         <List className="list-container">
-                            {itemList.map(item => {
+                            {itemList
+                                .filter(value => search === "" || (value.name.toLowerCase().includes(search.toLowerCase()) || value.barcode.includes(search)))
+                                .map(item => {
                                 return <ItemRowComponent
                                     key={item.id}
                                     id={item.id}
