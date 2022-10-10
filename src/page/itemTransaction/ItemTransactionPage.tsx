@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
@@ -13,7 +13,6 @@ import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {Fab} from "react-tiny-fab";
 
 export function ItemTransactionPage() {
-    const { itemId } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentItem = useSelector(getCurrentItem);
@@ -41,7 +40,11 @@ export function ItemTransactionPage() {
 
     const goToEditTransactionPage = (transaction: Transaction) => {
         dispatch(setCurrentTransaction(transaction));
-        navigate(`/item/${itemId}/transaction/${transaction.id}/edit`);
+        navigate(`/item/${currentItem?.id}/transaction/${transaction.id}/edit`);
+    }
+
+    const goToEditItemPage = () => {
+        navigate(`/item/${currentItem?.id}/edit`);
     }
 
     return (
@@ -63,7 +66,7 @@ export function ItemTransactionPage() {
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                                 {currentItem?.name} transactions
                             </Typography>
-                            <Button disabled ></Button>
+                            <Button onClick={goToEditItemPage} color="inherit">Edit</Button>
                         </Toolbar>
                     </AppBar>
                 </Box>
