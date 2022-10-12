@@ -18,7 +18,7 @@ import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
 import {Fastfood, House, LocalGroceryStore} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTabIndex} from "../selector/Selector";
-import {setCurrentTabIndex} from "../action/Action";
+import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
@@ -34,6 +34,7 @@ function App() {
     }
 
     const goToMealDashboard = () => {
+        dispatch(setCurrentItem(undefined));
         navigate("/meal");
     }
 

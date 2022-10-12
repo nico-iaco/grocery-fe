@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {AppBar, Box, Container, Grid, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
 import {Action, Fab} from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 import {Add, Fastfood, LocalGroceryStore} from "@mui/icons-material";
@@ -62,16 +62,23 @@ export function Home() {
                 <Box sx={{flexGrow: 1}}>
                     <AppBar position="sticky" className="AppBar">
                         <Toolbar>
+                            <Button disabled></Button>
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                 Home
                             </Typography>
+                            <Button disabled></Button>
                         </Toolbar>
                     </AppBar>
                 </Box>
             </Grid>
             <Container className="container">
                 <Grid item xs={8} className="container">
-                    <MealStatisticsComponent mealStatistics={mealStatistics}/>
+                    <MealStatisticsComponent
+                        mealStatistics={mealStatistics}
+                        mealKcalChartLabel={"Average calories per meal type"}
+                        kcalLabel={"Average calories per week"}
+                        costLabel={"Average cost per week"}
+                    />
                 </Grid>
                 <Grid item xs={8} className="container">
                     <ItemStatisticsComponent itemStatistics={itemStatistics}/>

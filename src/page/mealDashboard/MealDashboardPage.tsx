@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Container, Grid, List, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import {getAllMealInDateRange, getMealStatisticsInDateRange} from "../../api/mealApis";
 import {Meal} from "../../model/meal";
 import React, {useEffect, useState} from "react";
@@ -72,33 +72,46 @@ export const MealDashboardPage = () => {
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                 Meals available
                             </Typography>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <MobileDatePicker
-                                    label="Basic example"
-                                    value={date}
-                                    open={isPickerOpen}
-                                    onOpen={() => setIsPickerOpen(true)}
-                                    onClose={() => setIsPickerOpen(false)}
-                                    onChange={(newValue) => {
-                                        if (newValue) {
-                                            setDate(newValue);
-                                        }
-                                    }}
-                                    onAccept={(newValue) => {
-                                        if (newValue) {
-                                            setSelectedDate(newValue);
-                                        }
-                                    }}
-                                    renderInput={(params) => <CalendarMonth onClick={() => setIsPickerOpen(true)}/>}
-                                />
-                            </LocalizationProvider>
+                            <IconButton
+                                size="large"
+                                color={"inherit"}
+                                edge={"end"}
+                                sx={{mr: 2}}
+                            >
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <MobileDatePicker
+                                        label="Basic example"
+                                        value={date}
+                                        open={isPickerOpen}
+                                        onOpen={() => setIsPickerOpen(true)}
+                                        onClose={() => setIsPickerOpen(false)}
+                                        onChange={(newValue) => {
+                                            if (newValue) {
+                                                setDate(newValue);
+                                            }
+                                        }}
+                                        onAccept={(newValue) => {
+                                            if (newValue) {
+                                                setSelectedDate(newValue);
+                                            }
+                                        }}
+                                        renderInput={(params) => <CalendarMonth onClick={() => setIsPickerOpen(true)}/>}
+                                    />
+                                </LocalizationProvider>
+                            </IconButton>
+
                         </Toolbar>
                     </AppBar>
                 </Box>
             </Grid>
             <Container className="container">
                 <Grid item xs={8}>
-                    <MealStatisticsComponent mealStatistics={mealStatistic}/>
+                    <MealStatisticsComponent
+                        mealStatistics={mealStatistic}
+                        mealKcalChartLabel={"Kcal per meal type"}
+                        kcalLabel={"Total kcal of the day"}
+                        costLabel={"Total cost of the day"}
+                    />
                 </Grid>
                 <Grid item xs={8}>
                     <List>
