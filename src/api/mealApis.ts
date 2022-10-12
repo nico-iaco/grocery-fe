@@ -3,6 +3,7 @@ import {BaseResponse} from "../model/baseResponse";
 import {Meal} from "../model/meal";
 import {FoodConsumption} from "../model/foodConsumption";
 import {MealStatistic} from "../model/mealStatistic";
+import {format} from "date-fns";
 
 
 export const baseUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_BASE_URL_FT : process.env.REACT_APP_BASE_URL;
@@ -24,8 +25,26 @@ export const getAllMeals = async () => {
     return baseResponse.body;
 }
 
+export const getAllMealInDateRange = async (startDate: Date, endDate: Date) => {
+    const formattedStartDate = format(new Date(startDate), "dd-MM-yyyy")
+    const formattedEndDate = format(new Date(endDate), "dd-MM-yyyy")
+    const url = `${baseUrl}/meal?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
+    const axiosResponse = await axios.get(url);
+    const baseResponse: BaseResponse<Meal[]> = axiosResponse.data;
+    return baseResponse.body;
+}
+
 export const getMealStatistics = async () => {
     const url = `${baseUrl}/meal/statistics`;
+    const axiosResponse = await axios.get(url);
+    const baseResponse: BaseResponse<MealStatistic> = axiosResponse.data;
+    return baseResponse.body;
+}
+
+export const getMealStatisticsInDateRange = async (startDate: Date, endDate: Date) => {
+    const formattedStartDate = format(new Date(startDate), "dd-MM-yyyy")
+    const formattedEndDate = format(new Date(endDate), "dd-MM-yyyy")
+    const url = `${baseUrl}/meal/statistics?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<MealStatistic> = axiosResponse.data;
     return baseResponse.body;
