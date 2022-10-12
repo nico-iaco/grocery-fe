@@ -58,7 +58,7 @@ export const MealFoodConsumptionPage = () => {
                         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                             Meal consumption
                         </Typography>
-                        <Button onClick={goToEditMealPage} color="inherit">Delete</Button>
+                        <Button onClick={goToEditMealPage} color="inherit">Edit</Button>
                     </Toolbar>
                 </AppBar>
             </Box>
