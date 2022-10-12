@@ -15,42 +15,34 @@ import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 
 
 export const MealDashboardPage = () => {
-    const [mealList, setMealList] = useState<Meal[]>([])
-    const [date, setDate] = useState<Date>(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [mealStatistic, setMealStatistic] = useState<MealStatistic>({
+
+    const initialStatistics: MealStatistic = {
         averageWeekFoodCost: 0,
         sumWeekCost: 0,
         averageWeekCalories: 0,
         averageWeekCaloriesPerMealType: [],
-    });
+    }
+
+    const [mealList, setMealList] = useState<Meal[]>([])
+    const [date, setDate] = useState<Date>(new Date());
+    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const [mealStatistic, setMealStatistic] = useState<MealStatistic>(initialStatistics);
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    /*    useEffect(() => {
-            getAllMeals()
-                .then(value => {
-                    if (value) {
-                        setMealList(value)
-                    }
-                })
-                .catch(reason => console.error(reason));
-        }, [])*/
 
     useEffect(() => {
         getAllMealInDateRange(selectedDate, selectedDate)
             .then(value => {
 
-            setMealList(value || [])
+                setMealList(value || [])
 
             })
             .catch(reason => console.error(reason));
         getMealStatisticsInDateRange(selectedDate, selectedDate)
             .then(value => {
-                if (value) {
-                    setMealStatistic(value)
-                }
+                setMealStatistic(value || initialStatistics)
             })
             .catch(reason => console.error(reason));
     }, [selectedDate])
