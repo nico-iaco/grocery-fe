@@ -7,7 +7,7 @@ import {deleteItemTransaction, updateItemTransaction} from "../../api/itemApis";
 import {Transaction} from "../../model/transaction";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTransaction} from "../../selector/Selector";
-import {setCurrentTransaction} from "../../action/Action";
+import {setCurrentTransaction, setError} from "../../action/Action";
 
 export const EditTransactionPage = () => {
     const {itemId} = useParams();
@@ -42,7 +42,10 @@ export const EditTransactionPage = () => {
                 console.log(value);
                 goBack();
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
     }
 
     const deleteCurrentTransaction = () => {
@@ -52,7 +55,10 @@ export const EditTransactionPage = () => {
                 dispatch(setCurrentTransaction(undefined));
                 navigate(`/item/${itemId}/transaction`);
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
     }
 
     return <Grid container columns={8} sx={{

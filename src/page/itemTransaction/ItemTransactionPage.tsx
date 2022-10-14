@@ -9,7 +9,7 @@ import {FoodDetail} from "../../model/foodDetails";
 import "./ItemTransactionPage.css";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem} from "../../selector/Selector";
-import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
+import {setCurrentItem, setCurrentTransaction, setError} from "../../action/Action";
 import {Fab} from "react-tiny-fab";
 
 export function ItemTransactionPage() {
@@ -22,11 +22,18 @@ export function ItemTransactionPage() {
     useEffect(() => {
         getItemDetail(currentItem?.id || "")
             .then(value => {
-                setItemDetails(value || {});
-            }).catch(reason => console.error(reason));
+                setItemDetails(value);
+            })
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
         getAllItemTransaction(currentItem?.id || "")
             .then(itemTransactionList => setItemTransactionList(itemTransactionList || []))
-            .catch(reason => console.log(reason));
+            .catch(reason => {
+                console.log(reason)
+                dispatch(setError(reason.message));
+            });
     }, [currentItem?.id]);
 
     const goToAddTransactionPage = () => {
@@ -50,7 +57,7 @@ export function ItemTransactionPage() {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{flexGrow: 1}}>
                     <AppBar position="static">
                         <Toolbar>
                             <IconButton
@@ -58,12 +65,12 @@ export function ItemTransactionPage() {
                                 edge="start"
                                 color="inherit"
                                 aria-label="back"
-                                sx={{ mr: 2 }}
+                                sx={{mr: 2}}
                                 onClick={goBack}
                             >
-                                <ArrowBack />
+                                <ArrowBack/>
                             </IconButton>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                                 {currentItem?.name} transactions
                             </Typography>
                             <Button onClick={goToEditItemPage} color="inherit">Edit</Button>
@@ -73,7 +80,7 @@ export function ItemTransactionPage() {
             </Grid>
             <Container className="container">
                 <Grid item xs={12}>
-                    <img src={itemDetails?.image_nutrition_url} className="content-image"  alt="nutrition-table"/>
+                    <img src={itemDetails?.image_nutrition_url} className="content-image" alt="nutrition-table"/>
                     <List className="list-container">
                         {itemTransactionList.map(transaction => {
                             return <TransactionRowComponent
@@ -85,7 +92,8 @@ export function ItemTransactionPage() {
                                 unit={transaction.unit}
                                 price={transaction.price}
                                 expirationDate={transaction.expirationDate}
-                                onTransactionClick={() => {}}
+                                onTransactionClick={() => {
+                                }}
                                 onTransactionButtonClick={() => goToEditTransactionPage(transaction)}
                             />
                         })}

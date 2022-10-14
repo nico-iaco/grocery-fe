@@ -1,4 +1,4 @@
-import {setCurrentFoodConsumption} from "../../action/Action";
+import {setCurrentFoodConsumption, setError} from "../../action/Action";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentFoodConsumption, getCurrentMeal} from "../../selector/Selector";
 import {useNavigate} from "react-router-dom";
@@ -33,22 +33,21 @@ export const EditFoodConsumptionPage = () => {
                 kcal: kcals || 0
             }
             updateMealFoodConsumption(currentMeal?.id || "", foodConsumption)
-                .then(() => {
-                    goBack();
-                })
+                .then(goBack)
                 .catch((error) => {
                     console.log(error);
+                    dispatch(setError(error.message));
                 })
         }
     }
 
     const deleteFoodConsumptionFromServer = () => {
         deleteMealFoodConsumption(currentMeal?.id || "", currentFoodConsumption?.id || "")
-            .then(v => {
-                console.log(v);
-                goBack();
-            })
-            .catch(reason => console.error(reason));
+            .then(goBack)
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
     }
 
 

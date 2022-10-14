@@ -19,3 +19,7 @@ export const getCurrentFoodConsumption = (state: GroceryState) => {
 export const getCurrentTabIndex = (state: GroceryState) => {
     return state.currentTabIndex;
 }
+
+export const getError = (state: GroceryState) => {
+    return state.error;
+}

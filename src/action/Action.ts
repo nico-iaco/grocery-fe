@@ -1,6 +1,7 @@
 import {Item} from "../model/item";
 import {Transaction} from "../model/transaction";
 import {Meal} from "../model/meal";
+import {FoodConsumption} from "../model/foodConsumption";
 
 export interface Action {
     type: string;
@@ -20,6 +21,9 @@ export const SET_CURRENT_FOOD_CONSUMPTION_TYPE = "SET_CURRENT_FOOD_CONSUMPTION";
 export const UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE = "UPDATE_CURRENT_FOOD_CONSUMPTION";
 
 export const SET_CURRENT_TAB_INDEX_TYPE = "SET_CURRENT_TAB_INDEX";
+
+export const SET_ERROR_TYPE = "SET_ERROR";
+export const CLEAR_ERROR_TYPE = "CLEAR_ERROR";
 
 
 export const setCurrentItem = (item?: Item): Action => {
@@ -64,14 +68,14 @@ export const updateMealToState = (meal: Meal): Action => {
     };
 }
 
-export const setCurrentFoodConsumption = (foodConsumption?: any): Action => {
+export const setCurrentFoodConsumption = (foodConsumption?: FoodConsumption): Action => {
     return {
         type: SET_CURRENT_FOOD_CONSUMPTION_TYPE,
         payload: foodConsumption
     };
 }
 
-export const updateFoodConsumptionToState = (foodConsumption: any): Action => {
+export const updateFoodConsumptionToState = (foodConsumption: FoodConsumption): Action => {
     return {
         type: UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
         payload: foodConsumption
@@ -82,6 +86,19 @@ export const setCurrentTabIndex = (index: number): Action => {
     return {
         type: SET_CURRENT_TAB_INDEX_TYPE,
         payload: index
+    };
+}
+
+export const setError = (error: string): Action => {
+    return {
+        type: SET_ERROR_TYPE,
+        payload: error
+    };
+}
+
+export const clearError = (): Action => {
+    return {
+        type: CLEAR_ERROR_TYPE
     };
 }
 

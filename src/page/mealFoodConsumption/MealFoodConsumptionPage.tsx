@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
 import React, {useEffect, useState} from "react";
-import {setCurrentFoodConsumption, setCurrentMeal} from "../../action/Action";
+import {setCurrentFoodConsumption, setCurrentMeal, setError} from "../../action/Action";
 import {useNavigate} from "react-router-dom";
 import {FoodConsumption} from "../../model/foodConsumption";
 import {getMealFoodConsumptions} from "../../api/mealApis";
@@ -19,7 +19,10 @@ export const MealFoodConsumptionPage = () => {
     useEffect(() => {
         getMealFoodConsumptions(currentMeal?.id || "")
             .then(mealFoodConsumptionList => setMealFoodConsumptionList(mealFoodConsumptionList || []))
-            .catch(reason => console.log(reason));
+            .catch(reason => {
+                console.log(reason)
+                dispatch(setError(reason.message));
+            });
     }, [currentMeal?.id]);
 
     const goBack = () => {

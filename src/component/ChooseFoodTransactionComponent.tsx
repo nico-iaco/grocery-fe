@@ -1,5 +1,5 @@
 import {Button, Grid, List, Paper} from "@mui/material";
-import {setCurrentTransaction} from "../action/Action";
+import {setCurrentTransaction, setError} from "../action/Action";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
@@ -22,6 +22,7 @@ export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => 
             })
             .catch((error) => {
                 console.log(error);
+                dispatch(setError(error.message));
             });
     }, []);
 

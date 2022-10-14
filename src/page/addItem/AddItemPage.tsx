@@ -6,7 +6,7 @@ import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} f
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {useDispatch} from "react-redux";
-import {setCurrentItem} from "../../action/Action";
+import {setCurrentItem, setError} from "../../action/Action";
 
 export function AddItemPage () {
     const dispatch = useDispatch();
@@ -29,7 +29,10 @@ export function AddItemPage () {
               dispatch(setCurrentItem(value));
               navigate(`/item/${value?.id}/transaction`);
           })
-          .catch(reason => console.error(reason));
+          .catch(reason => {
+              console.error(reason)
+              dispatch(setError(reason.message));
+          });
     };
 
 

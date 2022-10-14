@@ -62,6 +62,7 @@ export const MealDataComponent = (props: TransactionDataComponentProps) => {
                     label="Meal date"
                     value={props.date}
                     maxDate={new Date()}
+                    inputFormat="DD/MM/YYYY"
                     onChange={(newValue) => {
                         if (newValue !== null) {
                             props.onDateChange(new Date(newValue));

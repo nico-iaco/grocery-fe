@@ -14,14 +14,15 @@ import {MealFoodConsumptionPage} from "./mealFoodConsumption/MealFoodConsumption
 import {EditMealPage} from "./editMeal/EditMealPage";
 import {AddFoodConsumptionPage} from "./addFoodConsumption/AddFoodConsumptionPage";
 import {EditFoodConsumptionPage} from "./editFoodConsumption/EditFoodConsumptionPage";
-import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
+import {Alert, BottomNavigation, BottomNavigationAction, Paper, Snackbar} from "@mui/material";
 import {Fastfood, House, LocalGroceryStore} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentTabIndex} from "../selector/Selector";
-import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
+import {getCurrentTabIndex, getError} from "../selector/Selector";
+import {clearError, setCurrentItem, setCurrentTabIndex} from "../action/Action";
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
+    const error = useSelector(getError);
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
@@ -36,6 +37,10 @@ function App() {
     const goToMealDashboard = () => {
         dispatch(setCurrentItem(undefined));
         navigate("/meal");
+    }
+
+    const handleClose = () => {
+        dispatch(clearError())
     }
 
     return (
@@ -57,6 +62,16 @@ function App() {
                     <Route path="/meal/:mealId/edit" element={<EditMealPage/>}/>
                 </Routes>
             </div>
+            <Snackbar
+                open={error?.isInErrorState}
+                onClose={handleClose}
+                autoHideDuration={2000}
+                sx={{ bottom: { xs: 140, sm: 75 } }}
+            >
+                <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
+                    {error?.message}
+                </Alert>
+            </Snackbar>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 <BottomNavigation
                     showLabels

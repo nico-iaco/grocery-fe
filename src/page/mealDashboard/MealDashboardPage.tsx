@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
 import {Add, CalendarMonth} from "@mui/icons-material";
 import {useDispatch} from "react-redux";
-import {setCurrentMeal} from "../../action/Action";
+import {setCurrentMeal, setError} from "../../action/Action";
 import {Fab} from "react-tiny-fab";
 import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
@@ -39,12 +39,18 @@ export const MealDashboardPage = () => {
                 setMealList(value || [])
 
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message))
+            });
         getMealStatisticsInDateRange(selectedDate, selectedDate)
             .then(value => {
                 setMealStatistic(value || initialStatistics)
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message))
+            });
     }, [selectedDate])
 
     const goToAddMeal = () => {
