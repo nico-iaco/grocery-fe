@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {Meal, MealType} from "../../model/meal";
 import {addMeal} from "../../api/mealApis";
 import {useNavigate} from "react-router-dom";
-import {setCurrentMeal} from "../../action/Action";
+import {setCurrentMeal, setError} from "../../action/Action";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {MealDataComponent} from "../../component/MealDataComponent";
@@ -28,7 +28,10 @@ export const AddMealPage = () => {
                 dispatch(setCurrentMeal(value));
                 navigate(`/meal/${value?.id}/consumption`);
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
     }
 
     const goBack = () => {

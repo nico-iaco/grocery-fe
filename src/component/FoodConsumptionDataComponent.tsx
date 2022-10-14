@@ -1,14 +1,9 @@
-import {
-    FormControl,
-    Grid, IconButton,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    Typography
-} from "@mui/material";
+import {FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography} from "@mui/material";
 import React from "react";
 import {Calculate} from "@mui/icons-material";
 import {getFoodKcal} from "../api/itemApis";
+import {useDispatch} from "react-redux";
+import {setError} from "../action/Action";
 
 export interface FoodConsumptionDataComponentProps {
     foodId?: string
@@ -22,6 +17,7 @@ export interface FoodConsumptionDataComponentProps {
 }
 
 export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponentProps) => {
+    const dispatch = useDispatch();
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
@@ -31,6 +27,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
             })
             .catch((error) => {
                 console.log(error)
+                dispatch(setError(error.message));
             })
     }
 

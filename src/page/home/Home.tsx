@@ -11,7 +11,7 @@ import {getItemStatistics} from "../../api/itemApis";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
 import {useDispatch} from "react-redux";
-import {setCurrentTabIndex} from "../../action/Action";
+import {setCurrentTabIndex, setError} from "../../action/Action";
 
 
 export function Home() {
@@ -35,14 +35,20 @@ export function Home() {
                     setMealStatistics(value);
                 }
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message))
+            });
         getItemStatistics()
             .then(value => {
                 if (value) {
                     setItemStatistics(value);
                 }
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message))
+            });
     }, [])
 
     const goToAddFood = () => {

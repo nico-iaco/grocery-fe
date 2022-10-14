@@ -5,7 +5,7 @@ import {useState} from "react";
 import {Button, Grid} from "@mui/material";
 import {FoodConsumptionDataComponent} from "./FoodConsumptionDataComponent";
 import {useNavigate} from "react-router-dom";
-import {setCurrentItem, setCurrentTransaction} from "../action/Action";
+import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action";
 import {FoodConsumption} from "../model/foodConsumption";
 import {addMealFoodConsumption} from "../api/mealApis";
 
@@ -39,6 +39,7 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
             })
             .catch((error) => {
                 console.log(error);
+                dispatch(setError(error.message));
             });
     }
 

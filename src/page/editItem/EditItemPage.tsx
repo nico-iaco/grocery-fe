@@ -7,7 +7,7 @@ import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {Item} from "../../model/item";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem} from "../../selector/Selector";
-import {setCurrentItem} from "../../action/Action";
+import {setCurrentItem, setError} from "../../action/Action";
 
 export const EditItemPage = () => {
     const currentItem = useSelector(getCurrentItem);
@@ -23,11 +23,11 @@ export const EditItemPage = () => {
             barcode
         }
         updateItem(updatedItem)
-            .then(value => {
-                console.log(value);
-                goBack();
-            })
-            .catch(reason => console.error(reason));
+            .then(goBack)
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
     }
 
     const goBack = () => {
@@ -40,7 +40,10 @@ export const EditItemPage = () => {
                 console.log(v);
                 dispatch(setCurrentItem(undefined));
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
     }
 
     return <Grid container columns={8} sx={{

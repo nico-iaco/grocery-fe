@@ -5,11 +5,14 @@ import {useNavigate, useParams} from "react-router-dom";
 import {addTransactionToItem} from "../../api/itemApis";
 import {ArrowBack} from "@mui/icons-material";
 import {TransactionDataComponent} from "../../component/TransactionDataComponent";
+import {useDispatch} from "react-redux";
+import {setError} from "../../action/Action";
 
 
 export function AddTransactionPage() {
     const {itemId} = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [vendor, setVendor] = useState("")
     const [quantity, setQuantity] = useState(0)
@@ -34,11 +37,11 @@ export function AddTransactionPage() {
         }
 
         addTransactionToItem(itemId || "", transaction)
-            .then(value => {
-                console.log(value);
-                goBack();
-            })
-            .catch(reason => console.error(reason));
+            .then(goBack)
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
 
 
     }

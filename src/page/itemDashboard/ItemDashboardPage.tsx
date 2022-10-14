@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
 import {getAllItems} from "../../api/itemApis";
-import {setCurrentItem} from "../../action/Action";
+import {setCurrentItem, setError} from "../../action/Action";
 import {
     AppBar,
     Box,
@@ -35,7 +35,10 @@ export const ItemDashboardPage = (props: any) => {
                     setItemList(value)
                 }
             })
-            .catch(reason => console.error(reason));
+            .catch(reason => {
+                console.error(reason)
+                dispatch(setError(reason.message));
+            });
     }, [])
 
     const goToAddItem = () => {

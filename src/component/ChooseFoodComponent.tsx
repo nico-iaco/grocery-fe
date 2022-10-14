@@ -5,9 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
 import {Button, Grid, List, Paper} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
-import {setCurrentItem} from "../action/Action";
+import {setCurrentItem, setError} from "../action/Action";
 import {getCurrentItem} from "../selector/Selector";
-
 
 
 export const ChooseFoodComponent = (props: StepperComponentProps) => {
@@ -22,6 +21,7 @@ export const ChooseFoodComponent = (props: StepperComponentProps) => {
             })
             .catch((error) => {
                 console.log(error);
+                dispatch(setError(error.message));
             });
     }, []);
 

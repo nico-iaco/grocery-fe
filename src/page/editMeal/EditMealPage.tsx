@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {MealDataComponent} from "../../component/MealDataComponent";
 import {MealType} from "../../model/meal";
 import {deleteMeal, updateMeal} from "../../api/mealApis";
-import {setCurrentMeal} from "../../action/Action";
+import {setCurrentMeal, setError} from "../../action/Action";
 
 export const EditMealPage = () => {
     const navigate = useNavigate();
@@ -31,7 +31,12 @@ export const EditMealPage = () => {
                 description: mealDescription,
                 mealType,
                 date: mealDate
-            }).then(() => goBack());
+            })
+                .then(goBack)
+                .catch(reason => {
+                    console.log(reason)
+                    dispatch(setError(reason.message));
+                });
         }
     }
 
@@ -42,7 +47,10 @@ export const EditMealPage = () => {
                     dispatch(setCurrentMeal(undefined));
                     navigate("/meal")
                 })
-                .catch(reason => console.error(reason));
+                .catch(reason => {
+                    console.error(reason)
+                    dispatch(setError(reason.message));
+                });
         }
     }
 

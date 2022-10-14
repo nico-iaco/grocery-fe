@@ -31,6 +31,9 @@ export const getAllMealInDateRange = async (startDate: Date, endDate: Date) => {
     const url = `${baseUrl}/meal?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Meal[]> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
@@ -38,6 +41,9 @@ export const getMealStatistics = async () => {
     const url = `${baseUrl}/meal/statistics`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<MealStatistic> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
@@ -47,6 +53,9 @@ export const getMealStatisticsInDateRange = async (startDate: Date, endDate: Dat
     const url = `${baseUrl}/meal/statistics?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<MealStatistic> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
@@ -54,17 +63,19 @@ export const getMeal = async (mealId: string) => {
     const url = `${baseUrl}/meal/${mealId}`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Meal> = axiosResponse.data;
-    if (baseResponse.body !== undefined) {
-        return baseResponse.body;
-    } else {
-        throw Error(baseResponse.errorMessage);
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
     }
+    return baseResponse.body;
 }
 
 export const updateMeal = async (meal: Meal) => {
     const url = `${baseUrl}/meal/${meal.id}`;
     const axiosResponse = await axios.patch(url, meal);
     const baseResponse: BaseResponse<Meal> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
@@ -72,6 +83,9 @@ export const deleteMeal = async (id: string) => {
     const url = `${baseUrl}/meal/${id}`;
     const axiosResponse = await axios.delete(url);
     const baseResponse: BaseResponse<string> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
@@ -79,11 +93,10 @@ export const getMealFoodConsumptions = async (mealId: string) => {
     const url = `${baseUrl}/meal/${mealId}/consumption`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<FoodConsumption[]> = axiosResponse.data;
-    if (baseResponse.body !== undefined && baseResponse.errorMessage === "") {
-        return baseResponse.body;
-    } else {
-        throw Error(baseResponse.errorMessage);
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
     }
+    return baseResponse.body;
 }
 
 export const addMealFoodConsumption = async (mealId: string, foodConsumption: FoodConsumption) => {
@@ -93,6 +106,9 @@ export const addMealFoodConsumption = async (mealId: string, foodConsumption: Fo
         foodConsumption
     );
     const baseResponse: BaseResponse<FoodConsumption> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
@@ -100,6 +116,9 @@ export const updateMealFoodConsumption = async (mealId: string, foodConsumption:
     const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumption.id}`;
     const axiosResponse = await axios.patch(url, foodConsumption);
     const baseResponse: BaseResponse<FoodConsumption> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
@@ -107,6 +126,9 @@ export const deleteMealFoodConsumption = async (mealId: string, foodConsumptionI
     const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumptionId}`;
     const axiosResponse = await axios.delete(url);
     const baseResponse: BaseResponse<string> = axiosResponse.data;
+    if (baseResponse.errorMessage !== null && baseResponse.errorMessage !== "") {
+        throw new Error(baseResponse.errorMessage);
+    }
     return baseResponse.body;
 }
 
