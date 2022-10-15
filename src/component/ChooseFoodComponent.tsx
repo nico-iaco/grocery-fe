@@ -32,7 +32,14 @@ export const ChooseFoodComponent = (props: StepperComponentProps) => {
     const next = () => {
         if (currentFood !== undefined) {
             props.onNextClicked();
+        } else {
+            dispatch(setError("Please select a food"));
         }
+    }
+
+    const skip = () => {
+        dispatch(setCurrentItem(undefined));
+        props.onSkipClicked();
     }
 
     return <Grid item xs={8}>
@@ -56,6 +63,9 @@ export const ChooseFoodComponent = (props: StepperComponentProps) => {
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
+                        {
+                            props.isSkipAvailable && <Button onClick={skip}>Skip</Button>
+                        }
                         {
                             props.isNextAvailable && <Button onClick={next}>Next</Button>
                         }

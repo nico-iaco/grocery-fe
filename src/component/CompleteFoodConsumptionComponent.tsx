@@ -13,6 +13,7 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
     const currentMeal = useSelector(getCurrentMeal);
     const currentFood = useSelector(getCurrentItem);
     const currentTransaction = useSelector(getCurrentTransaction);
+    const [foodName, setFoodName] = useState("");
     const [quantity, setQuantity] = useState<number>(0);
     const [quantityGram, setQuantityGram] = useState<number>(0);
     const [kcals, setKcals] = useState<number>(0);
@@ -22,10 +23,10 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
 
     const onCompleted = () => {
         const foodConsumption: FoodConsumption = {
-            foodId: currentFood?.id  || "",
-            transactionId: currentTransaction?.id || "",
+            foodId: currentFood?.id ,
+            transactionId: currentTransaction?.id,
             mealId: currentMeal?.id || "",
-            foodName: currentFood?.name || "",
+            foodName: currentFood?.name || foodName,
             quantityUsed: quantity,
             unit: currentFood?.unit || "",
             quantityUsedStd: quantityGram,
@@ -48,11 +49,13 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <FoodConsumptionDataComponent
+                    foodName={currentFood ? undefined : foodName}
                     foodId={currentFood?.id || ""}
                     quantity={quantity}
                     unit={currentTransaction?.unit || ""}
                     quantityGram={quantityGram}
                     kcals={kcals}
+                    onFoodNameChanged={setFoodName}
                     onQuantityChanged={setQuantity}
                     onQuantityGramChanged={setQuantityGram}
                     onKcalsChanged={setKcals} />

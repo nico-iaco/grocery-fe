@@ -23,26 +23,35 @@ import {CompleteFoodConsumptionComponent} from "../../component/CompleteFoodCons
 
 const steps = ['Select food', 'Select transaction', 'Complete'];
 
-const _renderStepContent = (step: number, onNextClicked: () => void, onPreviousClicked: () => void) => {
+const _renderStepContent = (step: number, onNextClicked: () => void, onPreviousClicked: () => void, onSkipClicked: () => void) => {
     switch (step) {
         case 0:
             return <ChooseFoodComponent
                 isNextAvailable={true}
                 onNextClicked={onNextClicked}
                 isPreviousAvailable={false}
-                onPreviousClicked={onPreviousClicked}/>;
+                onPreviousClicked={onPreviousClicked}
+                isSkipAvailable={true}
+                onSkipClicked={onSkipClicked}
+            />;
         case 1:
             return <ChooseFoodTransactionComponent
                 isNextAvailable={true}
                 onNextClicked={onNextClicked}
                 isPreviousAvailable={true}
-                onPreviousClicked={onPreviousClicked}/>;
+                onPreviousClicked={onPreviousClicked}
+                isSkipAvailable={true}
+                onSkipClicked={onSkipClicked}
+            />;
         case 2:
             return <CompleteFoodConsumptionComponent
                 isNextAvailable={true}
                 onNextClicked={onNextClicked}
                 isPreviousAvailable={true}
-                onPreviousClicked={onPreviousClicked}/>;
+                onPreviousClicked={onPreviousClicked}
+                isSkipAvailable={false}
+                onSkipClicked={onSkipClicked}
+            />;
         default:
             return <div></div>;
     }
@@ -53,6 +62,8 @@ export interface StepperComponentProps {
     onNextClicked: () => void
     isPreviousAvailable: boolean
     onPreviousClicked: () => void
+    isSkipAvailable: boolean
+    onSkipClicked: () => void
 }
 
 export const AddFoodConsumptionPage = () => {
@@ -68,6 +79,10 @@ export const AddFoodConsumptionPage = () => {
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
+
+    const handleSkip = () => {
+        setActiveStep(2);
     }
 
     const goBack = () => {
@@ -112,7 +127,7 @@ export const AddFoodConsumptionPage = () => {
                 </Stepper>
                 <React.Fragment>
                     {
-                        _renderStepContent(activeStep, handleNext, handleBack)
+                        _renderStepContent(activeStep, handleNext, handleBack, handleSkip)
                     }
                 </React.Fragment>
             </Grid>

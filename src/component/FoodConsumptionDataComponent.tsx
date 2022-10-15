@@ -7,10 +7,12 @@ import {setError} from "../action/Action";
 
 export interface FoodConsumptionDataComponentProps {
     foodId?: string
+    foodName?: string
     quantity: number
     unit: string
     quantityGram: number
     kcals: number
+    onFoodNameChanged: (foodName: string) => void
     onQuantityChanged: (quantity: number) => void
     onQuantityGramChanged: (quantityGram: number) => void
     onKcalsChanged: (kcals: number) => void
@@ -33,6 +35,21 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
 
     return <Grid item xs={8}>
         <Grid container columns={8}>
+            {
+                props.foodName !== undefined ?
+                    <Grid item xs={8}>
+                        <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
+                            <InputLabel htmlFor="food-name-required">Food name</InputLabel>
+                            <OutlinedInput
+                                required
+                                id="food-name-required"
+                                label="Food name"
+                                value={props.foodName}
+                                onChange={(event) => props.onFoodNameChanged(event.target.value)}
+                            />
+                        </FormControl>
+                    </Grid> : <div/>
+            }
             <Grid item xs={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                     <InputLabel htmlFor="quantity-required">Quantity</InputLabel>

@@ -15,6 +15,7 @@ export const EditFoodConsumptionPage = () => {
     const currentMeal = useSelector(getCurrentMeal);
     const currentFoodConsumption = useSelector(getCurrentFoodConsumption);
 
+    const [foodName, setFoodName] = React.useState( currentFoodConsumption?.foodName || "");
     const [quantity, setQuantity] = React.useState<number>(currentFoodConsumption?.quantityUsed || 0);
     const [quantityGram, setQuantityGram] = React.useState<number>(currentFoodConsumption?.quantityUsedStd || 0);
     const [kcals, setKcals] = React.useState<number>(currentFoodConsumption?.kcal || 0);
@@ -28,6 +29,7 @@ export const EditFoodConsumptionPage = () => {
         if (currentFoodConsumption) {
             const foodConsumption: FoodConsumption = {
                 ...currentFoodConsumption,
+                foodName: foodName,
                 quantityUsed: quantity || 0,
                 quantityUsedStd: quantityGram || 0,
                 kcal: kcals || 0
@@ -79,11 +81,13 @@ export const EditFoodConsumptionPage = () => {
                 <Grid container columns={8}>
                     <Grid item xs={8}>
                         <FoodConsumptionDataComponent
+                            foodName={currentFoodConsumption?.foodId !== "00000000-0000-0000-0000-000000000000" ? undefined : foodName}
                             foodId={currentFoodConsumption?.foodId || ""}
                             quantity={quantity || 0}
                             unit={currentFoodConsumption?.unit || ""}
                             quantityGram={quantityGram || 0}
                             kcals={kcals || 0}
+                            onFoodNameChanged={setFoodName}
                             onQuantityChanged={setQuantity}
                             onQuantityGramChanged={setQuantityGram}
                             onKcalsChanged={setKcals}/>

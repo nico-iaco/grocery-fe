@@ -1,5 +1,5 @@
 import {Button, Grid, List, Paper} from "@mui/material";
-import {setCurrentTransaction, setError} from "../action/Action";
+import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
@@ -28,6 +28,20 @@ export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => 
 
     const onTransactionClicked = (transaction: Transaction) => {
         dispatch(setCurrentTransaction(transaction));
+    }
+
+    const next = () => {
+        if (currentTransaction !== undefined) {
+            props.onNextClicked();
+        } else {
+            dispatch(setError("Please select a transaction"));
+        }
+    }
+
+    const skip = () => {
+        dispatch(setCurrentItem(undefined));
+        dispatch(setCurrentTransaction(undefined));
+        props.onSkipClicked();
     }
 
     return <Grid item xs={8}>
