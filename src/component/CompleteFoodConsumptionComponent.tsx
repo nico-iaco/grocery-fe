@@ -17,6 +17,7 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
     const [quantity, setQuantity] = useState<number>(0);
     const [quantityGram, setQuantityGram] = useState<number>(0);
     const [kcals, setKcals] = useState<number>(0);
+    const [cost, setCost] = useState<number>(0);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -30,7 +31,8 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
             quantityUsed: quantity,
             unit: currentFood?.unit || "",
             quantityUsedStd: quantityGram,
-            kcal: kcals
+            kcal: kcals,
+            cost: cost
         }
         addMealFoodConsumption(currentMeal?.id || "", foodConsumption)
             .then(() => {
@@ -55,10 +57,13 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
                     unit={currentTransaction?.unit || ""}
                     quantityGram={quantityGram}
                     kcals={kcals}
+                    cost={currentFood ? undefined : cost}
                     onFoodNameChanged={setFoodName}
                     onQuantityChanged={setQuantity}
                     onQuantityGramChanged={setQuantityGram}
-                    onKcalsChanged={setKcals} />
+                    onKcalsChanged={setKcals}
+                    onCostChanged={setCost}
+                />
             </Grid>
             <Grid item xs={8}>
                 <Grid container columns={8}>

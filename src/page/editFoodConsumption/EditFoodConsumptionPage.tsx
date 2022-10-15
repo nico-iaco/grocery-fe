@@ -19,6 +19,7 @@ export const EditFoodConsumptionPage = () => {
     const [quantity, setQuantity] = React.useState<number>(currentFoodConsumption?.quantityUsed || 0);
     const [quantityGram, setQuantityGram] = React.useState<number>(currentFoodConsumption?.quantityUsedStd || 0);
     const [kcals, setKcals] = React.useState<number>(currentFoodConsumption?.kcal || 0);
+    const [cost, setCost] = React.useState<number>(currentFoodConsumption?.cost || 0);
 
     const goBack = () => {
         dispatch(setCurrentFoodConsumption(undefined));
@@ -32,7 +33,8 @@ export const EditFoodConsumptionPage = () => {
                 foodName: foodName,
                 quantityUsed: quantity || 0,
                 quantityUsedStd: quantityGram || 0,
-                kcal: kcals || 0
+                kcal: kcals || 0,
+                cost: cost
             }
             updateMealFoodConsumption(currentMeal?.id || "", foodConsumption)
                 .then(goBack)
@@ -87,10 +89,13 @@ export const EditFoodConsumptionPage = () => {
                             unit={currentFoodConsumption?.unit || ""}
                             quantityGram={quantityGram || 0}
                             kcals={kcals || 0}
+                            cost={currentFoodConsumption?.foodId !== "00000000-0000-0000-0000-000000000000" ? undefined : cost}
                             onFoodNameChanged={setFoodName}
                             onQuantityChanged={setQuantity}
                             onQuantityGramChanged={setQuantityGram}
-                            onKcalsChanged={setKcals}/>
+                            onKcalsChanged={setKcals}
+                            onCostChanged={setCost}
+                        />
                     </Grid>
                     <Grid item xs={8}>
                         <Grid container columns={8}>
