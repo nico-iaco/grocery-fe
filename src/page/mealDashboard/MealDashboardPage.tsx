@@ -76,7 +76,7 @@ export const MealDashboardPage = () => {
                         <Toolbar>
                             <Button disabled></Button>
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Meals available
+                                Meals
                             </Typography>
                             <IconButton
                                 size="large"

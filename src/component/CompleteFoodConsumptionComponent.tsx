@@ -13,23 +13,26 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
     const currentMeal = useSelector(getCurrentMeal);
     const currentFood = useSelector(getCurrentItem);
     const currentTransaction = useSelector(getCurrentTransaction);
+    const [foodName, setFoodName] = useState("");
     const [quantity, setQuantity] = useState<number>(0);
     const [quantityGram, setQuantityGram] = useState<number>(0);
     const [kcals, setKcals] = useState<number>(0);
+    const [cost, setCost] = useState<number>(0);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onCompleted = () => {
         const foodConsumption: FoodConsumption = {
-            foodId: currentFood?.id  || "",
-            transactionId: currentTransaction?.id || "",
+            foodId: currentFood?.id ,
+            transactionId: currentTransaction?.id,
             mealId: currentMeal?.id || "",
-            foodName: currentFood?.name || "",
+            foodName: currentFood?.name || foodName,
             quantityUsed: quantity,
             unit: currentFood?.unit || "",
             quantityUsedStd: quantityGram,
-            kcal: kcals
+            kcal: kcals,
+            cost: cost
         }
         addMealFoodConsumption(currentMeal?.id || "", foodConsumption)
             .then(() => {
@@ -48,14 +51,19 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <FoodConsumptionDataComponent
+                    foodName={currentFood ? undefined : foodName}
                     foodId={currentFood?.id || ""}
                     quantity={quantity}
                     unit={currentTransaction?.unit || ""}
                     quantityGram={quantityGram}
                     kcals={kcals}
+                    cost={currentFood ? undefined : cost}
+                    onFoodNameChanged={setFoodName}
                     onQuantityChanged={setQuantity}
                     onQuantityGramChanged={setQuantityGram}
-                    onKcalsChanged={setKcals} />
+                    onKcalsChanged={setKcals}
+                    onCostChanged={setCost}
+                />
             </Grid>
             <Grid item xs={8}>
                 <Grid container columns={8}>
