@@ -1,6 +1,5 @@
 import {MealType} from "../model/meal";
 import {Chip, Grid, IconButton, Paper, Typography} from "@mui/material";
-import {format} from "date-fns";
 import {Edit} from "@mui/icons-material";
 
 export interface MealRowComponentProps {
@@ -16,7 +15,6 @@ export interface MealRowComponentProps {
 }
 
 export const MealRowComponent = (props: MealRowComponentProps) => {
-    const formattedDate = format(new Date(props.date), "dd-MM-yyyy")
 
     return (
         <div style={{
@@ -29,7 +27,7 @@ export const MealRowComponent = (props: MealRowComponentProps) => {
                     <Grid item xs={8} onClick={props.onClick}>
                         <Grid container columns={8}>
                             <Grid item xs={8} >
-                                <Typography variant="h5">{props.name} § {formattedDate}</Typography>
+                                <Typography variant="h5">{props.name}</Typography>
                                 <Typography variant="subtitle1">{props.description} {props.kcal ? `§ ${props.kcal} kcal` : ""} {props.cost ? `§ ${props.cost} €` : ""}</Typography>
                             </Grid>
                             <Grid item xs={8} className="center">

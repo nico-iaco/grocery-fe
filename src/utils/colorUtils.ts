@@ -1,10 +1,10 @@
 
 
 const mealTypeColors: Map<string, string> = new Map<string, string>([
-    ["breakfast", '#fff202'],
-    ["lunch", '#29c96a'],
-    ["dinner", '#24aad3'],
-    ["other", '#7f8165'],
+    ["breakfast", 'rgba(238,225,12,0.85)'],
+    ["lunch", 'rgba(51,218,45,0.7)'],
+    ["dinner", 'rgba(0,196,255,0.7)'],
+    ["other", 'rgba(173,167,61,0.44)']
 ]);
 
 export const generateRandomRgbaColor = () => {
@@ -15,5 +15,5 @@ export const generateRandomRgbaColor = () => {
 }
 
 export const getMealTypeColor = (mealType: string) => {
-    return mealTypeColors.get(mealType) || generateRandomRgbaColor();
+    return mealTypeColors.get(mealType);
 }

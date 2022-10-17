@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, IconButton, List, Skeleton, Toolbar, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {getAllItemTransaction, getItemDetail} from "../../api/itemApis";
@@ -80,7 +80,11 @@ export function ItemTransactionPage() {
             </Grid>
             <Container className="container">
                 <Grid item xs={12}>
-                    <img src={itemDetails?.image_nutrition_url} className="content-image" alt="nutrition-table"/>
+                    {
+                        itemDetails?.image_nutrition_url ?
+                            <img src={itemDetails?.image_nutrition_url} className="content-image" alt="nutrition-table" height={320}/>
+                            : <Skeleton variant="rectangular" height={320}/>
+                    }
                     <List className="list-container">
                         {itemTransactionList.map(transaction => {
                             return <TransactionRowComponent

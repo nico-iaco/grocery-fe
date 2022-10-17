@@ -16,6 +16,8 @@ import {
     InputLabel,
     List,
     OutlinedInput,
+    Skeleton,
+    Stack,
     Toolbar,
     Typography
 } from "@mui/material";
@@ -57,69 +59,80 @@ export const ItemDashboardPage = (props: any) => {
 
 
     return (
-            <Grid container columns={8}>
-                <Grid item xs={8}>
-                    <Box sx={{ flexGrow: 1 }}>
-                        <AppBar position="sticky" className="AppBar">
-                            <Toolbar>
-                                <Button disabled></Button>
-                                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                    Food available
-                                </Typography>
-                                <Button disabled></Button>
-                            </Toolbar>
-                        </AppBar>
-                    </Box>
-                </Grid>
-                <Container className="container">
-                    <Grid item xs={8}>
-                        <FormControl  variant="outlined" fullWidth>
-                            <InputLabel htmlFor="outlined-adornment-search">Search</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-search"
-                                type={'text'}
-                                value={search}
-                                onChange={(event) => setSearch(event.target.value)}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            edge="end"
-                                        >
-                                            <Search/>
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-                            />
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <List className="list-container">
-                            {itemList
-                                .filter(value => search === "" || (value.name.toLowerCase().includes(search.toLowerCase()) || value.barcode.includes(search)))
-                                .map(item => {
-                                return <ItemRowComponent
-                                    key={item.id}
-                                    id={item.id}
-                                    name={item.name}
-                                    barcode={item.barcode}
-                                    quantity={item.availableQuantity || 0}
-                                    unit={item.unit || ""}
-                                    onButtonClick={() => goToEditItem(item)}
-                                    onClick={() => goToItemTransaction(item)}/>
-                            })}
-                        </List>
-                    </Grid>
-                    <Fab
-                        mainButtonStyles={{backgroundColor: '#1677d7'}}
-                        style={{bottom: 50, right: 12}}
-                        icon={<Add/>}
-                        alwaysShowTitle={true}
-                        event="click"
-                        onClick={goToAddItem}
-                    >
-                    </Fab>
-                </Container>
+        <Grid container columns={8}>
+            <Grid item xs={8}>
+                <Box sx={{flexGrow: 1}}>
+                    <AppBar position="sticky" className="AppBar">
+                        <Toolbar>
+                            <Button disabled></Button>
+                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                                Food available
+                            </Typography>
+                            <Button disabled></Button>
+                        </Toolbar>
+                    </AppBar>
+                </Box>
             </Grid>
+            <Container className="container">
+                <Grid item xs={8}>
+                    <FormControl variant="outlined" fullWidth>
+                        <InputLabel htmlFor="outlined-adornment-search">Search</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-search"
+                            type={'text'}
+                            value={search}
+                            onChange={(event) => setSearch(event.target.value)}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        edge="end"
+                                    >
+                                        <Search/>
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Password"
+                        />
+                    </FormControl>
+                </Grid>
+                <Grid item xs={8}>
+                    <List className="list-container">
+                        {
+                            itemList.length > 0 ?
+                                itemList
+                                    .filter(value => search === "" || (value.name.toLowerCase().includes(search.toLowerCase()) || value.barcode.includes(search)))
+                                    .map(item => {
+                                        return <ItemRowComponent
+                                            key={item.id}
+                                            id={item.id}
+                                            name={item.name}
+                                            barcode={item.barcode}
+                                            quantity={item.availableQuantity || 0}
+                                            unit={item.unit || ""}
+                                            onButtonClick={() => goToEditItem(item)}
+                                            onClick={() => goToItemTransaction(item)}/>
+                                    }) :
+                                <Stack spacing={1}>
+                                    <Skeleton variant="rectangular" height={90}/>
+                                    <Skeleton variant="rectangular" height={90}/>
+                                    <Skeleton variant="rectangular" height={90}/>
+                                    <Skeleton variant="rectangular" height={90}/>
+                                    <Skeleton variant="rectangular" height={90}/>
+                                    <Skeleton variant="rectangular" height={90}/>
+                                </Stack>
+                        }
+                    </List>
+                </Grid>
+                <Fab
+                    mainButtonStyles={{backgroundColor: '#1677d7'}}
+                    style={{bottom: 50, right: 12}}
+                    icon={<Add/>}
+                    alwaysShowTitle={true}
+                    event="click"
+                    onClick={goToAddItem}
+                >
+                </Fab>
+            </Container>
+        </Grid>
     );
 }

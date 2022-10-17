@@ -1,4 +1,16 @@
-import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    Grid,
+    IconButton,
+    List,
+    Skeleton,
+    Stack,
+    Toolbar,
+    Typography
+} from "@mui/material";
 import {getAllMealInDateRange, getMealStatisticsInDateRange} from "../../api/mealApis";
 import {Meal} from "../../model/meal";
 import React, {useEffect, useState} from "react";
@@ -12,6 +24,7 @@ import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {MealStatistic} from "../../model/mealStatistic";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
+import {format} from "date-fns";
 
 
 export const MealDashboardPage = () => {
@@ -26,18 +39,24 @@ export const MealDashboardPage = () => {
     const [mealList, setMealList] = useState<Meal[]>([])
     const [date, setDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+    const [formattedDate, setFormattedDate] = useState<string>(format(new Date(), "dd-MM-yyyy"));
     const [mealStatistic, setMealStatistic] = useState<MealStatistic>(initialStatistics);
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
+    const handleDateChange = (date: Date | null) => {
+        if (date) {
+            setSelectedDate(date);
+            setFormattedDate(format(new Date(date), "dd-MM-yyyy"));
+        }
+    }
+
     useEffect(() => {
         getAllMealInDateRange(selectedDate, selectedDate)
             .then(value => {
-
                 setMealList(value || [])
-
             })
             .catch(reason => {
                 console.error(reason)
@@ -76,7 +95,7 @@ export const MealDashboardPage = () => {
                         <Toolbar>
                             <Button disabled></Button>
                             <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Meals
+                                Meals of {formattedDate}
                             </Typography>
                             <IconButton
                                 size="large"
@@ -98,7 +117,7 @@ export const MealDashboardPage = () => {
                                         }}
                                         onAccept={(newValue) => {
                                             if (newValue) {
-                                                setSelectedDate(newValue);
+                                                handleDateChange(newValue);
                                             }
                                         }}
                                         renderInput={(params) => <CalendarMonth onClick={() => setIsPickerOpen(true)}/>}
@@ -121,20 +140,29 @@ export const MealDashboardPage = () => {
                 </Grid>
                 <Grid item xs={8}>
                     <List>
-                        {mealList.map(meal => {
-                            return <MealRowComponent
-                                key={meal.id}
-                                id={meal.id || ""}
-                                name={meal.name}
-                                description={meal.description}
-                                mealType={meal.mealType}
-                                date={meal.date}
-                                kcal={meal.kcal}
-                                cost={meal.cost}
-                                onClick={() => goToMealTransaction(meal)}
-                                onButtonClick={() => goToEditMeal(meal)}
-                            />
-                        })}
+                        {
+                            mealList.length > 0 ?
+                                mealList.map(meal => {
+                                    return <MealRowComponent
+                                        key={meal.id}
+                                        id={meal.id || ""}
+                                        name={meal.name}
+                                        description={meal.description}
+                                        mealType={meal.mealType}
+                                        date={meal.date}
+                                        kcal={meal.kcal}
+                                        cost={meal.cost}
+                                        onClick={() => goToMealTransaction(meal)}
+                                        onButtonClick={() => goToEditMeal(meal)}
+                                    />
+                                }) :
+                                <Stack spacing={1}>
+                                    <Skeleton variant="rectangular" height={80}/>
+                                    <Skeleton variant="rectangular" height={80}/>
+                                    <Skeleton variant="rectangular" height={80}/>
+                                    <Skeleton variant="rectangular" height={80}/>
+                                </Stack>
+                        }
                     </List>
                 </Grid>
                 <Fab
