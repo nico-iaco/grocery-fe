@@ -8,7 +8,7 @@ import {Add, ArrowBack} from "@mui/icons-material";
 import {FoodDetail} from "../../model/foodDetails";
 import "./ItemTransactionPage.css";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentItem} from "../../selector/Selector";
+import {getCurrentItem, getUser} from "../../selector/Selector";
 import {setCurrentItem, setCurrentTransaction, setError} from "../../action/Action";
 import {Fab} from "react-tiny-fab";
 
@@ -16,11 +16,12 @@ export function ItemTransactionPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentItem = useSelector(getCurrentItem);
+    const currentUser = useSelector(getUser);
     const [itemTransactionList, setItemTransactionList] = useState<Transaction[]>([])
     const [itemDetails, setItemDetails] = useState<FoodDetail>();
 
     useEffect(() => {
-        getItemDetail(currentItem?.id || "")
+        getItemDetail(currentItem?.id || "", currentUser?.id || "")
             .then(value => {
                 setItemDetails(value);
             })
@@ -28,7 +29,9 @@ export function ItemTransactionPage() {
                 console.error(reason)
                 dispatch(setError(reason.message));
             });
-        getAllItemTransaction(currentItem?.id || "")
+        getAllItemTransaction(currentItem?.id || "",
+            false,
+            currentUser?.id || "")
             .then(itemTransactionList => setItemTransactionList(itemTransactionList || []))
             .catch(reason => {
                 console.log(reason)
@@ -90,7 +93,7 @@ export function ItemTransactionPage() {
                             return <TransactionRowComponent
                                 key={transaction.id}
                                 id={transaction.id}
-                                vendor={transaction.vendor}
+                                seller={transaction.seller}
                                 quantity={transaction.quantity}
                                 availableQuantity={transaction.availableQuantity}
                                 unit={transaction.unit}

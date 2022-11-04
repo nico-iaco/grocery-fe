@@ -4,7 +4,7 @@ import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
 import {getAllItemTransaction} from "../api/itemApis";
-import {getCurrentItem, getCurrentTransaction} from "../selector/Selector";
+import {getCurrentItem, getCurrentTransaction, getUser} from "../selector/Selector";
 import {Transaction} from "../model/transaction";
 import {useEffect, useState} from "react";
 import {format} from "date-fns";
@@ -12,11 +12,14 @@ import {format} from "date-fns";
 export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
+    const currentUser = useSelector(getUser);
     const currentTransaction = useSelector(getCurrentTransaction);
     const [transactionList, setTransactionList] = useState<Transaction[]>([]);
 
     useEffect(() => {
-        getAllItemTransaction(currentFood?.id || "" , true)
+        getAllItemTransaction(currentFood?.id || "" ,
+            true,
+            currentUser?.id || "")
             .then((transactions) => {
                 setTransactionList(transactions || []);
             })
@@ -67,7 +70,10 @@ export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => 
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isNextAvailable && <Button onClick={props.onNextClicked}>Next</Button>
+                            props.isSkipAvailable && <Button onClick={skip}>Skip</Button>
+                        }
+                        {
+                            props.isNextAvailable && <Button onClick={next}>Next</Button>
                         }
                     </Grid>
                 </Grid>

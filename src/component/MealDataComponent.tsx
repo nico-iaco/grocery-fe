@@ -1,7 +1,7 @@
 import {MealType} from "../model/meal";
 import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import React from "react";
 
 export interface TransactionDataComponentProps {
@@ -58,11 +58,11 @@ export const MealDataComponent = (props: TransactionDataComponentProps) => {
         </Grid>
         <Grid item xs={8}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
+                <DateTimePicker
                     label="Meal date"
                     value={props.date}
                     maxDate={new Date()}
-                    inputFormat="DD/MM/YYYY"
+                    inputFormat="DD/MM/YYYY HH:mm"
                     onChange={(newValue) => {
                         if (newValue !== null) {
                             props.onDateChange(new Date(newValue));

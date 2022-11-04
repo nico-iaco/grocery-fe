@@ -4,8 +4,8 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
 
 export interface TransactionDataComponentProps {
-    vendor ?: string
-    onVendorChange : (v: string) => void
+    seller ?: string
+    onSellerChange : (v: string) => void
     quantity ?: number
     onQuantityChange : (v: number) => void
     unit ?: string
@@ -14,6 +14,8 @@ export interface TransactionDataComponentProps {
     onPriceChange : (v: number) => void
     expirationDate ?: Date
     onExpirationDateChange : (v: Date) => void
+    purchaseDate ?: Date
+    onPurchaseDateChange : (v: Date) => void
     buttonText : string
     onButtonClick : () => void
 }
@@ -25,8 +27,8 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
               required
               id="outlined"
               label="Vendor"
-              value={props.vendor}
-              onChange={(event) => props.onVendorChange(event.target.value)}
+              value={props.seller}
+              onChange={(event) => props.onSellerChange(event.target.value)}
           />
       </Grid>
       <Grid item xs={8}>
@@ -68,6 +70,22 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
                   onChange={(newValue) => {
                       if (newValue !== null) {
                           props.onExpirationDateChange(new Date(newValue));
+                      }
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+              />
+          </LocalizationProvider>
+      </Grid>
+      <Grid item xs={8}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                  label="Purchase date"
+                  value={props.purchaseDate}
+                  minDate={new Date()}
+                  inputFormat="DD/MM/YYYY"
+                  onChange={(newValue) => {
+                      if (newValue !== null) {
+                          props.onPurchaseDateChange(new Date(newValue));
                       }
                   }}
                   renderInput={(params) => <TextField {...params} />}

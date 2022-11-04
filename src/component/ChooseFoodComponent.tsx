@@ -6,16 +6,17 @@ import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumpti
 import {Button, Grid, List, Paper} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {setCurrentItem, setError} from "../action/Action";
-import {getCurrentItem} from "../selector/Selector";
+import {getCurrentItem, getUser} from "../selector/Selector";
 
 
 export const ChooseFoodComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const [foodList, setFoodList] = useState<Item[]>([]);
     const currentFood = useSelector(getCurrentItem);
+    const currentUser = useSelector(getUser);
 
     useEffect(() => {
-        getAllItems(true)
+        getAllItems(true, currentUser?.id || "")
             .then((items) => {
                 setFoodList(items || []);
             })

@@ -2,8 +2,9 @@ import {FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput
 import React from "react";
 import {Calculate, Euro} from "@mui/icons-material";
 import {getFoodKcal} from "../api/itemApis";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setError} from "../action/Action";
+import {getUser} from "../selector/Selector";
 
 export interface FoodConsumptionDataComponentProps {
     foodId?: string
@@ -22,10 +23,13 @@ export interface FoodConsumptionDataComponentProps {
 
 export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponentProps) => {
     const dispatch = useDispatch();
+    const currentUser = useSelector(getUser);
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
-        getFoodKcal(props.foodId || "", quantity)
+        getFoodKcal(props.foodId || "",
+            quantity,
+            currentUser?.id || "")
             .then((response) => {
                 props.onKcalsChanged(response || 0)
             })

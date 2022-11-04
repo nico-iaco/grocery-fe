@@ -4,7 +4,7 @@ import {Edit} from "@mui/icons-material";
 
 export interface TransactionRowComponentProps {
     id: string
-    vendor: string
+    seller: string
     quantity: number
     availableQuantity: number
     unit: string
@@ -30,7 +30,7 @@ export function TransactionRowComponent(props: TransactionRowComponentProps) {
                     <Grid item xs={6} onClick={props.onTransactionClick}>
                         <Grid container columns={10}>
                             <Grid item xs={10}>
-                                <Typography variant="h5">{props.vendor} {props.price}€</Typography>
+                                <Typography variant="h5">{props.seller} {props.price}€</Typography>
                             </Grid>
                             <Grid item xs={10}>
                                 <Typography variant="subtitle1">Expiration date: {formattedDate}</Typography>

@@ -2,6 +2,7 @@ import {Item} from "../model/item";
 import {Transaction} from "../model/transaction";
 import {Meal} from "../model/meal";
 import {FoodConsumption} from "../model/foodConsumption";
+import {User} from "../model/user";
 
 export interface Action {
     type: string;
@@ -24,6 +25,9 @@ export const SET_CURRENT_TAB_INDEX_TYPE = "SET_CURRENT_TAB_INDEX";
 
 export const SET_ERROR_TYPE = "SET_ERROR";
 export const CLEAR_ERROR_TYPE = "CLEAR_ERROR";
+
+export const SET_USER_TYPE = "SET_USER";
+export const CLEAR_USER_TYPE = "CLEAR_USER";
 
 
 export const setCurrentItem = (item?: Item): Action => {
@@ -99,6 +103,19 @@ export const setError = (error: string): Action => {
 export const clearError = (): Action => {
     return {
         type: CLEAR_ERROR_TYPE
+    };
+}
+
+export const setUser = (user: User): Action => {
+    return {
+        type: SET_USER_TYPE,
+        payload: user
+    };
+}
+
+export const clearUser = (): Action => {
+    return {
+        type: CLEAR_USER_TYPE
     };
 }
 

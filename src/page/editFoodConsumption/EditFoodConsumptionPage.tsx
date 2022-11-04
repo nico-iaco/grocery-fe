@@ -1,6 +1,6 @@
 import {setCurrentFoodConsumption, setError} from "../../action/Action";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentFoodConsumption, getCurrentMeal} from "../../selector/Selector";
+import {getCurrentFoodConsumption, getCurrentMeal, getUser} from "../../selector/Selector";
 import {useNavigate} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {FoodConsumptionDataComponent} from "../../component/FoodConsumptionDataComponent";
@@ -14,6 +14,7 @@ export const EditFoodConsumptionPage = () => {
     const dispatch = useDispatch();
     const currentMeal = useSelector(getCurrentMeal);
     const currentFoodConsumption = useSelector(getCurrentFoodConsumption);
+    const currentUser = useSelector(getUser);
 
     const [foodName, setFoodName] = React.useState( currentFoodConsumption?.foodName || "");
     const [quantity, setQuantity] = React.useState<number>(currentFoodConsumption?.quantityUsed || 0);
@@ -36,7 +37,9 @@ export const EditFoodConsumptionPage = () => {
                 kcal: kcals || 0,
                 cost: cost
             }
-            updateMealFoodConsumption(currentMeal?.id || "", foodConsumption)
+            updateMealFoodConsumption(currentMeal?.id || "",
+                foodConsumption,
+                currentUser?.id || "")
                 .then(goBack)
                 .catch((error) => {
                     console.log(error);
@@ -46,7 +49,9 @@ export const EditFoodConsumptionPage = () => {
     }
 
     const deleteFoodConsumptionFromServer = () => {
-        deleteMealFoodConsumption(currentMeal?.id || "", currentFoodConsumption?.id || "")
+        deleteMealFoodConsumption(currentMeal?.id || "",
+            currentFoodConsumption?.id || "",
+            currentUser?.id || "")
             .then(goBack)
             .catch(reason => {
                 console.error(reason)

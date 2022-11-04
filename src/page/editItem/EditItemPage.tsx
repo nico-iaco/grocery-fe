@@ -6,23 +6,27 @@ import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {Item} from "../../model/item";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentItem} from "../../selector/Selector";
+import {getCurrentItem, getUser} from "../../selector/Selector";
 import {setCurrentItem, setError} from "../../action/Action";
 
 export const EditItemPage = () => {
     const currentItem = useSelector(getCurrentItem);
+    const user = useSelector(getUser);
     const [name, setName] = useState(currentItem?.name || "");
     const [barcode, setBarcode] = useState(currentItem?.barcode || "");
+    const [vendor, setVendor] = useState(currentItem?.vendor || "");
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const updateItemToBe = () => {
         const updatedItem: Item = {
             id: currentItem?.id || "",
+            userId: user?.id || "",
             name,
-            barcode
+            barcode,
+            vendor
         }
-        updateItem(updatedItem)
+        updateItem(updatedItem, user?.id || "")
             .then(goBack)
             .catch(reason => {
                 console.error(reason)
@@ -35,7 +39,7 @@ export const EditItemPage = () => {
     }
 
     const deleteItemFromServer = () => {
-        deleteItem(currentItem?.id || "")
+        deleteItem(currentItem?.id || "", user?.id || "")
             .then(v => {
                 console.log(v);
                 dispatch(setCurrentItem(undefined));
@@ -77,6 +81,8 @@ export const EditItemPage = () => {
                 onNameChange={(v) => setName(v)}
                 barcode={barcode}
                 onBarcodeChange={(v) => setBarcode(v)}
+                vendor={vendor}
+                onVendorChange={(v) => setVendor(v)}
                 buttonText="Update"
                 onButtonClick={updateItemToBe}
             />

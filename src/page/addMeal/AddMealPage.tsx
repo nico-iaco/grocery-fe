@@ -1,4 +1,4 @@
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import React, {useState} from "react";
 import {Meal, MealType} from "../../model/meal";
 import {addMeal} from "../../api/mealApis";
@@ -7,6 +7,7 @@ import {setCurrentMeal, setError} from "../../action/Action";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {MealDataComponent} from "../../component/MealDataComponent";
+import {getUser} from "../../selector/Selector";
 
 export const AddMealPage = () => {
     const dispatch = useDispatch();
@@ -16,9 +17,12 @@ export const AddMealPage = () => {
     const [mealType, setMealType] = useState(MealType.OTHERS);
     const [date, setDate] = useState(new Date());
 
+    const user = useSelector(getUser);
+
     const sendMealToBe = () => {
         const meal: Meal = {
             name,
+            userId: user?.id || "",
             description,
             mealType,
             date

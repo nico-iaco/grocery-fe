@@ -5,14 +5,17 @@ import {addItem} from "../../api/itemApis";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setCurrentItem, setError} from "../../action/Action";
+import {getUser} from "../../selector/Selector";
 
 export function AddItemPage () {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [barcode, setBarcode] = useState("");
+    const [vendor, setVendor] = useState("");
     const navigate = useNavigate();
+    const user = useSelector(getUser);
 
     const goBack = () => {
         navigate(`/item`);
@@ -21,8 +24,10 @@ export function AddItemPage () {
     const sendItemToBe = () => {
       const item: Item = {
           id: "",
+          userId: user?.id || "",
           name,
-          barcode
+          barcode,
+          vendor
       };
       addItem(item)
           .then(value => {
@@ -68,6 +73,8 @@ export function AddItemPage () {
                         onNameChange={(v) => setName(v)}
                         barcode={barcode}
                         onBarcodeChange={(v) => setBarcode(v)}
+                        vendor={vendor}
+                        onVendorChange={(v) => setVendor(v)}
                         buttonText="Add"
                         onButtonClick={sendItemToBe}
                     />

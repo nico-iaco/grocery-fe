@@ -5,8 +5,9 @@ import {useNavigate, useParams} from "react-router-dom";
 import {addTransactionToItem} from "../../api/itemApis";
 import {ArrowBack} from "@mui/icons-material";
 import {TransactionDataComponent} from "../../component/TransactionDataComponent";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setError} from "../../action/Action";
+import {getUser} from "../../selector/Selector";
 
 
 export function AddTransactionPage() {
@@ -14,11 +15,14 @@ export function AddTransactionPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [vendor, setVendor] = useState("")
+    const currentUser = useSelector(getUser);
+
+    const [seller, setSeller] = useState("")
     const [quantity, setQuantity] = useState(0)
     const [unit, setUnit] = useState("")
     const [price, setPrice] = useState(0)
     const [expirationDate, setExpirationDate] = useState(new Date())
+    const [purchaseDate, setPurchaseDate] = useState(new Date())
 
     const goBack = () => {
         navigate(`/item/${itemId}/transaction`);
@@ -28,15 +32,19 @@ export function AddTransactionPage() {
 
         const transaction: Transaction = {
             id: "",
-            vendor,
+            seller,
             quantity,
+            quantityStd: 0, //FIXME
             availableQuantity: quantity,
             unit,
             price,
-            expirationDate
+            expirationDate,
+            purchaseDate
         }
 
-        addTransactionToItem(itemId || "", transaction)
+        addTransactionToItem(itemId || "",
+            transaction,
+            currentUser?.id || "")
             .then(goBack)
             .catch(reason => {
                 console.error(reason)
@@ -73,8 +81,8 @@ export function AddTransactionPage() {
         </Grid>
         <Container className="container">
             <TransactionDataComponent
-                vendor={vendor}
-                onVendorChange={setVendor}
+                seller={seller}
+                onSellerChange={setSeller}
                 quantity={quantity}
                 onQuantityChange={setQuantity}
                 unit={unit}
@@ -83,6 +91,8 @@ export function AddTransactionPage() {
                 onPriceChange={setPrice}
                 expirationDate={expirationDate}
                 onExpirationDateChange={setExpirationDate}
+                purchaseDate={purchaseDate}
+                onPurchaseDateChange={setPurchaseDate}
                 buttonText="Add"
                 onButtonClick={sendTransactionToBe}/>
         </Container>
