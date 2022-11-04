@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentMeal} from "../../selector/Selector";
+import {getCurrentMeal, getUser} from "../../selector/Selector";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import React from "react";
@@ -13,6 +13,7 @@ export const EditMealPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentMeal = useSelector(getCurrentMeal);
+    const currentUser = useSelector(getUser);
 
     const [mealName, setMealName] = React.useState(currentMeal?.name || "");
     const [mealDescription, setMealDescription] = React.useState(currentMeal?.description || "");
@@ -31,7 +32,7 @@ export const EditMealPage = () => {
                 description: mealDescription,
                 mealType,
                 date: mealDate
-            })
+            }, currentUser?.id || "")
                 .then(goBack)
                 .catch(reason => {
                     console.log(reason)
@@ -42,7 +43,8 @@ export const EditMealPage = () => {
 
     const deleteMealFromServer = () => {
         if (currentMeal) {
-            deleteMeal(currentMeal.id || "")
+            deleteMeal(currentMeal.id || "",
+                currentUser?.id || "")
                 .then(() => {
                     dispatch(setCurrentMeal(undefined));
                     navigate("/meal")

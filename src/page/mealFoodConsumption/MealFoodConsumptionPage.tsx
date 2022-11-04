@@ -1,6 +1,6 @@
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentMeal} from "../../selector/Selector";
+import {getCurrentMeal, getUser} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
 import React, {useEffect, useState} from "react";
 import {setCurrentFoodConsumption, setCurrentMeal, setError} from "../../action/Action";
@@ -12,12 +12,14 @@ import {Fab} from "react-tiny-fab";
 
 export const MealFoodConsumptionPage = () => {
     const currentMeal = useSelector(getCurrentMeal);
+    const currentUser = useSelector(getUser);
     const [mealFoodConsumptionList, setMealFoodConsumptionList] = useState<FoodConsumption[]>([])
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        getMealFoodConsumptions(currentMeal?.id || "")
+        getMealFoodConsumptions(currentMeal?.id || "",
+            currentUser?.id || "")
             .then(mealFoodConsumptionList => setMealFoodConsumptionList(mealFoodConsumptionList || []))
             .catch(reason => {
                 console.log(reason)

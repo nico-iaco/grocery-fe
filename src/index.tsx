@@ -7,15 +7,32 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {eventReducer} from "./reducer/Reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import {initializeApp} from "firebase/app";
 
+
+const apiKey = process.env.REACT_APP_API_KEY;
+const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
+const appId = process.env.REACT_APP_APP_ID;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const firebaseConfig = {
+    apiKey,
+    authDomain: "foody-me.firebaseapp.com",
+    projectId: "foody-me",
+    storageBucket: "foody-me.appspot.com",
+    messagingSenderId,
+    appId,
+};
+
+const app = initializeApp(firebaseConfig);
+
 const store = configureStore({
     reducer: eventReducer
 });
+
 root.render(
   <React.StrictMode>
       <Provider store={store}>

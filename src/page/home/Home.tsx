@@ -10,13 +10,15 @@ import {getMealStatistics} from "../../api/mealApis";
 import {getItemStatistics} from "../../api/itemApis";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setCurrentTabIndex, setError} from "../../action/Action";
+import {getUser} from "../../selector/Selector";
 
 
 export function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const currentUser = useSelector(getUser);
     const [mealStatistics, setMealStatistics] = React.useState<MealStatistic>({
         averageWeekFoodCost: 0,
         averageWeekCaloriesPerMealType: [],
@@ -29,7 +31,8 @@ export function Home() {
     });
 
     useEffect(() => {
-        getMealStatistics()
+        dispatch(setCurrentTabIndex(0));
+        getMealStatistics(currentUser?.id || "")
             .then(value => {
                 if (value) {
                     setMealStatistics(value);
@@ -39,7 +42,7 @@ export function Home() {
                 console.error(reason)
                 dispatch(setError(reason.message))
             });
-        getItemStatistics()
+        getItemStatistics(currentUser?.id || "")
             .then(value => {
                 if (value) {
                     setItemStatistics(value);
@@ -62,55 +65,53 @@ export function Home() {
     }
 
 
-    return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="sticky" className="AppBar">
-                        <Toolbar>
-                            <Button disabled></Button>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Home
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
-            </Grid>
-            <Container className="container">
-                <Grid item xs={8} className="container">
-                    <MealStatisticsComponent
-                        mealStatistics={mealStatistics}
-                        mealKcalChartLabel={"Average calories per meal type"}
-                        kcalLabel={"Average calories per week"}
-                        costLabel={"Average cost per week"}
-                    />
-                </Grid>
-                <Grid item xs={8} className="container">
-                    <ItemStatisticsComponent itemStatistics={itemStatistics}/>
-                </Grid>
-                <Fab
-                    mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    style={{bottom: 50, right: 12}}
-                    icon={<Add/>}
-                    alwaysShowTitle={true}
-                >
-                    <Action
-                        style={{backgroundColor: '#1677d7'}}
-                        text="Add meal"
-                        onClick={goToAddMeal}
-                    >
-                        <Fastfood/>
-                    </Action>
-                    <Action
-                        style={{backgroundColor: '#1677d7'}}
-                        text="Add food"
-                        onClick={goToAddFood}
-                    >
-                        <LocalGroceryStore/>
-                    </Action>
-                </Fab>
-            </Container>
+    return <Grid container columns={8}>
+        <Grid item xs={8}>
+            <Box sx={{flexGrow: 1}}>
+                <AppBar position="sticky" className="AppBar">
+                    <Toolbar>
+                        <Button disabled></Button>
+                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                            Home
+                        </Typography>
+                        <Button disabled></Button>
+                    </Toolbar>
+                </AppBar>
+            </Box>
         </Grid>
-    );
+        <Container className="container">
+            <Grid item xs={8} className="container">
+                <MealStatisticsComponent
+                    mealStatistics={mealStatistics}
+                    mealKcalChartLabel={"Average calories per meal type"}
+                    kcalLabel={"Average calories per week"}
+                    costLabel={"Average cost per week"}
+                />
+            </Grid>
+            <Grid item xs={8} className="container">
+                <ItemStatisticsComponent itemStatistics={itemStatistics}/>
+            </Grid>
+            <Fab
+                mainButtonStyles={{backgroundColor: '#1677d7'}}
+                style={{bottom: 50, right: 12}}
+                icon={<Add/>}
+                alwaysShowTitle={true}
+            >
+                <Action
+                    style={{backgroundColor: '#1677d7'}}
+                    text="Add meal"
+                    onClick={goToAddMeal}
+                >
+                    <Fastfood/>
+                </Action>
+                <Action
+                    style={{backgroundColor: '#1677d7'}}
+                    text="Add food"
+                    onClick={goToAddFood}
+                >
+                    <LocalGroceryStore/>
+                </Action>
+            </Fab>
+        </Container>
+    </Grid>
 }

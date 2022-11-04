@@ -10,7 +10,7 @@ import {
     OutlinedInput,
 } from "@mui/material";
 import React, {useState} from "react";
-import {CameraAlt} from "@mui/icons-material";
+import {CameraAlt, StoreOutlined} from "@mui/icons-material";
 import {BarcodeComponent} from "./BarcodeComponent";
 
 export interface ItemDataComponentProps {
@@ -18,6 +18,8 @@ export interface ItemDataComponentProps {
     onNameChange: (v: string) => void
     barcode?: string
     onBarcodeChange: (v: string) => void
+    vendor?: string
+    onVendorChange: (v: string) => void
     buttonText: string
     onButtonClick: () => void
 }
@@ -58,6 +60,23 @@ export const ItemDataComponent = (props: ItemDataComponentProps) => {
                             >
                                 <CameraAlt/>
                             </IconButton>
+                        </InputAdornment>
+                    }
+                />
+            </FormControl>
+        </Grid>
+        <Grid item xs={8}>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                <InputLabel htmlFor="vendor-required">Vendor</InputLabel>
+                <OutlinedInput
+                    required
+                    id="vendor-required"
+                    label="Vendor"
+                    value={props.vendor}
+                    onChange={(event) => props.onVendorChange(event.target.value)}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <StoreOutlined/>
                         </InputAdornment>
                     }
                 />

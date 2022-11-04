@@ -6,18 +6,20 @@ import {useNavigate, useParams} from "react-router-dom";
 import {deleteItemTransaction, updateItemTransaction} from "../../api/itemApis";
 import {Transaction} from "../../model/transaction";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentTransaction} from "../../selector/Selector";
+import {getCurrentTransaction, getUser} from "../../selector/Selector";
 import {setCurrentTransaction, setError} from "../../action/Action";
 
 export const EditTransactionPage = () => {
     const {itemId} = useParams();
     const currentTransaction = useSelector(getCurrentTransaction);
+    const currentUser = useSelector(getUser);
     const dispatch = useDispatch();
-    const [vendor, setVendor] = React.useState(currentTransaction?.vendor || "");
+    const [seller, setSeller] = React.useState(currentTransaction?.seller || "");
     const [quantity, setQuantity] = React.useState(currentTransaction?.quantity || 0);
     const [unit, setUnit] = React.useState(currentTransaction?.unit || "");
     const [price, setPrice] = React.useState(currentTransaction?.price || 0);
     const [expirationDate, setExpirationDate] = React.useState(currentTransaction?.expirationDate || new Date());
+    const [purchaseDate, setPurchaseDate] = React.useState(currentTransaction?.purchaseDate || new Date());
     const navigate = useNavigate();
 
 
@@ -29,15 +31,19 @@ export const EditTransactionPage = () => {
     const updateTransactionToBe = () => {
         const updatedTransaction: Transaction = {
             id: currentTransaction?.id || "",
-            vendor,
+            seller,
             quantity,
+            quantityStd: 0, //FIXME
             availableQuantity: currentTransaction?.availableQuantity || 0,
             unit,
             price,
-            expirationDate
+            expirationDate,
+            purchaseDate
         }
 
-        updateItemTransaction(itemId || "", updatedTransaction)
+        updateItemTransaction(itemId || "",
+            updatedTransaction,
+            currentUser?.id || "")
             .then(value => {
                 console.log(value);
                 goBack();
@@ -49,7 +55,9 @@ export const EditTransactionPage = () => {
     }
 
     const deleteCurrentTransaction = () => {
-        deleteItemTransaction(itemId || "", currentTransaction?.id || "")
+        deleteItemTransaction(itemId || "",
+            currentTransaction?.id || "",
+            currentUser?.id || "")
             .then(result => {
                 console.log(result);
                 dispatch(setCurrentTransaction(undefined));
@@ -88,8 +96,8 @@ export const EditTransactionPage = () => {
         </Grid>
         <Container className="container">
             <TransactionDataComponent
-                vendor={vendor}
-                onVendorChange={setVendor}
+                seller={seller}
+                onSellerChange={setSeller}
                 quantity={quantity}
                 onQuantityChange={setQuantity}
                 unit={unit}
@@ -98,6 +106,8 @@ export const EditTransactionPage = () => {
                 onPriceChange={setPrice}
                 expirationDate={expirationDate}
                 onExpirationDateChange={setExpirationDate}
+                purchaseDate={purchaseDate}
+                onPurchaseDateChange={setPurchaseDate}
                 buttonText="Update"
                 onButtonClick={updateTransactionToBe}/>
         </Container>

@@ -1,5 +1,5 @@
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
-import {getCurrentItem, getCurrentMeal, getCurrentTransaction} from "../selector/Selector";
+import {getCurrentItem, getCurrentMeal, getCurrentTransaction, getUser} from "../selector/Selector";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import {Button, Grid} from "@mui/material";
@@ -12,6 +12,7 @@ import {addMealFoodConsumption} from "../api/mealApis";
 export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentMeal = useSelector(getCurrentMeal);
     const currentFood = useSelector(getCurrentItem);
+    const currentUser = useSelector(getUser);
     const currentTransaction = useSelector(getCurrentTransaction);
     const [foodName, setFoodName] = useState("");
     const [quantity, setQuantity] = useState<number>(0);
@@ -34,7 +35,9 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
             kcal: kcals,
             cost: cost
         }
-        addMealFoodConsumption(currentMeal?.id || "", foodConsumption)
+        addMealFoodConsumption(currentMeal?.id || "",
+            foodConsumption,
+            currentUser?.id || "")
             .then(() => {
                 dispatch(setCurrentItem(undefined));
                 dispatch(setCurrentTransaction(undefined));

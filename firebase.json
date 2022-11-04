@@ -1,0 +1,28 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/item/**",
+        "run": {
+          "serviceId": "grocery-be"
+        }
+      },
+      {
+        "source": "/api/meal/**",
+        "run": {
+          "serviceId": "food-track-be"
+        }
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
