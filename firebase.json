@@ -8,13 +8,13 @@
     ],
     "rewrites": [
       {
-        "source": "/api/grocery/**",
+        "source": "/api/item/**",
         "run": {
           "serviceId": "grocery-be"
         }
       },
       {
-        "source": "/api/track/**",
+        "source": "/api/meal/**",
         "run": {
           "serviceId": "food-track-be"
         }
