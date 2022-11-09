@@ -6,7 +6,7 @@ import {MealStatistic} from "../model/mealStatistic";
 import {format} from "date-fns";
 
 
-export const baseUrl = process.env.NODE_ENV === 'development' ? process.env.REACT_APP_BASE_URL_FT : process.env.REACT_APP_BASE_URL;
+export const baseUrl = process.env.REACT_APP_BASE_URL_FT;
 
 export const addMeal = async (meal: Meal) => {
     const url = `${baseUrl}/meal`;
