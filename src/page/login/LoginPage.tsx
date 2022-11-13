@@ -19,6 +19,7 @@ import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../action/Action";
 import {User} from "../../model/user";
+import {getAnalytics, logEvent} from "firebase/analytics";
 
 
 export const LoginPage = () => {
@@ -27,6 +28,8 @@ export const LoginPage = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const analytics = getAnalytics();
 
     const login = () => {
         const auth = getAuth();
@@ -38,6 +41,7 @@ export const LoginPage = () => {
                     id: firebaseUser.uid,
                     displayName: firebaseUser.displayName ?? "",
                 }
+                logEvent(analytics, 'login', user);
                 dispatch(setUser(user));
                 navigate(-1);
             })

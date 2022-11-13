@@ -8,6 +8,7 @@ import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} f
 import {ArrowBack} from "@mui/icons-material";
 import {MealDataComponent} from "../../component/MealDataComponent";
 import {getUser} from "../../selector/Selector";
+import {getAnalytics, logEvent} from "firebase/analytics";
 
 export const AddMealPage = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,9 @@ export const AddMealPage = () => {
 
     const user = useSelector(getUser);
 
+    const analytics = getAnalytics();
+
+
     const sendMealToBe = () => {
         const meal: Meal = {
             name,
@@ -29,6 +33,7 @@ export const AddMealPage = () => {
         };
         addMeal(meal)
             .then(value => {
+                logEvent(analytics, 'add_meal', meal);
                 dispatch(setCurrentMeal(value));
                 navigate(`/meal/${value?.id}/consumption`);
             })

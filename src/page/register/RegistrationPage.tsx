@@ -19,6 +19,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setError, setUser} from "../../action/Action";
 import {User} from "../../model/user";
+import {getAnalytics, logEvent} from "firebase/analytics";
 
 export const RegistrationPage = () => {
     const navigate = useNavigate();
@@ -28,6 +29,8 @@ export const RegistrationPage = () => {
     const [password, setPassword] = React.useState("");
     const [passwordVisible, setPasswordVisible] = React.useState(false);
     const [username, setUsername] = React.useState("");
+
+    const analytics = getAnalytics();
 
     const register = () => {
         const auth = getAuth();
@@ -43,6 +46,7 @@ export const RegistrationPage = () => {
                             id: firebaseUser.uid,
                             displayName: firebaseUser.displayName ?? "",
                         }
+                        logEvent(analytics, 'sign_up', user);
                         dispatch(setUser(user));
                         navigate(-1);
                     })

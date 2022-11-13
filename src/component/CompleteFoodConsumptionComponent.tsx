@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action";
 import {FoodConsumption} from "../model/foodConsumption";
 import {addMealFoodConsumption} from "../api/mealApis";
+import {getAnalytics, logEvent} from "firebase/analytics";
 
 export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentMeal = useSelector(getCurrentMeal);
@@ -22,6 +23,9 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const analytics = getAnalytics();
+
 
     const onCompleted = () => {
         const foodConsumption: FoodConsumption = {
@@ -39,6 +43,7 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
             foodConsumption,
             currentUser?.id || "")
             .then(() => {
+                logEvent(analytics, 'add_food_consumption', foodConsumption);
                 dispatch(setCurrentItem(undefined));
                 dispatch(setCurrentTransaction(undefined));
                 navigate(`/meal/${currentMeal?.id}/consumption`);

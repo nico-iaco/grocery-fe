@@ -8,6 +8,7 @@ import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentItem, setError} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
+import {getAnalytics, logEvent} from "firebase/analytics";
 
 export function AddItemPage () {
     const dispatch = useDispatch();
@@ -16,6 +17,8 @@ export function AddItemPage () {
     const [vendor, setVendor] = useState("");
     const navigate = useNavigate();
     const user = useSelector(getUser);
+
+    const analytics = getAnalytics();
 
     const goBack = () => {
         navigate(`/item`);
@@ -31,6 +34,7 @@ export function AddItemPage () {
       };
       addItem(item)
           .then(value => {
+              logEvent(analytics, 'add_item', item);
               dispatch(setCurrentItem(value));
               navigate(`/item/${value?.id}/transaction`);
           })
