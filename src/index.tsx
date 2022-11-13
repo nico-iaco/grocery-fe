@@ -15,6 +15,7 @@ import {getAnalytics} from "firebase/analytics";
 const apiKey = process.env.REACT_APP_API_KEY;
 const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
 const appId = process.env.REACT_APP_APP_ID;
+const measurementId = process.env.REACT_APP_MEASUREMENT_ID;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,6 +28,7 @@ const firebaseConfig = {
     storageBucket: "foody-me.appspot.com",
     messagingSenderId,
     appId,
+    measurementId,
 };
 
 const app = initializeApp(firebaseConfig);
