@@ -12,14 +12,15 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import React, {useState} from "react";
+import {useState} from "react";
 import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../action/Action";
 import {User} from "../../model/user";
-import {getAnalytics, logEvent} from "firebase/analytics";
+import {logEvent} from "firebase/analytics";
+import { analytics } from "../../utils/firebaseUtils";
 
 
 export const LoginPage = () => {
@@ -28,8 +29,6 @@ export const LoginPage = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const analytics = getAnalytics();
 
     const login = () => {
         const auth = getAuth();

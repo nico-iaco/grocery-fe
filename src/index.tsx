@@ -8,31 +8,16 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {eventReducer} from "./reducer/Reducer";
 import {configureStore} from "@reduxjs/toolkit";
-import {initializeApp} from "firebase/app";
-import {initializeAnalytics} from "firebase/analytics";
+import { AnalyticsComponent } from './component/AnalyticsComponent';
 
 
-const apiKey = process.env.REACT_APP_API_KEY;
-const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
-const appId = process.env.REACT_APP_APP_ID;
-const measurementId = process.env.REACT_APP_MEASUREMENT_ID;
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const firebaseConfig = {
-    apiKey,
-    authDomain: "foody-me.firebaseapp.com",
-    projectId: "foody-me",
-    storageBucket: "foody-me.appspot.com",
-    messagingSenderId,
-    appId,
-    measurementId,
-};
 
-const app = initializeApp(firebaseConfig);
-const analytics = initializeAnalytics(app);
 
 const store = configureStore({
     reducer: eventReducer
@@ -42,6 +27,7 @@ root.render(
   <React.StrictMode>
       <Provider store={store}>
           <BrowserRouter>
+              <AnalyticsComponent />
               <App />
           </BrowserRouter>
       </Provider>
