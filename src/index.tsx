@@ -9,7 +9,7 @@ import {Provider} from "react-redux";
 import {eventReducer} from "./reducer/Reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {initializeApp} from "firebase/app";
-import {getAnalytics} from "firebase/analytics";
+import {initializeAnalytics} from "firebase/analytics";
 
 
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -32,7 +32,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const analytics = initializeAnalytics(app);
 
 const store = configureStore({
     reducer: eventReducer
