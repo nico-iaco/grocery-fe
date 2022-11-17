@@ -42,7 +42,7 @@ export const getAllMealInDateRange = async (startDate: Date, endDate: Date, user
 }
 
 export const getMealStatistics = async (userid: string) => {
-    const url = `${baseUrl}/meal/statistics`;
+    const url = `${baseUrl}/meal/statistics/`;
     const axiosResponse = await axios.get(url, {
         headers: {
             "iv-user": userid
@@ -58,7 +58,7 @@ export const getMealStatistics = async (userid: string) => {
 export const getMealStatisticsInDateRange = async (startDate: Date, endDate: Date, userid: string) => {
     const formattedStartDate = format(new Date(startDate), "dd-MM-yyyy")
     const formattedEndDate = format(new Date(endDate), "dd-MM-yyyy")
-    const url = `${baseUrl}/meal/statistics?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
+    const url = `${baseUrl}/meal/statistics/?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
     const axiosResponse = await axios.get(url, {
         headers: {
             "iv-user": userid
@@ -72,7 +72,7 @@ export const getMealStatisticsInDateRange = async (startDate: Date, endDate: Dat
 }
 
 export const updateMeal = async (meal: Meal, userid: string) => {
-    const url = `${baseUrl}/meal/${meal.id}`;
+    const url = `${baseUrl}/meal/${meal.id}/`;
     const axiosResponse = await axios.patch(url, meal, {
         headers: {
             "iv-user": userid
@@ -86,7 +86,7 @@ export const updateMeal = async (meal: Meal, userid: string) => {
 }
 
 export const deleteMeal = async (id: string, userid: string) => {
-    const url = `${baseUrl}/meal/${id}`;
+    const url = `${baseUrl}/meal/${id}/`;
     const axiosResponse = await axios.delete(url, {
         headers: {
             "iv-user": userid
@@ -100,7 +100,7 @@ export const deleteMeal = async (id: string, userid: string) => {
 }
 
 export const getMealFoodConsumptions = async (mealId: string, userid: string) => {
-    const url = `${baseUrl}/meal/${mealId}/consumption`;
+    const url = `${baseUrl}/meal/${mealId}/consumption/`;
     const axiosResponse = await axios.get(url, {
         headers: {
             "iv-user": userid
@@ -114,7 +114,7 @@ export const getMealFoodConsumptions = async (mealId: string, userid: string) =>
 }
 
 export const addMealFoodConsumption = async (mealId: string, foodConsumption: FoodConsumption, userid: string) => {
-    const url = `${baseUrl}/meal/${mealId}/consumption`;
+    const url = `${baseUrl}/meal/${mealId}/consumption/`;
     const axiosResponse = await axios.post(
         url,
         foodConsumption,
@@ -132,7 +132,7 @@ export const addMealFoodConsumption = async (mealId: string, foodConsumption: Fo
 }
 
 export const updateMealFoodConsumption = async (mealId: string, foodConsumption: FoodConsumption, userid: string) => {
-    const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumption.id}`;
+    const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumption.id}/`;
     const axiosResponse = await axios.patch(url, foodConsumption, {
         headers: {
             "iv-user": userid
@@ -146,7 +146,7 @@ export const updateMealFoodConsumption = async (mealId: string, foodConsumption:
 }
 
 export const deleteMealFoodConsumption = async (mealId: string, foodConsumptionId: string, userid: string) => {
-    const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumptionId}`;
+    const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumptionId}/`;
     const axiosResponse = await axios.delete(url, {
         headers: {
             "iv-user": userid
