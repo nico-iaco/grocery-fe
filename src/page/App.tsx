@@ -23,7 +23,6 @@ import {ProfilePage} from "./profile/ProfilePage";
 import {RegistrationPage} from "./register/RegistrationPage";
 import {LoginPage} from "./login/LoginPage";
 import {NoAuthComponent} from "../component/NoAuthComponent";
-import { analytics, initializeFirebaseAnalytics } from '../utils/firebaseUtils';
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
@@ -31,10 +30,6 @@ function App() {
     const currentUser = useSelector(getUser);
     const navigate = useNavigate()
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        initializeFirebaseAnalytics();
-    }, []);
 
     const goToHome = () => {
         navigate("/");

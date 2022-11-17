@@ -1,11 +1,12 @@
-import {logEvent} from "firebase/analytics";
+import {getAnalytics, logEvent} from "firebase/analytics";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { analytics } from "../utils/firebaseUtils";
+import { app } from "../utils/firebaseUtils";
 
 
 
 const logCurrentPage = () => {
+    const analytics = getAnalytics(app);
     logEvent(analytics, 'page_view', {
         page_title: document.title,
         page_location: window.location.href,

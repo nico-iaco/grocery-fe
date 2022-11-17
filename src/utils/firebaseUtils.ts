@@ -1,5 +1,5 @@
-import { Analytics, initializeAnalytics } from "firebase/analytics";
-import { FirebaseApp, initializeApp } from "firebase/app";
+import { initializeAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
@@ -16,9 +16,7 @@ const firebaseConfig = {
     measurementId,
 };
 
-const app = initializeApp(firebaseConfig)
-export let analytics: Analytics;
+export const app = initializeApp(firebaseConfig);
+export const analytics = initializeAnalytics(app);
 
-export const initializeFirebaseAnalytics = () => {
-    analytics = initializeAnalytics(app);
-}
+
