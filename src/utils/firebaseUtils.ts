@@ -16,13 +16,9 @@ const firebaseConfig = {
     measurementId,
 };
 
+const app = initializeApp(firebaseConfig)
 export let analytics: Analytics;
 
-export const initializeFirebase = () => {
-    const app = initializeApp(firebaseConfig)
-    return app;
-}
-
-export const initializeFirebaseAnalytics = (app: FirebaseApp) => {
+export const initializeFirebaseAnalytics = () => {
     analytics = initializeAnalytics(app);
 }
