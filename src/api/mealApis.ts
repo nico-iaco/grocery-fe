@@ -9,7 +9,7 @@ import {format} from "date-fns";
 export const baseUrl = process.env.REACT_APP_BASE_URL_FT;
 
 export const addMeal = async (meal: Meal) => {
-    const url = `${baseUrl}/meal`;
+    const url = `${baseUrl}/meal/`;
     const axiosResponse = await axios.post(
         url,
         meal
@@ -19,7 +19,7 @@ export const addMeal = async (meal: Meal) => {
 }
 
 export const getAllMeals = async () => {
-    const url = `${baseUrl}/meal`;
+    const url = `${baseUrl}/meal/`;
     const axiosResponse = await axios.get(url);
     const baseResponse: BaseResponse<Meal[]> = axiosResponse.data;
     return baseResponse.body;
@@ -28,7 +28,7 @@ export const getAllMeals = async () => {
 export const getAllMealInDateRange = async (startDate: Date, endDate: Date, userid: string) => {
     const formattedStartDate = format(new Date(startDate), "dd-MM-yyyy")
     const formattedEndDate = format(new Date(endDate), "dd-MM-yyyy")
-    const url = `${baseUrl}/meal?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
+    const url = `${baseUrl}/meal/?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
     const axiosResponse = await axios.get(url, {
         headers: {
             "iv-user": userid
