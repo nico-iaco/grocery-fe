@@ -27,9 +27,11 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
+        const controller = new AbortController();
         getFoodKcal(props.foodId || "",
             quantity,
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then((response) => {
                 props.onKcalsChanged(response || 0)
             })

@@ -32,7 +32,8 @@ export function Home() {
 
     useEffect(() => {
         dispatch(setCurrentTabIndex(0));
-        getMealStatistics(currentUser?.id || "")
+        const controller = new AbortController();
+        getMealStatistics(currentUser?.id || "", controller)
             .then(value => {
                 if (value) {
                     setMealStatistics(value);
@@ -42,7 +43,7 @@ export function Home() {
                 console.error(reason)
                 dispatch(setError(reason.message))
             });
-        getItemStatistics(currentUser?.id || "")
+        getItemStatistics(currentUser?.id || "", controller)
             .then(value => {
                 if (value) {
                     setItemStatistics(value);
@@ -52,6 +53,7 @@ export function Home() {
                 console.error(reason)
                 dispatch(setError(reason.message))
             });
+        return () => controller.abort();
     }, [])
 
     const goToAddFood = () => {

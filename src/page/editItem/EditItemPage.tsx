@@ -26,7 +26,8 @@ export const EditItemPage = () => {
             barcode,
             vendor
         }
-        updateItem(updatedItem, user?.id || "")
+        const controller = new AbortController();
+        updateItem(updatedItem, user?.id || "", controller)
             .then(goBack)
             .catch(reason => {
                 console.error(reason)
@@ -39,7 +40,8 @@ export const EditItemPage = () => {
     }
 
     const deleteItemFromServer = () => {
-        deleteItem(currentItem?.id || "", user?.id || "")
+        const controller = new AbortController();
+        deleteItem(currentItem?.id || "", user?.id || "", controller)
             .then(v => {
                 console.log(v);
                 dispatch(setCurrentItem(undefined));

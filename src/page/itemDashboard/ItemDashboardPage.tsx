@@ -36,7 +36,8 @@ export const ItemDashboardPage = () => {
 
     useEffect(() => {
         dispatch(setCurrentTabIndex(2));
-        getAllItems(false, currentUser?.id || "")
+        const controller = new AbortController();
+        getAllItems(false, currentUser?.id || "", controller)
             .then(value => {
                 if (value) {
                     setItemList(value)
@@ -46,6 +47,7 @@ export const ItemDashboardPage = () => {
                 console.error(reason)
                 dispatch(setError(reason.message));
             });
+        return () => controller.abort();
     }, [])
 
     const goToAddItem = () => {

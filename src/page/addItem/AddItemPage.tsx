@@ -32,7 +32,8 @@ export function AddItemPage () {
           barcode,
           vendor
       };
-      addItem(item)
+      const controller = new AbortController();
+      addItem(item, controller)
           .then(value => {
               logEvent(analytics, 'add_item', item);
               dispatch(setCurrentItem(value));

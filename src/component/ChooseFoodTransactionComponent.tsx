@@ -17,9 +17,11 @@ export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => 
     const [transactionList, setTransactionList] = useState<Transaction[]>([]);
 
     useEffect(() => {
+        const controller = new AbortController();
         getAllItemTransaction(currentFood?.id || "" ,
             true,
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then((transactions) => {
                 setTransactionList(transactions || []);
             })
@@ -27,6 +29,9 @@ export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => 
                 console.log(error);
                 dispatch(setError(error.message));
             });
+        return () => {
+            controller.abort();
+        }
     }, []);
 
     const onTransactionClicked = (transaction: Transaction) => {

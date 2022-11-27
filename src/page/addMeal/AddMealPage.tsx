@@ -31,7 +31,8 @@ export const AddMealPage = () => {
             mealType,
             date
         };
-        addMeal(meal)
+        const controller = new AbortController();
+        addMeal(meal, controller)
             .then(value => {
                 logEvent(analytics, 'add_meal', meal);
                 dispatch(setCurrentMeal(value));

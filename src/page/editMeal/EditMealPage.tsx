@@ -26,13 +26,16 @@ export const EditMealPage = () => {
 
     const saveMeal = () => {
         if (currentMeal) {
+            const controller = new AbortController();
             updateMeal({
-                ...currentMeal,
-                name: mealName,
-                description: mealDescription,
-                mealType,
-                date: mealDate
-            }, currentUser?.id || "")
+                    ...currentMeal,
+                    name: mealName,
+                    description: mealDescription,
+                    mealType,
+                    date: mealDate
+                },
+                currentUser?.id || "",
+                controller)
                 .then(goBack)
                 .catch(reason => {
                     console.log(reason)
@@ -43,8 +46,10 @@ export const EditMealPage = () => {
 
     const deleteMealFromServer = () => {
         if (currentMeal) {
+            const controller = new AbortController();
             deleteMeal(currentMeal.id || "",
-                currentUser?.id || "")
+                currentUser?.id || "",
+                controller)
                 .then(() => {
                     dispatch(setCurrentMeal(undefined));
                     navigate("/meal")

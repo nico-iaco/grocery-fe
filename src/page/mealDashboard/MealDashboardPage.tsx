@@ -57,7 +57,8 @@ export const MealDashboardPage = () => {
 
     useEffect(() => {
         dispatch(setCurrentTabIndex(1));
-        getAllMealInDateRange(selectedDate, selectedDate, currentUser?.id || "")
+        const controller = new AbortController();
+        getAllMealInDateRange(selectedDate, selectedDate, currentUser?.id || "", controller)
             .then(value => {
                 setMealList(value || [])
             })
@@ -65,7 +66,7 @@ export const MealDashboardPage = () => {
                 console.error(reason)
                 dispatch(setError(reason.message))
             });
-        getMealStatisticsInDateRange(selectedDate, selectedDate, currentUser?.id || "")
+        getMealStatisticsInDateRange(selectedDate, selectedDate, currentUser?.id || "", controller)
             .then(value => {
                 setMealStatistic(value || initialStatistics)
             })
@@ -73,6 +74,9 @@ export const MealDashboardPage = () => {
                 console.error(reason)
                 dispatch(setError(reason.message))
             });
+        return () => {
+            controller.abort();
+        }
     }, [selectedDate])
 
     const goToAddMeal = () => {

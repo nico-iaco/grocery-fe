@@ -21,7 +21,8 @@ export function ItemTransactionPage() {
     const [itemDetails, setItemDetails] = useState<FoodDetail>();
 
     useEffect(() => {
-        getItemDetail(currentItem?.id || "", currentUser?.id || "")
+        const controller = new AbortController();
+        getItemDetail(currentItem?.id || "", currentUser?.id || "", controller)
             .then(value => {
                 setItemDetails(value);
             })
@@ -31,12 +32,14 @@ export function ItemTransactionPage() {
             });
         getAllItemTransaction(currentItem?.id || "",
             false,
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then(itemTransactionList => setItemTransactionList(itemTransactionList || []))
             .catch(reason => {
                 console.log(reason)
                 dispatch(setError(reason.message));
             });
+        return () => controller.abort();
     }, [currentItem?.id]);
 
     const goToAddTransactionPage = () => {

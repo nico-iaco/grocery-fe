@@ -42,9 +42,12 @@ export function AddTransactionPage() {
             purchaseDate
         }
 
+        const controller = new AbortController();
+
         addTransactionToItem(itemId || "",
             transaction,
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then(goBack)
             .catch(reason => {
                 console.error(reason)

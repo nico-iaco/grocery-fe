@@ -41,9 +41,12 @@ export const EditTransactionPage = () => {
             purchaseDate
         }
 
+        const controller = new AbortController();
+
         updateItemTransaction(itemId || "",
             updatedTransaction,
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then(value => {
                 console.log(value);
                 goBack();
@@ -55,9 +58,11 @@ export const EditTransactionPage = () => {
     }
 
     const deleteCurrentTransaction = () => {
+        const controller = new AbortController();
         deleteItemTransaction(itemId || "",
             currentTransaction?.id || "",
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then(result => {
                 console.log(result);
                 dispatch(setCurrentTransaction(undefined));

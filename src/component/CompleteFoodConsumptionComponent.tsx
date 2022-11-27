@@ -9,7 +9,7 @@ import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action"
 import {FoodConsumption} from "../model/foodConsumption";
 import {addMealFoodConsumption} from "../api/mealApis";
 import {logEvent} from "firebase/analytics";
-import { analytics } from "../utils/firebaseUtils";
+import {analytics} from "../utils/firebaseUtils";
 
 export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentMeal = useSelector(getCurrentMeal);
@@ -39,9 +39,11 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
             kcal: kcals,
             cost: cost
         }
+        const controller = new AbortController();
         addMealFoodConsumption(currentMeal?.id || "",
             foodConsumption,
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then(() => {
                 logEvent(analytics, 'add_food_consumption', foodConsumption);
                 dispatch(setCurrentItem(undefined));

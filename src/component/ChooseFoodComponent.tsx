@@ -16,7 +16,8 @@ export const ChooseFoodComponent = (props: StepperComponentProps) => {
     const currentUser = useSelector(getUser);
 
     useEffect(() => {
-        getAllItems(true, currentUser?.id || "")
+        const controller = new AbortController();
+        getAllItems(true, currentUser?.id || "", controller)
             .then((items) => {
                 setFoodList(items || []);
             })
@@ -24,6 +25,9 @@ export const ChooseFoodComponent = (props: StepperComponentProps) => {
                 console.log(error);
                 dispatch(setError(error.message));
             });
+        return () => {
+            controller.abort();
+        }
     }, []);
 
     const onFoodClicked = (item: Item) => {

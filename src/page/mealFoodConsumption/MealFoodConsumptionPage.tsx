@@ -18,13 +18,16 @@ export const MealFoodConsumptionPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const controller = new AbortController();
         getMealFoodConsumptions(currentMeal?.id || "",
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then(mealFoodConsumptionList => setMealFoodConsumptionList(mealFoodConsumptionList || []))
             .catch(reason => {
                 console.log(reason)
                 dispatch(setError(reason.message));
             });
+        return () => controller.abort();
     }, [currentMeal?.id]);
 
     const goBack = () => {

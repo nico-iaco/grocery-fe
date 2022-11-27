@@ -37,9 +37,11 @@ export const EditFoodConsumptionPage = () => {
                 kcal: kcals || 0,
                 cost: cost
             }
+            const controller = new AbortController();
             updateMealFoodConsumption(currentMeal?.id || "",
                 foodConsumption,
-                currentUser?.id || "")
+                currentUser?.id || "",
+                controller)
                 .then(goBack)
                 .catch((error) => {
                     console.log(error);
@@ -49,9 +51,11 @@ export const EditFoodConsumptionPage = () => {
     }
 
     const deleteFoodConsumptionFromServer = () => {
+        const controller = new AbortController();
         deleteMealFoodConsumption(currentMeal?.id || "",
             currentFoodConsumption?.id || "",
-            currentUser?.id || "")
+            currentUser?.id || "",
+            controller)
             .then(goBack)
             .catch(reason => {
                 console.error(reason)
