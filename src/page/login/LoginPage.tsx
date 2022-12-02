@@ -2,8 +2,11 @@ import {
     AppBar,
     Box,
     Button,
+    Checkbox,
     Container,
     FormControl,
+    FormControlLabel,
+    FormGroup,
     Grid,
     IconButton,
     InputAdornment,
@@ -15,23 +18,23 @@ import {
 import {useState} from "react";
 import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {browserLocalPersistence, getAuth, setPersistence, signInWithEmailAndPassword} from "firebase/auth";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../action/Action";
 import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
-import { analytics } from "../../utils/firebaseUtils";
+import {analytics} from "../../utils/firebaseUtils";
 
 
 export const LoginPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isPersistent, setIsPersistent] = useState(false);
 
-    const login = () => {
-        const auth = getAuth();
+    const firebaseSignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const firebaseUser = userCredential.user;
@@ -49,6 +52,23 @@ export const LoginPage = () => {
                 const errorMessage = error.message;
                 console.error(errorCode, errorMessage)
             });
+    }
+
+    const login = () => {
+        if (isPersistent) {
+            console.log("set persistence")
+            setPersistence(auth, browserLocalPersistence)
+                .then(() => {
+                    firebaseSignIn();
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error(errorCode, errorMessage)
+                });
+        } else {
+            firebaseSignIn();
+        }
     }
 
     const goBack = () => {
@@ -114,6 +134,22 @@ export const LoginPage = () => {
                                 </InputAdornment>
                             }
                         />
+                    </FormControl>
+                </Grid>
+                <Grid item xs={8} className="container">
+                    <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        value={isPersistent}
+                                        onChange={
+                                            (event) => setIsPersistent(event.target.checked)
+                                        } />
+                                }
+                                label="Remember me"
+                            />
+                        </FormGroup>
                     </FormControl>
                 </Grid>
                 <Grid item xs={8} className="container">

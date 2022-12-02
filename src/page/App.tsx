@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import {Route, Routes, useNavigate} from "react-router-dom";
 import {Home} from "./home/Home";
@@ -30,6 +30,7 @@ function App() {
     const currentUser = useSelector(getUser);
     const navigate = useNavigate()
     const dispatch = useDispatch();
+
 
     const goToHome = () => {
         navigate("/");

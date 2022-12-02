@@ -36,7 +36,7 @@ export const EditItemPage = () => {
     }
 
     const goBack = () => {
-        navigate(`/item/${currentItem?.id}/transaction`);
+        navigate(-1);
     }
 
     const deleteItemFromServer = () => {

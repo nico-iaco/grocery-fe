@@ -45,7 +45,7 @@ export const AddMealPage = () => {
     }
 
     const goBack = () => {
-        navigate(`/meal`);
+        navigate(-1);
     }
 
     return (

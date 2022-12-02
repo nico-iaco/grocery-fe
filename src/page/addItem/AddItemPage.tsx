@@ -21,7 +21,7 @@ export function AddItemPage () {
     const analytics = getAnalytics();
 
     const goBack = () => {
-        navigate(`/item`);
+        navigate(-1);
     }
 
     const sendItemToBe = () => {

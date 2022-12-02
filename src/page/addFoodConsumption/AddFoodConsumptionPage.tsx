@@ -88,7 +88,7 @@ export const AddFoodConsumptionPage = () => {
     const goBack = () => {
         dispatch(setCurrentItem(undefined));
         dispatch(setCurrentTransaction(undefined));
-        navigate(`/meal/${currentMeal?.id}/consumption`);
+        navigate(-1);
     }
 
     return <Grid container columns={8} sx={{

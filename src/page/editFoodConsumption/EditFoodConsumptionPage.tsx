@@ -24,7 +24,7 @@ export const EditFoodConsumptionPage = () => {
 
     const goBack = () => {
         dispatch(setCurrentFoodConsumption(undefined));
-        navigate(`/meal/${currentMeal?.id}/consumption`);
+        navigate(-1);
     }
 
     const editFoodConsumption = () => {

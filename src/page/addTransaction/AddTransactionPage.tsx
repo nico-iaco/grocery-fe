@@ -25,7 +25,7 @@ export function AddTransactionPage() {
     const [purchaseDate, setPurchaseDate] = useState(new Date())
 
     const goBack = () => {
-        navigate(`/item/${itemId}/transaction`);
+        navigate(-1);
     }
 
     const sendTransactionToBe = () => {

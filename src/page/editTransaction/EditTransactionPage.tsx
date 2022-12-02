@@ -25,7 +25,7 @@ export const EditTransactionPage = () => {
 
     const goBack = () => {
         dispatch(setCurrentTransaction(undefined));
-        navigate(`/item/${itemId}/transaction`);
+        navigate(-1);
     }
 
     const updateTransactionToBe = () => {
