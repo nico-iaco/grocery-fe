@@ -1,6 +1,6 @@
 import {Item} from "./item";
 
 export interface ItemStatistics {
-    itemsAlmostFinished: Item[];
-    itemsInExpiration: Item[];
+    itemsAlmostFinished: Item[] | null;
+    itemsInExpiration: Item[] | null;
 }

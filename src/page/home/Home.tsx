@@ -26,8 +26,8 @@ export function Home() {
         sumWeekCost: 0,
     });
     const [itemStatistics, setItemStatistics] = React.useState<ItemStatistics>({
-        itemsAlmostFinished: [],
-        itemsInExpiration: [],
+        itemsAlmostFinished: null,
+        itemsInExpiration: null,
     });
 
     useEffect(() => {
