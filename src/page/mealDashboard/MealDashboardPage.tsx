@@ -26,6 +26,7 @@ import {MealStatistic} from "../../model/mealStatistic";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {format} from "date-fns";
 import {getUser} from "../../selector/Selector";
+import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 
 
 export const MealDashboardPage = () => {
@@ -43,6 +44,7 @@ export const MealDashboardPage = () => {
     const [formattedDate, setFormattedDate] = useState<string>(format(new Date(), "dd-MM-yyyy"));
     const [mealStatistic, setMealStatistic] = useState<MealStatistic>(initialStatistics);
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
+    const [isDataAvailable, setIsDataAvailable] = useState<boolean>(false);
     const currentUser = useSelector(getUser);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -56,15 +58,25 @@ export const MealDashboardPage = () => {
     }
 
     useEffect(() => {
+        setIsDataAvailable(false);
+        return () => {
+            setIsDataAvailable(false);
+        }
+    }, [])
+
+    useEffect(() => {
+        setIsDataAvailable(false);
         dispatch(setCurrentTabIndex(1));
         const controller = new AbortController();
         getAllMealInDateRange(selectedDate, selectedDate, currentUser?.id || "", controller)
             .then(value => {
                 setMealList(value || [])
+                setIsDataAvailable(true);
             })
             .catch(reason => {
                 console.error(reason)
                 dispatch(setError(reason.message))
+                setIsDataAvailable(true);
             });
         getMealStatisticsInDateRange(selectedDate, selectedDate, currentUser?.id || "", controller)
             .then(value => {
@@ -148,8 +160,9 @@ export const MealDashboardPage = () => {
                 <Grid item xs={8}>
                     <List>
                         {
-                            mealList.length > 0 ?
-                                mealList.map(meal => {
+                            isDataAvailable ?
+                                (mealList.length > 0 ?
+                                    mealList.map(meal => {
                                     return <MealRowComponent
                                         key={meal.id}
                                         id={meal.id || ""}
@@ -162,8 +175,8 @@ export const MealDashboardPage = () => {
                                         onClick={() => goToMealTransaction(meal)}
                                         onButtonClick={() => goToEditMeal(meal)}
                                     />
-                                }) :
-                                <Stack spacing={1}>
+                                }) : <NoDataAvailableComponent/>)
+                            :   <Stack spacing={1}>
                                     <Skeleton variant="rectangular" height={80}/>
                                     <Skeleton variant="rectangular" height={80}/>
                                     <Skeleton variant="rectangular" height={80}/>

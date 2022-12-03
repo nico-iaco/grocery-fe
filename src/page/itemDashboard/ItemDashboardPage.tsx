@@ -25,27 +25,32 @@ import {ItemRowComponent} from "../../component/ItemRowComponent";
 import {Add, Search} from "@mui/icons-material";
 import {Fab} from "react-tiny-fab";
 import {getUser} from "../../selector/Selector";
+import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 
 export const ItemDashboardPage = () => {
     const dispatch = useDispatch();
     const [itemList, setItemList] = useState<Item[]>([])
     const [search, setSearch] = useState("");
+    const [isDataAvailable, setIsDataAvailable] = useState<boolean>(false);
     const currentUser = useSelector(getUser);
     const navigate = useNavigate();
 
 
     useEffect(() => {
+        setIsDataAvailable(false);
         dispatch(setCurrentTabIndex(2));
         const controller = new AbortController();
         getAllItems(false, currentUser?.id || "", controller)
             .then(value => {
                 if (value) {
                     setItemList(value)
+                    setIsDataAvailable(true);
                 }
             })
             .catch(reason => {
                 console.error(reason)
                 dispatch(setError(reason.message));
+                setIsDataAvailable(true);
             });
         return () => controller.abort();
     }, [])
@@ -105,21 +110,23 @@ export const ItemDashboardPage = () => {
                 <Grid item xs={8}>
                     <List className="list-container">
                         {
-                            itemList.length > 0 ?
-                                itemList
-                                    .filter(value => search === "" || (value.name.toLowerCase().includes(search.toLowerCase()) || value.barcode.includes(search)))
-                                    .map(item => {
-                                        return <ItemRowComponent
-                                            key={item.id}
-                                            id={item.id}
-                                            name={item.name}
-                                            barcode={item.barcode}
-                                            quantity={item.availableQuantity || 0}
-                                            unit={item.unit || ""}
-                                            onButtonClick={() => goToEditItem(item)}
-                                            onClick={() => goToItemTransaction(item)}/>
-                                    }) :
-                                <Stack spacing={1}>
+                            isDataAvailable ?
+                                (itemList.length > 0 ?
+                                    itemList
+                                        .filter(value => search === "" || (value.name.toLowerCase().includes(search.toLowerCase()) || value.barcode.includes(search)))
+                                        .map(item => {
+                                            return <ItemRowComponent
+                                                key={item.id}
+                                                id={item.id}
+                                                name={item.name}
+                                                barcode={item.barcode}
+                                                quantity={item.availableQuantity || 0}
+                                                unit={item.unit || ""}
+                                                onButtonClick={() => goToEditItem(item)}
+                                                onClick={() => goToItemTransaction(item)}/>
+                                        })
+                                    : <NoDataAvailableComponent/>)
+                                : <Stack spacing={1}>
                                     <Skeleton variant="rectangular" height={90}/>
                                     <Skeleton variant="rectangular" height={90}/>
                                     <Skeleton variant="rectangular" height={90}/>
