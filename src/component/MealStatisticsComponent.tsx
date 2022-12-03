@@ -4,6 +4,7 @@ import {Doughnut} from "react-chartjs-2";
 import React from "react";
 import {ArcElement, Chart as ChartJS, ChartData, Legend, Tooltip} from "chart.js";
 import {getMealTypeColor} from "../utils/colorUtils";
+import {WarningAmber} from "@mui/icons-material";
 
 export interface MealStatisticsProps {
     mealStatistics: MealStatistic;
@@ -34,7 +35,24 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                 <Typography variant="h5" component="div">
                     <b>{props.mealKcalChartLabel}</b>
                 </Typography>
-                <Doughnut data={mealDataset}/>
+                {
+                    props.mealStatistics.averageWeekCaloriesPerMealType.length > 0 ?
+                        <Doughnut data={mealDataset}/>
+                        :
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            padding: 64,
+                        }}>
+                            <WarningAmber style={{
+                                    marginRight: 8
+                            }}/>
+                            <Typography variant="h6" color="textSecondary">
+                                No data available
+                            </Typography>
+                        </div>
+                }
             </Grid>
             <Grid item xs={12} md={6} className={"container center"}>
                 <Grid container>
