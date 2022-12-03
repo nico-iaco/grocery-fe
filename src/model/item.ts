@@ -8,4 +8,5 @@ export interface Item {
     quantity?: number
     availableQuantity?: number
     unit?: string
+    nextExpirationDate?: Date
 }

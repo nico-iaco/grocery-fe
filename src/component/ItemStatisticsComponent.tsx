@@ -1,5 +1,5 @@
 import {ItemStatistics} from "../model/itemStatistics";
-import {Container, Grid, List, Paper, Typography} from "@mui/material";
+import {Container, Grid, List, Paper, Skeleton, Stack, Typography} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import React from "react";
 import {Item} from "../model/item";
@@ -32,15 +32,20 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                     </Typography>
                     <List>
                         {props.itemStatistics.itemsInExpiration ? props.itemStatistics.itemsInExpiration.map(item => {
+                            const formattedDateString = new Date(item.nextExpirationDate || "").toLocaleDateString();
                             return <Paper key={item.id} variant="outlined" className="list-item">
                                 <Grid container columns={8}>
                                     <SimpleItemRowComponent
                                         mainText={item.name}
-                                        subText={item.barcode}
+                                        subText={formattedDateString}
                                         onClick={() => goToItemTransactionPage(item)}/>
                                 </Grid>
                             </Paper>
-                        }) : <div></div>}
+                        }) : <Stack spacing={1}>
+                            <Skeleton variant="rectangular" height={80}/>
+                            <Skeleton variant="rectangular" height={80}/>
+                            <Skeleton variant="rectangular" height={80}/>
+                        </Stack>}
                     </List>
                 </Container>
             </Grid>
@@ -57,7 +62,11 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                                     subText={item.availableQuantity + " " + item.unit}
                                     onClick={() => goToItemTransactionPage(item)}/>
                             </Paper>
-                        }) : <div></div>}
+                        }) : <Stack spacing={1}>
+                            <Skeleton variant="rectangular" height={80}/>
+                            <Skeleton variant="rectangular" height={80}/>
+                            <Skeleton variant="rectangular" height={80}/>
+                        </Stack>}
                     </List>
                 </Container>
             </Grid>
