@@ -1,46 +1,23 @@
 import {useNavigate} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, IconButton, List, Skeleton, Toolbar, Typography} from "@mui/material";
-import React, {useEffect, useState} from "react";
 import {Transaction} from "../../model/transaction";
-import {getAllItemTransaction, getItemDetail} from "../../api/itemApis";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {Add, ArrowBack} from "@mui/icons-material";
-import {FoodDetail} from "../../model/foodDetails";
 import "./ItemTransactionPage.css";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem, getUser} from "../../selector/Selector";
-import {setCurrentItem, setCurrentTransaction, setError} from "../../action/Action";
+import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {Fab} from "react-tiny-fab";
+import {useTransactionList} from "../../hooks/useTransactionList";
+import {useItemDetail} from "../../hooks/useItemDetail";
 
 export function ItemTransactionPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentItem = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
-    const [itemTransactionList, setItemTransactionList] = useState<Transaction[]>([])
-    const [itemDetails, setItemDetails] = useState<FoodDetail>();
-
-    useEffect(() => {
-        const controller = new AbortController();
-        getItemDetail(currentItem?.id || "", currentUser?.id || "", controller)
-            .then(value => {
-                setItemDetails(value);
-            })
-            .catch(reason => {
-                console.error(reason)
-                dispatch(setError(reason.message));
-            });
-        getAllItemTransaction(currentItem?.id || "",
-            false,
-            currentUser?.id || "",
-            controller)
-            .then(itemTransactionList => setItemTransactionList(itemTransactionList || []))
-            .catch(reason => {
-                console.log(reason)
-                dispatch(setError(reason.message));
-            });
-        return () => controller.abort();
-    }, [currentItem?.id]);
+    const itemTransactionList = useTransactionList(currentUser?.id || "", currentItem?.id || "", false);
+    const itemDetails = useItemDetail(currentItem?.id || "", currentUser?.id || "");
 
     const goToAddTransactionPage = () => {
         navigate(`/item/${currentItem?.id}/transaction/add`);

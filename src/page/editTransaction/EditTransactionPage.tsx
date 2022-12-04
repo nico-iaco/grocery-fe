@@ -1,25 +1,25 @@
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {TransactionDataComponent} from "../../component/TransactionDataComponent";
-import React from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {deleteItemTransaction, updateItemTransaction} from "../../api/itemApis";
 import {Transaction} from "../../model/transaction";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTransaction, getUser} from "../../selector/Selector";
 import {setCurrentTransaction, setError} from "../../action/Action";
+import {useState} from "react";
 
 export const EditTransactionPage = () => {
     const {itemId} = useParams();
     const currentTransaction = useSelector(getCurrentTransaction);
     const currentUser = useSelector(getUser);
     const dispatch = useDispatch();
-    const [seller, setSeller] = React.useState(currentTransaction?.seller || "");
-    const [quantity, setQuantity] = React.useState(currentTransaction?.quantity || 0);
-    const [unit, setUnit] = React.useState(currentTransaction?.unit || "");
-    const [price, setPrice] = React.useState(currentTransaction?.price || 0);
-    const [expirationDate, setExpirationDate] = React.useState(currentTransaction?.expirationDate || new Date());
-    const [purchaseDate, setPurchaseDate] = React.useState(currentTransaction?.purchaseDate || new Date());
+    const [seller, setSeller] = useState(currentTransaction?.seller || "");
+    const [quantity, setQuantity] = useState(currentTransaction?.quantity || 0);
+    const [unit, setUnit] = useState(currentTransaction?.unit || "");
+    const [price, setPrice] = useState(currentTransaction?.price || 0);
+    const [expirationDate, setExpirationDate] = useState(currentTransaction?.expirationDate || new Date());
+    const [purchaseDate, setPurchaseDate] = useState(currentTransaction?.purchaseDate || new Date());
     const navigate = useNavigate();
 
 

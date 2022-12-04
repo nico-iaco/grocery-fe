@@ -1,5 +1,4 @@
 import {FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography} from "@mui/material";
-import React from "react";
 import {Calculate, Euro} from "@mui/icons-material";
 import {getFoodKcal} from "../api/itemApis";
 import {useDispatch, useSelector} from "react-redux";

@@ -1,4 +1,3 @@
-import React from "react";
 import {
     AppBar,
     Box,
@@ -12,14 +11,14 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import {getCurrentMeal} from "../../selector/Selector";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {ArrowBack} from "@mui/icons-material";
 import {ChooseFoodComponent} from "../../component/ChooseFoodComponent";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {ChooseFoodTransactionComponent} from "../../component/ChooseFoodTransactionComponent";
 import {CompleteFoodConsumptionComponent} from "../../component/CompleteFoodConsumptionComponent";
+import {Fragment, useState} from "react";
 
 const steps = ['Select food', 'Select transaction', 'Complete'];
 
@@ -69,9 +68,8 @@ export interface StepperComponentProps {
 export const AddFoodConsumptionPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const currentMeal = useSelector(getCurrentMeal);
 
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -125,11 +123,11 @@ export const AddFoodConsumptionPage = () => {
                         </Step>
                     ))}
                 </Stepper>
-                <React.Fragment>
+                <Fragment>
                     {
                         _renderStepContent(activeStep, handleNext, handleBack, handleSkip)
                     }
-                </React.Fragment>
+                </Fragment>
             </Grid>
         </Container>
     </Grid>

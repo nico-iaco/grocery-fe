@@ -1,5 +1,4 @@
 import {AppBar, Avatar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
-import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUser} from "../../selector/Selector";
 import {getAuth} from "firebase/auth";

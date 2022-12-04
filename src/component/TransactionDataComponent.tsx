@@ -1,7 +1,6 @@
 import {Button, Grid, TextField} from "@mui/material";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import React from "react";
 
 export interface TransactionDataComponentProps {
     seller ?: string
@@ -81,7 +80,7 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
               <DatePicker
                   label="Purchase date"
                   value={props.purchaseDate}
-                  minDate={new Date()}
+                  maxDate={new Date()}
                   inputFormat="DD/MM/YYYY"
                   onChange={(newValue) => {
                       if (newValue !== null) {

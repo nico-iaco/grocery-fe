@@ -13,23 +13,23 @@ import {
     Typography
 } from "@mui/material";
 import {ArrowBack, EmailOutlined, Key, Person, VisibilityOffOutlined, VisibilityOutlined} from "@mui/icons-material";
-import React from "react";
 import {createUserWithEmailAndPassword, getAuth, updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setError, setUser} from "../../action/Action";
 import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
-import { analytics } from "../../utils/firebaseUtils";
+import {analytics} from "../../utils/firebaseUtils";
+import {useState} from "react";
 
 export const RegistrationPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [passwordVisible, setPasswordVisible] = React.useState(false);
-    const [username, setUsername] = React.useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [username, setUsername] = useState("");
 
     const register = () => {
         const auth = getAuth();

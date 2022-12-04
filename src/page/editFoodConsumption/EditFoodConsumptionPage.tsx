@@ -4,10 +4,10 @@ import {getCurrentFoodConsumption, getCurrentMeal, getUser} from "../../selector
 import {useNavigate} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {FoodConsumptionDataComponent} from "../../component/FoodConsumptionDataComponent";
-import React from "react";
 import {deleteMealFoodConsumption, updateMealFoodConsumption} from "../../api/mealApis";
 import {FoodConsumption} from "../../model/foodConsumption";
 import {ArrowBack} from "@mui/icons-material";
+import {useState} from "react";
 
 export const EditFoodConsumptionPage = () => {
     const navigate = useNavigate();
@@ -16,11 +16,11 @@ export const EditFoodConsumptionPage = () => {
     const currentFoodConsumption = useSelector(getCurrentFoodConsumption);
     const currentUser = useSelector(getUser);
 
-    const [foodName, setFoodName] = React.useState( currentFoodConsumption?.foodName || "");
-    const [quantity, setQuantity] = React.useState<number>(currentFoodConsumption?.quantityUsed || 0);
-    const [quantityGram, setQuantityGram] = React.useState<number>(currentFoodConsumption?.quantityUsedStd || 0);
-    const [kcals, setKcals] = React.useState<number>(currentFoodConsumption?.kcal || 0);
-    const [cost, setCost] = React.useState<number>(currentFoodConsumption?.cost || 0);
+    const [foodName, setFoodName] = useState( currentFoodConsumption?.foodName || "");
+    const [quantity, setQuantity] = useState<number>(currentFoodConsumption?.quantityUsed || 0);
+    const [quantityGram, setQuantityGram] = useState<number>(currentFoodConsumption?.quantityUsedStd || 0);
+    const [kcals, setKcals] = useState<number>(currentFoodConsumption?.kcal || 0);
+    const [cost, setCost] = useState<number>(currentFoodConsumption?.cost || 0);
 
     const goBack = () => {
         dispatch(setCurrentFoodConsumption(undefined));

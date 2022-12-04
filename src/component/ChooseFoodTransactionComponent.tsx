@@ -3,36 +3,19 @@ import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action"
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
-import {getAllItemTransaction} from "../api/itemApis";
 import {getCurrentItem, getCurrentTransaction, getUser} from "../selector/Selector";
 import {Transaction} from "../model/transaction";
-import {useEffect, useState} from "react";
 import {format} from "date-fns";
+import {useTransactionList} from "../hooks/useTransactionList";
 
 export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
     const currentTransaction = useSelector(getCurrentTransaction);
-    const [transactionList, setTransactionList] = useState<Transaction[]>([]);
+    const transactionList = useTransactionList(currentUser?.id || "", currentFood?.id || "", true);
 
-    useEffect(() => {
-        const controller = new AbortController();
-        getAllItemTransaction(currentFood?.id || "" ,
-            true,
-            currentUser?.id || "",
-            controller)
-            .then((transactions) => {
-                setTransactionList(transactions || []);
-            })
-            .catch((error) => {
-                console.log(error);
-                dispatch(setError(error.message));
-            });
-        return () => {
-            controller.abort();
-        }
-    }, []);
+
 
     const onTransactionClicked = (transaction: Transaction) => {
         dispatch(setCurrentTransaction(transaction));

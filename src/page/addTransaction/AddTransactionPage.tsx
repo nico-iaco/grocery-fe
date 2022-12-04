@@ -1,5 +1,5 @@
 import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
-import React, {useState} from "react";
+import {useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {useNavigate, useParams} from "react-router-dom";
 import {addTransactionToItem} from "../../api/itemApis";

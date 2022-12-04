@@ -2,7 +2,6 @@ import {MealType} from "../model/meal";
 import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
-import React from "react";
 
 export interface TransactionDataComponentProps {
     name?: string

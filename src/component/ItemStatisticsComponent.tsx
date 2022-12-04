@@ -1,7 +1,6 @@
 import {ItemStatistics} from "../model/itemStatistics";
 import {Container, Grid, List, Paper, Skeleton, Stack, Typography} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
-import React from "react";
 import {Item} from "../model/item";
 import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
 import {useDispatch} from "react-redux";

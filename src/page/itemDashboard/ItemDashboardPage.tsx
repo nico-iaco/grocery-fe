@@ -1,9 +1,8 @@
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
-import {getAllItems} from "../../api/itemApis";
-import {setCurrentItem, setCurrentTabIndex, setError} from "../../action/Action";
+import {setCurrentItem, setCurrentTabIndex} from "../../action/Action";
 import {
     AppBar,
     Box,
@@ -26,33 +25,17 @@ import {Add, Search} from "@mui/icons-material";
 import {Fab} from "react-tiny-fab";
 import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
+import {useItemList} from "../../hooks/useItemList";
 
 export const ItemDashboardPage = () => {
     const dispatch = useDispatch();
-    const [itemList, setItemList] = useState<Item[]>([])
     const [search, setSearch] = useState("");
-    const [isDataAvailable, setIsDataAvailable] = useState<boolean>(false);
     const currentUser = useSelector(getUser);
     const navigate = useNavigate();
-
+    const {itemList, isDataAvailable} = useItemList(false, currentUser?.id || "");
 
     useEffect(() => {
-        setIsDataAvailable(false);
         dispatch(setCurrentTabIndex(2));
-        const controller = new AbortController();
-        getAllItems(false, currentUser?.id || "", controller)
-            .then(value => {
-                if (value) {
-                    setItemList(value)
-                    setIsDataAvailable(true);
-                }
-            })
-            .catch(reason => {
-                console.error(reason)
-                dispatch(setError(reason.message));
-                setIsDataAvailable(true);
-            });
-        return () => controller.abort();
     }, [])
 
     const goToAddItem = () => {
@@ -103,7 +86,7 @@ export const ItemDashboardPage = () => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            label="Password"
+                            label="search"
                         />
                     </FormControl>
                 </Grid>

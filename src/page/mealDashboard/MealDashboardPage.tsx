@@ -11,41 +11,34 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import {getAllMealInDateRange, getMealStatisticsInDateRange} from "../../api/mealApis";
 import {Meal} from "../../model/meal";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
 import {Add, CalendarMonth} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentMeal, setCurrentTabIndex, setError} from "../../action/Action";
+import {setCurrentMeal, setCurrentTabIndex} from "../../action/Action";
 import {Fab} from "react-tiny-fab";
 import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {MealStatistic} from "../../model/mealStatistic";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {format} from "date-fns";
 import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
+import {useMealStatistics} from "../../hooks/useMealStatistics";
+import {useMealList} from "../../hooks/useMealList";
 
 
 export const MealDashboardPage = () => {
 
-    const initialStatistics: MealStatistic = {
-        averageWeekFoodCost: 0,
-        sumWeekCost: 0,
-        averageWeekCalories: 0,
-        averageWeekCaloriesPerMealType: [],
-    }
-
-    const [mealList, setMealList] = useState<Meal[]>([])
     const [date, setDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
     const [formattedDate, setFormattedDate] = useState<string>(format(new Date(), "dd-MM-yyyy"));
-    const [mealStatistic, setMealStatistic] = useState<MealStatistic>(initialStatistics);
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
-    const [isDataAvailable, setIsDataAvailable] = useState<boolean>(false);
     const currentUser = useSelector(getUser);
+    const {mealList, isDataAvailable} = useMealList(currentUser?.id || "", selectedDate, selectedDate);
+    const mealStatistic = useMealStatistics(currentUser?.id || "", selectedDate, selectedDate)
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -58,38 +51,8 @@ export const MealDashboardPage = () => {
     }
 
     useEffect(() => {
-        setIsDataAvailable(false);
-        return () => {
-            setIsDataAvailable(false);
-        }
-    }, [])
-
-    useEffect(() => {
-        setIsDataAvailable(false);
         dispatch(setCurrentTabIndex(1));
-        const controller = new AbortController();
-        getAllMealInDateRange(selectedDate, selectedDate, currentUser?.id || "", controller)
-            .then(value => {
-                setMealList(value || [])
-                setIsDataAvailable(true);
-            })
-            .catch(reason => {
-                console.error(reason)
-                dispatch(setError(reason.message))
-                setIsDataAvailable(true);
-            });
-        getMealStatisticsInDateRange(selectedDate, selectedDate, currentUser?.id || "", controller)
-            .then(value => {
-                setMealStatistic(value || initialStatistics)
-            })
-            .catch(reason => {
-                console.error(reason)
-                dispatch(setError(reason.message))
-            });
-        return () => {
-            controller.abort();
-        }
-    }, [selectedDate])
+    }, [])
 
     const goToAddMeal = () => {
         navigate("/meal/add");

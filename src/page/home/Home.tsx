@@ -1,59 +1,27 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
 import {Action, Fab} from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 import {Add, Fastfood, LocalGroceryStore} from "@mui/icons-material";
-import {MealStatistic} from "../../model/mealStatistic";
-import {ItemStatistics} from "../../model/itemStatistics";
-import {getMealStatistics} from "../../api/mealApis";
-import {getItemStatistics} from "../../api/itemApis";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentTabIndex, setError} from "../../action/Action";
+import {setCurrentTabIndex} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
+import {useMealStatistics} from "../../hooks/useMealStatistics";
+import {useItemStatistics} from "../../hooks/useItemStatistics";
 
 
 export function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
-    const [mealStatistics, setMealStatistics] = React.useState<MealStatistic>({
-        averageWeekFoodCost: 0,
-        averageWeekCaloriesPerMealType: [],
-        averageWeekCalories: 0,
-        sumWeekCost: 0,
-    });
-    const [itemStatistics, setItemStatistics] = React.useState<ItemStatistics>({
-        itemsAlmostFinished: null,
-        itemsInExpiration: null,
-    });
+    const mealStatistics = useMealStatistics(currentUser?.id || "");
+    const itemStatistics = useItemStatistics(currentUser?.id || "");
 
     useEffect(() => {
         dispatch(setCurrentTabIndex(0));
-        const controller = new AbortController();
-        getMealStatistics(currentUser?.id || "", controller)
-            .then(value => {
-                if (value) {
-                    setMealStatistics(value);
-                }
-            })
-            .catch(reason => {
-                console.error(reason)
-                dispatch(setError(reason.message))
-            });
-        getItemStatistics(currentUser?.id || "", controller)
-            .then(value => {
-                if (value) {
-                    setItemStatistics(value);
-                }
-            })
-            .catch(reason => {
-                console.error(reason)
-                dispatch(setError(reason.message))
-            });
-        return () => controller.abort();
     }, [])
 
     const goToAddFood = () => {

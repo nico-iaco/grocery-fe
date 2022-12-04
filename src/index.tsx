@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './page/App';
@@ -12,6 +11,7 @@ import {AnalyticsComponent} from './component/AnalyticsComponent';
 import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {PersistGate} from "redux-persist/integration/react";
+import React from 'react';
 
 
 const root = ReactDOM.createRoot(

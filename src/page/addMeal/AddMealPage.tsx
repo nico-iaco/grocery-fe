@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import React, {useState} from "react";
+import {useState} from "react";
 import {Meal, MealType} from "../../model/meal";
 import {addMeal} from "../../api/mealApis";
 import {useNavigate} from "react-router-dom";

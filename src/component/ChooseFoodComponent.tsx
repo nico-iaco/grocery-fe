@@ -1,34 +1,19 @@
-import {useEffect, useState} from "react";
 import {Item} from "../model/item";
-import {getAllItems} from "../api/itemApis";
 import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
 import {Button, Grid, List, Paper} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {setCurrentItem, setError} from "../action/Action";
 import {getCurrentItem, getUser} from "../selector/Selector";
+import {useFoodList} from "../hooks/useFoodList";
 
 
 export const ChooseFoodComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
-    const [foodList, setFoodList] = useState<Item[]>([]);
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
 
-    useEffect(() => {
-        const controller = new AbortController();
-        getAllItems(true, currentUser?.id || "", controller)
-            .then((items) => {
-                setFoodList(items || []);
-            })
-            .catch((error) => {
-                console.log(error);
-                dispatch(setError(error.message));
-            });
-        return () => {
-            controller.abort();
-        }
-    }, []);
+    const foodList = useFoodList( true, currentUser?.id || "");
 
     const onFoodClicked = (item: Item) => {
         dispatch(setCurrentItem(item));

@@ -2,33 +2,19 @@ import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typogra
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal, getUser} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
-import React, {useEffect, useState} from "react";
-import {setCurrentFoodConsumption, setCurrentMeal, setError} from "../../action/Action";
+import {setCurrentFoodConsumption, setCurrentMeal} from "../../action/Action";
 import {useNavigate} from "react-router-dom";
 import {FoodConsumption} from "../../model/foodConsumption";
-import {getMealFoodConsumptions} from "../../api/mealApis";
 import {FoodConsumptionRowComponent} from "../../component/FoodConsumptionRowComponent";
 import {Fab} from "react-tiny-fab";
+import {useFoodConsumptionList} from "../../hooks/useFoodConsumptionList";
 
 export const MealFoodConsumptionPage = () => {
     const currentMeal = useSelector(getCurrentMeal);
     const currentUser = useSelector(getUser);
-    const [mealFoodConsumptionList, setMealFoodConsumptionList] = useState<FoodConsumption[]>([])
+    const mealFoodConsumptionList = useFoodConsumptionList(currentUser?.id || "", currentMeal?.id || "");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const controller = new AbortController();
-        getMealFoodConsumptions(currentMeal?.id || "",
-            currentUser?.id || "",
-            controller)
-            .then(mealFoodConsumptionList => setMealFoodConsumptionList(mealFoodConsumptionList || []))
-            .catch(reason => {
-                console.log(reason)
-                dispatch(setError(reason.message));
-            });
-        return () => controller.abort();
-    }, [currentMeal?.id]);
 
     const goBack = () => {
         dispatch(setCurrentMeal(undefined));
