@@ -14,7 +14,7 @@ import {EditMealPage} from "./editMeal/EditMealPage";
 import {AddFoodConsumptionPage} from "./addFoodConsumption/AddFoodConsumptionPage";
 import {EditFoodConsumptionPage} from "./editFoodConsumption/EditFoodConsumptionPage";
 import {Alert, BottomNavigation, BottomNavigationAction, Paper, Snackbar} from "@mui/material";
-import {Fastfood, House, LocalGroceryStore, Person} from "@mui/icons-material";
+import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTabIndex, getError, getUser} from "../selector/Selector";
 import {clearError, setCurrentItem, setCurrentTabIndex} from "../action/Action";
@@ -22,6 +22,9 @@ import {ProfilePage} from "./profile/ProfilePage";
 import {RegistrationPage} from "./register/RegistrationPage";
 import {LoginPage} from "./login/LoginPage";
 import {NoAuthComponent} from "../component/NoAuthComponent";
+import {LiveGroceryShoppingPage} from "./liveGroceryShopping/LiveGroceryShoppingPage";
+import {AddItemCartPage} from "./addCartItem/AddItemCartPage";
+import {EditItemCartPage} from "./editCartItem/EditItemCartPage";
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
@@ -72,6 +75,9 @@ function App() {
                     <Route path="/meal/:mealId/consumption/add" element={currentUser ? <AddFoodConsumptionPage/> : <NoAuthComponent/>}/>
                     <Route path="/meal/:mealId/consumption/:consumptionId/edit" element={currentUser ? <EditFoodConsumptionPage/> : <NoAuthComponent/>}/>
                     <Route path="/meal/:mealId/edit" element={currentUser ? <EditMealPage/> : <NoAuthComponent/>}/>
+                    <Route path="/live" element={currentUser ? <LiveGroceryShoppingPage/> : <NoAuthComponent/>}/>
+                    <Route path="/live/add" element={currentUser ? <AddItemCartPage/> : <NoAuthComponent/>}/>
+                    <Route path="/live/edit/:barcode" element={currentUser ? <EditItemCartPage /> : <NoAuthComponent/>}/>
                 </Routes>
             </div>
             <Snackbar
@@ -94,7 +100,7 @@ function App() {
                 >
                     <BottomNavigationAction label="Home" icon={<House />} onClick={goToHome} />
                     <BottomNavigationAction label="Meal" icon={<Fastfood />} onClick={goToMealDashboard} />
-                    <BottomNavigationAction label="Grocery" icon={<LocalGroceryStore />} onClick={goToItemDashboard} />
+                    <BottomNavigationAction label="Grocery" icon={<FoodBank />} onClick={goToItemDashboard} />
                     <BottomNavigationAction label="Profile" icon={<Person />} onClick={goToProfile} />
                 </BottomNavigation>
             </Paper>

@@ -5,6 +5,7 @@ import {Meal} from "../model/meal";
 import {FoodConsumption} from "../model/foodConsumption";
 import {AppError} from "../model/appError";
 import {User} from "../model/user";
+import {ShoppingItem} from "../model/shoppingItem";
 
 export const getCurrentItem = (state: GroceryState) : Item | undefined => {
     return state.currentItem;
@@ -32,4 +33,12 @@ export const getError = (state: GroceryState) : AppError | undefined => {
 
 export const getUser = (state: GroceryState) : User | undefined => {
     return state.user;
+}
+
+export const getShoppingList = (state: GroceryState) : ShoppingItem[] => {
+    return state.shoppingList;
+}
+
+export const getCurrentShoppingItem = (state: GroceryState) : ShoppingItem | undefined => {
+    return state.currentShoppingItem;
 }

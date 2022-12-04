@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {AppBar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
 import {Action, Fab} from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
-import {Add, Fastfood, LocalGroceryStore} from "@mui/icons-material";
+import {Add, Fastfood, FoodBank, LocalGroceryStore} from "@mui/icons-material";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
 import {useDispatch, useSelector} from "react-redux";
@@ -32,6 +32,10 @@ export function Home() {
     const goToAddMeal = () => {
         dispatch(setCurrentTabIndex(1));
         navigate(`/meal/add`);
+    }
+
+    const goToLiveShopping = () => {
+        navigate(`/live`);
     }
 
 
@@ -69,6 +73,13 @@ export function Home() {
             >
                 <Action
                     style={{backgroundColor: '#1677d7'}}
+                    text="Live grocery shopping"
+                    onClick={goToLiveShopping}
+                >
+                    <LocalGroceryStore/>
+                </Action>
+                <Action
+                    style={{backgroundColor: '#1677d7'}}
                     text="Add meal"
                     onClick={goToAddMeal}
                 >
@@ -79,7 +90,7 @@ export function Home() {
                     text="Add food"
                     onClick={goToAddFood}
                 >
-                    <LocalGroceryStore/>
+                    <FoodBank/>
                 </Action>
             </Fab>
         </Container>

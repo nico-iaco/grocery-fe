@@ -3,6 +3,7 @@ import {Transaction} from "../model/transaction";
 import {Meal} from "../model/meal";
 import {FoodConsumption} from "../model/foodConsumption";
 import {User} from "../model/user";
+import {ShoppingItem} from "../model/shoppingItem";
 
 export interface Action {
     type: string;
@@ -28,6 +29,15 @@ export const CLEAR_ERROR_TYPE = "CLEAR_ERROR";
 
 export const SET_USER_TYPE = "SET_USER";
 export const CLEAR_USER_TYPE = "CLEAR_USER";
+
+export const SET_SHOPPING_LIST_TYPE = "SET_SHOPPING_LIST";
+export const ADD_TO_SHOPPING_LIST_TYPE = "ADD_TO_SHOPPING_LIST";
+export const REMOVE_FROM_SHOPPING_LIST_TYPE = "REMOVE_FROM_SHOPPING_LIST";
+export const UPDATE_SHOPPING_LIST_TYPE = "UPDATE_SHOPPING_LIST";
+export const CLEAR_SHOPPING_LIST_TYPE = "CLEAR_SHOPPING_LIST";
+
+export const SET_CURRENT_SHOPPING_ITEM_TYPE = "SET_CURRENT_SHOPPING_ITEM";
+export const CLEAR_CURRENT_SHOPPING_ITEM_TYPE = "CLEAR_CURRENT_SHOPPING_ITEM";
 
 
 export const setCurrentItem = (item?: Item): Action => {
@@ -119,3 +129,49 @@ export const clearUser = (): Action => {
     };
 }
 
+export const setShoppingList = (shoppingList: ShoppingItem[]): Action => {
+    return {
+        type: SET_SHOPPING_LIST_TYPE,
+        payload: shoppingList
+    };
+}
+
+export const addToShoppingList = (item: ShoppingItem): Action => {
+    return {
+        type: ADD_TO_SHOPPING_LIST_TYPE,
+        payload: item
+    };
+}
+
+export const removeFromShoppingList = (item: ShoppingItem): Action => {
+    return {
+        type: REMOVE_FROM_SHOPPING_LIST_TYPE,
+        payload: item
+    };
+}
+
+export const updateShoppingList = (item: ShoppingItem): Action => {
+    return {
+        type: UPDATE_SHOPPING_LIST_TYPE,
+        payload: item
+    };
+}
+
+export const clearShoppingList = (): Action => {
+    return {
+        type: CLEAR_SHOPPING_LIST_TYPE
+    };
+}
+
+export const setCurrentShoppingItem = (item?: ShoppingItem): Action => {
+    return {
+        type: SET_CURRENT_SHOPPING_ITEM_TYPE,
+        payload: item
+    };
+}
+
+export const clearCurrentShoppingItem = (): Action => {
+    return {
+        type: CLEAR_CURRENT_SHOPPING_ITEM_TYPE
+    };
+}

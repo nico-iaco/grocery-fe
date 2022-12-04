@@ -19,6 +19,7 @@ export function AddTransactionPage() {
 
     const [seller, setSeller] = useState("")
     const [quantity, setQuantity] = useState(0)
+    const [quantityStd, setQuantityStd] = useState(0)
     const [unit, setUnit] = useState("")
     const [price, setPrice] = useState(0)
     const [expirationDate, setExpirationDate] = useState(new Date())
@@ -34,7 +35,7 @@ export function AddTransactionPage() {
             id: "",
             seller,
             quantity,
-            quantityStd: 0, //FIXME
+            quantityStd,
             availableQuantity: quantity,
             unit,
             price,
@@ -90,6 +91,8 @@ export function AddTransactionPage() {
                 onQuantityChange={setQuantity}
                 unit={unit}
                 onUnitChange={setUnit}
+                quantityGram={quantityStd}
+                onQuantityGramChange={setQuantityStd}
                 price={price}
                 onPriceChange={setPrice}
                 expirationDate={expirationDate}
