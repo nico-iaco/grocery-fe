@@ -45,6 +45,7 @@ export const EditItemPage = () => {
             .then(v => {
                 console.log(v);
                 dispatch(setCurrentItem(undefined));
+                navigate("/item");
             })
             .catch(reason => {
                 console.error(reason)

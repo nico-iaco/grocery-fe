@@ -4,6 +4,7 @@ import {BaseResponse} from "../model/baseResponse";
 import {Transaction} from "../model/transaction";
 import {FoodDetail} from "../model/foodDetails";
 import {ItemStatistics} from "../model/itemStatistics";
+import {ShoppingItem} from "../model/shoppingItem";
 
 export const baseUrl = process.env.REACT_APP_BASE_URL
 
@@ -17,6 +18,22 @@ export const addItem = async (item: Item, controller: AbortController) => {
         }
     );
     const baseResponse: BaseResponse<Item> = axiosResponse.data;
+    return baseResponse.body;
+}
+
+export const addShoppingItemList = async (shoppingItemList: ShoppingItem[], controller: AbortController) => {
+    const url = `${baseUrl}/item/all`;
+    const request = {
+        shoppingItems: shoppingItemList
+    }
+    const axiosResponse = await axios.post(
+        url,
+        request,
+        {
+            signal: controller.signal,
+        }
+    );
+    const baseResponse: BaseResponse<Item[]> = axiosResponse.data;
     return baseResponse.body;
 }
 

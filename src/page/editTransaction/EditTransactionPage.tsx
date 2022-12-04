@@ -17,6 +17,7 @@ export const EditTransactionPage = () => {
     const [seller, setSeller] = useState(currentTransaction?.seller || "");
     const [quantity, setQuantity] = useState(currentTransaction?.quantity || 0);
     const [unit, setUnit] = useState(currentTransaction?.unit || "");
+    const [quantityStd, setQuantityStd] = useState(currentTransaction?.quantityStd || 0);
     const [price, setPrice] = useState(currentTransaction?.price || 0);
     const [expirationDate, setExpirationDate] = useState(currentTransaction?.expirationDate || new Date());
     const [purchaseDate, setPurchaseDate] = useState(currentTransaction?.purchaseDate || new Date());
@@ -33,7 +34,7 @@ export const EditTransactionPage = () => {
             id: currentTransaction?.id || "",
             seller,
             quantity,
-            quantityStd: 0, //FIXME
+            quantityStd,
             availableQuantity: currentTransaction?.availableQuantity || 0,
             unit,
             price,
@@ -107,6 +108,8 @@ export const EditTransactionPage = () => {
                 onQuantityChange={setQuantity}
                 unit={unit}
                 onUnitChange={setUnit}
+                quantityGram={quantityStd}
+                onQuantityGramChange={setQuantityStd}
                 price={price}
                 onPriceChange={setPrice}
                 expirationDate={expirationDate}

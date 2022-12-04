@@ -1,18 +1,25 @@
 import {
     Action,
+    ADD_TO_SHOPPING_LIST_TYPE,
+    CLEAR_CURRENT_SHOPPING_ITEM_TYPE,
     CLEAR_ERROR_TYPE,
+    CLEAR_SHOPPING_LIST_TYPE,
     CLEAR_USER_TYPE,
+    REMOVE_FROM_SHOPPING_LIST_TYPE,
     SET_CURRENT_FOOD_CONSUMPTION_TYPE,
     SET_CURRENT_ITEM_TYPE,
     SET_CURRENT_MEAL_TYPE,
+    SET_CURRENT_SHOPPING_ITEM_TYPE,
     SET_CURRENT_TAB_INDEX_TYPE,
     SET_CURRENT_TRANSACTION_TYPE,
     SET_ERROR_TYPE,
+    SET_SHOPPING_LIST_TYPE,
     SET_USER_TYPE,
     UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
     UPDATE_CURRENT_ITEM_TYPE,
     UPDATE_CURRENT_MEAL_TYPE,
-    UPDATE_CURRENT_TRANSACTION_TYPE
+    UPDATE_CURRENT_TRANSACTION_TYPE,
+    UPDATE_SHOPPING_LIST_TYPE
 } from "../action/Action";
 import {Item} from "../model/item";
 import {Transaction} from "../model/transaction";
@@ -20,6 +27,7 @@ import {Meal} from "../model/meal";
 import {FoodConsumption} from "../model/foodConsumption";
 import {AppError} from "../model/appError";
 import {User} from "../model/user";
+import {ShoppingItem} from "../model/shoppingItem";
 
 export interface GroceryState {
     currentItem: Item | undefined;
@@ -27,6 +35,8 @@ export interface GroceryState {
     currentMeal: Meal | undefined;
     currentFoodConsumption: FoodConsumption | undefined;
     currentTabIndex: number;
+    currentShoppingItem: ShoppingItem | undefined;
+    shoppingList: ShoppingItem[];
     user: User | undefined;
     error: AppError | undefined;
 }
@@ -37,6 +47,8 @@ export const initialState: GroceryState = {
     currentMeal: undefined,
     currentFoodConsumption: undefined,
     currentTabIndex: 0,
+    currentShoppingItem: undefined,
+    shoppingList: [],
     user: undefined,
     error: undefined
 }
@@ -110,6 +122,41 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
             return {
                 ...state,
                 user: undefined
+            }
+        case SET_SHOPPING_LIST_TYPE:
+            return {
+                ...state,
+                shoppingList: action.payload
+            }
+        case ADD_TO_SHOPPING_LIST_TYPE:
+            return {
+                ...state,
+                shoppingList: [...state.shoppingList, action.payload]
+            }
+        case UPDATE_SHOPPING_LIST_TYPE:
+            return {
+                ...state,
+                shoppingList: [...state.shoppingList.filter(shoppingItem => shoppingItem.item.id !== action.payload.item.id), action.payload]
+            }
+        case REMOVE_FROM_SHOPPING_LIST_TYPE:
+            return {
+                ...state,
+                shoppingList: state.shoppingList.filter(shoppingItem => shoppingItem.item.id !== action.payload.item.id)
+            }
+        case CLEAR_SHOPPING_LIST_TYPE:
+            return {
+                ...state,
+                shoppingList: []
+            }
+        case SET_CURRENT_SHOPPING_ITEM_TYPE:
+            return {
+                ...state,
+                currentShoppingItem: action.payload
+            }
+        case CLEAR_CURRENT_SHOPPING_ITEM_TYPE:
+            return {
+                ...state,
+                currentShoppingItem: undefined
             }
         default:
             return state;
