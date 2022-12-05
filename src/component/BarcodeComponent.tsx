@@ -22,7 +22,9 @@ export const BarcodeComponent = (props: BarcodeComponentProps) => {
             fps: props.fps,
             qrbox: props.qrbox,
             aspectRatio: 4/3,
-            useBarCodeDetectorIfSupported: true,
+            experimentalFeatures: {
+                useBarCodeDetectorIfSupported: true
+            },
             showTorchButtonIfSupported: true,
             supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA]
         }
