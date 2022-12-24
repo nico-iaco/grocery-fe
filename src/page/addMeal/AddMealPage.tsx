@@ -10,7 +10,7 @@ import {MealDataComponent} from "../../component/MealDataComponent";
 import {getUser} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
 
-export const AddMealPage = () => {
+const AddMealPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [name, setName] = useState("");
@@ -92,3 +92,5 @@ export const AddMealPage = () => {
     );
 
 }
+
+export default AddMealPage;

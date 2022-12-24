@@ -11,7 +11,7 @@ import {Fab} from "react-tiny-fab";
 import {useTransactionList} from "../../hooks/useTransactionList";
 import {useItemDetail} from "../../hooks/useItemDetail";
 
-export function ItemTransactionPage() {
+function ItemTransactionPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentItem = useSelector(getCurrentItem);
@@ -98,3 +98,5 @@ export function ItemTransactionPage() {
             </Container>
         </Grid>);
 }
+
+export default ItemTransactionPage;

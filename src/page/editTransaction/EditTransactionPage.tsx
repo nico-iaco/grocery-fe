@@ -9,7 +9,7 @@ import {getCurrentTransaction, getUser} from "../../selector/Selector";
 import {setCurrentTransaction, setError} from "../../action/Action";
 import {useState} from "react";
 
-export const EditTransactionPage = () => {
+const EditTransactionPage = () => {
     const {itemId} = useParams();
     const currentTransaction = useSelector(getCurrentTransaction);
     const currentUser = useSelector(getUser);
@@ -121,3 +121,5 @@ export const EditTransactionPage = () => {
         </Container>
     </Grid>
 }
+
+export default EditTransactionPage;

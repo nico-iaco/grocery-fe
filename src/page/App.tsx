@@ -1,30 +1,33 @@
 import './App.css';
 import {Route, Routes, useNavigate} from "react-router-dom";
-import {Home} from "./home/Home";
-import {AddItemPage} from "./addItem/AddItemPage";
-import {ItemTransactionPage} from "./itemTransaction/ItemTransactionPage";
-import {AddTransactionPage} from "./addTransaction/AddTransactionPage";
-import {EditItemPage} from "./editItem/EditItemPage";
-import {EditTransactionPage} from "./editTransaction/EditTransactionPage";
-import {MealDashboardPage} from "./mealDashboard/MealDashboardPage";
-import {ItemDashboardPage} from "./itemDashboard/ItemDashboardPage";
-import {AddMealPage} from "./addMeal/AddMealPage";
-import {MealFoodConsumptionPage} from "./mealFoodConsumption/MealFoodConsumptionPage";
-import {EditMealPage} from "./editMeal/EditMealPage";
-import {AddFoodConsumptionPage} from "./addFoodConsumption/AddFoodConsumptionPage";
-import {EditFoodConsumptionPage} from "./editFoodConsumption/EditFoodConsumptionPage";
 import {Alert, BottomNavigation, BottomNavigationAction, Paper, Snackbar} from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTabIndex, getError, getUser} from "../selector/Selector";
 import {clearError, setCurrentItem, setCurrentTabIndex} from "../action/Action";
-import {ProfilePage} from "./profile/ProfilePage";
-import {RegistrationPage} from "./register/RegistrationPage";
-import {LoginPage} from "./login/LoginPage";
-import {NoAuthComponent} from "../component/NoAuthComponent";
-import {LiveGroceryShoppingPage} from "./liveGroceryShopping/LiveGroceryShoppingPage";
-import {AddItemCartPage} from "./addCartItem/AddItemCartPage";
-import {EditItemCartPage} from "./editCartItem/EditItemCartPage";
+import {lazy, Suspense} from "react";
+
+const Home = lazy(() => import('./home/Home'));
+const AddItemPage = lazy(() => import('./addItem/AddItemPage'));
+const ItemTransactionPage = lazy(() => import('./itemTransaction/ItemTransactionPage'));
+const AddTransactionPage = lazy(() => import('./addTransaction/AddTransactionPage'));
+const EditItemPage = lazy(() => import('./editItem/EditItemPage'));
+const EditTransactionPage = lazy(() => import('./editTransaction/EditTransactionPage'));
+const MealDashboardPage = lazy(() => import('./mealDashboard/MealDashboardPage'));
+const ItemDashboardPage = lazy(() => import('./itemDashboard/ItemDashboardPage'));
+const AddMealPage = lazy(() => import('./addMeal/AddMealPage'));
+const MealFoodConsumptionPage = lazy(() => import('./mealFoodConsumption/MealFoodConsumptionPage'));
+const EditMealPage = lazy(() => import('./editMeal/EditMealPage'));
+const AddFoodConsumptionPage = lazy(() => import('./addFoodConsumption/AddFoodConsumptionPage'));
+const EditFoodConsumptionPage = lazy(() => import('./editFoodConsumption/EditFoodConsumptionPage'));
+const ProfilePage = lazy(() => import('./profile/ProfilePage'));
+const RegistrationPage = lazy(() => import('./register/RegistrationPage'));
+const LoginPage = lazy(() => import('./login/LoginPage'));
+const NoAuthComponent = lazy(() => import('../component/NoAuthComponent'));
+const LiveGroceryShoppingPage = lazy(() => import('./liveGroceryShopping/LiveGroceryShoppingPage'));
+const AddItemCartPage = lazy(() => import('./addCartItem/AddItemCartPage'));
+const EditItemCartPage = lazy(() => import('./editCartItem/EditItemCartPage'));
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
@@ -58,27 +61,30 @@ function App() {
     return (
         <div>
             <div className="App">
-                <Routes>
-                    <Route path="/" element={currentUser ? <Home/> : <NoAuthComponent/>}/>
-                    <Route path="/profile" element={currentUser ? <ProfilePage/> : <NoAuthComponent/>}/>
-                    <Route path="/signup" element={<RegistrationPage/>}/>
-                    <Route path="/signin" element={<LoginPage/>}/>
-                    <Route path="/item" element={currentUser ? <ItemDashboardPage/> : <NoAuthComponent/>}/>
-                    <Route path="/item/add" element={currentUser ? <AddItemPage/> : <NoAuthComponent/>}/>
-                    <Route path="/item/:itemId/transaction" element={currentUser ? <ItemTransactionPage/> : <NoAuthComponent/>}/>
-                    <Route path="/item/:itemId/transaction/add" element={currentUser ? <AddTransactionPage/> : <NoAuthComponent/>}/>
-                    <Route path="/item/:itemId/edit" element={currentUser ? <EditItemPage/> : <NoAuthComponent/>}/>
-                    <Route path="/item/:itemId/transaction/:transactionId/edit" element={currentUser ? <EditTransactionPage/> : <NoAuthComponent/>}/>
-                    <Route path="/meal" element={currentUser ? <MealDashboardPage/> : <NoAuthComponent/>}/>
-                    <Route path="/meal/add" element={currentUser ? <AddMealPage/> : <NoAuthComponent/>}/>
-                    <Route path="/meal/:mealId/consumption" element={currentUser ? <MealFoodConsumptionPage/> : <NoAuthComponent/>}/>
-                    <Route path="/meal/:mealId/consumption/add" element={currentUser ? <AddFoodConsumptionPage/> : <NoAuthComponent/>}/>
-                    <Route path="/meal/:mealId/consumption/:consumptionId/edit" element={currentUser ? <EditFoodConsumptionPage/> : <NoAuthComponent/>}/>
-                    <Route path="/meal/:mealId/edit" element={currentUser ? <EditMealPage/> : <NoAuthComponent/>}/>
-                    <Route path="/live" element={currentUser ? <LiveGroceryShoppingPage/> : <NoAuthComponent/>}/>
-                    <Route path="/live/add" element={currentUser ? <AddItemCartPage/> : <NoAuthComponent/>}/>
-                    <Route path="/live/edit/:barcode" element={currentUser ? <EditItemCartPage /> : <NoAuthComponent/>}/>
-                </Routes>
+                <Suspense fallback={<CircularProgress className="center" />}>
+                    <Routes>
+                        <Route path="/" element={currentUser ? <Home/> : <NoAuthComponent/>}/>
+                        <Route path="/profile" element={currentUser ? <ProfilePage/> : <NoAuthComponent/>}/>
+                        <Route path="/signup" element={<RegistrationPage/>}/>
+                        <Route path="/signin" element={<LoginPage/>}/>
+                        <Route path="/item" element={currentUser ? <ItemDashboardPage/> : <NoAuthComponent/>}/>
+                        <Route path="/item/add" element={currentUser ? <AddItemPage/> : <NoAuthComponent/>}/>
+                        <Route path="/item/:itemId/transaction" element={currentUser ? <ItemTransactionPage/> : <NoAuthComponent/>}/>
+                        <Route path="/item/:itemId/transaction/add" element={currentUser ? <AddTransactionPage/> : <NoAuthComponent/>}/>
+                        <Route path="/item/:itemId/edit" element={currentUser ? <EditItemPage/> : <NoAuthComponent/>}/>
+                        <Route path="/item/:itemId/transaction/:transactionId/edit" element={currentUser ? <EditTransactionPage/> : <NoAuthComponent/>}/>
+                        <Route path="/meal" element={currentUser ? <MealDashboardPage/> : <NoAuthComponent/>}/>
+                        <Route path="/meal/add" element={currentUser ? <AddMealPage/> : <NoAuthComponent/>}/>
+                        <Route path="/meal/:mealId/consumption" element={currentUser ? <MealFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                        <Route path="/meal/:mealId/consumption/add" element={currentUser ? <AddFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                        <Route path="/meal/:mealId/consumption/:consumptionId/edit" element={currentUser ? <EditFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                        <Route path="/meal/:mealId/edit" element={currentUser ? <EditMealPage/> : <NoAuthComponent/>}/>
+                        <Route path="/live" element={currentUser ? <LiveGroceryShoppingPage/> : <NoAuthComponent/>}/>
+                        <Route path="/live/add" element={currentUser ? <AddItemCartPage/> : <NoAuthComponent/>}/>
+                        <Route path="/live/edit/:barcode" element={currentUser ? <EditItemCartPage /> : <NoAuthComponent/>}/>
+                    </Routes>
+                </Suspense>
+
             </div>
             <Snackbar
                 open={error?.isInErrorState}

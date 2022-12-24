@@ -11,7 +11,7 @@ import {addMealFoodConsumption} from "../api/mealApis";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../utils/firebaseUtils";
 
-export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
+const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentMeal = useSelector(getCurrentMeal);
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
@@ -92,3 +92,5 @@ export const CompleteFoodConsumptionComponent = (props: StepperComponentProps) =
         </Grid>
     </Grid>
 }
+
+export default CompleteFoodConsumptionComponent;

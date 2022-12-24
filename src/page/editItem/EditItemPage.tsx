@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem, getUser} from "../../selector/Selector";
 import {setCurrentItem, setError} from "../../action/Action";
 
-export const EditItemPage = () => {
+const EditItemPage = () => {
     const currentItem = useSelector(getCurrentItem);
     const user = useSelector(getUser);
     const [name, setName] = useState(currentItem?.name || "");
@@ -92,3 +92,5 @@ export const EditItemPage = () => {
         </Container>
     </Grid>
 }
+
+export default EditItemPage;

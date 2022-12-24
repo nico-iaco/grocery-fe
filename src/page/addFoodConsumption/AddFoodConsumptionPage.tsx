@@ -1,3 +1,4 @@
+import React, {Fragment, useState} from "react";
 import {
     AppBar,
     Box,
@@ -14,11 +15,11 @@ import {
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {ArrowBack} from "@mui/icons-material";
-import {ChooseFoodComponent} from "../../component/ChooseFoodComponent";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
-import {ChooseFoodTransactionComponent} from "../../component/ChooseFoodTransactionComponent";
-import {CompleteFoodConsumptionComponent} from "../../component/CompleteFoodConsumptionComponent";
-import {Fragment, useState} from "react";
+
+const ChooseFoodComponent = React.lazy(() => import("../../component/ChooseFoodComponent"));
+const ChooseFoodTransactionComponent = React.lazy(() => import("../../component/ChooseFoodTransactionComponent"));
+const CompleteFoodConsumptionComponent = React.lazy(() => import("../../component/CompleteFoodConsumptionComponent"));
 
 const steps = ['Select food', 'Select transaction', 'Complete'];
 
@@ -65,7 +66,7 @@ export interface StepperComponentProps {
     onSkipClicked: () => void
 }
 
-export const AddFoodConsumptionPage = () => {
+const AddFoodConsumptionPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -133,3 +134,5 @@ export const AddFoodConsumptionPage = () => {
     </Grid>
 
 }
+
+export default AddFoodConsumptionPage;

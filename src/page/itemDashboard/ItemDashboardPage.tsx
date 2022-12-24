@@ -27,7 +27,7 @@ import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useItemList} from "../../hooks/useItemList";
 
-export const ItemDashboardPage = () => {
+const ItemDashboardPage = () => {
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
     const currentUser = useSelector(getUser);
@@ -133,3 +133,5 @@ export const ItemDashboardPage = () => {
         </Grid>
     );
 }
+
+export default ItemDashboardPage;

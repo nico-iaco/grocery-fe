@@ -5,7 +5,7 @@ import {getAuth} from "firebase/auth";
 import {clearUser, setCurrentTabIndex, setError} from "../../action/Action";
 import {stringAvatar} from "../../utils/colorUtils";
 
-export const ProfilePage = () => {
+const ProfilePage = () => {
     const currentUser = useSelector(getUser);
     const dispatch = useDispatch();
     dispatch(setCurrentTabIndex(3));
@@ -52,3 +52,5 @@ export const ProfilePage = () => {
         </Grid>
     );
 }
+
+export default ProfilePage;

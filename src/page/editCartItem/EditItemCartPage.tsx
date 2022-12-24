@@ -12,7 +12,7 @@ import {updateShoppingList} from "../../action/Action";
 import {ArrowBack} from "@mui/icons-material";
 
 
-export const EditItemCartPage = () => {
+const EditItemCartPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
@@ -128,3 +128,5 @@ export const EditItemCartPage = () => {
         </Grid>
     )
 }
+
+export default EditItemCartPage;

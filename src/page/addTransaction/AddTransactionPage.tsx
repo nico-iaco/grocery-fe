@@ -10,7 +10,7 @@ import {setError} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
 
 
-export function AddTransactionPage() {
+function AddTransactionPage() {
     const {itemId} = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -105,3 +105,5 @@ export function AddTransactionPage() {
 
     </Grid>
 }
+
+export default AddTransactionPage;
