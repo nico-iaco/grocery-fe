@@ -10,7 +10,7 @@ import {clearShoppingList, setCurrentShoppingItem, setError} from "../../action/
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addShoppingItemList} from "../../api/itemApis";
 
-export const LiveGroceryShoppingPage = () => {
+const LiveGroceryShoppingPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const itemList = useSelector(getShoppingList);
@@ -110,3 +110,5 @@ export const LiveGroceryShoppingPage = () => {
         </Grid>
     )
 }
+
+export default LiveGroceryShoppingPage;

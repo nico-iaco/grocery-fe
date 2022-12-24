@@ -8,7 +8,7 @@ import {getCurrentItem, getUser} from "../selector/Selector";
 import {useFoodList} from "../hooks/useFoodList";
 
 
-export const ChooseFoodComponent = (props: StepperComponentProps) => {
+const ChooseFoodComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
@@ -65,3 +65,5 @@ export const ChooseFoodComponent = (props: StepperComponentProps) => {
         </Grid>
     </Grid>
 }
+
+export default ChooseFoodComponent;

@@ -22,7 +22,7 @@ import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
 import {useState} from "react";
 
-export const RegistrationPage = () => {
+const RegistrationPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -158,3 +158,5 @@ export const RegistrationPage = () => {
         </Grid>
     );
 }
+
+export default RegistrationPage;

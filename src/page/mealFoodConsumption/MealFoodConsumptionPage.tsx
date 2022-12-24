@@ -9,7 +9,7 @@ import {FoodConsumptionRowComponent} from "../../component/FoodConsumptionRowCom
 import {Fab} from "react-tiny-fab";
 import {useFoodConsumptionList} from "../../hooks/useFoodConsumptionList";
 
-export const MealFoodConsumptionPage = () => {
+const MealFoodConsumptionPage = () => {
     const currentMeal = useSelector(getCurrentMeal);
     const currentUser = useSelector(getUser);
     const mealFoodConsumptionList = useFoodConsumptionList(currentUser?.id || "", currentMeal?.id || "");
@@ -86,3 +86,5 @@ export const MealFoodConsumptionPage = () => {
         </Container>
     </Grid>
 }
+
+export default MealFoodConsumptionPage;

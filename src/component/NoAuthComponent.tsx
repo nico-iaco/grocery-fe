@@ -1,7 +1,7 @@
 import {AppBar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
-export const NoAuthComponent = () => {
+const NoAuthComponent = () => {
     const navigate = useNavigate();
 
     const login = () => {
@@ -43,3 +43,5 @@ export const NoAuthComponent = () => {
         </Grid>
     );
 }
+
+export default NoAuthComponent;

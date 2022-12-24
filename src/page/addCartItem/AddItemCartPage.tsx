@@ -11,7 +11,7 @@ import {Transaction} from "../../model/transaction";
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addToShoppingList} from "../../action/Action";
 
-export const AddItemCartPage = () => {
+const AddItemCartPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [name, setName] = useState<string>("");
@@ -124,3 +124,5 @@ export const AddItemCartPage = () => {
         </Grid>
     );
 }
+
+export default AddItemCartPage;

@@ -13,7 +13,7 @@ import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useItemStatistics} from "../../hooks/useItemStatistics";
 
 
-export function Home() {
+function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
@@ -96,3 +96,5 @@ export function Home() {
         </Container>
     </Grid>
 }
+
+export default Home;

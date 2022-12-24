@@ -10,7 +10,7 @@ import {setCurrentItem, setError} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
 
-export function AddItemPage () {
+function AddItemPage () {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [barcode, setBarcode] = useState("");
@@ -87,3 +87,5 @@ export function AddItemPage () {
             </Grid>
     );
 }
+
+export default AddItemPage;

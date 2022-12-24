@@ -8,7 +8,7 @@ import {Transaction} from "../model/transaction";
 import {format} from "date-fns";
 import {useTransactionList} from "../hooks/useTransactionList";
 
-export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
+const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
@@ -69,3 +69,5 @@ export const ChooseFoodTransactionComponent = (props: StepperComponentProps) => 
         </Grid>
     </Grid>
 }
+
+export default ChooseFoodTransactionComponent;

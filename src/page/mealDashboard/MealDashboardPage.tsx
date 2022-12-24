@@ -29,7 +29,7 @@ import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useMealList} from "../../hooks/useMealList";
 
 
-export const MealDashboardPage = () => {
+const MealDashboardPage = () => {
 
     const [date, setDate] = useState<Date>(new Date());
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -162,3 +162,5 @@ export const MealDashboardPage = () => {
     )
 
 }
+
+export default MealDashboardPage;

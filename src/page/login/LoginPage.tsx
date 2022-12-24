@@ -26,7 +26,7 @@ import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
 
 
-export const LoginPage = () => {
+const LoginPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const auth = getAuth();
@@ -159,3 +159,5 @@ export const LoginPage = () => {
         </Grid>
     );
 }
+
+export default LoginPage;

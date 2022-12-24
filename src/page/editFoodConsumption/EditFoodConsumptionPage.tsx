@@ -9,7 +9,7 @@ import {FoodConsumption} from "../../model/foodConsumption";
 import {ArrowBack} from "@mui/icons-material";
 import {useState} from "react";
 
-export const EditFoodConsumptionPage = () => {
+const EditFoodConsumptionPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentMeal = useSelector(getCurrentMeal);
@@ -124,3 +124,5 @@ export const EditFoodConsumptionPage = () => {
     </Grid>
 
 }
+
+export default EditFoodConsumptionPage;

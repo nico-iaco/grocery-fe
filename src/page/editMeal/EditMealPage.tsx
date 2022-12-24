@@ -9,7 +9,7 @@ import {deleteMeal, updateMeal} from "../../api/mealApis";
 import {setCurrentMeal, setError} from "../../action/Action";
 import {useState} from "react";
 
-export const EditMealPage = () => {
+const EditMealPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const currentMeal = useSelector(getCurrentMeal);
@@ -104,3 +104,5 @@ export const EditMealPage = () => {
         </Grid>)
 
 }
+
+export default EditMealPage;
