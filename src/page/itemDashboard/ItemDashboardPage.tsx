@@ -134,3 +134,4 @@ const ItemDashboardPage = () => {
     );
 }
 
+export default ItemDashboardPage;
