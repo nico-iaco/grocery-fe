@@ -2,7 +2,7 @@ import {
     AppBar,
     Box,
     Button,
-    Container,
+    Container, Fab,
     Grid,
     IconButton,
     List,
@@ -18,7 +18,6 @@ import {MealRowComponent} from "../../component/MealRowComponent";
 import {Add, CalendarMonth} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentMeal, setCurrentTabIndex} from "../../action/Action";
-import {Fab} from "react-tiny-fab";
 import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
@@ -149,13 +148,13 @@ const MealDashboardPage = () => {
                     </List>
                 </Grid>
                 <Fab
-                    mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    style={{bottom: 50, right: 12}}
-                    icon={<Add/>}
-                    alwaysShowTitle={true}
-                    event="click"
+                    //mainButtonStyles={{backgroundColor: '#1677d7'}}
+                    sx={{bottom: 50, right: 12}}
+                    //alwaysShowTitle={true}
+                    //event="click"
                     onClick={goToAddMeal}
                 >
+                    <Add/>
                 </Fab>
             </Container>
         </Grid>

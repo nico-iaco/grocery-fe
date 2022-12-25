@@ -1,5 +1,17 @@
 import {useNavigate} from "react-router-dom";
-import {AppBar, Box, Button, Container, Grid, IconButton, List, Skeleton, Toolbar, Typography} from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    Fab,
+    Grid,
+    IconButton,
+    List,
+    Skeleton,
+    Toolbar,
+    Typography
+} from "@mui/material";
 import {Transaction} from "../../model/transaction";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -7,7 +19,6 @@ import "./ItemTransactionPage.css";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem, getUser} from "../../selector/Selector";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
-import {Fab} from "react-tiny-fab";
 import {useTransactionList} from "../../hooks/useTransactionList";
 import {useItemDetail} from "../../hooks/useItemDetail";
 
@@ -87,13 +98,13 @@ function ItemTransactionPage() {
                     </List>
                 </Grid>
                 <Fab
-                    mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    style={{bottom: 50, right: 12}}
-                    icon={<Add/>}
-                    alwaysShowTitle={true}
-                    event="click"
+                    //mainButtonStyles={{backgroundColor: '#1677d7'}}
+                    sx={{bottom: 50, right: 12}}
+                    //alwaysShowTitle={true}
+                    //event="click"
                     onClick={goToAddTransactionPage}
                 >
+                    <Add/>
                 </Fab>
             </Container>
         </Grid>);

@@ -7,7 +7,7 @@ import {
     AppBar,
     Box,
     Button,
-    Container,
+    Container, Fab,
     FormControl,
     Grid,
     IconButton,
@@ -22,7 +22,6 @@ import {
 } from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
 import {Add, Search} from "@mui/icons-material";
-import {Fab} from "react-tiny-fab";
 import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useItemList} from "../../hooks/useItemList";
@@ -121,13 +120,13 @@ const ItemDashboardPage = () => {
                     </List>
                 </Grid>
                 <Fab
-                    mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    style={{bottom: 50, right: 12}}
-                    icon={<Add/>}
-                    alwaysShowTitle={true}
-                    event="click"
+                    //mainButtonStyles={{backgroundColor: '#1677d7'}}
+                    sx={{bottom: 50, right: 12}}
+                    //alwaysShowTitle={true}
+                    //event="click"
                     onClick={goToAddItem}
                 >
+                    <Add/>
                 </Fab>
             </Container>
         </Grid>

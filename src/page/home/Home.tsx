@@ -1,8 +1,6 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {AppBar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
-import {Action, Fab} from 'react-tiny-fab';
-import 'react-tiny-fab/dist/styles.css';
+import {AppBar, Box, Button, Container, Grid, SpeedDial, SpeedDialAction, Toolbar, Typography} from "@mui/material";
 import {Add, Fastfood, FoodBank, LocalGroceryStore} from "@mui/icons-material";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
@@ -65,34 +63,32 @@ function Home() {
             <Grid item xs={8} className="container">
                 <ItemStatisticsComponent itemStatistics={itemStatistics}/>
             </Grid>
-            <Fab
-                mainButtonStyles={{backgroundColor: '#1677d7'}}
-                style={{bottom: 50, right: 12}}
+            <SpeedDial
+                //mainButtonStyles={{backgroundColor: '#1677d7'}}
+                sx={{bottom: 50, right: 12}}
                 icon={<Add/>}
-                alwaysShowTitle={true}
+                ariaLabel={"Add"}
+                //alwaysShowTitle={true}
             >
-                <Action
-                    style={{backgroundColor: '#1677d7'}}
-                    text="Live grocery shopping"
+                <SpeedDialAction
+                    //style={{backgroundColor: '#1677d7'}}
+                    tooltipTitle="Live grocery shopping"
                     onClick={goToLiveShopping}
-                >
-                    <LocalGroceryStore/>
-                </Action>
-                <Action
-                    style={{backgroundColor: '#1677d7'}}
-                    text="Add meal"
+                    icon={<LocalGroceryStore/>}
+                />
+                <SpeedDialAction
+                    //style={{backgroundColor: '#1677d7'}}
+                    tooltipTitle="Add meal"
                     onClick={goToAddMeal}
-                >
-                    <Fastfood/>
-                </Action>
-                <Action
-                    style={{backgroundColor: '#1677d7'}}
-                    text="Add food"
+                    icon={<Fastfood/>}
+                />
+                <SpeedDialAction
+                    //style={{backgroundColor: '#1677d7'}}
+                    tooltipTitle="Add food"
                     onClick={goToAddFood}
-                >
-                    <FoodBank/>
-                </Action>
-            </Fab>
+                    icon={<FoodBank/>}
+                />
+            </SpeedDial>
         </Container>
     </Grid>
 }

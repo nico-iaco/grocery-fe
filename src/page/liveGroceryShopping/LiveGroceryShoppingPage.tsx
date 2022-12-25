@@ -1,6 +1,5 @@
-import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Fab, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import {Add, ArrowBack, Edit} from "@mui/icons-material";
-import {Fab} from "react-tiny-fab";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getShoppingList} from "../../selector/Selector";
@@ -98,13 +97,13 @@ const LiveGroceryShoppingPage = () => {
                     <Button variant="contained" color="error" onClick={clearCart}>Discard</Button>
                 </Grid>
                 <Fab
-                    mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    style={{bottom: 50, right: 12}}
-                    icon={<Add/>}
-                    alwaysShowTitle={true}
-                    event="click"
+                    //mainButtonStyles={{backgroundColor: '#1677d7'}}
+                    sx={{bottom: 50, right: 12}}
+                    //alwaysShowTitle={true}
+                    //event="click"
                     onClick={goToAddItemToCart}
                 >
+                    <Add/>
                 </Fab>
             </Container>
         </Grid>
