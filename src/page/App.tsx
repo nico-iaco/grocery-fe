@@ -1,6 +1,14 @@
 import './App.css';
 import {Route, Routes, useNavigate} from "react-router-dom";
-import {Alert, BottomNavigation, BottomNavigationAction, Paper, Snackbar} from "@mui/material";
+import {
+    Alert,
+    BottomNavigation,
+    BottomNavigationAction,
+    createTheme,
+    Paper,
+    Snackbar,
+    ThemeProvider
+} from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
@@ -36,6 +44,16 @@ function App() {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
+    let theme = createTheme({
+        palette: {
+            primary: {
+                main: '#F3A766',
+            },
+            secondary: {
+                main: '#0068B7',
+            },
+        },
+    });
 
     const goToHome = () => {
         navigate("/");
@@ -60,58 +78,69 @@ function App() {
 
     return (
         <div>
-            <div className="App">
-                <Suspense fallback={<CircularProgress className="center" />}>
-                    <Routes>
-                        <Route path="/" element={currentUser ? <Home/> : <NoAuthComponent/>}/>
-                        <Route path="/profile" element={currentUser ? <ProfilePage/> : <NoAuthComponent/>}/>
-                        <Route path="/signup" element={<RegistrationPage/>}/>
-                        <Route path="/signin" element={<LoginPage/>}/>
-                        <Route path="/item" element={currentUser ? <ItemDashboardPage/> : <NoAuthComponent/>}/>
-                        <Route path="/item/add" element={currentUser ? <AddItemPage/> : <NoAuthComponent/>}/>
-                        <Route path="/item/:itemId/transaction" element={currentUser ? <ItemTransactionPage/> : <NoAuthComponent/>}/>
-                        <Route path="/item/:itemId/transaction/add" element={currentUser ? <AddTransactionPage/> : <NoAuthComponent/>}/>
-                        <Route path="/item/:itemId/edit" element={currentUser ? <EditItemPage/> : <NoAuthComponent/>}/>
-                        <Route path="/item/:itemId/transaction/:transactionId/edit" element={currentUser ? <EditTransactionPage/> : <NoAuthComponent/>}/>
-                        <Route path="/meal" element={currentUser ? <MealDashboardPage/> : <NoAuthComponent/>}/>
-                        <Route path="/meal/add" element={currentUser ? <AddMealPage/> : <NoAuthComponent/>}/>
-                        <Route path="/meal/:mealId/consumption" element={currentUser ? <MealFoodConsumptionPage/> : <NoAuthComponent/>}/>
-                        <Route path="/meal/:mealId/consumption/add" element={currentUser ? <AddFoodConsumptionPage/> : <NoAuthComponent/>}/>
-                        <Route path="/meal/:mealId/consumption/:consumptionId/edit" element={currentUser ? <EditFoodConsumptionPage/> : <NoAuthComponent/>}/>
-                        <Route path="/meal/:mealId/edit" element={currentUser ? <EditMealPage/> : <NoAuthComponent/>}/>
-                        <Route path="/live" element={currentUser ? <LiveGroceryShoppingPage/> : <NoAuthComponent/>}/>
-                        <Route path="/live/add" element={currentUser ? <AddItemCartPage/> : <NoAuthComponent/>}/>
-                        <Route path="/live/edit/:barcode" element={currentUser ? <EditItemCartPage /> : <NoAuthComponent/>}/>
-                    </Routes>
-                </Suspense>
+            <ThemeProvider theme={theme}>
+                <div className="App">
+                    <Suspense fallback={<CircularProgress className="center"/>}>
+                        <Routes>
+                            <Route path="/" element={currentUser ? <Home/> : <NoAuthComponent/>}/>
+                            <Route path="/profile" element={currentUser ? <ProfilePage/> : <NoAuthComponent/>}/>
+                            <Route path="/signup" element={<RegistrationPage/>}/>
+                            <Route path="/signin" element={<LoginPage/>}/>
+                            <Route path="/item" element={currentUser ? <ItemDashboardPage/> : <NoAuthComponent/>}/>
+                            <Route path="/item/add" element={currentUser ? <AddItemPage/> : <NoAuthComponent/>}/>
+                            <Route path="/item/:itemId/transaction"
+                                   element={currentUser ? <ItemTransactionPage/> : <NoAuthComponent/>}/>
+                            <Route path="/item/:itemId/transaction/add"
+                                   element={currentUser ? <AddTransactionPage/> : <NoAuthComponent/>}/>
+                            <Route path="/item/:itemId/edit"
+                                   element={currentUser ? <EditItemPage/> : <NoAuthComponent/>}/>
+                            <Route path="/item/:itemId/transaction/:transactionId/edit"
+                                   element={currentUser ? <EditTransactionPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal" element={currentUser ? <MealDashboardPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal/add" element={currentUser ? <AddMealPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal/:mealId/consumption"
+                                   element={currentUser ? <MealFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal/:mealId/consumption/add"
+                                   element={currentUser ? <AddFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal/:mealId/consumption/:consumptionId/edit"
+                                   element={currentUser ? <EditFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal/:mealId/edit"
+                                   element={currentUser ? <EditMealPage/> : <NoAuthComponent/>}/>
+                            <Route path="/live"
+                                   element={currentUser ? <LiveGroceryShoppingPage/> : <NoAuthComponent/>}/>
+                            <Route path="/live/add" element={currentUser ? <AddItemCartPage/> : <NoAuthComponent/>}/>
+                            <Route path="/live/edit/:barcode"
+                                   element={currentUser ? <EditItemCartPage/> : <NoAuthComponent/>}/>
+                        </Routes>
+                    </Suspense>
 
-            </div>
-            <Snackbar
-                open={error?.isInErrorState}
-                onClose={handleClose}
-                autoHideDuration={2000}
-                sx={{ bottom: { xs: 140, sm: 75 } }}
-            >
-                <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
-                    {error?.message}
-                </Alert>
-            </Snackbar>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation
-                    showLabels
-                    value={currentIndex}
-                    onChange={(event, newValue) => {
-                        dispatch(setCurrentTabIndex(newValue));
-                    }}
+                </div>
+                <Snackbar
+                    open={error?.isInErrorState}
+                    onClose={handleClose}
+                    autoHideDuration={2000}
+                    sx={{bottom: {xs: 140, sm: 75}}}
                 >
-                    <BottomNavigationAction label="Home" icon={<House />} onClick={goToHome} />
-                    <BottomNavigationAction label="Meal" icon={<Fastfood />} onClick={goToMealDashboard} />
-                    <BottomNavigationAction label="Grocery" icon={<FoodBank />} onClick={goToItemDashboard} />
-                    <BottomNavigationAction label="Profile" icon={<Person />} onClick={goToProfile} />
-                </BottomNavigation>
-            </Paper>
+                    <Alert variant="filled" severity="error" sx={{width: '100%'}}>
+                        {error?.message}
+                    </Alert>
+                </Snackbar>
+                <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+                    <BottomNavigation
+                        showLabels
+                        value={currentIndex}
+                        onChange={(event, newValue) => {
+                            dispatch(setCurrentTabIndex(newValue));
+                        }}
+                    >
+                        <BottomNavigationAction label="Home" icon={<House/>} onClick={goToHome}/>
+                        <BottomNavigationAction label="Meal" icon={<Fastfood/>} onClick={goToMealDashboard}/>
+                        <BottomNavigationAction label="Grocery" icon={<FoodBank/>} onClick={goToItemDashboard}/>
+                        <BottomNavigationAction label="Profile" icon={<Person/>} onClick={goToProfile}/>
+                    </BottomNavigation>
+                </Paper>
+            </ThemeProvider>
         </div>
-
     );
 }
 

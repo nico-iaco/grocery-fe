@@ -4,7 +4,10 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "src/**",
+      "public/**",
+      "k8s/**"
     ],
     "rewrites": [
       {
@@ -22,6 +25,17 @@
       {
         "source": "**",
         "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=36000, s-maxage=36000"
+          }
+        ]
       }
     ]
   }
