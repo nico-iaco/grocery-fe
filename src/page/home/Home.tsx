@@ -65,7 +65,7 @@ function Home() {
             </Grid>
             <SpeedDial
                 //mainButtonStyles={{backgroundColor: '#1677d7'}}
-                sx={{ position: 'absolute', bottom: 50, right: 12}}
+                sx={{ position: 'fixed', bottom: 56, right: 12}}
                 icon={<Add/>}
                 ariaLabel={"Add"}
                 //alwaysShowTitle={true}

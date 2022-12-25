@@ -150,7 +150,7 @@ const MealDashboardPage = () => {
                 <Fab
                     //mainButtonStyles={{backgroundColor: '#1677d7'}}
                     color="primary"
-                    sx={{position: 'absolute', bottom: 50, right: 12}}
+                    sx={{position: 'fixed', bottom: 56, right: 12}}
                     //alwaysShowTitle={true}
                     //event="click"
                     onClick={goToAddMeal}
