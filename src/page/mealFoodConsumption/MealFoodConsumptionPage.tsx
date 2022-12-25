@@ -76,7 +76,7 @@ const MealFoodConsumptionPage = () => {
             <Fab
                 //mainButtonStyles={{backgroundColor: '#1677d7'}}
                 color="primary"
-                sx={{position: 'fixed', bottom: 56, right: 12}}
+                sx={{position: 'fixed', bottom: 62, right: 8}}
                 //alwaysShowTitle={true}
                 //event="click"
                 onClick={goToAddFoodConsumptionPage}
