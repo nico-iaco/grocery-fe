@@ -148,11 +148,8 @@ const MealDashboardPage = () => {
                     </List>
                 </Grid>
                 <Fab
-                    //mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    color="primary"
+                    color="secondary"
                     sx={{position: 'fixed', bottom: 62, right: 8}}
-                    //alwaysShowTitle={true}
-                    //event="click"
                     onClick={goToAddMeal}
                 >
                     <Add/>

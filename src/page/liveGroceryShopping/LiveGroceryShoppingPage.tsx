@@ -97,11 +97,8 @@ const LiveGroceryShoppingPage = () => {
                     <Button variant="contained" color="error" onClick={clearCart}>Discard</Button>
                 </Grid>
                 <Fab
-                    //mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    color="primary"
+                    color="secondary"
                     sx={{position: 'fixed', bottom: 62, right: 8}}
-                    //alwaysShowTitle={true}
-                    //event="click"
                     onClick={goToAddItemToCart}
                 >
                     <Add/>

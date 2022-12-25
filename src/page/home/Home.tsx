@@ -1,6 +1,17 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {AppBar, Box, Button, Container, Grid, SpeedDial, SpeedDialAction, Toolbar, Typography} from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Button,
+    Container,
+    Grid,
+    SpeedDial,
+    SpeedDialAction,
+    Toolbar,
+    Typography,
+    useTheme
+} from "@mui/material";
 import {Add, Fastfood, FoodBank, LocalGroceryStore} from "@mui/icons-material";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
@@ -14,9 +25,17 @@ import {useItemStatistics} from "../../hooks/useItemStatistics";
 function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const theme = useTheme();
     const currentUser = useSelector(getUser);
     const mealStatistics = useMealStatistics(currentUser?.id || "");
     const itemStatistics = useItemStatistics(currentUser?.id || "");
+
+    const fabProps = {
+        style: {
+            backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.contrastText
+        }
+    }
 
     useEffect(() => {
         dispatch(setCurrentTabIndex(0));
@@ -64,28 +83,27 @@ function Home() {
                 <ItemStatisticsComponent itemStatistics={itemStatistics}/>
             </Grid>
             <SpeedDial
-                //mainButtonStyles={{backgroundColor: '#1677d7'}}
-                sx={{ position: 'fixed', bottom: 62, right: 8}}
+                sx={{position: 'fixed', bottom: 62, right: 8}}
+                FabProps={fabProps}
                 icon={<Add/>}
                 ariaLabel={"Add"}
-                //alwaysShowTitle={true}
             >
                 <SpeedDialAction
-                    //style={{backgroundColor: '#1677d7'}}
+                    FabProps={fabProps}
                     tooltipTitle="Live grocery shopping"
                     onClick={goToLiveShopping}
                     tooltipOpen
                     icon={<LocalGroceryStore/>}
                 />
                 <SpeedDialAction
-                    //style={{backgroundColor: '#1677d7'}}
+                    FabProps={fabProps}
                     tooltipTitle="Add meal"
                     onClick={goToAddMeal}
                     tooltipOpen
                     icon={<Fastfood/>}
                 />
                 <SpeedDialAction
-                    //style={{backgroundColor: '#1677d7'}}
+                    FabProps={fabProps}
                     tooltipTitle="Add food"
                     onClick={goToAddFood}
                     tooltipOpen
