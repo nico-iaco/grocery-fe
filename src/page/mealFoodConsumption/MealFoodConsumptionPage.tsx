@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Container, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Fab, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal, getUser} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -6,7 +6,6 @@ import {setCurrentFoodConsumption, setCurrentMeal} from "../../action/Action";
 import {useNavigate} from "react-router-dom";
 import {FoodConsumption} from "../../model/foodConsumption";
 import {FoodConsumptionRowComponent} from "../../component/FoodConsumptionRowComponent";
-import {Fab} from "react-tiny-fab";
 import {useFoodConsumptionList} from "../../hooks/useFoodConsumptionList";
 
 const MealFoodConsumptionPage = () => {
@@ -75,13 +74,11 @@ const MealFoodConsumptionPage = () => {
                 </List>
             </Grid>
             <Fab
-                mainButtonStyles={{backgroundColor: '#1677d7'}}
-                style={{bottom: 50, right: 12}}
-                icon={<Add/>}
-                alwaysShowTitle={true}
-                event="click"
+                color="secondary"
+                sx={{position: 'fixed', bottom: 62, right: 8}}
                 onClick={goToAddFoodConsumptionPage}
             >
+                <Add/>
             </Fab>
         </Container>
     </Grid>
