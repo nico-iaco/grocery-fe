@@ -65,7 +65,7 @@ function Home() {
             </Grid>
             <SpeedDial
                 //mainButtonStyles={{backgroundColor: '#1677d7'}}
-                sx={{bottom: 50, right: 12}}
+                sx={{ position: 'absolute', bottom: 50, right: 12}}
                 icon={<Add/>}
                 ariaLabel={"Add"}
                 //alwaysShowTitle={true}
@@ -74,18 +74,21 @@ function Home() {
                     //style={{backgroundColor: '#1677d7'}}
                     tooltipTitle="Live grocery shopping"
                     onClick={goToLiveShopping}
+                    tooltipOpen
                     icon={<LocalGroceryStore/>}
                 />
                 <SpeedDialAction
                     //style={{backgroundColor: '#1677d7'}}
                     tooltipTitle="Add meal"
                     onClick={goToAddMeal}
+                    tooltipOpen
                     icon={<Fastfood/>}
                 />
                 <SpeedDialAction
                     //style={{backgroundColor: '#1677d7'}}
                     tooltipTitle="Add food"
                     onClick={goToAddFood}
+                    tooltipOpen
                     icon={<FoodBank/>}
                 />
             </SpeedDial>

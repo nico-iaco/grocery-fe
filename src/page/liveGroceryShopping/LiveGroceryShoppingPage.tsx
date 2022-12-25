@@ -98,7 +98,8 @@ const LiveGroceryShoppingPage = () => {
                 </Grid>
                 <Fab
                     //mainButtonStyles={{backgroundColor: '#1677d7'}}
-                    sx={{bottom: 50, right: 12}}
+                    color="primary"
+                    sx={{position: 'absolute', bottom: 50, right: 12}}
                     //alwaysShowTitle={true}
                     //event="click"
                     onClick={goToAddItemToCart}
