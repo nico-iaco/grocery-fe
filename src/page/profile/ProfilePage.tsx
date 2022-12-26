@@ -39,7 +39,13 @@ const ProfilePage = () => {
 
                 </Grid>
                 <Grid item xs={8} className="container">
-                    <Button variant="contained" onClick={logout}>Logout</Button>
+                    <Button
+                        variant="contained"
+                        color={"secondary"}
+                        onClick={logout}
+                    >
+                        Logout
+                    </Button>
                 </Grid>
             </Container>
         </Grid>

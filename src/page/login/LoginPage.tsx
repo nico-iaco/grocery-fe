@@ -134,7 +134,13 @@ const LoginPage = () => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={8} className="container">
-                    <Button variant="contained" onClick={login}>Login</Button>
+                    <Button
+                        variant="contained"
+                        color={"secondary"}
+                        onClick={login}
+                    >
+                        Login
+                    </Button>
                 </Grid>
             </Container>
         </Grid>

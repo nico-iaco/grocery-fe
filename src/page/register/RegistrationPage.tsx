@@ -125,7 +125,13 @@ const RegistrationPage = () => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={8} className="container">
-                    <Button variant="contained" onClick={register}>Register</Button>
+                    <Button
+                        variant="contained"
+                        color={"secondary"}
+                        onClick={register}
+                    >
+                        Register
+                    </Button>
                 </Grid>
             </Container>
         </Grid>
