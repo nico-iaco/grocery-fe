@@ -20,7 +20,7 @@ import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {browserLocalPersistence, getAuth, setPersistence, signInWithEmailAndPassword} from "firebase/auth";
 import {useDispatch} from "react-redux";
-import {setUser} from "../../action/Action";
+import {setError, setUser} from "../../action/Action";
 import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
@@ -48,9 +48,8 @@ const LoginPage = () => {
                 navigate(-1);
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.error(errorCode, errorMessage)
+                dispatch(setError(errorMessage));
             });
     }
 
@@ -62,9 +61,8 @@ const LoginPage = () => {
                     firebaseSignIn();
                 })
                 .catch((error) => {
-                    const errorCode = error.code;
                     const errorMessage = error.message;
-                    console.error(errorCode, errorMessage)
+                    dispatch(setError(errorMessage));
                 });
         } else {
             firebaseSignIn();

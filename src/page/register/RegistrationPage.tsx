@@ -50,9 +50,7 @@ const RegistrationPage = () => {
                         navigate(-1);
                     })
                     .catch((error) => {
-                        const errorCode = error.code;
                         const errorMessage = error.message;
-                        console.error(errorCode, errorMessage)
                         dispatch(setError(errorMessage));
                     });
             })
