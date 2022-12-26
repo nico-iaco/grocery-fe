@@ -25,7 +25,13 @@ export const ItemDataComponent = (props: ItemDataComponentProps) => {
                 vendor={props.vendor}
             />
             <Grid item xs={8}>
-                <Button variant="contained" onClick={props.onButtonClick}>{props.buttonText}</Button>
+                <Button
+                    variant="contained"
+                    color={"secondary"}
+                    onClick={props.onButtonClick}
+                >
+                    {props.buttonText}
+                </Button>
             </Grid>
         </Container>
     </Grid>

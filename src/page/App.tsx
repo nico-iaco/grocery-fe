@@ -32,7 +32,7 @@ const EditFoodConsumptionPage = lazy(() => import('./editFoodConsumption/EditFoo
 const ProfilePage = lazy(() => import('./profile/ProfilePage'));
 const RegistrationPage = lazy(() => import('./register/RegistrationPage'));
 const LoginPage = lazy(() => import('./login/LoginPage'));
-const NoAuthComponent = lazy(() => import('../component/NoAuthComponent'));
+const NoAuthComponent = lazy(() => import('./noAuth/NoAuthPage'));
 const LiveGroceryShoppingPage = lazy(() => import('./liveGroceryShopping/LiveGroceryShoppingPage'));
 const AddItemCartPage = lazy(() => import('./addCartItem/AddItemCartPage'));
 const EditItemCartPage = lazy(() => import('./editCartItem/EditItemCartPage'));
