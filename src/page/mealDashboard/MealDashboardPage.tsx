@@ -1,16 +1,4 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    Container, Fab,
-    Grid,
-    IconButton,
-    List,
-    Skeleton,
-    Stack,
-    Toolbar,
-    Typography
-} from "@mui/material";
+import {Container, Fab, Grid, IconButton, List, Skeleton, Stack} from "@mui/material";
 import {Meal} from "../../model/meal";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -26,6 +14,7 @@ import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useMealList} from "../../hooks/useMealList";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 
 const MealDashboardPage = () => {
@@ -71,44 +60,36 @@ const MealDashboardPage = () => {
     return (
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="sticky" className="AppBar">
-                        <Toolbar>
-                            <Button disabled></Button>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Meals of {formattedDate}
-                            </Typography>
-                            <IconButton
-                                size="large"
-                                color={"inherit"}
-                                edge={"end"}
-                                sx={{mr: 2}}
-                            >
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <MobileDatePicker
-                                        label="Basic example"
-                                        value={date}
-                                        open={isPickerOpen}
-                                        onOpen={() => setIsPickerOpen(true)}
-                                        onClose={() => setIsPickerOpen(false)}
-                                        onChange={(newValue) => {
-                                            if (newValue) {
-                                                setDate(newValue);
-                                            }
-                                        }}
-                                        onAccept={(newValue) => {
-                                            if (newValue) {
-                                                handleDateChange(newValue);
-                                            }
-                                        }}
-                                        renderInput={(params) => <CalendarMonth onClick={() => setIsPickerOpen(true)}/>}
-                                    />
-                                </LocalizationProvider>
-                            </IconButton>
-
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Meals of " + formattedDate}
+                    rightButton={<IconButton
+                        size="large"
+                        color={"inherit"}
+                        edge={"end"}
+                        sx={{mr: 2}}
+                    >
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <MobileDatePicker
+                                label="Date picker"
+                                value={date}
+                                open={isPickerOpen}
+                                onOpen={() => setIsPickerOpen(true)}
+                                onClose={() => setIsPickerOpen(false)}
+                                onChange={(newValue) => {
+                                    if (newValue) {
+                                        setDate(newValue);
+                                    }
+                                }}
+                                onAccept={(newValue) => {
+                                    if (newValue) {
+                                        handleDateChange(newValue);
+                                    }
+                                }}
+                                renderInput={(params) => <CalendarMonth onClick={() => setIsPickerOpen(true)}/>}
+                            />
+                        </LocalizationProvider>
+                    </IconButton>}
+                />
             </Grid>
             <Container className="container">
                 <Grid item xs={8}>

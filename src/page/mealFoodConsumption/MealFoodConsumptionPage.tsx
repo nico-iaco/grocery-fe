@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Container, Fab, Grid, IconButton, List, Toolbar, Typography} from "@mui/material";
+import {Button, Container, Fab, Grid, IconButton, List} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal, getUser} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {FoodConsumption} from "../../model/foodConsumption";
 import {FoodConsumptionRowComponent} from "../../component/FoodConsumptionRowComponent";
 import {useFoodConsumptionList} from "../../hooks/useFoodConsumptionList";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const MealFoodConsumptionPage = () => {
     const currentMeal = useSelector(getCurrentMeal);
@@ -35,26 +36,20 @@ const MealFoodConsumptionPage = () => {
 
     return <Grid container columns={8}>
         <Grid item xs={8}>
-            <Box sx={{flexGrow: 1}}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="back"
-                            sx={{mr: 2}}
-                            onClick={goBack}
-                        >
-                            <ArrowBack/>
-                        </IconButton>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            Meal consumption
-                        </Typography>
-                        <Button onClick={goToEditMealPage} color="inherit">Edit</Button>
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            <AppBarComponent
+                title={"Meal consumption"}
+                leftButton={<IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="back"
+                    sx={{mr: 2}}
+                    onClick={goBack}
+                >
+                    <ArrowBack/>
+                </IconButton>}
+                rightButton={<Button onClick={goToEditMealPage} color="inherit">Edit</Button>}
+            />
         </Grid>
         <Container className="container">
             <Grid item xs={8}>
