@@ -1,6 +1,4 @@
 import {
-    AppBar,
-    Box,
     Button,
     Checkbox,
     Container,
@@ -8,12 +6,9 @@ import {
     FormControlLabel,
     FormGroup,
     Grid,
-    IconButton,
     InputAdornment,
     InputLabel,
-    OutlinedInput,
-    Toolbar,
-    Typography
+    OutlinedInput
 } from "@mui/material";
 import {useState} from "react";
 import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
@@ -24,6 +19,7 @@ import {setError, setUser} from "../../action/Action";
 import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 
 const LoginPage = () => {
@@ -76,26 +72,13 @@ const LoginPage = () => {
     return (
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="sticky" className="AppBar">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="back"
-                                sx={{mr: 2}}
-                                onClick={goBack}
-                            >
-                                <ArrowBack/>
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Login
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Login"}
+                    leftButton={{
+                        icon: <ArrowBack/>,
+                        onClick: goBack
+                    }}
+                />
             </Grid>
             <Container className="container">
                 <Grid item xs={8} className="container">

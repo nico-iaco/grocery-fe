@@ -1,4 +1,4 @@
-import {Button, Container, Fab, Grid, IconButton, List} from "@mui/material";
+import {Button, Container, Fab, Grid, List} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal, getUser} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -38,16 +38,10 @@ const MealFoodConsumptionPage = () => {
         <Grid item xs={8}>
             <AppBarComponent
                 title={"Meal consumption"}
-                leftButton={<IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="back"
-                    sx={{mr: 2}}
-                    onClick={goBack}
-                >
-                    <ArrowBack/>
-                </IconButton>}
+                leftButton={{
+                    icon: <ArrowBack/>,
+                    onClick: goBack
+                }}
                 rightButton={<Button onClick={goToEditMealPage} color="inherit">Edit</Button>}
             />
         </Grid>

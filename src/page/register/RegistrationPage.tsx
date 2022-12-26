@@ -1,17 +1,4 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    Container,
-    FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    Toolbar,
-    Typography
-} from "@mui/material";
+import {Button, Container, FormControl, Grid, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {ArrowBack, EmailOutlined, Key, Person, VisibilityOffOutlined, VisibilityOutlined} from "@mui/icons-material";
 import {createUserWithEmailAndPassword, getAuth, updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
@@ -21,6 +8,7 @@ import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
 import {useState} from "react";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const RegistrationPage = () => {
     const navigate = useNavigate();
@@ -67,26 +55,13 @@ const RegistrationPage = () => {
     return (
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="sticky" className="AppBar">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="back"
-                                sx={{mr: 2}}
-                                onClick={goBack}
-                            >
-                                <ArrowBack/>
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Register
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Register"}
+                    leftButton={{
+                        icon: <ArrowBack/>,
+                        onClick: goBack,
+                    }}
+                />
             </Grid>
             <Container className="container">
                 <Grid item xs={8} className="container">

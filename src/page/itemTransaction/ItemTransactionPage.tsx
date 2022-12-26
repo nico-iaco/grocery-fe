@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {Button, Container, Fab, Grid, IconButton, List, Skeleton} from "@mui/material";
+import {Button, Container, Fab, Grid, List, Skeleton} from "@mui/material";
 import {Transaction} from "../../model/transaction";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -42,18 +42,10 @@ function ItemTransactionPage() {
             <Grid item xs={12}>
                 <AppBarComponent
                     title={currentItem?.name + " transactions"}
-                    leftButton={
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="back"
-                            sx={{mr: 2}}
-                            onClick={goBack}
-                        >
-                            <ArrowBack/>
-                        </IconButton>
-                    }
+                    leftButton={{
+                        icon: <ArrowBack/>,
+                        onClick: goBack
+                    }}
                     rightButton={<Button onClick={goToEditItemPage} color="inherit">Edit</Button>}
                 />
             </Grid>

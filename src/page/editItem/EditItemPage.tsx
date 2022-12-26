@@ -1,13 +1,14 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {deleteItem, updateItem} from "../../api/itemApis";
-import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {Button, Container, Grid} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {Item} from "../../model/item";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem, getUser} from "../../selector/Selector";
 import {setCurrentItem, setError} from "../../action/Action";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const EditItemPage = () => {
     const currentItem = useSelector(getCurrentItem);
@@ -57,26 +58,14 @@ const EditItemPage = () => {
         '& .MuiTextField-root': {m: 1, width: '25ch'},
     }}>
         <Grid item xs={8}>
-            <Box sx={{flexGrow: 1}}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            sx={{mr: 2}}
-                            onClick={goBack}
-                        >
-                            <ArrowBack/>
-                        </IconButton>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            Edit {currentItem?.name}
-                        </Typography>
-                        <Button onClick={deleteItemFromServer} color="inherit">Delete</Button>
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            <AppBarComponent
+                title={"Edit " + currentItem?.name}
+                leftButton={{
+                    icon: <ArrowBack/>,
+                    onClick: goBack
+                }}
+                rightButton={<Button onClick={deleteItemFromServer} color="inherit">Delete</Button>}
+            />
         </Grid>
         <Container className="container">
             <ItemDataComponent

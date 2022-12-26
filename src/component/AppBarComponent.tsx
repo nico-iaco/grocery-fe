@@ -1,9 +1,12 @@
-import {AppBar, Box, Button, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
 
 
 export interface AppBarComponentProps {
     title: string;
-    leftButton?: JSX.Element;
+    leftButton?: {
+        icon: JSX.Element;
+        onClick: () => void;
+    };
     rightButton?: JSX.Element;
 }
 
@@ -11,9 +14,20 @@ export const AppBarComponent = (props: AppBarComponentProps) => {
     return <Box sx={{flexGrow: 1}}>
         <AppBar position="sticky" className="AppBar">
             <Toolbar>
-                {props.leftButton || <Button disabled></Button>}
-                <Typography variant="h6" component="div" className="lobster-font" sx={{flexGrow: 1}}>
-                    ${props.title}
+                {props.leftButton ?
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                        onClick={props.leftButton.onClick}
+                    >
+                        {props.leftButton.icon}
+                    </IconButton>
+                    : <Button disabled></Button>}
+                <Typography variant="h5" className="lobster-font" sx={{flexGrow: 1}}>
+                    {props.title}
                 </Typography>
                 {props.rightButton || <Button disabled></Button>}
             </Toolbar>

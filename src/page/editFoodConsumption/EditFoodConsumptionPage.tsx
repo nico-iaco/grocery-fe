@@ -2,12 +2,13 @@ import {setCurrentFoodConsumption, setError} from "../../action/Action";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentFoodConsumption, getCurrentMeal, getUser} from "../../selector/Selector";
 import {useNavigate} from "react-router-dom";
-import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {Button, Container, Grid} from "@mui/material";
 import {FoodConsumptionDataComponent} from "../../component/FoodConsumptionDataComponent";
 import {deleteMealFoodConsumption, updateMealFoodConsumption} from "../../api/mealApis";
 import {FoodConsumption} from "../../model/foodConsumption";
 import {ArrowBack} from "@mui/icons-material";
 import {useState} from "react";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const EditFoodConsumptionPage = () => {
     const navigate = useNavigate();
@@ -66,26 +67,14 @@ const EditFoodConsumptionPage = () => {
 
     return <Grid container columns={8}>
         <Grid item xs={8}>
-            <Box sx={{flexGrow: 1}}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="back"
-                            sx={{mr: 2}}
-                            onClick={goBack}
-                        >
-                            <ArrowBack/>
-                        </IconButton>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            Edit food consumption
-                        </Typography>
-                        <Button onClick={deleteFoodConsumptionFromServer} color="inherit">Delete</Button>
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            <AppBarComponent
+                title={"Edit Food Consumption"}
+                leftButton={{
+                    icon: <ArrowBack/>,
+                    onClick: goBack
+                }}
+                rightButton={<Button onClick={deleteFoodConsumptionFromServer} color="inherit">Delete</Button>}
+            />
         </Grid>
         <Container className="container">
             <Grid item xs={8}>

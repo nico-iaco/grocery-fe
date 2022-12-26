@@ -42,6 +42,6 @@
 }
 
 .lobster-font {
-    font-family: 'Lobster', cursive;
+    font-family: 'Lobster', cursive !important;
 }
 
