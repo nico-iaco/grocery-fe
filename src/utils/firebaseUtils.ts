@@ -1,7 +1,6 @@
 import {initializeAnalytics} from "firebase/analytics";
 import {initializeApp} from "firebase/app";
-import firebase from "firebase/compat";
-import auth = firebase.auth;
+import {getAuth} from "firebase/auth";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
@@ -22,7 +21,7 @@ export const app = initializeApp(firebaseConfig);
 export const analytics = initializeAnalytics(app);
 
 export const getFirebaseUserToken = async () => {
-    const user = auth().currentUser;
+    const user = getAuth().currentUser;
     if (user) {
         return await user.getIdToken();
     }
