@@ -26,7 +26,7 @@ export const AppBarComponent = (props: AppBarComponentProps) => {
                         {props.leftButton.icon}
                     </IconButton>
                     : <Button disabled></Button>}
-                <Typography variant="h3" className="lobster-font" sx={{flexGrow: 1}}>
+                <Typography variant="h5" className="lobster-font" sx={{flexGrow: 1}}>
                     {props.title}
                 </Typography>
                 {props.rightButton || <Button disabled></Button>}
