@@ -1,5 +1,6 @@
-import { initializeAnalytics } from "firebase/analytics";
-import { initializeApp } from "firebase/app";
+import {initializeAnalytics} from "firebase/analytics";
+import {initializeApp} from "firebase/app";
+import {getAuth} from "firebase/auth";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
@@ -18,5 +19,13 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const analytics = initializeAnalytics(app);
+
+export const getFirebaseUserToken = async () => {
+    const user = getAuth().currentUser;
+    if (user) {
+        return await user.getIdToken();
+    }
+    return null;
+}
 
 
