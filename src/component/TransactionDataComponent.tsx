@@ -40,7 +40,13 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
               onPurchaseDateChange={props.onPurchaseDateChange}
           />
           <Grid item xs={8}>
-              <Button variant="contained" onClick={props.onButtonClick}>{props.buttonText}</Button>
+              <Button
+                  variant="contained"
+                  color={"secondary"}
+                  onClick={props.onButtonClick}
+              >
+                  {props.buttonText}
+              </Button>
           </Grid>
       </Container>
   </Grid>

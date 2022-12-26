@@ -102,7 +102,12 @@ const EditFoodConsumptionPage = () => {
                             </Grid>
                             <Grid item xs={4} className="center">
                                 {
-                                    <Button onClick={editFoodConsumption}>Edit</Button>
+                                    <Button
+                                        color={"secondary"}
+                                        onClick={editFoodConsumption}
+                                    >
+                                        Edit
+                                    </Button>
                                 }
                             </Grid>
                         </Grid>
