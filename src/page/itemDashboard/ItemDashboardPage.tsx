@@ -4,10 +4,8 @@ import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
 import {setCurrentItem, setCurrentTabIndex} from "../../action/Action";
 import {
-    AppBar,
-    Box,
-    Button,
-    Container, Fab,
+    Container,
+    Fab,
     FormControl,
     Grid,
     IconButton,
@@ -16,15 +14,14 @@ import {
     List,
     OutlinedInput,
     Skeleton,
-    Stack,
-    Toolbar,
-    Typography
+    Stack
 } from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
 import {Add, Search} from "@mui/icons-material";
 import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useItemList} from "../../hooks/useItemList";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const ItemDashboardPage = () => {
     const dispatch = useDispatch();
@@ -55,17 +52,9 @@ const ItemDashboardPage = () => {
     return (
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="sticky" className="AppBar">
-                        <Toolbar>
-                            <Button disabled></Button>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Food available
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Food pantry"}
+                />
             </Grid>
             <Container className="container">
                 <Grid item xs={8}>

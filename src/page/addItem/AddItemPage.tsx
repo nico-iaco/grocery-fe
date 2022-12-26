@@ -2,13 +2,14 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Item} from "../../model/item";
 import {addItem} from "../../api/itemApis";
-import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentItem, setError} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 function AddItemPage () {
     const dispatch = useDispatch();
@@ -51,26 +52,13 @@ function AddItemPage () {
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}>
                 <Grid item xs={8}>
-                    <Box sx={{ flexGrow: 1 }}>
-                        <AppBar position="static">
-                            <Toolbar>
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    sx={{ mr: 2 }}
-                                    onClick={goBack}
-                                >
-                                    <ArrowBack />
-                                </IconButton>
-                                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                    Add food
-                                </Typography>
-                                <Button disabled></Button>
-                            </Toolbar>
-                        </AppBar>
-                    </Box>
+                    <AppBarComponent
+                        title={"Add food"}
+                        leftButton={{
+                            icon: <ArrowBack/>,
+                            onClick: goBack
+                        }}
+                    />
                 </Grid>
                 <Container className="container">
                     <ItemDataComponent

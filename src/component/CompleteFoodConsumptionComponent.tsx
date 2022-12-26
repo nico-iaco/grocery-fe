@@ -79,12 +79,12 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
                 <Grid container columns={8}>
                     <Grid item xs={4} className="center">
                         {
-                            props.isPreviousAvailable && <Button onClick={props.onPreviousClicked}>Previous</Button>
+                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>Previous</Button>
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isNextAvailable && <Button onClick={onCompleted}>Add</Button>
+                            props.isNextAvailable && <Button color={"secondary"} onClick={onCompleted}>Add</Button>
                         }
                     </Grid>
                 </Grid>

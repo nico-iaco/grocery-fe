@@ -1,17 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {
-    AppBar,
-    Box,
-    Button,
-    Container,
-    Fab,
-    Grid,
-    IconButton,
-    List,
-    Skeleton,
-    Toolbar,
-    Typography
-} from "@mui/material";
+import {Button, Container, Fab, Grid, List, Skeleton} from "@mui/material";
 import {Transaction} from "../../model/transaction";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -21,6 +9,7 @@ import {getCurrentItem, getUser} from "../../selector/Selector";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {useTransactionList} from "../../hooks/useTransactionList";
 import {useItemDetail} from "../../hooks/useItemDetail";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 function ItemTransactionPage() {
     const navigate = useNavigate();
@@ -51,32 +40,21 @@ function ItemTransactionPage() {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="back"
-                                sx={{mr: 2}}
-                                onClick={goBack}
-                            >
-                                <ArrowBack/>
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                {currentItem?.name} transactions
-                            </Typography>
-                            <Button onClick={goToEditItemPage} color="inherit">Edit</Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={currentItem?.name + " transactions"}
+                    leftButton={{
+                        icon: <ArrowBack/>,
+                        onClick: goBack
+                    }}
+                    rightButton={<Button onClick={goToEditItemPage} color="inherit">Edit</Button>}
+                />
             </Grid>
             <Container className="container">
                 <Grid item xs={12}>
                     {
                         itemDetails?.image_nutrition_url ?
-                            <img src={itemDetails?.image_nutrition_url} className="content-image" alt="nutrition-table" height={320}/>
+                            <img src={itemDetails?.image_nutrition_url} className="content-image" alt="nutrition-table"
+                                 height={320}/>
                             : <Skeleton variant="rectangular" height={320}/>
                     }
                     <List className="list-container">

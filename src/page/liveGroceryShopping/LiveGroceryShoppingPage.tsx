@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Container, Fab, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {Button, Container, Fab, Grid, Typography} from "@mui/material";
 import {Add, ArrowBack, Edit} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,6 +8,7 @@ import {SimpleItemWithButtonComponent} from "../../component/SimpleItemWithButto
 import {clearShoppingList, setCurrentShoppingItem, setError} from "../../action/Action";
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addShoppingItemList} from "../../api/itemApis";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const LiveGroceryShoppingPage = () => {
     const navigate = useNavigate();
@@ -49,26 +50,13 @@ const LiveGroceryShoppingPage = () => {
     return (
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="sticky" className="AppBar">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="back"
-                                sx={{mr: 2}}
-                                onClick={goBack}
-                            >
-                                <ArrowBack/>
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Grocery shopping
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Grocery shopping"}
+                    leftButton={{
+                        icon: <ArrowBack/>,
+                        onClick: goBack
+                    }}
+                />
             </Grid>
             <Container className="container">
                 <Grid item xs={8} className="container">

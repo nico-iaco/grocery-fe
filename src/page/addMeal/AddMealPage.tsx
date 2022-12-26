@@ -4,11 +4,12 @@ import {Meal, MealType} from "../../model/meal";
 import {addMeal} from "../../api/mealApis";
 import {useNavigate} from "react-router-dom";
 import {setCurrentMeal, setError} from "../../action/Action";
-import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {MealDataComponent} from "../../component/MealDataComponent";
 import {getUser} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const AddMealPage = () => {
     const dispatch = useDispatch();
@@ -53,26 +54,13 @@ const AddMealPage = () => {
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}>
                 <Grid item xs={8}>
-                    <Box sx={{ flexGrow: 1 }}>
-                        <AppBar position="static">
-                            <Toolbar>
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                    aria-label="menu"
-                                    sx={{ mr: 2 }}
-                                    onClick={goBack}
-                                >
-                                    <ArrowBack />
-                                </IconButton>
-                                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                    Add meal
-                                </Typography>
-                                <Button disabled></Button>
-                            </Toolbar>
-                        </AppBar>
-                    </Box>
+                    <AppBarComponent
+                        title={"Add meal"}
+                        leftButton={{
+                            icon: <ArrowBack/>,
+                            onClick: goBack
+                        }}
+                    />
                 </Grid>
                 <Container className="container">
                     <MealDataComponent

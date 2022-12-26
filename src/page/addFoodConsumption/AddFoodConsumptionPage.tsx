@@ -1,21 +1,10 @@
 import React, {Fragment, useState} from "react";
-import {
-    AppBar,
-    Box,
-    Button,
-    Container,
-    Grid,
-    IconButton,
-    Step,
-    StepLabel,
-    Stepper,
-    Toolbar,
-    Typography
-} from "@mui/material";
+import {Container, Grid, Step, StepLabel, Stepper} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {ArrowBack} from "@mui/icons-material";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const ChooseFoodComponent = React.lazy(() => import("../../component/ChooseFoodComponent"));
 const ChooseFoodTransactionComponent = React.lazy(() => import("../../component/ChooseFoodTransactionComponent"));
@@ -94,26 +83,13 @@ const AddFoodConsumptionPage = () => {
         '& .MuiTextField-root': {m: 1, width: '25ch'},
     }}>
         <Grid item xs={8}>
-            <Box sx={{flexGrow: 1}}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            sx={{mr: 2}}
-                            onClick={goBack}
-                        >
-                            <ArrowBack/>
-                        </IconButton>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            Add food consumption
-                        </Typography>
-                        <Button disabled></Button>
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            <AppBarComponent
+                title={"Add food consumption"}
+                leftButton={{
+                    icon: <ArrowBack/>,
+                    onClick: goBack
+                }}
+            />
         </Grid>
         <Container className="container">
             <Grid item xs={8}>

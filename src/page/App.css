@@ -36,3 +36,12 @@
     margin: 0 auto;
 }
 
+@font-face {
+    font-family: 'Lobster';
+    src: url('../fonts/foody-lobster-two-regular.ttf') format('truetype');
+}
+
+.lobster-font {
+    font-family: 'Lobster', cursive !important;
+}
+

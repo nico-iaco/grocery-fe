@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {Button, Container, Grid} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {ItemDataDisplayComponent} from "../../component/ItemDataDisplayComponent";
@@ -10,6 +10,7 @@ import {getUser} from "../../selector/Selector";
 import {Transaction} from "../../model/transaction";
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addToShoppingList} from "../../action/Action";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const AddItemCartPage = () => {
     const navigate = useNavigate();
@@ -71,26 +72,13 @@ const AddItemCartPage = () => {
             '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}>
             <Grid item xs={8}>
-                <Box sx={{ flexGrow: 1 }}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{ mr: 2 }}
-                                onClick={goBack}
-                            >
-                                <ArrowBack />
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                Add to cart
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Add to cart"}
+                    leftButton={{
+                        icon: <ArrowBack/>,
+                        onClick: goBack
+                    }}
+                />
             </Grid>
             <Container className="container">
                 <ItemDataDisplayComponent

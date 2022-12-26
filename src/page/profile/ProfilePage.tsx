@@ -1,9 +1,10 @@
-import {AppBar, Avatar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
+import {Avatar, Button, Container, Grid} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {getUser} from "../../selector/Selector";
 import {getAuth} from "firebase/auth";
 import {clearUser, setCurrentTabIndex, setError} from "../../action/Action";
 import {stringAvatar} from "../../utils/colorUtils";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 const ProfilePage = () => {
     const currentUser = useSelector(getUser);
@@ -25,17 +26,9 @@ const ProfilePage = () => {
     return (
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="sticky" className="AppBar">
-                        <Toolbar>
-                            <Button disabled></Button>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Profile
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Profile"}
+                />
             </Grid>
             <Container className="container">
                 <Grid item xs={8} className="container">
@@ -46,7 +39,13 @@ const ProfilePage = () => {
 
                 </Grid>
                 <Grid item xs={8} className="container">
-                    <Button variant="contained" onClick={logout}>Logout</Button>
+                    <Button
+                        variant="contained"
+                        color={"secondary"}
+                        onClick={logout}
+                    >
+                        Logout
+                    </Button>
                 </Grid>
             </Container>
         </Grid>

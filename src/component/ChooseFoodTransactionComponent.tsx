@@ -53,15 +53,15 @@ const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
                 <Grid container columns={8}>
                     <Grid item xs={4} className="center">
                         {
-                            props.isPreviousAvailable && <Button onClick={props.onPreviousClicked}>Previous</Button>
+                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>Previous</Button>
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isSkipAvailable && <Button onClick={skip}>Skip</Button>
+                            props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>Skip</Button>
                         }
                         {
-                            props.isNextAvailable && <Button onClick={next}>Next</Button>
+                            props.isNextAvailable && <Button color={"secondary"} onClick={next}>Next</Button>
                         }
                     </Grid>
                 </Grid>

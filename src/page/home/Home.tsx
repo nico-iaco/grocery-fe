@@ -1,17 +1,6 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {
-    AppBar,
-    Box,
-    Button,
-    Container,
-    Grid,
-    SpeedDial,
-    SpeedDialAction,
-    Toolbar,
-    Typography,
-    useTheme
-} from "@mui/material";
+import {Container, Grid, SpeedDial, SpeedDialAction, useTheme} from "@mui/material";
 import {Add, Fastfood, FoodBank, LocalGroceryStore} from "@mui/icons-material";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
@@ -20,6 +9,7 @@ import {setCurrentTabIndex} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useItemStatistics} from "../../hooks/useItemStatistics";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 
 function Home() {
@@ -58,17 +48,9 @@ function Home() {
 
     return <Grid container columns={8}>
         <Grid item xs={8}>
-            <Box sx={{flexGrow: 1}}>
-                <AppBar position="sticky" className="AppBar">
-                    <Toolbar>
-                        <Button disabled></Button>
-                        <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                            Home
-                        </Typography>
-                        <Button disabled></Button>
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            <AppBarComponent
+                title={"Foody"}
+            />
         </Grid>
         <Container className="container">
             <Grid item xs={8} className="container">

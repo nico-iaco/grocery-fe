@@ -1,5 +1,5 @@
 import {ShoppingItem} from "../../model/shoppingItem";
-import {AppBar, Box, Button, Container, Grid, IconButton, Toolbar, Typography} from "@mui/material";
+import {Button, Container, Grid} from "@mui/material";
 import {ItemDataDisplayComponent} from "../../component/ItemDataDisplayComponent";
 import {TransactionDataDisplayComponent} from "../../component/TransactionDataDisplayComponent";
 import {useNavigate} from "react-router-dom";
@@ -10,6 +10,7 @@ import {Item} from "../../model/item";
 import {Transaction} from "../../model/transaction";
 import {updateShoppingList} from "../../action/Action";
 import {ArrowBack} from "@mui/icons-material";
+import {AppBarComponent} from "../../component/AppBarComponent";
 
 
 const EditItemCartPage = () => {
@@ -75,26 +76,13 @@ const EditItemCartPage = () => {
             '& .MuiTextField-root': {m: 1, width: '25ch'},
         }}>
             <Grid item xs={8}>
-                <Box sx={{flexGrow: 1}}>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <IconButton
-                                size="large"
-                                edge="start"
-                                color="inherit"
-                                aria-label="menu"
-                                sx={{mr: 2}}
-                                onClick={goBack}
-                            >
-                                <ArrowBack/>
-                            </IconButton>
-                            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                                Edit item
-                            </Typography>
-                            <Button disabled></Button>
-                        </Toolbar>
-                    </AppBar>
-                </Box>
+                <AppBarComponent
+                    title={"Edit Item"}
+                    leftButton={{
+                        icon: <ArrowBack/>,
+                        onClick: goBack
+                    }}
+                />
             </Grid>
             <Container className="container">
                 <ItemDataDisplayComponent
