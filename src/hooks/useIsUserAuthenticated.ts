@@ -12,6 +12,8 @@ export const useIsUserAuthenticated = () => {
         const controller = new AbortController();
         getFirebaseUserToken()
             .then(value => {
+                console.log("Firebase user token: ", value);
+                console.log("Current user: ", currentUser);
                 setIsAuthenticated(value !== null && currentUser !== undefined);
             })
             .catch(reason => {
