@@ -1,4 +1,4 @@
-import {Html5QrcodeScanner, Html5QrcodeScanType} from "html5-qrcode";
+import {Html5QrcodeScanner} from "html5-qrcode";
 import {useEffect} from "react";
 import {QrcodeErrorCallback, QrcodeSuccessCallback} from "html5-qrcode/core";
 
@@ -11,22 +11,15 @@ export interface BarcodeComponentProps {
 
 export const BarcodeComponent = (props: BarcodeComponentProps) => {
 
-    const regionId = "html5qr-code-full-region"
-
-
-
+    const regionId = "reader"
 
 
     useEffect(() => {
         const config = {
             fps: props.fps,
             qrbox: props.qrbox,
-            aspectRatio: 4/3,
-            experimentalFeatures: {
-                useBarCodeDetectorIfSupported: true
-            },
+            aspectRatio: 1.33,
             showTorchButtonIfSupported: true,
-            supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA]
         }
         const html5QrcodeScanner = new Html5QrcodeScanner(
             regionId, config, false);
