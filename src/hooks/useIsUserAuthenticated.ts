@@ -9,7 +9,6 @@ export const useIsUserAuthenticated = () => {
 
 
     useEffect(() => {
-        const controller = new AbortController();
         getFirebaseUserToken()
             .then(value => {
                 console.log("Firebase user token: ", value);
@@ -20,7 +19,6 @@ export const useIsUserAuthenticated = () => {
                 console.error(reason);
                 setIsAuthenticated(false);
             });
-        return () => controller.abort();
     }, [currentUser]);
 
     return isAuthenticated;
