@@ -42,3 +42,7 @@ export const getShoppingList = (state: GroceryState) : ShoppingItem[] => {
 export const getCurrentShoppingItem = (state: GroceryState) : ShoppingItem | undefined => {
     return state.currentShoppingItem;
 }
+
+export const isUserPersisted = (state: GroceryState) : boolean => {
+    return state.isUserPersisted;
+}

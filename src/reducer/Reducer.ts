@@ -13,6 +13,7 @@ import {
     SET_CURRENT_TAB_INDEX_TYPE,
     SET_CURRENT_TRANSACTION_TYPE,
     SET_ERROR_TYPE,
+    SET_IS_USER_PERSISTED_TYPE,
     SET_SHOPPING_LIST_TYPE,
     SET_USER_TYPE,
     UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
@@ -38,6 +39,7 @@ export interface GroceryState {
     currentShoppingItem: ShoppingItem | undefined;
     shoppingList: ShoppingItem[];
     user: User | undefined;
+    isUserPersisted: boolean;
     error: AppError | undefined;
 }
 
@@ -50,6 +52,7 @@ export const initialState: GroceryState = {
     currentShoppingItem: undefined,
     shoppingList: [],
     user: undefined,
+    isUserPersisted: false,
     error: undefined
 }
 
@@ -157,6 +160,11 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
             return {
                 ...state,
                 currentShoppingItem: undefined
+            }
+        case SET_IS_USER_PERSISTED_TYPE:
+            return {
+                ...state,
+                isUserPersisted: action.payload
             }
         default:
             return state;

@@ -1,6 +1,6 @@
 import {initializeAnalytics} from "firebase/analytics";
 import {initializeApp} from "firebase/app";
-import {getAuth} from "firebase/auth";
+import {getAuth, User} from "firebase/auth";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
@@ -26,6 +26,10 @@ export const getFirebaseUserToken = async () => {
         return await user.getIdToken();
     }
     return null;
+}
+
+export const refreshFirebaseUser = async (user: User | null) => {
+    getAuth().updateCurrentUser(user);
 }
 
 

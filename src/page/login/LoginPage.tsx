@@ -21,7 +21,7 @@ import {
     UserCredential
 } from "firebase/auth";
 import {useDispatch} from "react-redux";
-import {setError, setUser} from "../../action/Action";
+import {setError, setIsUserPersisted, setUser} from "../../action/Action";
 import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
@@ -54,6 +54,7 @@ const LoginPage = () => {
     const login = () => {
         if (isPersistent) {
             console.log("set persistence")
+            dispatch(setIsUserPersisted(true));
             setPersistence(auth, browserLocalPersistence)
                 .then(() => {
                     return signInWithEmailAndPassword(auth, email, password)

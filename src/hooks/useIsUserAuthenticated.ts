@@ -1,24 +1,51 @@
-import {getFirebaseUserToken} from "../utils/firebaseUtils";
+import {getFirebaseUserToken, refreshFirebaseUser} from "../utils/firebaseUtils";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {getUser} from "../selector/Selector";
+import { User } from "firebase/auth";
 
-export const useIsUserAuthenticated = () => {
+export const useIsUserAuthenticated = (isPersisted: boolean) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const currentUser = useSelector(getUser);
 
+    const isFirebaseUser = (user: any): user is User => {
+        return "uid" in user;
+    }
+
 
     useEffect(() => {
-        getFirebaseUserToken()
+
+        if (isPersisted) {
+            const userRaw = localStorage.getItem("user");
+            if (userRaw) {
+                const user = JSON.parse(userRaw);
+                if (isFirebaseUser(user)) {
+                    refreshFirebaseUser(user)
+                        .then(() => {
+                            getFirebaseUserToken()
+                                .then(value => {
+                                    setIsAuthenticated(value !== null && currentUser !== undefined);
+                                })
+                                .catch(reason => {
+                                    console.error(reason);
+                                    setIsAuthenticated(false);
+                                });
+                        })
+                        .catch(reason => {
+                            console.error(reason);
+                        });
+                }
+            }
+        } else {
+            getFirebaseUserToken()
             .then(value => {
-                console.log("Firebase user token: ", value);
-                console.log("Current user: ", currentUser);
                 setIsAuthenticated(value !== null && currentUser !== undefined);
             })
             .catch(reason => {
                 console.error(reason);
                 setIsAuthenticated(false);
             });
+        }
     }, [currentUser]);
 
     return isAuthenticated;
