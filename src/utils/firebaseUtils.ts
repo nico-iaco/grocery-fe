@@ -29,7 +29,7 @@ export const getFirebaseUserToken = async () => {
 }
 
 export const refreshFirebaseUser = async (user: User | null) => {
-    getAuth().updateCurrentUser(user);
+    return getAuth().updateCurrentUser(user);
 }
 
 
