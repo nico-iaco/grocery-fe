@@ -13,9 +13,15 @@ import {
 import {useState} from "react";
 import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
-import {browserLocalPersistence, getAuth, setPersistence, signInWithEmailAndPassword} from "firebase/auth";
+import {
+    browserLocalPersistence,
+    getAuth,
+    setPersistence,
+    signInWithEmailAndPassword,
+    UserCredential
+} from "firebase/auth";
 import {useDispatch} from "react-redux";
-import {setError, setUser} from "../../action/Action";
+import {setError, setIsUserPersisted, setUser} from "../../action/Action";
 import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
@@ -30,38 +36,45 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [isPersistent, setIsPersistent] = useState(false);
 
-    const firebaseSignIn = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const firebaseUser = userCredential.user;
-                const user: User = {
-                    email: firebaseUser.email ?? "",
-                    id: firebaseUser.uid,
-                    displayName: firebaseUser.displayName ?? "",
-                }
-                logEvent(analytics, 'login', user);
-                dispatch(setUser(user));
-                navigate(-1);
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                dispatch(setError(errorMessage));
-            });
+
+    const setCurrentUser = (fUser: UserCredential) => {
+        const firebaseUser = fUser.user;
+        if (firebaseUser) {
+            const user: User = {
+                email: firebaseUser.email ?? "",
+                id: firebaseUser.uid,
+                displayName: firebaseUser.displayName ?? "",
+            }
+            logEvent(analytics, 'login', user);
+            dispatch(setUser(user));
+            navigate(-1);
+        }
     }
 
     const login = () => {
         if (isPersistent) {
             console.log("set persistence")
+            dispatch(setIsUserPersisted(true));
             setPersistence(auth, browserLocalPersistence)
                 .then(() => {
-                    firebaseSignIn();
+                    return signInWithEmailAndPassword(auth, email, password)
+                })
+                .then((userCredential) => {
+                    setCurrentUser(userCredential);
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
                     dispatch(setError(errorMessage));
                 });
         } else {
-            firebaseSignIn();
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    setCurrentUser(userCredential);
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    dispatch(setError(errorMessage));
+                });
         }
     }
 

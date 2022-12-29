@@ -39,6 +39,7 @@ export const CLEAR_SHOPPING_LIST_TYPE = "CLEAR_SHOPPING_LIST";
 export const SET_CURRENT_SHOPPING_ITEM_TYPE = "SET_CURRENT_SHOPPING_ITEM";
 export const CLEAR_CURRENT_SHOPPING_ITEM_TYPE = "CLEAR_CURRENT_SHOPPING_ITEM";
 
+export const SET_IS_USER_PERSISTED_TYPE = "SET_IS_USER_PERSISTED";
 
 export const setCurrentItem = (item?: Item): Action => {
     return {
@@ -173,5 +174,12 @@ export const setCurrentShoppingItem = (item?: ShoppingItem): Action => {
 export const clearCurrentShoppingItem = (): Action => {
     return {
         type: CLEAR_CURRENT_SHOPPING_ITEM_TYPE
+    };
+}
+
+export const setIsUserPersisted = (isUserPersisted: boolean): Action => {
+    return {
+        type: SET_IS_USER_PERSISTED_TYPE,
+        payload: isUserPersisted
     };
 }

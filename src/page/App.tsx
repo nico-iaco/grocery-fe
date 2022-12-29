@@ -12,9 +12,11 @@ import {
 import CircularProgress from '@mui/material/CircularProgress';
 import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentTabIndex, getError, getUser} from "../selector/Selector";
+import {getCurrentTabIndex, getError, isUserPersisted} from "../selector/Selector";
 import {clearError, setCurrentItem, setCurrentTabIndex} from "../action/Action";
 import {lazy, Suspense} from "react";
+import {useIsUserAuthenticated} from "../hooks/useIsUserAuthenticated";
+import { getAuth } from 'firebase/auth';
 
 const Home = lazy(() => import('./home/Home'));
 const AddItemPage = lazy(() => import('./addItem/AddItemPage'));
@@ -39,10 +41,23 @@ const EditItemCartPage = lazy(() => import('./editCartItem/EditItemCartPage'));
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
+    const isPersisted = useSelector(isUserPersisted);
     const error = useSelector(getError);
-    const currentUser = useSelector(getUser);
+    const isUserAuthenticated = useIsUserAuthenticated();
     const navigate = useNavigate()
     const dispatch = useDispatch();
+
+    getAuth().onAuthStateChanged((user) => {
+        if (user) {
+            if (isPersisted) {
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+        } else {
+            localStorage.removeItem('user');
+            console.log("User signed out");
+        }
+    });
+    
 
     let theme = createTheme({
         palette: {
@@ -82,35 +97,35 @@ function App() {
                 <div className="App">
                     <Suspense fallback={<CircularProgress className="center"/>}>
                         <Routes>
-                            <Route path="/" element={currentUser ? <Home/> : <NoAuthComponent/>}/>
-                            <Route path="/profile" element={currentUser ? <ProfilePage/> : <NoAuthComponent/>}/>
+                            <Route path="/" element={isUserAuthenticated ? <Home/> : <NoAuthComponent/>}/>
+                            <Route path="/profile" element={isUserAuthenticated ? <ProfilePage/> : <NoAuthComponent/>}/>
                             <Route path="/signup" element={<RegistrationPage/>}/>
                             <Route path="/signin" element={<LoginPage/>}/>
-                            <Route path="/item" element={currentUser ? <ItemDashboardPage/> : <NoAuthComponent/>}/>
-                            <Route path="/item/add" element={currentUser ? <AddItemPage/> : <NoAuthComponent/>}/>
+                            <Route path="/item" element={isUserAuthenticated ? <ItemDashboardPage/> : <NoAuthComponent/>}/>
+                            <Route path="/item/add" element={isUserAuthenticated ? <AddItemPage/> : <NoAuthComponent/>}/>
                             <Route path="/item/:itemId/transaction"
-                                   element={currentUser ? <ItemTransactionPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <ItemTransactionPage/> : <NoAuthComponent/>}/>
                             <Route path="/item/:itemId/transaction/add"
-                                   element={currentUser ? <AddTransactionPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <AddTransactionPage/> : <NoAuthComponent/>}/>
                             <Route path="/item/:itemId/edit"
-                                   element={currentUser ? <EditItemPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <EditItemPage/> : <NoAuthComponent/>}/>
                             <Route path="/item/:itemId/transaction/:transactionId/edit"
-                                   element={currentUser ? <EditTransactionPage/> : <NoAuthComponent/>}/>
-                            <Route path="/meal" element={currentUser ? <MealDashboardPage/> : <NoAuthComponent/>}/>
-                            <Route path="/meal/add" element={currentUser ? <AddMealPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <EditTransactionPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal" element={isUserAuthenticated ? <MealDashboardPage/> : <NoAuthComponent/>}/>
+                            <Route path="/meal/add" element={isUserAuthenticated ? <AddMealPage/> : <NoAuthComponent/>}/>
                             <Route path="/meal/:mealId/consumption"
-                                   element={currentUser ? <MealFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <MealFoodConsumptionPage/> : <NoAuthComponent/>}/>
                             <Route path="/meal/:mealId/consumption/add"
-                                   element={currentUser ? <AddFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <AddFoodConsumptionPage/> : <NoAuthComponent/>}/>
                             <Route path="/meal/:mealId/consumption/:consumptionId/edit"
-                                   element={currentUser ? <EditFoodConsumptionPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <EditFoodConsumptionPage/> : <NoAuthComponent/>}/>
                             <Route path="/meal/:mealId/edit"
-                                   element={currentUser ? <EditMealPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <EditMealPage/> : <NoAuthComponent/>}/>
                             <Route path="/live"
-                                   element={currentUser ? <LiveGroceryShoppingPage/> : <NoAuthComponent/>}/>
-                            <Route path="/live/add" element={currentUser ? <AddItemCartPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <LiveGroceryShoppingPage/> : <NoAuthComponent/>}/>
+                            <Route path="/live/add" element={isUserAuthenticated ? <AddItemCartPage/> : <NoAuthComponent/>}/>
                             <Route path="/live/edit/:barcode"
-                                   element={currentUser ? <EditItemCartPage/> : <NoAuthComponent/>}/>
+                                   element={isUserAuthenticated ? <EditItemCartPage/> : <NoAuthComponent/>}/>
                         </Routes>
                     </Suspense>
 
