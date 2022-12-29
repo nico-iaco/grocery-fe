@@ -43,7 +43,7 @@ function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
     const isPersisted = useSelector(isUserPersisted);
     const error = useSelector(getError);
-    const isUserAuthenticated = useIsUserAuthenticated(isPersisted);
+    const isUserAuthenticated = useIsUserAuthenticated();
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
