@@ -12,6 +12,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {PersistGate} from "redux-persist/integration/react";
 import React from 'react';
+import { sendToAnalytics } from './utils/analyticsUtils';
 
 
 const root = ReactDOM.createRoot(
@@ -48,7 +49,7 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(sendToAnalytics);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
