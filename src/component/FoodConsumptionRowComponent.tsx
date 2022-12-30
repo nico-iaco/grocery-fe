@@ -1,4 +1,4 @@
-import {Edit} from "@mui/icons-material";
+import {Edit, MenuBook} from "@mui/icons-material";
 import { ListItemRowComponent } from "./ListItemRowComponent";
 
 export interface FoodConsumptionRowComponentProps {
@@ -13,7 +13,7 @@ export interface FoodConsumptionRowComponentProps {
 export const FoodConsumptionRowComponent = (props: FoodConsumptionRowComponentProps) => {
     return (
         <ListItemRowComponent
-            leftIcon={<Edit/>}
+            leftIcon={<MenuBook/>}
             title={props.foodName}
             subtitle={`${props.quantityUsed} ${props.unit}  ${props.kcal} kcal`}
             tagList={[]}

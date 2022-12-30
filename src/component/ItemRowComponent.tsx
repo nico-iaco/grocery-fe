@@ -15,11 +15,11 @@ export interface ItemRowComponentProps {
 export function ItemRowComponent(props: ItemRowComponentProps) {
     return (
         <ListItemRowComponent
-            leftIcon={<Fastfood color="secondary"/>}
+            leftIcon={<Fastfood/>}
             title={props.name}
             subtitle={`${props.barcode}   ${props.quantity} ${props.unit}`}
             tagList={[]}
-            rightIcon={<Edit color="secondary"/>}
+            rightIcon={<Edit/>}
             onItemClicked={props.onClick}
             onRightIconClicked={props.onButtonClick}
         />
