@@ -5,12 +5,12 @@ import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
 import {Add, CalendarMonth} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentMeal, setCurrentTabIndex} from "../../action/Action";
+import {clearCurrentMealDate, setCurrentMeal, setCurrentMealDate, setCurrentTabIndex} from "../../action/Action";
 import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {format} from "date-fns";
-import {getUser} from "../../selector/Selector";
+import {getCurrentMealDate, getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useMealList} from "../../hooks/useMealList";
@@ -20,8 +20,8 @@ import {AppBarComponent} from "../../component/AppBarComponent";
 const MealDashboardPage = () => {
 
     const [date, setDate] = useState<Date>(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [formattedDate, setFormattedDate] = useState<string>(format(new Date(), "dd-MM-yyyy"));
+    const selectedDate = useSelector(getCurrentMealDate);
+    const [formattedDate, setFormattedDate] = useState<string>(format(new Date(selectedDate), "dd-MM-yyyy"));
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
     const currentUser = useSelector(getUser);
     const {mealList, isDataAvailable} = useMealList(currentUser?.id || "", selectedDate, selectedDate);
@@ -33,7 +33,7 @@ const MealDashboardPage = () => {
 
     const handleDateChange = (date: Date | null) => {
         if (date) {
-            setSelectedDate(date);
+            dispatch(setCurrentMealDate(date));
             setFormattedDate(format(new Date(date), "dd-MM-yyyy"));
         }
     }

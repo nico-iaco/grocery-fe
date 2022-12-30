@@ -39,6 +39,9 @@ export const CLEAR_SHOPPING_LIST_TYPE = "CLEAR_SHOPPING_LIST";
 export const SET_CURRENT_SHOPPING_ITEM_TYPE = "SET_CURRENT_SHOPPING_ITEM";
 export const CLEAR_CURRENT_SHOPPING_ITEM_TYPE = "CLEAR_CURRENT_SHOPPING_ITEM";
 
+export const SET_CURRENT_MEAL_DATE_TYPE = "SET_CURRENT_MEAL_DATE";
+export const CLEAR_CURRENT_MEAL_DATE_TYPE = "CLEAR_CURRENT_MEAL_DATE";
+
 
 export const setCurrentItem = (item?: Item): Action => {
     return {
@@ -173,5 +176,18 @@ export const setCurrentShoppingItem = (item?: ShoppingItem): Action => {
 export const clearCurrentShoppingItem = (): Action => {
     return {
         type: CLEAR_CURRENT_SHOPPING_ITEM_TYPE
+    };
+}
+
+export const setCurrentMealDate = (date: Date): Action => {
+    return {
+        type: SET_CURRENT_MEAL_DATE_TYPE,
+        payload: date
+    };
+}
+
+export const clearCurrentMealDate = (): Action => {
+    return {
+        type: CLEAR_CURRENT_MEAL_DATE_TYPE
     };
 }
