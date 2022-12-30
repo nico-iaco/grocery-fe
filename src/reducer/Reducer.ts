@@ -1,6 +1,7 @@
 import {
     Action,
     ADD_TO_SHOPPING_LIST_TYPE,
+    CLEAR_CURRENT_MEAL_DATE_TYPE,
     CLEAR_CURRENT_SHOPPING_ITEM_TYPE,
     CLEAR_ERROR_TYPE,
     CLEAR_SHOPPING_LIST_TYPE,
@@ -8,6 +9,7 @@ import {
     REMOVE_FROM_SHOPPING_LIST_TYPE,
     SET_CURRENT_FOOD_CONSUMPTION_TYPE,
     SET_CURRENT_ITEM_TYPE,
+    SET_CURRENT_MEAL_DATE_TYPE,
     SET_CURRENT_MEAL_TYPE,
     SET_CURRENT_SHOPPING_ITEM_TYPE,
     SET_CURRENT_TAB_INDEX_TYPE,
@@ -38,6 +40,7 @@ export interface GroceryState {
     currentShoppingItem: ShoppingItem | undefined;
     shoppingList: ShoppingItem[];
     user: User | undefined;
+    currentMealDate: Date;
     error: AppError | undefined;
 }
 
@@ -50,6 +53,7 @@ export const initialState: GroceryState = {
     currentShoppingItem: undefined,
     shoppingList: [],
     user: undefined,
+    currentMealDate: new Date(),
     error: undefined
 }
 
@@ -157,6 +161,16 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
             return {
                 ...state,
                 currentShoppingItem: undefined
+            }
+        case SET_CURRENT_MEAL_DATE_TYPE:
+            return {
+                ...state,
+                currentMealDate: action.payload
+            }
+        case CLEAR_CURRENT_MEAL_DATE_TYPE:
+            return {
+                ...state,
+                currentMealDate: new Date()
             }
         default:
             return state;

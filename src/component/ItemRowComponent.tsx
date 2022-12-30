@@ -16,7 +16,7 @@ export function ItemRowComponent(props: ItemRowComponentProps) {
     return (
         <SimpleItemWithButtonComponent
             mainText={props.name}
-            subText={`${props.barcode} § ${props.quantity} ${props.unit}`}
+            subText={`${props.barcode}   ${props.quantity} ${props.unit}`}
             onItemClicked={props.onClick}
             icon={<Edit/>}
             onButtonClicked={props.onButtonClick}

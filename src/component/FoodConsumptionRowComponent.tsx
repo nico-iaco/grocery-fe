@@ -16,12 +16,13 @@ export const FoodConsumptionRowComponent = (props: FoodConsumptionRowComponentPr
         paddingBottom: 8
     }}>
         <Paper variant="outlined" style={{
-            padding: 8
+            padding: 8,
+            borderRadius: 8
         }}>
             <Grid container columns={10}>
                 <SimpleItemRowComponent
                     mainText={props.foodName}
-                    subText={`${props.quantityUsed} ${props.unit} § ${props.kcal} kcal`}
+                    subText={`${props.quantityUsed} ${props.unit}  ${props.kcal} kcal`}
                     onClick={ props.onItemClicked }
                 />
                 <Grid item xs={2} className="center">

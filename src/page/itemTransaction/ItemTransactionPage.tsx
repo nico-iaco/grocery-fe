@@ -41,7 +41,7 @@ function ItemTransactionPage() {
         <Grid container>
             <Grid item xs={12}>
                 <AppBarComponent
-                    title={currentItem?.name + " transactions"}
+                    title={currentItem?.name || ""}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
