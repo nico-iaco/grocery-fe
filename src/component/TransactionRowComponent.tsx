@@ -17,9 +17,6 @@ export interface TransactionRowComponentProps {
 export function TransactionRowComponent(props: TransactionRowComponentProps) {
     const formattedDate = format(new Date(props.expirationDate), "dd-MM-yyyy")
     return (
-        <div style={{
-            paddingBottom: 8
-        }}>
             <ListItemRowComponent
                 leftIcon={<Receipt />}
                 title={`${props.seller} ${props.price}€`}
@@ -29,5 +26,5 @@ export function TransactionRowComponent(props: TransactionRowComponentProps) {
                 onItemClicked={props.onTransactionClick}
                 onRightIconClicked={props.onTransactionButtonClick}
             />
-        </div>);
+    );
 }

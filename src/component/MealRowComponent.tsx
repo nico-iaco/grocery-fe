@@ -19,9 +19,6 @@ export const MealRowComponent = (props: MealRowComponentProps) => {
     const subtitle = props.description + (props.kcal ? `  ${props.kcal} kcal` : "") + (props.cost ? `  ${props.cost} €` : "")
 
     return (
-        <div style={{
-            paddingBottom: 8
-        }}>
             <ListItemRowComponent
                 leftIcon={<Restaurant/>}
                 title={props.name}
@@ -31,7 +28,5 @@ export const MealRowComponent = (props: MealRowComponentProps) => {
                 onItemClicked={props.onClick}
                 onRightIconClicked={props.onButtonClick}
             />
-        </div>
-
     );
 }

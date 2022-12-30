@@ -11,9 +11,7 @@ export interface FoodConsumptionRowComponentProps {
 }
 
 export const FoodConsumptionRowComponent = (props: FoodConsumptionRowComponentProps) => {
-    return <div style={{
-        paddingBottom: 8
-    }}>
+    return (
         <ListItemRowComponent
             leftIcon={<Edit/>}
             title={props.foodName}
@@ -22,7 +20,6 @@ export const FoodConsumptionRowComponent = (props: FoodConsumptionRowComponentPr
             rightIcon={<Edit/>}
             onItemClicked={props.onItemClicked}
             onRightIconClicked={props.onButtonClicked}
-        />
-    </div>
+        />);
 
 }
