@@ -14,8 +14,8 @@ export interface ListItemRowComponentProps {
 export const ListItemRowComponent = (props: ListItemRowComponentProps) => {
     return (
         <Paper sx={{
-            cornerRadius: 8,
-            padding: 8,
+            cornerRadius: 32,
+            padding: 2,
         }}>
             <Grid container spacing={2} alignItems="center" onClick={props.onItemClicked}>
                 <Grid item xs={2}>

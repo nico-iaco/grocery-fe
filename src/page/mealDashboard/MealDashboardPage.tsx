@@ -21,7 +21,7 @@ const MealDashboardPage = () => {
 
     const [date, setDate] = useState<Date>(new Date());
     const selectedDate = useSelector(getCurrentMealDate);
-    const [formattedDate, setFormattedDate] = useState<string>(format(selectedDate, "dd-MM-yyyy"));
+    const [formattedDate, setFormattedDate] = useState<string>(format(new Date(), "dd-MM-yyyy"));
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
     const currentUser = useSelector(getUser);
     const {mealList, isDataAvailable} = useMealList(currentUser?.id || "", selectedDate, selectedDate);
