@@ -1,5 +1,5 @@
-import {Edit} from "@mui/icons-material";
-import {SimpleItemWithButtonComponent} from "./SimpleItemWithButtonComponent";
+import {Edit, Fastfood} from "@mui/icons-material";
+import { ListItemRowComponent } from "./ListItemRowComponent";
 
 
 export interface ItemRowComponentProps {
@@ -14,12 +14,14 @@ export interface ItemRowComponentProps {
 
 export function ItemRowComponent(props: ItemRowComponentProps) {
     return (
-        <SimpleItemWithButtonComponent
-            mainText={props.name}
-            subText={`${props.barcode}   ${props.quantity} ${props.unit}`}
+        <ListItemRowComponent
+            leftIcon={<Fastfood color="secondary"/>}
+            title={props.name}
+            subtitle={`${props.barcode}   ${props.quantity} ${props.unit}`}
+            tagList={[]}
+            rightIcon={<Edit color="secondary"/>}
             onItemClicked={props.onClick}
-            icon={<Edit/>}
-            onButtonClicked={props.onButtonClick}
+            onRightIconClicked={props.onButtonClick}
         />
     );
 }
