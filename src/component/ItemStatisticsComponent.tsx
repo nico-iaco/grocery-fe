@@ -5,6 +5,8 @@ import {Item} from "../model/item";
 import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import { ListItemRowComponent } from "./ListItemRowComponent";
+import { HourglassBottom, ProductionQuantityLimits, Warning } from "@mui/icons-material";
 
 export interface ItemStatisticsComponentProps {
     itemStatistics: ItemStatistics
@@ -32,14 +34,14 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                     <List>
                         {props.itemStatistics.itemsInExpiration ? props.itemStatistics.itemsInExpiration.map(item => {
                             const formattedDateString = new Date(item.nextExpirationDate || "").toLocaleDateString();
-                            return <Paper key={item.id} variant="outlined" className="list-item">
-                                <Grid container columns={8}>
-                                    <SimpleItemRowComponent
-                                        mainText={item.name}
-                                        subText={formattedDateString}
-                                        onClick={() => goToItemTransactionPage(item)}/>
-                                </Grid>
-                            </Paper>
+                            return <ListItemRowComponent
+                                key={item.id}
+                                leftIcon={<HourglassBottom color="warning"/>}
+                                title={item.name}
+                                subtitle={formattedDateString}
+                                tagList={[]}
+                                onItemClicked={() => goToItemTransactionPage(item)}
+                            />
                         }) : <Stack spacing={1}>
                             <Skeleton variant="rectangular" height={80}/>
                             <Skeleton variant="rectangular" height={80}/>
@@ -55,12 +57,14 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                     </Typography>
                     <List>
                         {props.itemStatistics.itemsAlmostFinished ? props.itemStatistics.itemsAlmostFinished.map(item => {
-                            return <Paper key={item.id} variant="outlined" className="list-item">
-                                <SimpleItemRowComponent
-                                    mainText={item.name}
-                                    subText={item.availableQuantity + " " + item.unit}
-                                    onClick={() => goToItemTransactionPage(item)}/>
-                            </Paper>
+                            return <ListItemRowComponent
+                                key={item.id}
+                                leftIcon={<ProductionQuantityLimits color="warning"/>}
+                                title={item.name}
+                                subtitle={`${item.quantity} ${item.unit}`}
+                                tagList={[]}
+                                onItemClicked={() => goToItemTransactionPage(item)}
+                            />
                         }) : <Stack spacing={1}>
                             <Skeleton variant="rectangular" height={80}/>
                             <Skeleton variant="rectangular" height={80}/>

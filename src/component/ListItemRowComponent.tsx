@@ -2,13 +2,13 @@ import { Chip, Grid, Paper, Typography } from "@mui/material";
 
 
 export interface ListItemRowComponentProps {
-    leftIcon: JSX.Element;
+    leftIcon?: JSX.Element;
     title: string;
     subtitle: string;
     tagList: string[];
-    rightIcon: JSX.Element;
+    rightIcon?: JSX.Element;
     onItemClicked: () => void;
-    onRightIconClicked: () => void;
+    onRightIconClicked?: () => void;
 }
 
 export const ListItemRowComponent = (props: ListItemRowComponentProps) => {

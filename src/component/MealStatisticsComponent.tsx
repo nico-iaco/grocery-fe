@@ -65,6 +65,14 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                             <b>{props.costLabel}:</b> {props.mealStatistics.averageWeekFoodCost} €
                         </Typography>
                     </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="body1" component="div">
+                            <b>Most eaten food: </b> {props.mealStatistics.mostConsumedFood.foodName !== "" ?
+                                props.mealStatistics.mostConsumedFood.foodName + "  " + props.mealStatistics.mostConsumedFood.quantityUsed + "  " + props.mealStatistics.mostConsumedFood.unit
+                                : "N/A"
+                            }
+                        </Typography>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
