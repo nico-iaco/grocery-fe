@@ -1,7 +1,5 @@
 import {MealStatistic} from "../model/mealStatistic";
 import {Grid, Paper, Typography} from "@mui/material";
-import {Doughnut} from "react-chartjs-2";
-import {ArcElement, Chart as ChartJS, ChartData, Legend, Tooltip} from "chart.js";
 import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
 import {PieChart, Pie, Sector, Cell, ResponsiveContainer} from "recharts";
