@@ -1,9 +1,8 @@
 import {MealStatistic} from "../model/mealStatistic";
 import {Grid, Paper, Typography} from "@mui/material";
-import {Doughnut} from "react-chartjs-2";
-import {ArcElement, Chart as ChartJS, ChartData, Legend, Tooltip} from "chart.js";
 import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
+import {PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip} from "recharts";
 
 export interface MealStatisticsProps {
     mealStatistics: MealStatistic;
@@ -12,21 +11,20 @@ export interface MealStatisticsProps {
     costLabel: string;
 }
 
+interface StatisticDataset {
+    name: string;
+    value: number;
+}
+
 export const MealStatisticsComponent = (props: MealStatisticsProps) => {
 
-    ChartJS.register(ArcElement, Tooltip, Legend);
+    const data: StatisticDataset[] = props.mealStatistics.averageWeekCaloriesPerMealType.map(value => {
+        return {
+            name: value.mealType,
+            value: value.avgKcal
+        }
+    });
 
-    const mealDataset: ChartData<"doughnut", number[], string> = {
-        labels: props.mealStatistics.averageWeekCaloriesPerMealType.map(value => value.mealType),
-        datasets: [
-            {
-                label: 'Average Calories',
-                data: props.mealStatistics.averageWeekCaloriesPerMealType.map(value => value.avgKcal),
-                backgroundColor: props.mealStatistics.averageWeekCaloriesPerMealType.map((value) => getMealTypeColor(value.mealType)),
-                borderWidth: 1,
-            }
-        ],
-    }
 
     return <Paper>
         <Grid container>
@@ -36,7 +34,26 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                 </Typography>
                 {
                     props.mealStatistics.averageWeekCaloriesPerMealType.length > 0 ?
-                        <Doughnut data={mealDataset}/>
+                        <ResponsiveContainer aspect={1.5}>
+                            <PieChart>
+                                <Pie
+                                    data={data}
+                                    innerRadius={60}
+                                    outerRadius={80}
+                                    fill="#8884d8"
+                                    paddingAngle={5}
+                                    dataKey="value"
+                                >
+                                    {
+                                        data.map((entry, index) => (
+                                            <Cell key={'cell-'+index} fill={getMealTypeColor(entry.name)} />
+                                        ))
+                                    }
+                                    <Tooltip />
+                                    <Legend iconType={"rect"} />
+                                </Pie>
+                            </PieChart>
+                        </ResponsiveContainer>
                         :
                         <div style={{
                             display: "flex",
