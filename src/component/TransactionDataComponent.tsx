@@ -6,6 +6,8 @@ export interface TransactionDataComponentProps {
     onSellerChange : (v: string) => void
     quantity ?: number
     onQuantityChange : (v: number) => void
+    availableQuantity ?: number
+    onAvailableQuantityChange ?: (v: number) => void
     unit ?: string
     onUnitChange : (v: string) => void
     quantityGram ?: number
@@ -28,6 +30,8 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
               onSellerChange={props.onSellerChange}
               quantity={props.quantity}
               onQuantityChange={props.onQuantityChange}
+              availableQuantity={props.availableQuantity}
+              onAvailableQuantityChange={props.onAvailableQuantityChange}
               unit={props.unit}
               onUnitChange={props.onUnitChange}
               quantityGram={props.quantityGram}

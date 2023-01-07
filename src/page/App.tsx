@@ -13,7 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTabIndex, getError, getUser} from "../selector/Selector";
-import {clearError, setCurrentItem, setCurrentTabIndex} from "../action/Action";
+import {clearError, setCurrentItem, setCurrentMealDate, setCurrentTabIndex} from "../action/Action";
 import {lazy, Suspense} from "react";
 
 const Home = lazy(() => import('./home/Home'));
@@ -125,11 +125,12 @@ function App() {
                         {error?.message}
                     </Alert>
                 </Snackbar>
-                <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0, paddingBottom: '4px'}} elevation={3}>
+                <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0, paddingBottom: '8px'}} elevation={3}>
                     <BottomNavigation
                         showLabels
                         value={currentIndex}
                         onChange={(event, newValue) => {
+                            dispatch(setCurrentMealDate(new Date()));
                             dispatch(setCurrentTabIndex(newValue));
                         }}
                     >
