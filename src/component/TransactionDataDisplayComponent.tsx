@@ -8,6 +8,8 @@ export interface TransactionDataDisplayComponentProps {
     onSellerChange : (v: string) => void
     quantity ?: number
     onQuantityChange : (v: number) => void
+    availableQuantity ?: number
+    onAvailableQuantityChange ?: (v: number) => void
     unit ?: string
     onUnitChange : (v: string) => void
     quantityGram ?: number
@@ -51,6 +53,24 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                 onChange={(event) => props.onUnitChange(event.target.value)}
             />
         </Grid>
+        {
+            props.availableQuantity ? 
+                <Grid item xs={8}>
+                    <TextField
+                        required
+                        id="outlined"
+                        label="Available quantity"
+                        type="number"
+                        value={props.availableQuantity}
+                        onChange={(event) => {
+                            if (props.onAvailableQuantityChange) {
+                                props.onAvailableQuantityChange(Number.parseFloat(event.target.value))
+                            }
+                        }}
+                    />
+                </Grid>
+            : null
+        }
         {
             "g" !== props.unit ?
                 <Grid item xs={8}>
