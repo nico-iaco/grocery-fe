@@ -54,7 +54,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
             />
         </Grid>
         {
-            props.availableQuantity ? 
+            props.onAvailableQuantityChange ? 
                 <Grid item xs={8}>
                     <TextField
                         required
