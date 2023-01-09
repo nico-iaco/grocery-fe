@@ -1,12 +1,11 @@
 import {ItemStatistics} from "../model/itemStatistics";
 import {Container, Grid, List, Paper, Skeleton, Stack, Typography} from "@mui/material";
-import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {Item} from "../model/item";
 import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import { ListItemRowComponent } from "./ListItemRowComponent";
-import { HourglassBottom, ProductionQuantityLimits, Warning } from "@mui/icons-material";
+import {ListItemRowComponent} from "./ListItemRowComponent";
+import {HourglassBottom, ProductionQuantityLimits} from "@mui/icons-material";
 
 export interface ItemStatisticsComponentProps {
     itemStatistics: ItemStatistics
@@ -61,7 +60,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                                 key={item.id}
                                 leftIcon={<ProductionQuantityLimits color="warning"/>}
                                 title={item.name}
-                                subtitle={`${item.quantity} ${item.unit}`}
+                                subtitle={`${item.availableQuantity} ${item.unit}`}
                                 tagList={[]}
                                 onItemClicked={() => goToItemTransactionPage(item)}
                             />
