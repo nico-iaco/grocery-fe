@@ -140,7 +140,7 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
         case UPDATE_SHOPPING_LIST_TYPE:
             return {
                 ...state,
-                shoppingList: [...state.shoppingList.filter(shoppingItem => shoppingItem.item.id !== action.payload.item.id), action.payload]
+                shoppingList: [...state.shoppingList.filter(shoppingItem => shoppingItem.item.name !== action.payload.item.name), action.payload]
             }
         case REMOVE_FROM_SHOPPING_LIST_TYPE:
             return {
