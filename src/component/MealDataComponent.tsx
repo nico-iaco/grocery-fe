@@ -3,7 +3,7 @@ import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 
-export interface TransactionDataComponentProps {
+export interface MealDataComponentProps {
     name?: string
     onNameChange: (v: string) => void
     description?: string
@@ -16,7 +16,7 @@ export interface TransactionDataComponentProps {
     onButtonClick: () => void
 }
 
-export const MealDataComponent = (props: TransactionDataComponentProps) => {
+export const MealDataComponent = (props: MealDataComponentProps) => {
     return <Grid container columns={8}>
         <Grid item xs={8}>
             <TextField

@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
 import {Add, CalendarMonth} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {clearCurrentMealDate, setCurrentMeal, setCurrentMealDate, setCurrentTabIndex} from "../../action/Action";
+import {setCurrentMeal, setCurrentMealDate, setCurrentTabIndex} from "../../action/Action";
 import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
@@ -130,7 +130,7 @@ const MealDashboardPage = () => {
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 62, right: 8}}
+                    sx={{position: 'fixed', bottom: 70, right: 8}}
                     onClick={goToAddMeal}
                 >
                     <Add/>

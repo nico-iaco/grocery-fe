@@ -86,7 +86,7 @@ const LiveGroceryShoppingPage = () => {
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 62, right: 8}}
+                    sx={{position: 'fixed', bottom: 70, right: 8}}
                     onClick={goToAddItemToCart}
                 >
                     <Add/>
