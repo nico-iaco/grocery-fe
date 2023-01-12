@@ -2,7 +2,7 @@ import {MealStatistic} from "../model/mealStatistic";
 import {Grid, Paper, Typography} from "@mui/material";
 import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
-import {Cell, Legend, Pie, PieChart, ResponsiveContainer} from "recharts";
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 
 export interface MealStatisticsProps {
     mealStatistics: MealStatistic;
@@ -49,7 +49,8 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                                             <Cell key={'cell-'+index} fill={getMealTypeColor(entry.name)} />
                                         ))
                                     }
-                                    <Legend iconType="rect" />
+                                    <Tooltip/>
+                                    <Legend iconType="rect" verticalAlign={"top"} />
                                 </Pie>
                             </PieChart>
                         </ResponsiveContainer>
