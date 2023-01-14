@@ -1,4 +1,13 @@
-import {FormControl, Grid, InputAdornment, InputLabel, OutlinedInput, TextField, Typography} from "@mui/material";
+import {
+    FormControl,
+    Grid,
+    InputAdornment,
+    InputLabel,
+    MenuItem,
+    OutlinedInput,
+    TextField,
+    Typography
+} from "@mui/material";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 
@@ -24,6 +33,8 @@ export interface TransactionDataDisplayComponentProps {
 
 export const TransactionDataDisplayComponent = (props: TransactionDataDisplayComponentProps) => {
 
+    const availableUnit = ["g", "ml", "Unit"];
+
     return <div>
         <Grid item xs={8}>
             <TextField
@@ -47,11 +58,14 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
         <Grid item xs={8}>
             <TextField
                 required
+                select
                 id="outlined"
                 label="Unit"
                 value={props.unit}
                 onChange={(event) => props.onUnitChange(event.target.value)}
-            />
+            >
+                {availableUnit.map((unit) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
+            </TextField>
         </Grid>
         {
             props.onAvailableQuantityChange ? 
@@ -72,7 +86,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
             : null
         }
         {
-            "g" !== props.unit ?
+            ("g" !== props.unit) && ("ml" !== props.unit) ?
                 <Grid item xs={8}>
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="quantity-g-required">Quantity in grams</InputLabel>
@@ -85,7 +99,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                             onChange={(event) => props.onQuantityGramChange(Number.parseFloat(event.target.value))}
                             endAdornment={
                                 <InputAdornment position="end">
-                                    <Typography>g</Typography>
+                                    <Typography>g/ml</Typography>
                                 </InputAdornment>
                             }
                         />
