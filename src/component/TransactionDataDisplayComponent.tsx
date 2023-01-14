@@ -1,4 +1,13 @@
-import {FormControl, Grid, InputAdornment, InputLabel, OutlinedInput, TextField, Typography} from "@mui/material";
+import {
+    FormControl,
+    Grid,
+    InputAdornment,
+    InputLabel,
+    MenuItem,
+    OutlinedInput,
+    TextField,
+    Typography
+} from "@mui/material";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 
@@ -55,7 +64,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                 value={props.unit}
                 onChange={(event) => props.onUnitChange(event.target.value)}
             >
-                {availableUnit.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
+                {availableUnit.map((unit) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
             </TextField>
         </Grid>
         {
