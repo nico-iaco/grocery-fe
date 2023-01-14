@@ -8,7 +8,7 @@ import {useState} from "react";
 import {getCurrentShoppingItem, getUser} from "../../selector/Selector";
 import {Item} from "../../model/item";
 import {Transaction} from "../../model/transaction";
-import {updateShoppingList} from "../../action/Action";
+import {removeFromShoppingList, updateShoppingList} from "../../action/Action";
 import {ArrowBack} from "@mui/icons-material";
 import {AppBarComponent} from "../../component/AppBarComponent";
 
@@ -71,6 +71,13 @@ const EditItemCartPage = () => {
 
     }
 
+    const deleteItemFromCart = () => {
+        if (currentShoppingItem) {
+            dispatch(removeFromShoppingList(currentShoppingItem))
+            navigate(-1);
+        }
+    }
+
     return (
         <Grid container columns={8} sx={{
             '& .MuiTextField-root': {m: 1, width: '25ch'},
@@ -82,6 +89,7 @@ const EditItemCartPage = () => {
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
+                    rightButton={<Button onClick={deleteItemFromCart} color="inherit">Delete</Button>}
                 />
             </Grid>
             <Container className="container">

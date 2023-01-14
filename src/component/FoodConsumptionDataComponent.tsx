@@ -76,7 +76,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
-                props.unit !== 'g' ?
+                (props.unit !== 'g') && (props.unit !== 'ml') ?
                     <Grid item xs={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                             <InputLabel htmlFor="quantity-g-required">Quantity in grams</InputLabel>
@@ -89,7 +89,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                                 onChange={(event) => props.onQuantityGramChanged(Number.parseFloat(event.target.value))}
                                 endAdornment={
                                     <InputAdornment position="end">
-                                        <Typography>g</Typography>
+                                        <Typography>g/ml</Typography>
                                     </InputAdornment>
                                 }
                             />

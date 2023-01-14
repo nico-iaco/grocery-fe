@@ -24,6 +24,8 @@ export interface TransactionDataDisplayComponentProps {
 
 export const TransactionDataDisplayComponent = (props: TransactionDataDisplayComponentProps) => {
 
+    const availableUnit = ["g", "ml", "Unit"];
+
     return <div>
         <Grid item xs={8}>
             <TextField
@@ -51,7 +53,9 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                 label="Unit"
                 value={props.unit}
                 onChange={(event) => props.onUnitChange(event.target.value)}
-            />
+            >
+                {availableUnit.map((unit) => <option key={unit} value={unit}>{unit}</option>)}
+            </TextField>
         </Grid>
         {
             props.onAvailableQuantityChange ? 
@@ -72,7 +76,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
             : null
         }
         {
-            "g" !== props.unit ?
+            ("g" !== props.unit) && ("ml" !== props.unit) ?
                 <Grid item xs={8}>
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="quantity-g-required">Quantity in grams</InputLabel>
@@ -85,7 +89,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                             onChange={(event) => props.onQuantityGramChange(Number.parseFloat(event.target.value))}
                             endAdornment={
                                 <InputAdornment position="end">
-                                    <Typography>g</Typography>
+                                    <Typography>g/ml</Typography>
                                 </InputAdornment>
                             }
                         />

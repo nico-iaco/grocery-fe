@@ -1,8 +1,6 @@
 import {
     Action,
     ADD_TO_SHOPPING_LIST_TYPE,
-    CLEAR_CURRENT_MEAL_DATE_TYPE,
-    CLEAR_CURRENT_SHOPPING_ITEM_TYPE,
     CLEAR_ERROR_TYPE,
     CLEAR_SHOPPING_LIST_TYPE,
     CLEAR_USER_TYPE,
@@ -15,12 +13,7 @@ import {
     SET_CURRENT_TAB_INDEX_TYPE,
     SET_CURRENT_TRANSACTION_TYPE,
     SET_ERROR_TYPE,
-    SET_SHOPPING_LIST_TYPE,
     SET_USER_TYPE,
-    UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
-    UPDATE_CURRENT_ITEM_TYPE,
-    UPDATE_CURRENT_MEAL_TYPE,
-    UPDATE_CURRENT_TRANSACTION_TYPE,
     UPDATE_SHOPPING_LIST_TYPE
 } from "../action/Action";
 import {Item} from "../model/item";
@@ -64,17 +57,7 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 currentItem: action.payload
             }
-        case UPDATE_CURRENT_ITEM_TYPE:
-            return {
-                ...state,
-                currentItem: action.payload
-            }
         case SET_CURRENT_TRANSACTION_TYPE:
-            return {
-                ...state,
-                currentTransaction: action.payload
-            }
-        case UPDATE_CURRENT_TRANSACTION_TYPE:
             return {
                 ...state,
                 currentTransaction: action.payload
@@ -84,17 +67,7 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 currentMeal: action.payload
             }
-        case UPDATE_CURRENT_MEAL_TYPE:
-            return {
-                ...state,
-                currentMeal: action.payload
-            }
         case SET_CURRENT_FOOD_CONSUMPTION_TYPE:
-            return {
-                ...state,
-                currentFoodConsumption: action.payload
-            }
-        case UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE:
             return {
                 ...state,
                 currentFoodConsumption: action.payload
@@ -127,11 +100,6 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 user: undefined
             }
-        case SET_SHOPPING_LIST_TYPE:
-            return {
-                ...state,
-                shoppingList: action.payload
-            }
         case ADD_TO_SHOPPING_LIST_TYPE:
             return {
                 ...state,
@@ -157,20 +125,10 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 currentShoppingItem: action.payload
             }
-        case CLEAR_CURRENT_SHOPPING_ITEM_TYPE:
-            return {
-                ...state,
-                currentShoppingItem: undefined
-            }
         case SET_CURRENT_MEAL_DATE_TYPE:
             return {
                 ...state,
                 currentMealDate: action.payload
-            }
-        case CLEAR_CURRENT_MEAL_DATE_TYPE:
-            return {
-                ...state,
-                currentMealDate: new Date()
             }
         default:
             return state;
