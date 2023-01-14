@@ -1,6 +1,6 @@
 import {MealType} from "../model/meal";
 import {Edit, Restaurant} from "@mui/icons-material";
-import { ListItemRowComponent } from "./ListItemRowComponent";
+import {ListItemRowComponent} from "./ListItemRowComponent";
 
 export interface MealRowComponentProps {
     id: string
@@ -16,7 +16,7 @@ export interface MealRowComponentProps {
 
 export const MealRowComponent = (props: MealRowComponentProps) => {
 
-    const subtitle = props.description + (props.kcal ? `  ${props.kcal} kcal` : "") + (props.cost ? `  ${props.cost} €` : "")
+    const subtitle = props.description + (props.kcal ? `  ${props.kcal} kcal` : "") + (props.cost ? `  ${props.cost.toFixed(2)} €` : "")
 
     return (
             <ListItemRowComponent

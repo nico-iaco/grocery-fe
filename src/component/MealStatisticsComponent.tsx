@@ -2,7 +2,7 @@ import {MealStatistic} from "../model/mealStatistic";
 import {Grid, Paper, Typography} from "@mui/material";
 import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
-import {PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip} from "recharts";
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 
 export interface MealStatisticsProps {
     mealStatistics: MealStatistic;
@@ -49,9 +49,12 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                                             <Cell key={'cell-'+index} fill={getMealTypeColor(entry.name)} />
                                         ))
                                     }
-                                    <Tooltip />
-                                    <Legend iconType={"rect"} />
                                 </Pie>
+                                <Tooltip formatter={(value, name, props) => {
+                                    const formattedNumber = Number.parseFloat(value.toString()).toFixed(2)
+                                    return `${formattedNumber} kcal`
+                                }}/>
+                                <Legend iconType="rect" />
                             </PieChart>
                         </ResponsiveContainer>
                         :
@@ -74,12 +77,12 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                 <Grid container>
                     <Grid item xs={12}>
                         <Typography variant="body1" component="div">
-                            <b>{props.kcalLabel}:</b> {props.mealStatistics.averageWeekCalories} kcal
+                            <b>{props.kcalLabel}:</b> {props.mealStatistics.averageWeekCalories.toFixed(2)} kcal
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="body1" component="div">
-                            <b>{props.costLabel}:</b> {props.mealStatistics.averageWeekFoodCost} €
+                            <b>{props.costLabel}:</b> {props.mealStatistics.averageWeekFoodCost.toFixed(2)} €
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>

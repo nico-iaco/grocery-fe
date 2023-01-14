@@ -35,6 +35,7 @@ export const useMealStatistics = (userId: string, startRange?: Date, endRange?: 
                 .catch(reason => {
                     console.error(reason)
                     dispatch(setError(reason.message))
+                    setMealStatistics(initialStatistics)
                 });
         } else {
             getMealStatistics(userId || "", controller)
@@ -46,6 +47,7 @@ export const useMealStatistics = (userId: string, startRange?: Date, endRange?: 
                 .catch(reason => {
                     console.error(reason)
                     dispatch(setError(reason.message))
+                    setMealStatistics(initialStatistics)
                 });
         }
         return () => {
