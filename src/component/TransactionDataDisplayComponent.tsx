@@ -49,6 +49,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
         <Grid item xs={8}>
             <TextField
                 required
+                select
                 id="outlined"
                 label="Unit"
                 value={props.unit}
