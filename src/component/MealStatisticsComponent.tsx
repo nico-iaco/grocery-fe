@@ -49,9 +49,12 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                                             <Cell key={'cell-'+index} fill={getMealTypeColor(entry.name)} />
                                         ))
                                     }
-                                    <Tooltip/>
-                                    <Legend iconType="rect" verticalAlign={"top"} />
                                 </Pie>
+                                <Tooltip formatter={(value, name, props) => {
+                                    const formattedNumber = Number.parseFloat(value.toString()).toFixed(2)
+                                    return `${formattedNumber} kcal`
+                                }}/>
+                                <Legend iconType="rect" />
                             </PieChart>
                         </ResponsiveContainer>
                         :
