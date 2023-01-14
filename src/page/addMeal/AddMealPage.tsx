@@ -7,17 +7,18 @@ import {setCurrentMeal, setError} from "../../action/Action";
 import {Container, Grid} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {MealDataComponent} from "../../component/MealDataComponent";
-import {getUser} from "../../selector/Selector";
+import {getCurrentMealDate, getUser} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
 import {AppBarComponent} from "../../component/AppBarComponent";
 
 const AddMealPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const currentMealDate = useSelector(getCurrentMealDate);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [mealType, setMealType] = useState(MealType.OTHERS);
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date(currentMealDate));
 
     const user = useSelector(getUser);
 
