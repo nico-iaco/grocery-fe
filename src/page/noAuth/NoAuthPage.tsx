@@ -20,7 +20,7 @@ const NoAuthPage = () => {
                     title={"Foody"}
                 />
             </Grid>
-            <Container className="container">
+            <Container className="container text-center">
                 <Grid item xs={8} className="container">
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         You are not logged in.

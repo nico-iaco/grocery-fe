@@ -6,6 +6,7 @@ import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {setCurrentItem, setError} from "../action/Action";
 import {getCurrentItem, getUser} from "../selector/Selector";
 import {useFoodList} from "../hooks/useFoodList";
+import {ListLoadingComponent} from "./ListLoadingComponent";
 
 
 const ChooseFoodComponent = (props: StepperComponentProps) => {
@@ -35,15 +36,18 @@ const ChooseFoodComponent = (props: StepperComponentProps) => {
     return <Grid item xs={8}>
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <List>
-                    {foodList.map((item) => {
-                        return <div key={item.id} style={{padding: 8}}>
-                            <Paper variant="outlined" className={currentFood !== undefined && item.id === currentFood.id ? "list-item-selected" : "list-item"}>
-                                <SimpleItemRowComponent mainText={item.name} subText={`${item.availableQuantity} ${item.unit}`} onClick={() => {onFoodClicked(item)}}/>
-                            </Paper>
-                        </div>
-                    })}
-                </List>
+                {
+                    foodList.length > 0 ?
+                        <List>
+                            {foodList.map((item) => {
+                                return <div key={item.id} style={{padding: 8}}>
+                                    <Paper variant="outlined" className={currentFood !== undefined && item.id === currentFood.id ? "list-item-selected" : "list-item"}>
+                                        <SimpleItemRowComponent mainText={item.name} subText={`${item.availableQuantity} ${item.unit}`} onClick={() => {onFoodClicked(item)}}/>
+                                    </Paper>
+                                </div>
+                            })}
+                        </List> : <ListLoadingComponent listItemNumber={8} />
+                }
             </Grid>
             <Grid item xs={8}>
                 <Grid container columns={8}>

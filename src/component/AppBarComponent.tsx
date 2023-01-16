@@ -12,7 +12,7 @@ export interface AppBarComponentProps {
 
 export const AppBarComponent = (props: AppBarComponentProps) => {
     return <Box sx={{flexGrow: 1}}>
-        <AppBar position="sticky" className="AppBar">
+        <AppBar position="sticky" className="AppBar text-center">
             <Toolbar>
                 {props.leftButton ?
                     <IconButton

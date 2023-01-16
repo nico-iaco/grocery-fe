@@ -14,7 +14,7 @@ export interface ItemDataComponentProps {
 
 export const ItemDataComponent = (props: ItemDataComponentProps) => {
 
-    return <Grid container columns={8}>
+    return <Grid container columns={8} className={"text-center"}>
         <Container>
             <ItemDataDisplayComponent
                 onNameChange={props.onNameChange}

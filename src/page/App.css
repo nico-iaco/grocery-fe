@@ -1,5 +1,4 @@
 .App {
-    text-align: center;
     padding-bottom: 74px!important;
 }
 
@@ -39,5 +38,11 @@
 
 .lobster-font {
     font-family: 'Lobster', cursive !important;
+}
+
+.fab {
+    position: fixed !important;
+    bottom: 70px;
+    right: 8px;
 }
 

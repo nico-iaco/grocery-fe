@@ -77,7 +77,7 @@ function ItemTransactionPage() {
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 70, right: 8}}
+                    className={"fab"}
                     onClick={goToAddTransactionPage}
                 >
                     <Add/>
