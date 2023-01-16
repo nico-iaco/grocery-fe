@@ -12,6 +12,7 @@ const ProfilePage = () => {
     const currentUser = useSelector(getUser);
     const dispatch = useDispatch();
     dispatch(setCurrentTabIndex(3));
+    const appVersionDetail = process.env.REACT_APP_VERSION;
 
     const logout = () => {
         const auth = getAuth();
@@ -68,7 +69,7 @@ const ProfilePage = () => {
                             <ListItemIcon>
                                 <Info/>
                             </ListItemIcon>
-                            <ListItemText primary="Application version" secondary={"v2.0.0"}/>
+                            <ListItemText primary="Application version" secondary={`v2.0.0-${appVersionDetail}`}/>
                         </ListItem>
                         <Divider />
                     </List>

@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+        with:
+          length: 7
       - run: npm ci && npm run build
         env:
           CI: false
@@ -18,6 +22,7 @@ jobs:
           REACT_APP_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
           REACT_APP_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
+          REACT_APP_VERSION: ${{ steps.short-sha.outputs.sha }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
