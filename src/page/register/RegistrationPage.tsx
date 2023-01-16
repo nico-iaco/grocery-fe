@@ -63,7 +63,7 @@ const RegistrationPage = () => {
                     }}
                 />
             </Grid>
-            <Container className="container">
+            <Container className="container text-center">
                 <Grid item xs={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="name-required">Name</InputLabel>
@@ -124,7 +124,7 @@ const RegistrationPage = () => {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={8} className="container">
+                <Grid item xs={8} className="container text-center">
                     <Button
                         variant="contained"
                         color={"secondary"}

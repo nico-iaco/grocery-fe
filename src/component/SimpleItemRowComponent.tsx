@@ -9,7 +9,7 @@ export interface SimpleItemRowComponentProps {
 export const SimpleItemRowComponent = (props: SimpleItemRowComponentProps) => {
     return <Grid item xs={8} onClick={props.onClick}>
         <Grid container columns={8}>
-            <Grid item xs={8} >
+            <Grid item xs={8} className={"center"}>
                 <Typography variant="h5">{props.mainText}</Typography>
             </Grid>
             <Grid item xs={8} className="center">
