@@ -7,6 +7,7 @@ import {getCurrentItem, getCurrentTransaction, getUser} from "../selector/Select
 import {Transaction} from "../model/transaction";
 import {format} from "date-fns";
 import {useTransactionList} from "../hooks/useTransactionList";
+import {ListLoadingComponent} from "./ListLoadingComponent";
 
 const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
@@ -38,16 +39,19 @@ const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
     return <Grid item xs={8}>
         <Grid container columns={8}>
             <Grid item xs={8}>
-                <List>
-                    {transactionList.map((transaction) => {
-                        const formattedDate = format(new Date(transaction.expirationDate), "dd-MM-yyyy");
-                        return <div key={transaction.id} style={{padding: 8}}>
-                            <Paper variant="outlined" className={currentTransaction !== undefined && transaction.id === currentTransaction.id ? "list-item-selected" : "list-item"}>
-                                <SimpleItemRowComponent mainText={`${transaction.availableQuantity} ${transaction.unit}`} subText={formattedDate} onClick={() => {onTransactionClicked(transaction)}}/>
-                            </Paper>
-                        </div>
-                    })}
-                </List>
+                {
+                    transactionList.length > 0 ?
+                        <List>
+                            {transactionList.map((transaction) => {
+                                const formattedDate = format(new Date(transaction.expirationDate), "dd-MM-yyyy");
+                                return <div key={transaction.id} style={{padding: 8}}>
+                                    <Paper variant="outlined" className={currentTransaction !== undefined && transaction.id === currentTransaction.id ? "list-item-selected" : "list-item"}>
+                                        <SimpleItemRowComponent mainText={`${transaction.availableQuantity} ${transaction.unit}`} subText={formattedDate} onClick={() => {onTransactionClicked(transaction)}}/>
+                                    </Paper>
+                                </div>
+                            })}
+                        </List> : <ListLoadingComponent listItemNumber={8} />
+                }
             </Grid>
             <Grid item xs={8}>
                 <Grid container columns={8}>

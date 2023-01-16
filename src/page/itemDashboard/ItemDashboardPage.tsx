@@ -12,9 +12,7 @@ import {
     InputAdornment,
     InputLabel,
     List,
-    OutlinedInput,
-    Skeleton,
-    Stack
+    OutlinedInput
 } from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
 import {Add, Search} from "@mui/icons-material";
@@ -22,6 +20,7 @@ import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useItemList} from "../../hooks/useItemList";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {ListLoadingComponent} from "../../component/ListLoadingComponent";
 
 const ItemDashboardPage = () => {
     const dispatch = useDispatch();
@@ -97,20 +96,13 @@ const ItemDashboardPage = () => {
                                                 onClick={() => goToItemTransaction(item)}/>
                                         })
                                     : <NoDataAvailableComponent/>)
-                                : <Stack spacing={1}>
-                                    <Skeleton variant="rectangular" height={90}/>
-                                    <Skeleton variant="rectangular" height={90}/>
-                                    <Skeleton variant="rectangular" height={90}/>
-                                    <Skeleton variant="rectangular" height={90}/>
-                                    <Skeleton variant="rectangular" height={90}/>
-                                    <Skeleton variant="rectangular" height={90}/>
-                                </Stack>
+                                : <ListLoadingComponent listItemNumber={8} />
                         }
                     </List>
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 70, right: 8}}
+                    className={"fab"}
                     onClick={goToAddItem}
                 >
                     <Add/>

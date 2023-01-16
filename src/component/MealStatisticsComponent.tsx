@@ -1,5 +1,5 @@
 import {MealStatistic} from "../model/mealStatistic";
-import {Grid, Paper, Typography} from "@mui/material";
+import {Container, Grid, Paper, Typography} from "@mui/material";
 import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
@@ -29,71 +29,75 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
     return <Paper>
         <Grid container>
             <Grid item xs={12} md={6} className={"container"}>
-                <Typography variant="h5" component="div">
-                    <b>{props.mealKcalChartLabel}</b>
-                </Typography>
-                {
-                    props.mealStatistics.averageWeekCaloriesPerMealType.length > 0 ?
-                        <ResponsiveContainer aspect={1.5}>
-                            <PieChart>
-                                <Pie
-                                    data={data}
-                                    innerRadius={60}
-                                    outerRadius={80}
-                                    fill="#8884d8"
-                                    paddingAngle={5}
-                                    dataKey="value"
-                                >
-                                    {
-                                        data.map((entry, index) => (
-                                            <Cell key={'cell-'+index} fill={getMealTypeColor(entry.name)} />
-                                        ))
-                                    }
-                                </Pie>
-                                <Tooltip formatter={(value, name, props) => {
-                                    const formattedNumber = Number.parseFloat(value.toString()).toFixed(2)
-                                    return `${formattedNumber} kcal`
-                                }}/>
-                                <Legend iconType="rect" />
-                            </PieChart>
-                        </ResponsiveContainer>
-                        :
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: 64,
-                        }}>
-                            <WarningAmber style={{
+                <Container>
+                    <Typography variant="h6" className={"text-center"}>
+                        <b>{props.mealKcalChartLabel}</b>
+                    </Typography>
+                    {
+                        props.mealStatistics.averageWeekCaloriesPerMealType.length > 0 ?
+                            <ResponsiveContainer aspect={1.5}>
+                                <PieChart>
+                                    <Pie
+                                        data={data}
+                                        innerRadius={60}
+                                        outerRadius={80}
+                                        fill="#8884d8"
+                                        paddingAngle={5}
+                                        dataKey="value"
+                                    >
+                                        {
+                                            data.map((entry, index) => (
+                                                <Cell key={'cell-' + index} fill={getMealTypeColor(entry.name)}/>
+                                            ))
+                                        }
+                                    </Pie>
+                                    <Tooltip formatter={(value, name, props) => {
+                                        const formattedNumber = Number.parseFloat(value.toString()).toFixed(2)
+                                        return `${formattedNumber} kcal`
+                                    }}/>
+                                    <Legend iconType="rect"/>
+                                </PieChart>
+                            </ResponsiveContainer>
+                            :
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                padding: 64,
+                            }}>
+                                <WarningAmber style={{
                                     marginRight: 8
-                            }}/>
-                            <Typography variant="h6" color="textSecondary">
-                                No data available
-                            </Typography>
-                        </div>
-                }
+                                }}/>
+                                <Typography variant="h6" color="textSecondary">
+                                    No data available
+                                </Typography>
+                            </div>
+                    }
+                </Container>
             </Grid>
-            <Grid item xs={12} md={6} className={"container center"}>
-                <Grid container>
-                    <Grid item xs={12}>
-                        <Typography variant="body1" component="div">
-                            <b>{props.kcalLabel}:</b> {props.mealStatistics.averageWeekCalories.toFixed(2)} kcal
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="body1" component="div">
-                            <b>{props.costLabel}:</b> {props.mealStatistics.averageWeekFoodCost.toFixed(2)} €
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="body1" component="div">
-                            <b>Most eaten food: </b> {props.mealStatistics.mostConsumedFood.foodName !== "" ?
+            <Grid item xs={12} md={6} className={"container"}>
+                <Container>
+                    <Grid container className={"center"}>
+                        <Grid item xs={12}>
+                            <Typography variant="body1" component="div">
+                                <b>{props.kcalLabel}:</b> {props.mealStatistics.averageWeekCalories.toFixed(2)} kcal
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="body1" component="div">
+                                <b>{props.costLabel}:</b> {props.mealStatistics.averageWeekFoodCost.toFixed(2)} €
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="body1" component="div">
+                                <b>Most eaten food: </b> {props.mealStatistics.mostConsumedFood.foodName !== "" ?
                                 props.mealStatistics.mostConsumedFood.foodName + "  " + props.mealStatistics.mostConsumedFood.quantityUsed + "  " + props.mealStatistics.mostConsumedFood.unit
                                 : "N/A"
                             }
-                        </Typography>
+                            </Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Container>
             </Grid>
         </Grid>
     </Paper>

@@ -23,7 +23,7 @@ export interface TransactionDataComponentProps {
 }
 
 export const TransactionDataComponent = (props: TransactionDataComponentProps) => {
-  return <Grid container columns={8}>
+  return <Grid container columns={8} className={"text-center"}>
       <Container>
           <TransactionDataDisplayComponent
               seller={props.seller}

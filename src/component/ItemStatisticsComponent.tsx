@@ -1,11 +1,12 @@
 import {ItemStatistics} from "../model/itemStatistics";
-import {Container, Grid, List, Paper, Skeleton, Stack, Typography} from "@mui/material";
+import {Container, Grid, List, Paper, Typography} from "@mui/material";
 import {Item} from "../model/item";
 import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {ListItemRowComponent} from "./ListItemRowComponent";
 import {HourglassBottom, ProductionQuantityLimits} from "@mui/icons-material";
+import {ListLoadingComponent} from "./ListLoadingComponent";
 
 export interface ItemStatisticsComponentProps {
     itemStatistics: ItemStatistics
@@ -41,11 +42,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                                 tagList={[]}
                                 onItemClicked={() => goToItemTransactionPage(item)}
                             />
-                        }) : <Stack spacing={1}>
-                            <Skeleton variant="rectangular" height={80}/>
-                            <Skeleton variant="rectangular" height={80}/>
-                            <Skeleton variant="rectangular" height={80}/>
-                        </Stack>}
+                        }) : <ListLoadingComponent listItemNumber={3} />}
                     </List>
                 </Container>
             </Grid>
@@ -64,11 +61,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                                 tagList={[]}
                                 onItemClicked={() => goToItemTransactionPage(item)}
                             />
-                        }) : <Stack spacing={1}>
-                            <Skeleton variant="rectangular" height={80}/>
-                            <Skeleton variant="rectangular" height={80}/>
-                            <Skeleton variant="rectangular" height={80}/>
-                        </Stack>}
+                        }) : <ListLoadingComponent listItemNumber={3} />}
                     </List>
                 </Container>
             </Grid>

@@ -17,7 +17,7 @@ export interface MealDataComponentProps {
 }
 
 export const MealDataComponent = (props: MealDataComponentProps) => {
-    return <Grid container columns={8}>
+    return <Grid container columns={8} className={"text-center"}>
         <Grid item xs={8}>
             <TextField
                 required

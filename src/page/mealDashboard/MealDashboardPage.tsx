@@ -1,4 +1,4 @@
-import {Container, Fab, Grid, IconButton, List, Skeleton, Stack} from "@mui/material";
+import {Container, Fab, Grid, IconButton, List} from "@mui/material";
 import {Meal} from "../../model/meal";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -15,6 +15,7 @@ import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useMealList} from "../../hooks/useMealList";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {ListLoadingComponent} from "../../component/ListLoadingComponent";
 
 
 const MealDashboardPage = () => {
@@ -119,18 +120,13 @@ const MealDashboardPage = () => {
                                         onButtonClick={() => goToEditMeal(meal)}
                                     />
                                 }) : <NoDataAvailableComponent/>)
-                            :   <Stack spacing={1}>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                </Stack>
+                            :   <ListLoadingComponent listItemNumber={8} />
                         }
                     </List>
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 70, right: 8}}
+                    className={"fab"}
                     onClick={goToAddMeal}
                 >
                     <Add/>

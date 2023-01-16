@@ -65,7 +65,7 @@ function Home() {
                 <ItemStatisticsComponent itemStatistics={itemStatistics}/>
             </Grid>
             <SpeedDial
-                sx={{position: 'fixed', bottom: 70, right: 8}}
+                className={"fab"}
                 FabProps={fabProps}
                 icon={<Add/>}
                 ariaLabel={"Add"}

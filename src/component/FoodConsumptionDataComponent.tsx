@@ -40,7 +40,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
             })
     }
 
-    return <Grid item xs={8}>
+    return <Grid item xs={8} className={"text-center"}>
         <Grid container columns={8}>
             {
                 props.foodName !== undefined ?
