@@ -1,4 +1,14 @@
-import {FormControl, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, TextField, Typography} from "@mui/material";
+import {
+    FormControl,
+    Grid,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    MenuItem,
+    OutlinedInput,
+    TextField,
+    Typography
+} from "@mui/material";
 import {Calculate, Euro} from "@mui/icons-material";
 import {getFoodKcal} from "../api/itemApis";
 import {useDispatch, useSelector} from "react-redux";
@@ -79,7 +89,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
-                (props.onUnitChanged) ?
+                (props.unit === ' ') ?
                     <Grid item xs={8}>
                         <TextField
                             required
