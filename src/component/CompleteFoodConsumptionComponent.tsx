@@ -18,6 +18,7 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentTransaction = useSelector(getCurrentTransaction);
     const [foodName, setFoodName] = useState("");
     const [quantity, setQuantity] = useState<number>(0);
+    const [unit, setUnit] = useState("");
     const [quantityGram, setQuantityGram] = useState<number>(0);
     const [kcals, setKcals] = useState<number>(0);
     const [cost, setCost] = useState<number>(0);
@@ -34,7 +35,7 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
             mealId: currentMeal?.id || "",
             foodName: currentFood?.name || foodName,
             quantityUsed: quantity,
-            unit: currentFood?.unit || "",
+            unit: currentFood?.unit || unit,
             quantityUsedStd: quantityGram,
             kcal: kcals,
             cost: cost
@@ -64,12 +65,13 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
                     foodName={currentFood ? undefined : foodName}
                     foodId={currentFood?.id || ""}
                     quantity={quantity}
-                    unit={currentTransaction?.unit || ""}
+                    unit={currentTransaction ? currentTransaction.unit : unit}
                     quantityGram={quantityGram}
                     kcals={kcals}
                     cost={currentFood ? undefined : cost}
                     onFoodNameChanged={setFoodName}
                     onQuantityChanged={setQuantity}
+                    onUnitChanged={setUnit}
                     onQuantityGramChanged={setQuantityGram}
                     onKcalsChanged={setKcals}
                     onCostChanged={setCost}

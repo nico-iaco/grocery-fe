@@ -1,4 +1,14 @@
-import {FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography} from "@mui/material";
+import {
+    FormControl,
+    Grid,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    MenuItem,
+    OutlinedInput,
+    TextField,
+    Typography
+} from "@mui/material";
 import {Calculate, Euro} from "@mui/icons-material";
 import {getFoodKcal} from "../api/itemApis";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,6 +26,7 @@ export interface FoodConsumptionDataComponentProps {
     onFoodNameChanged: (foodName: string) => void
     onQuantityChanged: (quantity: number) => void
     onQuantityGramChanged: (quantityGram: number) => void
+    onUnitChanged?: (unit: string) => void
     onKcalsChanged: (kcals: number) => void
     onCostChanged: (cost: number) => void
 }
@@ -23,6 +34,8 @@ export interface FoodConsumptionDataComponentProps {
 export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponentProps) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
+
+    const availableUnit = ["g", "ml", "Unit"];
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
@@ -75,6 +88,25 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                     />
                 </FormControl>
             </Grid>
+            {
+                (props.onUnitChanged) ?
+                    <Grid item xs={8}>
+                        <TextField
+                            required
+                            select
+                            id="outlined"
+                            label="Unit"
+                            value={props.unit}
+                            onChange={(event) => {
+                                if (props.onUnitChanged) {
+                                    props.onUnitChanged(event.target.value)
+                                }
+                            }}
+                        >
+                            {availableUnit.map((unit) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
+                        </TextField>
+                    </Grid> : null
+            }
             {
                 (props.unit !== 'g') && (props.unit !== 'ml') ?
                     <Grid item xs={8}>
