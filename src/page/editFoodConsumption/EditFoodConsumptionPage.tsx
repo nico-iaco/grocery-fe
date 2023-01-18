@@ -35,6 +35,7 @@ const EditFoodConsumptionPage = () => {
                 ...currentFoodConsumption,
                 foodName: foodName,
                 quantityUsed: quantity,
+                unit: unit,
                 quantityUsedStd: quantityGram,
                 kcal: kcals,
                 cost: cost
