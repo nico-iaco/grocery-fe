@@ -60,6 +60,10 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
     return <Grid item xs={8} className={"text-center"}>
         <Grid container columns={8}>
             {
+                /**
+                 * When props.foodName is undefined, the food name is not editable because it is already set by
+                 * grocery-be service
+                 */
                 props.foodName !== undefined ?
                     <Grid item xs={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
@@ -93,7 +97,10 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
-                (props.foodId === '') ?
+                /**
+                 * when props.foodName is undefined, it means that is an external food so the unit can be edited
+                 */
+                (props.foodName !== undefined) ?
                     <Grid item xs={8}>
                         <TextField
                             required
@@ -156,6 +163,10 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
+                /**
+                 * When props.cost is undefined, the cost is not editable because it is already set by
+                 * grocery-be service
+                 */
                 props.cost !== undefined ?
                     <Grid item xs={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">

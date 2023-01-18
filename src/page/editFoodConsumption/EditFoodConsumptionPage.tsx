@@ -34,9 +34,9 @@ const EditFoodConsumptionPage = () => {
             const foodConsumption: FoodConsumption = {
                 ...currentFoodConsumption,
                 foodName: foodName,
-                quantityUsed: quantity || 0,
-                quantityUsedStd: quantityGram || 0,
-                kcal: kcals || 0,
+                quantityUsed: quantity,
+                quantityUsedStd: quantityGram,
+                kcal: kcals,
                 cost: cost
             }
             const controller = new AbortController();
