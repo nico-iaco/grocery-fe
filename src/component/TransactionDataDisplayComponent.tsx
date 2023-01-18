@@ -33,7 +33,7 @@ export interface TransactionDataDisplayComponentProps {
 
 export const TransactionDataDisplayComponent = (props: TransactionDataDisplayComponentProps) => {
 
-    const availableUnit = process.env.REACT_APP_AVAILABLE_UNIT?.split(",") || [];
+    const availableUnit = process.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
 
     return <div>
         <Grid item xs={8}>

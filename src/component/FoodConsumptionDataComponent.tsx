@@ -35,7 +35,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
 
-    const availableUnit = process.env.REACT_APP_AVAILABLE_UNIT?.split(",") || [];
+    const availableUnit = process.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
