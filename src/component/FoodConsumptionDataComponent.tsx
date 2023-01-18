@@ -93,7 +93,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
-                (props.foodId) ?
+                (props.foodId === '') ?
                     <Grid item xs={8}>
                         <TextField
                             required

@@ -19,6 +19,7 @@ const EditFoodConsumptionPage = () => {
 
     const [foodName, setFoodName] = useState( currentFoodConsumption?.foodName || "");
     const [quantity, setQuantity] = useState<number>(currentFoodConsumption?.quantityUsed || 0);
+    const [unit, setUnit] = useState(currentFoodConsumption?.unit || "");
     const [quantityGram, setQuantityGram] = useState<number>(currentFoodConsumption?.quantityUsedStd || 0);
     const [kcals, setKcals] = useState<number>(currentFoodConsumption?.kcal || 0);
     const [cost, setCost] = useState<number>(currentFoodConsumption?.cost || 0);
@@ -83,13 +84,14 @@ const EditFoodConsumptionPage = () => {
                         <FoodConsumptionDataComponent
                             foodName={currentFoodConsumption?.foodId !== "00000000-0000-0000-0000-000000000000" ? undefined : foodName}
                             foodId={currentFoodConsumption?.foodId || ""}
-                            quantity={quantity || 0}
-                            unit={currentFoodConsumption?.unit || ""}
-                            quantityGram={quantityGram || 0}
-                            kcals={kcals || 0}
+                            quantity={quantity}
+                            unit={unit}
+                            quantityGram={quantityGram}
+                            kcals={kcals}
                             cost={currentFoodConsumption?.foodId !== "00000000-0000-0000-0000-000000000000" ? undefined : cost}
                             onFoodNameChanged={setFoodName}
                             onQuantityChanged={setQuantity}
+                            onUnitChanged={setUnit}
                             onQuantityGramChanged={setQuantityGram}
                             onKcalsChanged={setKcals}
                             onCostChanged={setCost}
