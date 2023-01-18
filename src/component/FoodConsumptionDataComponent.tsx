@@ -35,22 +35,26 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
 
-    const availableUnit = ["g", "ml", "Unit"];
+    const availableUnit = process.env.REACT_APP_AVAILABLE_UNIT?.split(",") || [];
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
         const controller = new AbortController();
-        getFoodKcal(props.foodId || "",
-            quantity,
-            currentUser?.id || "",
-            controller)
-            .then((response) => {
-                props.onKcalsChanged(response || 0)
-            })
-            .catch((error) => {
-                console.log(error)
-                dispatch(setError(error.message));
-            })
+        if (props.foodId && currentUser) {
+            getFoodKcal(props.foodId,
+                quantity,
+                currentUser.id,
+                controller)
+                .then((response) => {
+                    props.onKcalsChanged(response || 0)
+                })
+                .catch((error) => {
+                    dispatch(setError(error.message));
+                })
+        } else {
+            dispatch(setError("Feature not available"));
+        }
+
     }
 
     return <Grid item xs={8} className={"text-center"}>
@@ -89,7 +93,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
-                (props.onUnitChanged) ?
+                (props.foodId) ?
                     <Grid item xs={8}>
                         <TextField
                             required
