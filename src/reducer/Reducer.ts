@@ -13,6 +13,7 @@ import {
     SET_CURRENT_TAB_INDEX_TYPE,
     SET_CURRENT_TRANSACTION_TYPE,
     SET_ERROR_TYPE,
+    SET_LANGUAGE_TYPE,
     SET_USER_TYPE,
     UPDATE_SHOPPING_LIST_TYPE
 } from "../action/Action";
@@ -35,6 +36,7 @@ export interface GroceryState {
     user: User | undefined;
     currentMealDate: Date;
     error: AppError | undefined;
+    language: string | undefined;
 }
 
 export const initialState: GroceryState = {
@@ -47,7 +49,8 @@ export const initialState: GroceryState = {
     shoppingList: [],
     user: undefined,
     currentMealDate: new Date(),
-    error: undefined
+    error: undefined,
+    language: undefined
 }
 
 export function eventReducer(state: GroceryState = initialState, action: Action): GroceryState {
@@ -129,6 +132,11 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
             return {
                 ...state,
                 currentMealDate: action.payload
+            }
+        case SET_LANGUAGE_TYPE:
+            return {
+                ...state,
+                language: action.payload
             }
         default:
             return state;

@@ -9,6 +9,7 @@ import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const RegistrationPage = () => {
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ const RegistrationPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Register"}
+                    title={strings.registerTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack,

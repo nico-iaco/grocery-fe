@@ -46,3 +46,7 @@ export const getCurrentShoppingItem = (state: GroceryState) : ShoppingItem | und
 export const getCurrentMealDate = (state: GroceryState) : Date => {
     return state.currentMealDate;
 }
+
+export const getLanguage = (state: GroceryState) : string | undefined => {
+    return state.language;
+}

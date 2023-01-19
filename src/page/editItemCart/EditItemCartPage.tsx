@@ -11,6 +11,7 @@ import {Transaction} from "../../model/transaction";
 import {removeFromShoppingList, updateShoppingList} from "../../action/Action";
 import {ArrowBack} from "@mui/icons-material";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 
 const EditItemCartPage = () => {
@@ -84,7 +85,7 @@ const EditItemCartPage = () => {
         }}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Edit Item"}
+                    title={strings.editItemCartTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack

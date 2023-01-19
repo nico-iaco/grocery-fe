@@ -9,6 +9,7 @@ import {clearShoppingList, setCurrentShoppingItem, setError} from "../../action/
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addShoppingItemList} from "../../api/itemApis";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const LiveGroceryShoppingPage = () => {
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ const LiveGroceryShoppingPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Grocery shopping"}
+                    title={strings.liveGroceryShoppingTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack

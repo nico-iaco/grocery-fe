@@ -10,6 +10,7 @@ import {MealDataComponent} from "../../component/MealDataComponent";
 import {getCurrentMealDate, getUser} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const AddMealPage = () => {
     const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const AddMealPage = () => {
             }}>
                 <Grid item xs={8}>
                     <AppBarComponent
-                        title={"Add meal"}
+                        title={strings.addMealTitle}
                         leftButton={{
                             icon: <ArrowBack/>,
                             onClick: goBack

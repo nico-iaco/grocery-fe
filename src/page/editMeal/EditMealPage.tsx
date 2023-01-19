@@ -9,6 +9,7 @@ import {deleteMeal, updateMeal} from "../../api/mealApis";
 import {setCurrentMeal, setError} from "../../action/Action";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const EditMealPage = () => {
     const navigate = useNavigate();
@@ -69,7 +70,7 @@ const EditMealPage = () => {
         }}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Edit meal"}
+                    title={strings.editMealTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack

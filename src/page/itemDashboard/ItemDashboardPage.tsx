@@ -21,6 +21,7 @@ import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent
 import {useItemList} from "../../hooks/useItemList";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {ListLoadingComponent} from "../../component/ListLoadingComponent";
+import {strings} from "../../localization/strings";
 
 const ItemDashboardPage = () => {
     const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const ItemDashboardPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Food pantry"}
+                    title={strings.groceryTitle}
                 />
             </Grid>
             <Container className="container">

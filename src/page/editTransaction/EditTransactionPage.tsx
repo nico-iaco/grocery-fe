@@ -9,6 +9,7 @@ import {getCurrentTransaction, getUser} from "../../selector/Selector";
 import {setCurrentTransaction, setError} from "../../action/Action";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const EditTransactionPage = () => {
     const {itemId} = useParams();
@@ -82,7 +83,7 @@ const EditTransactionPage = () => {
     }}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Edit Transaction"}
+                title={strings.editTransactionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack

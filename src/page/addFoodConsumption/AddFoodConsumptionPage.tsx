@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {ArrowBack} from "@mui/icons-material";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const ChooseFoodComponent = React.lazy(() => import("../../component/ChooseFoodComponent"));
 const ChooseFoodTransactionComponent = React.lazy(() => import("../../component/ChooseFoodTransactionComponent"));
@@ -84,7 +85,7 @@ const AddFoodConsumptionPage = () => {
     }}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Add food consumption"}
+                title={strings.addFoodConsumptionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack

@@ -20,6 +20,7 @@ import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../../utils/firebaseUtils";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 
 const LoginPage = () => {
@@ -73,7 +74,7 @@ const LoginPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Login"}
+                    title={strings.loginTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
