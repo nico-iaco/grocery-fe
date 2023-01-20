@@ -11,6 +11,7 @@ import {Transaction} from "../../model/transaction";
 import {removeFromShoppingList, updateShoppingList} from "../../action/Action";
 import {ArrowBack} from "@mui/icons-material";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 
 const EditItemCartPage = () => {
@@ -84,12 +85,12 @@ const EditItemCartPage = () => {
         }}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Edit Item"}
+                    title={strings.editItemCartTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
-                    rightButton={<Button onClick={deleteItemFromCart} color="inherit">Delete</Button>}
+                    rightButton={<Button onClick={deleteItemFromCart} color="inherit">{strings.deleteButtonLabel}</Button>}
                 />
             </Grid>
             <Container className="container">
@@ -118,7 +119,7 @@ const EditItemCartPage = () => {
                     onPurchaseDateChange={setPurchaseDate}
                 />
                 <Grid item xs={8}>
-                    <Button variant="contained" color="success" onClick={editItem}>Edit</Button>
+                    <Button variant="contained" color="success" onClick={editItem}>{strings.editButtonLabel}</Button>
                 </Grid>
             </Container>
         </Grid>

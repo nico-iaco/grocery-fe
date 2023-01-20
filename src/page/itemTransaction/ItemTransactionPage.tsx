@@ -10,6 +10,7 @@ import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {useTransactionList} from "../../hooks/useTransactionList";
 import {useItemDetail} from "../../hooks/useItemDetail";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 function ItemTransactionPage() {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ function ItemTransactionPage() {
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
-                    rightButton={<Button onClick={goToEditItemPage} color="inherit">Edit</Button>}
+                    rightButton={<Button onClick={goToEditItemPage} color="inherit">{strings.editButtonLabel}</Button>}
                 />
             </Grid>
             <Container className="container">

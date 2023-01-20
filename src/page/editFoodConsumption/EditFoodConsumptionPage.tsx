@@ -9,6 +9,7 @@ import {FoodConsumption} from "../../model/foodConsumption";
 import {ArrowBack} from "@mui/icons-material";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const EditFoodConsumptionPage = () => {
     const navigate = useNavigate();
@@ -70,7 +71,7 @@ const EditFoodConsumptionPage = () => {
     return <Grid container columns={8}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Edit Food Consumption"}
+                title={strings.editFoodConsumptionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack
@@ -109,7 +110,7 @@ const EditFoodConsumptionPage = () => {
                                         color={"secondary"}
                                         onClick={editFoodConsumption}
                                     >
-                                        Edit
+                                        {strings.editButtonLabel}
                                     </Button>
                                 }
                             </Grid>

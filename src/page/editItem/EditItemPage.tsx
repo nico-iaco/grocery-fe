@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCurrentItem, getUser} from "../../selector/Selector";
 import {setCurrentItem, setError} from "../../action/Action";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const EditItemPage = () => {
     const currentItem = useSelector(getCurrentItem);
@@ -59,12 +60,12 @@ const EditItemPage = () => {
     }}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Edit " + currentItem?.name}
+                title={strings.formatString(strings.editItemTitle, currentItem?.name || "").toString()}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack
                 }}
-                rightButton={<Button onClick={deleteItemFromServer} color="inherit">Delete</Button>}
+                rightButton={<Button onClick={deleteItemFromServer} color="inherit">{strings.deleteButtonLabel}</Button>}
             />
         </Grid>
         <Container className="container">
@@ -75,7 +76,7 @@ const EditItemPage = () => {
                 onBarcodeChange={(v) => setBarcode(v)}
                 vendor={vendor}
                 onVendorChange={(v) => setVendor(v)}
-                buttonText="Update"
+                buttonText={strings.editButtonLabel}
                 onButtonClick={updateItemToBe}
             />
         </Container>

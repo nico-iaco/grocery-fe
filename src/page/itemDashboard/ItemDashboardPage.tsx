@@ -21,6 +21,7 @@ import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent
 import {useItemList} from "../../hooks/useItemList";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {ListLoadingComponent} from "../../component/ListLoadingComponent";
+import {strings} from "../../localization/strings";
 
 const ItemDashboardPage = () => {
     const dispatch = useDispatch();
@@ -52,13 +53,13 @@ const ItemDashboardPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Food pantry"}
+                    title={strings.groceryTitle}
                 />
             </Grid>
             <Container className="container">
                 <Grid item xs={8}>
                     <FormControl variant="outlined" fullWidth>
-                        <InputLabel htmlFor="outlined-adornment-search">Search</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-search">{strings.searchLabel}</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-search"
                             type={'text'}
@@ -73,7 +74,7 @@ const ItemDashboardPage = () => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            label="search"
+                            label={strings.searchLabel}
                         />
                     </FormControl>
                 </Grid>

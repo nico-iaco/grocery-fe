@@ -9,6 +9,7 @@ import {deleteMeal, updateMeal} from "../../api/mealApis";
 import {setCurrentMeal, setError} from "../../action/Action";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const EditMealPage = () => {
     const navigate = useNavigate();
@@ -69,12 +70,12 @@ const EditMealPage = () => {
         }}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Edit meal"}
+                    title={strings.editMealTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
-                    rightButton={<Button onClick={deleteMealFromServer} color="inherit">Delete</Button>}
+                    rightButton={<Button onClick={deleteMealFromServer} color="inherit">{strings.deleteButtonLabel}</Button>}
                 />
             </Grid>
             <Container className="container">
@@ -87,7 +88,7 @@ const EditMealPage = () => {
                     onMealTypeChange={setMealType}
                     date={mealDate}
                     onDateChange={setMealDate}
-                    buttonText="Update"
+                    buttonText={strings.editButtonLabel}
                     onButtonClick={saveMeal}/>
             </Container>
         </Grid>)

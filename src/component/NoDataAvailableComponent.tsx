@@ -1,5 +1,6 @@
 import {Paper, Typography} from "@mui/material";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import {strings} from "../localization/strings";
 
 export const NoDataAvailableComponent = () => {
     return (
@@ -18,7 +19,7 @@ export const NoDataAvailableComponent = () => {
                         marginRight: 8
                     }}/>
                     <Typography variant="h6" color="textSecondary">
-                        No data available
+                        {strings.noDataAvailableLabel}
                     </Typography>
                 </div>
             </Paper>

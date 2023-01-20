@@ -8,6 +8,7 @@ import {Transaction} from "../model/transaction";
 import {format} from "date-fns";
 import {useTransactionList} from "../hooks/useTransactionList";
 import {ListLoadingComponent} from "./ListLoadingComponent";
+import {strings} from "../localization/strings";
 
 const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
@@ -57,15 +58,15 @@ const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
                 <Grid container columns={8}>
                     <Grid item xs={4} className="center">
                         {
-                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>Previous</Button>
+                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>Skip</Button>
+                            props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>{strings.skipButtonLabel}</Button>
                         }
                         {
-                            props.isNextAvailable && <Button color={"secondary"} onClick={next}>Next</Button>
+                            props.isNextAvailable && <Button color={"secondary"} onClick={next}>{strings.nextButtonLabel}</Button>
                         }
                     </Grid>
                 </Grid>

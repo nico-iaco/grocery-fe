@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {ListItemRowComponent} from "./ListItemRowComponent";
 import {HourglassBottom, ProductionQuantityLimits} from "@mui/icons-material";
 import {ListLoadingComponent} from "./ListLoadingComponent";
+import {strings} from "../localization/strings";
 
 export interface ItemStatisticsComponentProps {
     itemStatistics: ItemStatistics
@@ -29,7 +30,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
             <Grid item xs={12} md={6} className="container">
                 <Container>
                     <Typography variant="h5" component="div">
-                        <b>Food in expiration</b>
+                        <b>{strings.itemStatisticsFoodInExpirationTitle}</b>
                     </Typography>
                     <List>
                         {props.itemStatistics.itemsInExpiration ? props.itemStatistics.itemsInExpiration.map(item => {
@@ -49,7 +50,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
             <Grid item xs={12} md={6} className="container">
                 <Container>
                     <Typography variant="h5" component="div">
-                        <b>Food almost finished</b>
+                        <b>{strings.itemStatisticsFoodAlmostFinishedTitle}</b>
                     </Typography>
                     <List>
                         {props.itemStatistics.itemsAlmostFinished ? props.itemStatistics.itemsAlmostFinished.map(item => {

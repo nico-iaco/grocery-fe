@@ -15,6 +15,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTabIndex, getError, getUser} from "../selector/Selector";
 import {clearError, setCurrentItem, setCurrentMealDate, setCurrentTabIndex} from "../action/Action";
 import {lazy, Suspense} from "react";
+import {strings} from "../localization/strings";
 
 const Home = lazy(() => import('./home/Home'));
 const AddItemPage = lazy(() => import('./addItem/AddItemPage'));
@@ -34,8 +35,8 @@ const RegistrationPage = lazy(() => import('./register/RegistrationPage'));
 const LoginPage = lazy(() => import('./login/LoginPage'));
 const NoAuthComponent = lazy(() => import('./noAuth/NoAuthPage'));
 const LiveGroceryShoppingPage = lazy(() => import('./liveGroceryShopping/LiveGroceryShoppingPage'));
-const AddItemCartPage = lazy(() => import('./addCartItem/AddItemCartPage'));
-const EditItemCartPage = lazy(() => import('./editCartItem/EditItemCartPage'));
+const AddItemCartPage = lazy(() => import('./addItemCart/AddItemCartPage'));
+const EditItemCartPage = lazy(() => import('./editItemCart/EditItemCartPage'));
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
@@ -134,10 +135,10 @@ function App() {
                             dispatch(setCurrentTabIndex(newValue));
                         }}
                     >
-                        <BottomNavigationAction label="Home" icon={<House/>} onClick={goToHome}/>
-                        <BottomNavigationAction label="Meal" icon={<Fastfood/>} onClick={goToMealDashboard}/>
-                        <BottomNavigationAction label="Grocery" icon={<FoodBank/>} onClick={goToItemDashboard}/>
-                        <BottomNavigationAction label="Profile" icon={<Person/>} onClick={goToProfile}/>
+                        <BottomNavigationAction label={strings.homeTab} icon={<House/>} onClick={goToHome}/>
+                        <BottomNavigationAction label={strings.mealsTab} icon={<Fastfood/>} onClick={goToMealDashboard}/>
+                        <BottomNavigationAction label={strings.groceryTab} icon={<FoodBank/>} onClick={goToItemDashboard}/>
+                        <BottomNavigationAction label={strings.profileTab} icon={<Person/>} onClick={goToProfile}/>
                     </BottomNavigation>
                 </Paper>
             </ThemeProvider>

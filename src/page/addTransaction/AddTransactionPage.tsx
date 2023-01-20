@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setError} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 
 function AddTransactionPage() {
@@ -64,7 +65,7 @@ function AddTransactionPage() {
     }}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Add Transaction"}
+                title={strings.addTransactionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack
@@ -87,7 +88,7 @@ function AddTransactionPage() {
                 onExpirationDateChange={setExpirationDate}
                 purchaseDate={purchaseDate}
                 onPurchaseDateChange={setPurchaseDate}
-                buttonText="Add"
+                buttonText={strings.addButtonLabel}
                 onButtonClick={sendTransactionToBe}/>
         </Container>
 

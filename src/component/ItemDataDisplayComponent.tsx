@@ -2,6 +2,7 @@ import {Box, FormControl, Grid, IconButton, InputAdornment, InputLabel, Modal, O
 import {CameraAlt, StoreOutlined} from "@mui/icons-material";
 import {BarcodeComponent} from "./BarcodeComponent";
 import {useState} from "react";
+import {strings} from "../localization/strings";
 
 export interface ItemDataDisplayComponentProps {
     name?: string
@@ -20,11 +21,11 @@ export const ItemDataDisplayComponent = (props: ItemDataDisplayComponentProps) =
         <div>
             <Grid item xs={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                    <InputLabel htmlFor="name-required">Name</InputLabel>
+                    <InputLabel htmlFor="name-required">{strings.itemNameLabel}</InputLabel>
                     <OutlinedInput
                         required
                         id="name-required"
-                        label="Name"
+                        label={strings.itemNameLabel}
                         value={props.name}
                         onChange={(event) => props.onNameChange(event.target.value)}
                     />
@@ -32,11 +33,11 @@ export const ItemDataDisplayComponent = (props: ItemDataDisplayComponentProps) =
             </Grid>
             <Grid item xs={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                    <InputLabel htmlFor="barcode-required">Barcode</InputLabel>
+                    <InputLabel htmlFor="barcode-required">{strings.itemBarcodeLabel}</InputLabel>
                     <OutlinedInput
                         required
                         id="barcode-required"
-                        label="Barcode"
+                        label={strings.itemBarcodeLabel}
                         value={props.barcode}
                         onChange={(event) => props.onBarcodeChange(event.target.value)}
                         endAdornment={
@@ -55,11 +56,11 @@ export const ItemDataDisplayComponent = (props: ItemDataDisplayComponentProps) =
             </Grid>
             <Grid item xs={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                    <InputLabel htmlFor="vendor-required">Vendor</InputLabel>
+                    <InputLabel htmlFor="vendor-required">{strings.itemVendorLabel}</InputLabel>
                     <OutlinedInput
                         required
                         id="vendor-required"
-                        label="Vendor"
+                        label={strings.itemVendorLabel}
                         value={props.vendor}
                         onChange={(event) => props.onVendorChange(event.target.value)}
                         endAdornment={

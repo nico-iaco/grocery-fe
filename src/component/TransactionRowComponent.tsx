@@ -1,6 +1,7 @@
 import {format} from "date-fns";
 import {Edit, Receipt} from "@mui/icons-material";
-import { ListItemRowComponent } from "./ListItemRowComponent";
+import {ListItemRowComponent} from "./ListItemRowComponent";
+import {strings} from "../localization/strings";
 
 export interface TransactionRowComponentProps {
     id: string
@@ -20,7 +21,7 @@ export function TransactionRowComponent(props: TransactionRowComponentProps) {
             <ListItemRowComponent
                 leftIcon={<Receipt />}
                 title={`${props.seller} ${props.price}€`}
-                subtitle={`Expiration date: ${formattedDate}   ${props.availableQuantity}/${props.quantity} ${props.unit}`}
+                subtitle={strings.formatString(strings.transactionRowSubtitle, formattedDate, props.availableQuantity.toString(), props.quantity.toString(), props.unit).toString()}
                 tagList={[]}
                 rightIcon={<Edit/>}
                 onItemClicked={props.onTransactionClick}

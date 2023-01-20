@@ -3,6 +3,7 @@ import {Container, Grid, Paper, Typography} from "@mui/material";
 import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
+import {strings} from "../localization/strings";
 
 export interface MealStatisticsProps {
     mealStatistics: MealStatistic;
@@ -90,7 +91,7 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="body1" component="div">
-                                <b>Most eaten food: </b> {props.mealStatistics.mostConsumedFood.foodName !== "" ?
+                                <b>{strings.mealStatisticsMostEatenFoodLabel}</b> {props.mealStatistics.mostConsumedFood.foodName !== "" ?
                                 props.mealStatistics.mostConsumedFood.foodName + "  " + props.mealStatistics.mostConsumedFood.quantityUsed + "  " + props.mealStatistics.mostConsumedFood.unit
                                 : "N/A"
                             }

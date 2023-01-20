@@ -35,6 +35,8 @@ export const SET_CURRENT_SHOPPING_ITEM_TYPE = "SET_CURRENT_SHOPPING_ITEM";
 
 export const SET_CURRENT_MEAL_DATE_TYPE = "SET_CURRENT_MEAL_DATE";
 
+export const SET_LANGUAGE_TYPE = "SET_LANGUAGE";
+
 
 export const setCurrentItem = (item?: Item): Action => {
     return {
@@ -135,6 +137,13 @@ export const setCurrentMealDate = (date: Date): Action => {
     return {
         type: SET_CURRENT_MEAL_DATE_TYPE,
         payload: date
+    };
+}
+
+export const setLanguage = (language: string): Action => {
+    return {
+        type: SET_LANGUAGE_TYPE,
+        payload: language
     };
 }
 

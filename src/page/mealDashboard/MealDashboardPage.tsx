@@ -16,6 +16,7 @@ import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useMealList} from "../../hooks/useMealList";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {ListLoadingComponent} from "../../component/ListLoadingComponent";
+import {strings} from "../../localization/strings";
 
 
 const MealDashboardPage = () => {
@@ -62,7 +63,7 @@ const MealDashboardPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Meals of " + formattedDate}
+                    title={strings.formatString(strings.mealsTitle, formattedDate).toString()}
                     rightButton={<IconButton
                         size="large"
                         color={"inherit"}
@@ -96,9 +97,9 @@ const MealDashboardPage = () => {
                 <Grid item xs={8}>
                     <MealStatisticsComponent
                         mealStatistics={mealStatistic}
-                        mealKcalChartLabel={"Kcal per meal type"}
-                        kcalLabel={"Total kcal of the day"}
-                        costLabel={"Total cost of the day"}
+                        mealKcalChartLabel={strings.mealStatisticsKcalPerMealTypeTitle}
+                        kcalLabel={strings.mealStatisticsSumKcalPerDayLabel}
+                        costLabel={strings.mealStatisticsSumCostPerDayLabel}
                     />
                 </Grid>
                 <Grid item xs={8}>
