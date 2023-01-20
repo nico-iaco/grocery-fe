@@ -8,12 +8,15 @@ import {getCurrentItem, getUser} from "../selector/Selector";
 import {useFoodList} from "../hooks/useFoodList";
 import {ListLoadingComponent} from "./ListLoadingComponent";
 import {strings} from "../localization/strings";
+import {useState} from "react";
+import SearchComponent from "./SearchComponent";
 
 
 const ChooseFoodComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
+    const [search, setSearch] = useState("");
 
     const foodList = useFoodList( true, currentUser?.id || "");
 
@@ -36,14 +39,25 @@ const ChooseFoodComponent = (props: StepperComponentProps) => {
 
     return <Grid item xs={8}>
         <Grid container columns={8}>
+            <SearchComponent
+                search={search}
+                onSearchChanged={setSearch}
+            />
             <Grid item xs={8}>
                 {
                     foodList.length > 0 ?
                         <List>
-                            {foodList.map((item) => {
-                                return <div key={item.id} style={{padding: 8}}>
-                                    <Paper variant="outlined" className={currentFood !== undefined && item.id === currentFood.id ? "list-item-selected" : "list-item"}>
-                                        <SimpleItemRowComponent mainText={item.name} subText={`${item.availableQuantity} ${item.unit}`} onClick={() => {onFoodClicked(item)}}/>
+                            {foodList
+                                .filter(value => search === "" || (value.name.toLowerCase().includes(search.toLowerCase()) || value.barcode.includes(search)))
+                                .map((item) => {
+                                    return <div key={item.id} style={{padding: 8}}>
+                                        <Paper variant="outlined"
+                                               className={currentFood !== undefined && item.id === currentFood.id ? "list-item-selected" : "list-item"}>
+                                            <SimpleItemRowComponent mainText={item.name}
+                                                                    subText={`${item.availableQuantity} ${item.unit}`}
+                                                                    onClick={() => {
+                                                                        onFoodClicked(item)
+                                                                    }}/>
                                     </Paper>
                                 </div>
                             })}
