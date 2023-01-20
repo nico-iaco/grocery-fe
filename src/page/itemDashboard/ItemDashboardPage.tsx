@@ -74,7 +74,7 @@ const ItemDashboardPage = () => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                            label="search"
+                            label={strings.searchLabel}
                         />
                     </FormControl>
                 </Grid>

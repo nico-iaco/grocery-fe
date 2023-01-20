@@ -74,7 +74,7 @@ const AddMealPage = () => {
                         onMealTypeChange={setMealType}
                         date={date}
                         onDateChange={setDate}
-                        buttonText="Add meal"
+                        buttonText={strings.addButtonLabel}
                         onButtonClick={sendMealToBe}
                     />
                 </Container>

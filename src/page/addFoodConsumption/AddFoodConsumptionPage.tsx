@@ -11,7 +11,6 @@ const ChooseFoodComponent = React.lazy(() => import("../../component/ChooseFoodC
 const ChooseFoodTransactionComponent = React.lazy(() => import("../../component/ChooseFoodTransactionComponent"));
 const CompleteFoodConsumptionComponent = React.lazy(() => import("../../component/CompleteFoodConsumptionComponent"));
 
-const steps = ['Select food', 'Select transaction', 'Complete'];
 
 const _renderStepContent = (step: number, onNextClicked: () => void, onPreviousClicked: () => void, onSkipClicked: () => void) => {
     switch (step) {
@@ -61,6 +60,12 @@ const AddFoodConsumptionPage = () => {
     const dispatch = useDispatch();
 
     const [activeStep, setActiveStep] = useState(0);
+
+    const steps = [
+        strings.addFoodConsumptionSelectFoodStepTitle,
+        strings.addFoodConsumptionSelectTransactionStepTitle,
+        strings.addFoodConsumptionCompleteStepTitle
+    ];
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);

@@ -10,6 +10,7 @@ import {FoodConsumption} from "../model/foodConsumption";
 import {addMealFoodConsumption} from "../api/mealApis";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../utils/firebaseUtils";
+import {strings} from "../localization/strings";
 
 const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentMeal = useSelector(getCurrentMeal);
@@ -81,12 +82,12 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
                 <Grid container columns={8}>
                     <Grid item xs={4} className="center">
                         {
-                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>Previous</Button>
+                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isNextAvailable && <Button color={"secondary"} onClick={onCompleted}>Add</Button>
+                            props.isNextAvailable && <Button color={"secondary"} onClick={onCompleted}>{strings.doneButtonLabel}</Button>
                         }
                     </Grid>
                 </Grid>

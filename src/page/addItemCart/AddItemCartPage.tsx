@@ -107,7 +107,9 @@ const AddItemCartPage = () => {
                     onPurchaseDateChange={setPurchaseDate}
                 />
                 <Grid item xs={8}>
-                    <Button variant="contained" color="success" onClick={addToCart}>Add to cart</Button>
+                    <Button variant="contained" color="success" onClick={addToCart}>
+                        {strings.addToCartButtonLabel}
+                    </Button>
                 </Grid>
             </Container>
         </Grid>

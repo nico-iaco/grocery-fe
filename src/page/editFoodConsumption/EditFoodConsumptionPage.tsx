@@ -110,7 +110,7 @@ const EditFoodConsumptionPage = () => {
                                         color={"secondary"}
                                         onClick={editFoodConsumption}
                                     >
-                                        Edit
+                                        {strings.editButtonLabel}
                                     </Button>
                                 }
                             </Grid>

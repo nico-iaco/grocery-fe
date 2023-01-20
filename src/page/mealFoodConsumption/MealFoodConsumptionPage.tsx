@@ -43,7 +43,7 @@ const MealFoodConsumptionPage = () => {
                     icon: <ArrowBack/>,
                     onClick: goBack
                 }}
-                rightButton={<Button onClick={goToEditMealPage} color="inherit">Edit</Button>}
+                rightButton={<Button onClick={goToEditMealPage} color="inherit">{strings.editButtonLabel}</Button>}
             />
         </Grid>
         <Container className="container">

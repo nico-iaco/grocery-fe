@@ -1,4 +1,5 @@
 import {Dialog, DialogTitle, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
+import {strings} from "../localization/strings";
 
 export interface LanguageSelectionDialogComponentProps {
     open: boolean;
@@ -19,16 +20,16 @@ const LanguageSelectionDialogComponent = (props: LanguageSelectionDialogComponen
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="dialog-title" open={open}>
-            <DialogTitle id="dialog-title">Select language</DialogTitle>
+            <DialogTitle id="dialog-title">{strings.languageSelectionDialogTitle}</DialogTitle>
             <List>
                 <ListItem>
                     <ListItemButton onClick={() => handleListItemClick('it')} selected={'it' === selectedValue}>
-                        <ListItemText primary="Italian"/>
+                        <ListItemText primary={strings.languageSelectionItalianLabel}/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem>
                     <ListItemButton onClick={() => handleListItemClick('en')} selected={'en' === selectedValue}>
-                        <ListItemText primary="English"/>
+                        <ListItemText primary={strings.languageSelectionEnglishLabel}/>
                     </ListItemButton>
                 </ListItem>
             </List>

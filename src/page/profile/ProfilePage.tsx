@@ -65,7 +65,7 @@ const ProfilePage = () => {
             <Grid item xs={8}>
                 <AppBarComponent
                     title={strings.profileTitle}
-                    rightButton={<Button color={"inherit"} onClick={logout}>Logout</Button>}
+                    rightButton={<Button color={"inherit"} onClick={logout}>{strings.logoutButtonLabel}</Button>}
                 />
             </Grid>
             <Container className="container">
@@ -76,7 +76,7 @@ const ProfilePage = () => {
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <h2 className={"lobster-font"}>Hi {currentUser?.displayName}</h2>
+                        <h2 className={"lobster-font"}>{strings.formatString(strings.profileGreetingsLabel, currentUser?.displayName || "")}</h2>
                     </Grid>
                 </Grid>
                 <Grid item xs={8} className="container">
@@ -85,7 +85,7 @@ const ProfilePage = () => {
                             <ListItemIcon>
                                 <Email/>
                             </ListItemIcon>
-                            <ListItemText primary="Email" secondary={currentUser?.email}/>
+                            <ListItemText primary={strings.profileEmailLabel} secondary={currentUser?.email}/>
                         </ListItem>
                         <Divider/>
                         <ListItem disablePadding>
@@ -93,7 +93,7 @@ const ProfilePage = () => {
                                 <ListItemIcon>
                                     <Language/>
                                 </ListItemIcon>
-                                <ListItemText primary="Language" secondary={currentLanguage}/>
+                                <ListItemText primary={strings.profileLanguageLabel} secondary={currentLanguage}/>
                             </ListItemButton>
                         </ListItem>
                         <Divider />
@@ -102,8 +102,8 @@ const ProfilePage = () => {
                                 <BugReport/>
                             </ListItemIcon>
                             <ListItemText
-                                primary="Report a bug"
-                                secondary={"Open a Github issue"}
+                                primary={strings.profileReportBugPrimaryLabel}
+                                secondary={strings.profileReportBugSecondaryLabel}
                                 onClick={() => window.open("https://github.com/nico-iaco/grocery-fe/issues/new?assignees=&labels=bug&template=bug_report.md&title=BUG+-+", "_blank")}
                             />
                         </ListItem>
@@ -112,7 +112,10 @@ const ProfilePage = () => {
                             <ListItemIcon>
                                 <Info/>
                             </ListItemIcon>
-                            <ListItemText primary="Application version" secondary={`v2.0.0-${appVersionDetail}`}/>
+                            <ListItemText
+                                primary={strings.profileApplicationVersionLabel}
+                                secondary={`v2.0.0-${appVersionDetail}`}
+                            />
                         </ListItem>
                         <Divider />
                     </List>

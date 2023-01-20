@@ -88,7 +88,7 @@ function AddTransactionPage() {
                 onExpirationDateChange={setExpirationDate}
                 purchaseDate={purchaseDate}
                 onPurchaseDateChange={setPurchaseDate}
-                buttonText="Add"
+                buttonText={strings.addButtonLabel}
                 onButtonClick={sendTransactionToBe}/>
         </Container>
 

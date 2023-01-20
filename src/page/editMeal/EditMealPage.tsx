@@ -75,7 +75,7 @@ const EditMealPage = () => {
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
-                    rightButton={<Button onClick={deleteMealFromServer} color="inherit">Delete</Button>}
+                    rightButton={<Button onClick={deleteMealFromServer} color="inherit">{strings.deleteButtonLabel}</Button>}
                 />
             </Grid>
             <Container className="container">
@@ -88,7 +88,7 @@ const EditMealPage = () => {
                     onMealTypeChange={setMealType}
                     date={mealDate}
                     onDateChange={setMealDate}
-                    buttonText="Update"
+                    buttonText={strings.editButtonLabel}
                     onButtonClick={saveMeal}/>
             </Container>
         </Grid>)

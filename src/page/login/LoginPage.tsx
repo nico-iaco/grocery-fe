@@ -84,12 +84,12 @@ const LoginPage = () => {
             <Container className="container text-center">
                 <Grid item xs={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                        <InputLabel htmlFor="email-required">Email</InputLabel>
+                        <InputLabel htmlFor="email-required">{strings.emailLabel}</InputLabel>
                         <OutlinedInput
                             required
                             id="email-required"
                             label="Email"
-                            value={email}
+                            value={strings.emailLabel}
                             type={"email"}
                             onChange={(event) => setEmail(event.target.value)}
                             endAdornment={
@@ -102,11 +102,11 @@ const LoginPage = () => {
                 </Grid>
                 <Grid item xs={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                        <InputLabel htmlFor="password-required">Password</InputLabel>
+                        <InputLabel htmlFor="password-required">{strings.passwordLabel}</InputLabel>
                         <OutlinedInput
                             required
                             id="password-required"
-                            label="Password"
+                            label={strings.passwordLabel}
                             value={password}
                             type={"password"}
                             onChange={(event) => setPassword(event.target.value)}
@@ -129,7 +129,7 @@ const LoginPage = () => {
                                             (event) => setIsPersistent(event.target.checked)
                                         } />
                                 }
-                                label="Remember me"
+                                label={strings.rememberMeLabel}
                             />
                         </FormGroup>
                     </FormControl>
@@ -140,7 +140,7 @@ const LoginPage = () => {
                         color={"secondary"}
                         onClick={login}
                     >
-                        Login
+                        {strings.loginButtonLabel}
                     </Button>
                 </Grid>
             </Container>

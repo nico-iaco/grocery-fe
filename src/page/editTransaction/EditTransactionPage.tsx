@@ -88,7 +88,7 @@ const EditTransactionPage = () => {
                     icon: <ArrowBack/>,
                     onClick: goBack
                 }}
-                rightButton={<Button onClick={deleteCurrentTransaction} color="inherit">Delete</Button>}
+                rightButton={<Button onClick={deleteCurrentTransaction} color="inherit">{strings.deleteButtonLabel}</Button>}
             />
         </Grid>
         <Container className="container">
@@ -109,7 +109,7 @@ const EditTransactionPage = () => {
                 onExpirationDateChange={setExpirationDate}
                 purchaseDate={purchaseDate}
                 onPurchaseDateChange={setPurchaseDate}
-                buttonText="Update"
+                buttonText={strings.editButtonLabel}
                 onButtonClick={updateTransactionToBe}/>
         </Container>
     </Grid>

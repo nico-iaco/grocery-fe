@@ -67,11 +67,11 @@ const RegistrationPage = () => {
             <Container className="container text-center">
                 <Grid item xs={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                        <InputLabel htmlFor="name-required">Name</InputLabel>
+                        <InputLabel htmlFor="name-required">{strings.registrationNameLabel}</InputLabel>
                         <OutlinedInput
                             required
                             id="name-required"
-                            label="Name"
+                            label={strings.registrationNameLabel}
                             value={username}
                             type={"text"}
                             onChange={(event) => setUsername(event.target.value)}
@@ -85,11 +85,11 @@ const RegistrationPage = () => {
                 </Grid>
                 <Grid item xs={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                        <InputLabel htmlFor="email-required">Email</InputLabel>
+                        <InputLabel htmlFor="email-required">{strings.registrationEmailLabel}</InputLabel>
                         <OutlinedInput
                             required
                             id="email-required"
-                            label="Email"
+                            label={strings.registrationEmailLabel}
                             value={email}
                             type={"email"}
                             onChange={(event) => setEmail(event.target.value)}
@@ -103,11 +103,11 @@ const RegistrationPage = () => {
                 </Grid>
                 <Grid item xs={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                        <InputLabel htmlFor="password-required">Password</InputLabel>
+                        <InputLabel htmlFor="password-required">{strings.registrationPasswordLabel}</InputLabel>
                         <OutlinedInput
                             required
                             id="password-required"
-                            label="Password"
+                            label={strings.registrationPasswordLabel}
                             value={password}
                             type={passwordVisible ? "text" : "password"}
                             onChange={(event) => setPassword(event.target.value)}
@@ -131,7 +131,7 @@ const RegistrationPage = () => {
                         color={"secondary"}
                         onClick={register}
                     >
-                        Register
+                        {strings.registerButtonLabel}
                     </Button>
                 </Grid>
             </Container>

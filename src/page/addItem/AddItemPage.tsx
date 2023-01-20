@@ -69,7 +69,7 @@ function AddItemPage () {
                         onBarcodeChange={(v) => setBarcode(v)}
                         vendor={vendor}
                         onVendorChange={(v) => setVendor(v)}
-                        buttonText="Add"
+                        buttonText={strings.addButtonLabel}
                         onButtonClick={sendItemToBe}
                     />
                 </Container>

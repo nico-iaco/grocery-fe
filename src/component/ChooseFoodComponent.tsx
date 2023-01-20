@@ -7,6 +7,7 @@ import {setCurrentItem, setError} from "../action/Action";
 import {getCurrentItem, getUser} from "../selector/Selector";
 import {useFoodList} from "../hooks/useFoodList";
 import {ListLoadingComponent} from "./ListLoadingComponent";
+import {strings} from "../localization/strings";
 
 
 const ChooseFoodComponent = (props: StepperComponentProps) => {
@@ -53,15 +54,15 @@ const ChooseFoodComponent = (props: StepperComponentProps) => {
                 <Grid container columns={8}>
                     <Grid item xs={4} className="center">
                         {
-                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>Previous</Button>
+                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>Skip</Button>
+                            props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>{strings.skipButtonLabel}</Button>
                         }
                         {
-                            props.isNextAvailable && <Button color={"secondary"} onClick={next}>Next</Button>
+                            props.isNextAvailable && <Button color={"secondary"} onClick={next}>{strings.nextButtonLabel}</Button>
                         }
                     </Grid>
                 </Grid>

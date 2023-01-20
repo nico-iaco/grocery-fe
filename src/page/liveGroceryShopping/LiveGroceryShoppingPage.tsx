@@ -78,16 +78,20 @@ const LiveGroceryShoppingPage = () => {
                 </Grid>
                 <Grid item xs={8} className="container">
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        <b>Total:</b> {total} €
+                        <b>{strings.shoppingCartTotalLabel}</b> {total} €
                     </Typography>
                 </Grid>
                 <Grid item xs={8} className="container">
-                    <Button variant="contained" color="success" onClick={applyShoppingList}>Apply</Button>
-                    <Button variant="contained" color="error" onClick={clearCart}>Discard</Button>
+                    <Button variant="contained" color="success" onClick={applyShoppingList}>
+                        {strings.shoppingCartApplyButtonLabel}
+                    </Button>
+                    <Button variant="contained" color="error" onClick={clearCart}>
+                        {strings.shoppingCartDiscardButtonLabel}
+                    </Button>
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 70, right: 8}}
+                    className={"fab"}
                     onClick={goToAddItemToCart}
                 >
                     <Add/>

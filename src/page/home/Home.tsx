@@ -73,21 +73,21 @@ function Home() {
             >
                 <SpeedDialAction
                     FabProps={fabProps}
-                    tooltipTitle="Live grocery shopping"
+                    tooltipTitle={strings.fabLiveGroceryShoppingLabel}
                     onClick={goToLiveShopping}
                     tooltipOpen
                     icon={<LocalGroceryStore/>}
                 />
                 <SpeedDialAction
                     FabProps={fabProps}
-                    tooltipTitle="Add meal"
+                    tooltipTitle={strings.fabAddMealLabel}
                     onClick={goToAddMeal}
                     tooltipOpen
                     icon={<Fastfood/>}
                 />
                 <SpeedDialAction
                     FabProps={fabProps}
-                    tooltipTitle="Add food"
+                    tooltipTitle={strings.fabAddItemLabel}
                     onClick={goToAddFood}
                     tooltipOpen
                     icon={<FoodBank/>}

@@ -65,7 +65,7 @@ const EditItemPage = () => {
                     icon: <ArrowBack/>,
                     onClick: goBack
                 }}
-                rightButton={<Button onClick={deleteItemFromServer} color="inherit">Delete</Button>}
+                rightButton={<Button onClick={deleteItemFromServer} color="inherit">{strings.deleteButtonLabel}</Button>}
             />
         </Grid>
         <Container className="container">
@@ -76,7 +76,7 @@ const EditItemPage = () => {
                 onBarcodeChange={(v) => setBarcode(v)}
                 vendor={vendor}
                 onVendorChange={(v) => setVendor(v)}
-                buttonText="Update"
+                buttonText={strings.editButtonLabel}
                 onButtonClick={updateItemToBe}
             />
         </Container>
