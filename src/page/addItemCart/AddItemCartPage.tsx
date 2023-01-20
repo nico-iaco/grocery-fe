@@ -81,7 +81,7 @@ const AddItemCartPage = () => {
                     }}
                 />
             </Grid>
-            <Container className="container">
+            <Container className="container text-center">
                 <ItemDataDisplayComponent
                     name={name}
                     onNameChange={(v) => setName(v)}
@@ -107,7 +107,7 @@ const AddItemCartPage = () => {
                     onPurchaseDateChange={setPurchaseDate}
                 />
                 <Grid item xs={8}>
-                    <Button variant="contained" color="success" onClick={addToCart}>
+                    <Button variant="contained" color="secondary" onClick={addToCart}>
                         {strings.addToCartButtonLabel}
                     </Button>
                 </Grid>

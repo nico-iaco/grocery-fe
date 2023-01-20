@@ -82,12 +82,18 @@ const LiveGroceryShoppingPage = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={8} className="container">
-                    <Button variant="contained" color="success" onClick={applyShoppingList}>
-                        {strings.shoppingCartApplyButtonLabel}
-                    </Button>
-                    <Button variant="contained" color="error" onClick={clearCart}>
-                        {strings.shoppingCartDiscardButtonLabel}
-                    </Button>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6} className={"center"}>
+                            <Button variant="contained" color="success" onClick={applyShoppingList}>
+                                {strings.shoppingCartApplyButtonLabel}
+                            </Button>
+                        </Grid>
+                        <Grid item xs={6} className={"center"}>
+                            <Button variant="contained" color="error" onClick={clearCart}>
+                                {strings.shoppingCartDiscardButtonLabel}
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Fab
                     color="secondary"
