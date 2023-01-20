@@ -48,7 +48,7 @@ export const MealDataComponent = (props: MealDataComponentProps) => {
                     value={props.mealType}
                     onChange={(event) => props.onMealTypeChange(event.target.value as MealType)}
                 >
-                    <MenuItem value={MealType.BREAKFAST}>{strings.melaTypeBreakfastLabel}</MenuItem>
+                    <MenuItem value={MealType.BREAKFAST}>{strings.mealTypeBreakfastLabel}</MenuItem>
                     <MenuItem value={MealType.LUNCH}>{strings.mealTypeLunchLabel}</MenuItem>
                     <MenuItem value={MealType.DINNER}>{strings.mealTypeDinnerLabel}</MenuItem>
                     <MenuItem value={MealType.OTHERS}>{strings.mealTypeOtherLabel}</MenuItem>
