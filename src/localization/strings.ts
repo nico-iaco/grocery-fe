@@ -53,7 +53,7 @@ export interface IStrings extends LocalizedStringsMethods {
     mealDescriptionLabel: string;
     mealTypeLabel: string;
     mealDateLabel: string;
-    melaTypeBreakfastLabel: string;
+    mealTypeBreakfastLabel: string;
     mealTypeLunchLabel: string;
     mealTypeDinnerLabel: string;
     mealTypeOtherLabel: string;
@@ -154,7 +154,7 @@ export const strings: IStrings = new LocalizedStrings({
         mealDescriptionLabel: 'Description',
         mealTypeLabel: 'Meal type',
         mealDateLabel: 'Meal date',
-        melaTypeBreakfastLabel: 'Breakfast',
+        mealTypeBreakfastLabel: 'Breakfast',
         mealTypeLunchLabel: 'Lunch',
         mealTypeDinnerLabel: 'Dinner',
         mealTypeOtherLabel: 'Other',
@@ -252,7 +252,7 @@ export const strings: IStrings = new LocalizedStrings({
         mealDescriptionLabel: 'Descrizione',
         mealTypeLabel: 'Tipo pasto',
         mealDateLabel: 'Data pasto',
-        melaTypeBreakfastLabel: 'Colazione',
+        mealTypeBreakfastLabel: 'Colazione',
         mealTypeLunchLabel: 'Pranzo',
         mealTypeDinnerLabel: 'Cena',
         mealTypeOtherLabel: 'Altro',
