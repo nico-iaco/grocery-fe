@@ -4,6 +4,7 @@ import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
 import {strings} from "../localization/strings";
+import {getTranslatedMealType} from "../utils/translationUtils";
 
 export interface MealStatisticsProps {
     mealStatistics: MealStatistic;
@@ -52,11 +53,16 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                                             ))
                                         }
                                     </Pie>
-                                    <Tooltip formatter={(value, name, props) => {
+                                    <Tooltip formatter={(value) => {
                                         const formattedNumber = Number.parseFloat(value.toString()).toFixed(2)
                                         return `${formattedNumber} kcal`
                                     }}/>
-                                    <Legend iconType="rect"/>
+                                    <Legend
+                                        iconType="rect"
+                                        formatter={(value) => {
+                                            return getTranslatedMealType(value)
+                                        }}
+                                    />
                                 </PieChart>
                             </ResponsiveContainer>
                             :
@@ -70,7 +76,7 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                                     marginRight: 8
                                 }}/>
                                 <Typography variant="h6" color="textSecondary">
-                                    No data available
+                                    {strings.noDataAvailableLabel}
                                 </Typography>
                             </div>
                     }

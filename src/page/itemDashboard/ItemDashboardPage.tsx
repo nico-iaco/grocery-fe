@@ -3,25 +3,16 @@ import {useEffect, useState} from "react";
 import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
 import {setCurrentItem, setCurrentTabIndex} from "../../action/Action";
-import {
-    Container,
-    Fab,
-    FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    List,
-    OutlinedInput
-} from "@mui/material";
+import {Container, Fab, Grid, List} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
-import {Add, Search} from "@mui/icons-material";
+import {Add} from "@mui/icons-material";
 import {getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useItemList} from "../../hooks/useItemList";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {ListLoadingComponent} from "../../component/ListLoadingComponent";
 import {strings} from "../../localization/strings";
+import SearchComponent from "../../component/SearchComponent";
 
 const ItemDashboardPage = () => {
     const dispatch = useDispatch();
@@ -57,27 +48,10 @@ const ItemDashboardPage = () => {
                 />
             </Grid>
             <Container className="container">
-                <Grid item xs={8}>
-                    <FormControl variant="outlined" fullWidth>
-                        <InputLabel htmlFor="outlined-adornment-search">{strings.searchLabel}</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-search"
-                            type={'text'}
-                            value={search}
-                            onChange={(event) => setSearch(event.target.value)}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        edge="end"
-                                    >
-                                        <Search/>
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label={strings.searchLabel}
-                        />
-                    </FormControl>
-                </Grid>
+                <SearchComponent
+                    search={search}
+                    onSearchChanged={setSearch}
+                />
                 <Grid item xs={8}>
                     <List className="list-container">
                         {
