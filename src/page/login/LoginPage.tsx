@@ -13,7 +13,12 @@ import {
 import {useState} from "react";
 import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
-import {browserLocalPersistence, setPersistence, signInWithEmailAndPassword,} from "firebase/auth";
+import {
+    browserLocalPersistence,
+    setPersistence,
+    signInWithEmailAndPassword,
+    User as FirebaseUser,
+} from "firebase/auth";
 import {useDispatch} from "react-redux";
 import {setError, setIsUserPersisted, setUser} from "../../action/Action";
 import {analytics, auth, mapFirebaseUserToUser} from "../../utils/firebaseUtils";
@@ -29,6 +34,12 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [isPersistent, setIsPersistent] = useState(false);
 
+    const handleLogin = (firebaseUser: FirebaseUser) => {
+        const user = mapFirebaseUserToUser(firebaseUser);
+        logEvent(analytics, 'login', user);
+        dispatch(setUser(user));
+        navigate(-1);
+    }
 
     const login = () => {
         if (isPersistent) {
@@ -39,9 +50,8 @@ const LoginPage = () => {
                     return signInWithEmailAndPassword(auth, email, password)
                 })
                 .then((userCredential) => {
-                    const user = mapFirebaseUserToUser(userCredential.user);
-                    logEvent(analytics, 'login', user);
-                    dispatch(setUser(user));
+                    const firebaseUser = userCredential.user;
+                    handleLogin(firebaseUser);
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
@@ -50,9 +60,8 @@ const LoginPage = () => {
         } else {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    const user = mapFirebaseUserToUser(userCredential.user);
-                    logEvent(analytics, 'login', user);
-                    dispatch(setUser(user));
+                    const firebaseUser = userCredential.user;
+                    handleLogin(firebaseUser);
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
