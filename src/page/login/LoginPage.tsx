@@ -13,56 +13,51 @@ import {
 import {useState} from "react";
 import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
-import {browserLocalPersistence, getAuth, setPersistence, signInWithEmailAndPassword} from "firebase/auth";
+import {browserLocalPersistence, setPersistence, signInWithEmailAndPassword,} from "firebase/auth";
 import {useDispatch} from "react-redux";
-import {setError, setUser} from "../../action/Action";
-import {User} from "../../model/user";
-import {logEvent} from "firebase/analytics";
-import {analytics} from "../../utils/firebaseUtils";
+import {setError, setIsUserPersisted, setUser} from "../../action/Action";
+import {analytics, auth, mapFirebaseUserToUser} from "../../utils/firebaseUtils";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {strings} from "../../localization/strings";
+import {logEvent} from "firebase/analytics";
 
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const auth = getAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isPersistent, setIsPersistent] = useState(false);
 
-    const firebaseSignIn = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const firebaseUser = userCredential.user;
-                const user: User = {
-                    email: firebaseUser.email ?? "",
-                    id: firebaseUser.uid,
-                    displayName: firebaseUser.displayName ?? "",
-                }
-                logEvent(analytics, 'login', user);
-                dispatch(setUser(user));
-                navigate(-1);
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                dispatch(setError(errorMessage));
-            });
-    }
 
     const login = () => {
         if (isPersistent) {
             console.log("set persistence")
+            dispatch(setIsUserPersisted(true));
             setPersistence(auth, browserLocalPersistence)
                 .then(() => {
-                    firebaseSignIn();
+                    return signInWithEmailAndPassword(auth, email, password)
+                })
+                .then((userCredential) => {
+                    const user = mapFirebaseUserToUser(userCredential.user);
+                    logEvent(analytics, 'login', user);
+                    dispatch(setUser(user));
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
                     dispatch(setError(errorMessage));
                 });
         } else {
-            firebaseSignIn();
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = mapFirebaseUserToUser(userCredential.user);
+                    logEvent(analytics, 'login', user);
+                    dispatch(setUser(user));
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    dispatch(setError(errorMessage));
+                });
         }
     }
 
@@ -88,8 +83,8 @@ const LoginPage = () => {
                         <OutlinedInput
                             required
                             id="email-required"
-                            label="Email"
-                            value={strings.emailLabel}
+                            label={strings.emailLabel}
+                            value={email}
                             type={"email"}
                             onChange={(event) => setEmail(event.target.value)}
                             endAdornment={

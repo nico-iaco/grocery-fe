@@ -37,6 +37,7 @@ export const SET_CURRENT_MEAL_DATE_TYPE = "SET_CURRENT_MEAL_DATE";
 
 export const SET_LANGUAGE_TYPE = "SET_LANGUAGE";
 
+export const SET_IS_USER_PERSISTED_TYPE = "SET_IS_USER_PERSISTED";
 
 export const setCurrentItem = (item?: Item): Action => {
     return {
@@ -147,3 +148,9 @@ export const setLanguage = (language: string): Action => {
     };
 }
 
+export const setIsUserPersisted = (isUserPersisted: boolean): Action => {
+    return {
+        type: SET_IS_USER_PERSISTED_TYPE,
+        payload: isUserPersisted
+    };
+}

@@ -13,9 +13,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTabIndex, getError, getUser} from "../selector/Selector";
-import {clearError, setCurrentItem, setCurrentMealDate, setCurrentTabIndex} from "../action/Action";
+import {clearError, clearUser, setCurrentItem, setCurrentMealDate, setCurrentTabIndex, setUser} from "../action/Action";
 import {lazy, Suspense} from "react";
 import {strings} from "../localization/strings";
+import {auth, mapFirebaseUserToUser} from "../utils/firebaseUtils";
 
 const Home = lazy(() => import('./home/Home'));
 const AddItemPage = lazy(() => import('./addItem/AddItemPage'));
@@ -44,6 +45,18 @@ function App() {
     const currentUser = useSelector(getUser);
     const navigate = useNavigate()
     const dispatch = useDispatch();
+
+
+    auth.onAuthStateChanged((fUser) => {
+        if (fUser) {
+            const user = mapFirebaseUserToUser(fUser);
+            if (!currentUser) {
+                dispatch(setUser(user));
+            }
+        } else {
+            dispatch(clearUser());
+        }
+    });
 
     let theme = createTheme({
         palette: {
