@@ -15,6 +15,7 @@ import {ArrowBack, EmailOutlined, Key} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {
     browserLocalPersistence,
+    inMemoryPersistence,
     setPersistence,
     signInWithEmailAndPassword,
     User as FirebaseUser,
@@ -42,32 +43,19 @@ const LoginPage = () => {
     }
 
     const login = () => {
-        if (isPersistent) {
-            console.log("set persistence")
-            dispatch(setIsUserPersisted(true));
-            setPersistence(auth, browserLocalPersistence)
-                .then(() => {
-                    return signInWithEmailAndPassword(auth, email, password)
-                })
-                .then((userCredential) => {
-                    const firebaseUser = userCredential.user;
-                    handleLogin(firebaseUser);
-                })
-                .catch((error) => {
-                    const errorMessage = error.message;
-                    dispatch(setError(errorMessage));
-                });
-        } else {
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const firebaseUser = userCredential.user;
-                    handleLogin(firebaseUser);
-                })
-                .catch((error) => {
-                    const errorMessage = error.message;
-                    dispatch(setError(errorMessage));
-                });
-        }
+        dispatch(setIsUserPersisted(true));
+        setPersistence(auth, isPersistent ? browserLocalPersistence : inMemoryPersistence)
+            .then(() => {
+                return signInWithEmailAndPassword(auth, email, password)
+            })
+            .then((userCredential) => {
+                const firebaseUser = userCredential.user;
+                handleLogin(firebaseUser);
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                dispatch(setError(errorMessage));
+            });
     }
 
     const goBack = () => {
@@ -131,7 +119,7 @@ const LoginPage = () => {
                                         value={isPersistent}
                                         onChange={
                                             (event) => setIsPersistent(event.target.checked)
-                                        } />
+                                        }/>
                                 }
                                 label={strings.rememberMeLabel}
                             />
