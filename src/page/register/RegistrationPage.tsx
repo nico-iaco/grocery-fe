@@ -1,12 +1,11 @@
 import {Button, Container, FormControl, Grid, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {ArrowBack, EmailOutlined, Key, Person, VisibilityOffOutlined, VisibilityOutlined} from "@mui/icons-material";
-import {createUserWithEmailAndPassword, getAuth, updateProfile} from "firebase/auth";
+import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setError, setUser} from "../../action/Action";
-import {User} from "../../model/user";
 import {logEvent} from "firebase/analytics";
-import {analytics} from "../../utils/firebaseUtils";
+import {analytics, auth, mapFirebaseUserToUser} from "../../utils/firebaseUtils";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {strings} from "../../localization/strings";
@@ -21,7 +20,6 @@ const RegistrationPage = () => {
     const [username, setUsername] = useState("");
 
     const register = () => {
-        const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const firebaseUser = userCredential.user;
@@ -29,11 +27,7 @@ const RegistrationPage = () => {
                     displayName: username,
                 })
                     .then(() => {
-                        const user: User = {
-                            email: firebaseUser.email ?? "",
-                            id: firebaseUser.uid,
-                            displayName: firebaseUser.displayName ?? "",
-                        }
+                        const user = mapFirebaseUserToUser(firebaseUser);
                         logEvent(analytics, 'sign_up', user);
                         dispatch(setUser(user));
                         navigate(-1);
