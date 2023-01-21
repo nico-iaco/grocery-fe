@@ -21,7 +21,7 @@ import {
     User as FirebaseUser,
 } from "firebase/auth";
 import {useDispatch} from "react-redux";
-import {setError, setIsUserPersisted, setUser} from "../../action/Action";
+import {setError, setUser} from "../../action/Action";
 import {analytics, auth, mapFirebaseUserToUser} from "../../utils/firebaseUtils";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {strings} from "../../localization/strings";
@@ -43,7 +43,6 @@ const LoginPage = () => {
     }
 
     const login = () => {
-        dispatch(setIsUserPersisted(true));
         setPersistence(auth, isPersistent ? browserLocalPersistence : inMemoryPersistence)
             .then(() => {
                 return signInWithEmailAndPassword(auth, email, password)

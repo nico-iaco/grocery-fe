@@ -51,6 +51,3 @@ export const getLanguage = (state: GroceryState) : string | undefined => {
     return state.language;
 }
 
-export const isUserPersisted = (state: GroceryState) : boolean => {
-    return state.isUserPersisted;
-}

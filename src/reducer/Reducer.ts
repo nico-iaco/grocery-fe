@@ -14,7 +14,6 @@ import {
     SET_CURRENT_TRANSACTION_TYPE,
     SET_ERROR_TYPE,
     SET_LANGUAGE_TYPE,
-    SET_IS_USER_PERSISTED_TYPE,
     SET_USER_TYPE,
     UPDATE_SHOPPING_LIST_TYPE
 } from "../action/Action";
@@ -140,11 +139,6 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
             return {
                 ...state,
                 language: action.payload
-            }
-        case SET_IS_USER_PERSISTED_TYPE:
-            return {
-                ...state,
-                isUserPersisted: action.payload
             }
         default:
             return state;
