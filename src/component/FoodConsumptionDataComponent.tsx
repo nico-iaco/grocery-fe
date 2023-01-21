@@ -1,9 +1,20 @@
-import {FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography} from "@mui/material";
+import {
+    FormControl,
+    Grid,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    MenuItem,
+    OutlinedInput,
+    TextField,
+    Typography
+} from "@mui/material";
 import {Calculate, Euro} from "@mui/icons-material";
 import {getFoodKcal} from "../api/itemApis";
 import {useDispatch, useSelector} from "react-redux";
 import {setError} from "../action/Action";
 import {getUser} from "../selector/Selector";
+import {strings} from "../localization/strings";
 
 export interface FoodConsumptionDataComponentProps {
     foodId?: string
@@ -16,6 +27,7 @@ export interface FoodConsumptionDataComponentProps {
     onFoodNameChanged: (foodName: string) => void
     onQuantityChanged: (quantity: number) => void
     onQuantityGramChanged: (quantityGram: number) => void
+    onUnitChanged?: (unit: string) => void
     onKcalsChanged: (kcals: number) => void
     onCostChanged: (cost: number) => void
 }
@@ -24,33 +36,43 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
 
+    const availableUnit = process.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
+
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
         const controller = new AbortController();
-        getFoodKcal(props.foodId || "",
-            quantity,
-            currentUser?.id || "",
-            controller)
-            .then((response) => {
-                props.onKcalsChanged(response || 0)
-            })
-            .catch((error) => {
-                console.log(error)
-                dispatch(setError(error.message));
-            })
+        if (props.foodId && currentUser) {
+            getFoodKcal(props.foodId,
+                quantity,
+                currentUser.id,
+                controller)
+                .then((response) => {
+                    props.onKcalsChanged(response || 0)
+                })
+                .catch((error) => {
+                    dispatch(setError(error.message));
+                })
+        } else {
+            dispatch(setError(strings.featureNotAvailableError));
+        }
+
     }
 
-    return <Grid item xs={8}>
+    return <Grid item xs={8} className={"text-center"}>
         <Grid container columns={8}>
             {
+                /**
+                 * When props.foodName is undefined, the food name is not editable because it is already set by
+                 * grocery-be service
+                 */
                 props.foodName !== undefined ?
                     <Grid item xs={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                            <InputLabel htmlFor="food-name-required">Food name</InputLabel>
+                            <InputLabel htmlFor="food-name-required">{strings.foodConsumptionNameLabel}</InputLabel>
                             <OutlinedInput
                                 required
                                 id="food-name-required"
-                                label="Food name"
+                                label={strings.foodConsumptionNameLabel}
                                 value={props.foodName}
                                 onChange={(event) => props.onFoodNameChanged(event.target.value)}
                             />
@@ -59,11 +81,11 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
             }
             <Grid item xs={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                    <InputLabel htmlFor="quantity-required">Quantity</InputLabel>
+                    <InputLabel htmlFor="quantity-required">{strings.foodConsumptionQuantityLabel}</InputLabel>
                     <OutlinedInput
                         required
                         id="quantity-required"
-                        label="Quantity"
+                        label={strings.foodConsumptionQuantityLabel}
                         value={props.quantity}
                         type={"number"}
                         onChange={(event) => props.onQuantityChanged(Number.parseFloat(event.target.value))}
@@ -76,20 +98,42 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
-                props.unit !== 'g' ?
+                /**
+                 * when props.foodName is undefined, it means that is an external food so the unit can be edited
+                 */
+                (props.foodName !== undefined) ?
+                    <Grid item xs={8}>
+                        <TextField
+                            required
+                            select
+                            id="outlined"
+                            label={strings.foodConsumptionUnitLabel}
+                            value={props.unit}
+                            onChange={(event) => {
+                                if (props.onUnitChanged) {
+                                    props.onUnitChanged(event.target.value)
+                                }
+                            }}
+                        >
+                            {availableUnit.map((unit) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
+                        </TextField>
+                    </Grid> : null
+            }
+            {
+                (props.unit !== 'g') && (props.unit !== 'ml') ?
                     <Grid item xs={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                            <InputLabel htmlFor="quantity-g-required">Quantity in grams</InputLabel>
+                            <InputLabel htmlFor="quantity-g-required">{strings.foodConsumptionQuantityGramsLabel}</InputLabel>
                             <OutlinedInput
                                 required
                                 id="quantity-g-required"
-                                label="Quantity in grams"
+                                label={strings.foodConsumptionQuantityGramsLabel}
                                 value={props.quantityGram}
                                 type={"number"}
                                 onChange={(event) => props.onQuantityGramChanged(Number.parseFloat(event.target.value))}
                                 endAdornment={
                                     <InputAdornment position="end">
-                                        <Typography>g</Typography>
+                                        <Typography>g/ml</Typography>
                                     </InputAdornment>
                                 }
                             />
@@ -98,11 +142,11 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
             }
             <Grid item xs={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                    <InputLabel htmlFor="kcals-required">Kcals</InputLabel>
+                    <InputLabel htmlFor="kcals-required">{strings.foodConsumptionKcalLabel}</InputLabel>
                     <OutlinedInput
                         required
                         id="kcals-required"
-                        label="Kcals"
+                        label={strings.foodConsumptionKcalLabel}
                         value={props.kcals}
                         type={"number"}
                         onChange={(event) => props.onKcalsChanged(Number.parseFloat(event.target.value))}
@@ -120,14 +164,18 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                 </FormControl>
             </Grid>
             {
+                /**
+                 * When props.cost is undefined, the cost is not editable because it is already set by
+                 * grocery-be service
+                 */
                 props.cost !== undefined ?
                     <Grid item xs={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                            <InputLabel htmlFor="cost-required">Cost</InputLabel>
+                            <InputLabel htmlFor="cost-required">{strings.foodConsumptionCostLabel}</InputLabel>
                             <OutlinedInput
                                 required
                                 id="cost-required"
-                                label="Cost"
+                                label={strings.foodConsumptionCostLabel}
                                 value={props.cost}
                                 type={"number"}
                                 onChange={(event) => props.onCostChanged(Number.parseFloat(event.target.value))}

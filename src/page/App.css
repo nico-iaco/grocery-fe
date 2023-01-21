@@ -1,5 +1,4 @@
 .App {
-    text-align: center;
     padding-bottom: 74px!important;
 }
 
@@ -22,10 +21,6 @@
     border: 3px solid #39c922 !important;
 }
 
-.list-container {
-
-}
-
 .center {
     display: flex;
     justify-content: center;
@@ -43,5 +38,11 @@
 
 .lobster-font {
     font-family: 'Lobster', cursive !important;
+}
+
+.fab {
+    position: fixed !important;
+    bottom: 70px;
+    right: 8px;
 }
 

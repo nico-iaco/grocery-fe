@@ -10,6 +10,13 @@ export const useMealStatistics = (userId: string, startRange?: Date, endRange?: 
         sumWeekCost: 0,
         averageWeekCalories: 0,
         averageWeekCaloriesPerMealType: [],
+        mostConsumedFood: {
+            foodName: "",
+            foodId: "",
+            quantityUsed: 0,
+            unit: "",
+            quantityUsedStd: 0,
+        }
     }
 
     const [mealStatistics, setMealStatistics] = useState<MealStatistic>(initialStatistics);
@@ -28,6 +35,7 @@ export const useMealStatistics = (userId: string, startRange?: Date, endRange?: 
                 .catch(reason => {
                     console.error(reason)
                     dispatch(setError(reason.message))
+                    setMealStatistics(initialStatistics)
                 });
         } else {
             getMealStatistics(userId || "", controller)
@@ -39,6 +47,7 @@ export const useMealStatistics = (userId: string, startRange?: Date, endRange?: 
                 .catch(reason => {
                     console.error(reason)
                     dispatch(setError(reason.message))
+                    setMealStatistics(initialStatistics)
                 });
         }
         return () => {

@@ -10,6 +10,7 @@ import {setCurrentItem, setError} from "../../action/Action";
 import {getUser} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 function AddItemPage () {
     const dispatch = useDispatch();
@@ -53,7 +54,7 @@ function AddItemPage () {
             }}>
                 <Grid item xs={8}>
                     <AppBarComponent
-                        title={"Add food"}
+                        title={strings.addItemTitle}
                         leftButton={{
                             icon: <ArrowBack/>,
                             onClick: goBack
@@ -68,7 +69,7 @@ function AddItemPage () {
                         onBarcodeChange={(v) => setBarcode(v)}
                         vendor={vendor}
                         onVendorChange={(v) => setVendor(v)}
-                        buttonText="Add"
+                        buttonText={strings.addButtonLabel}
                         onButtonClick={sendItemToBe}
                     />
                 </Container>

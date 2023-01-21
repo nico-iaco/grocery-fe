@@ -6,12 +6,17 @@ import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {setCurrentItem, setError} from "../action/Action";
 import {getCurrentItem, getUser} from "../selector/Selector";
 import {useFoodList} from "../hooks/useFoodList";
+import {ListLoadingComponent} from "./ListLoadingComponent";
+import {strings} from "../localization/strings";
+import {useState} from "react";
+import SearchComponent from "./SearchComponent";
 
 
 const ChooseFoodComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
+    const [search, setSearch] = useState("");
 
     const foodList = useFoodList( true, currentUser?.id || "");
 
@@ -34,30 +39,44 @@ const ChooseFoodComponent = (props: StepperComponentProps) => {
 
     return <Grid item xs={8}>
         <Grid container columns={8}>
+            <SearchComponent
+                search={search}
+                onSearchChanged={setSearch}
+            />
             <Grid item xs={8}>
-                <List>
-                    {foodList.map((item) => {
-                        return <div key={item.id} style={{padding: 8}}>
-                            <Paper variant="outlined" className={currentFood !== undefined && item.id === currentFood.id ? "list-item-selected" : "list-item"}>
-                                <SimpleItemRowComponent mainText={item.name} subText={`${item.availableQuantity} ${item.unit}`} onClick={() => {onFoodClicked(item)}}/>
-                            </Paper>
-                        </div>
-                    })}
-                </List>
+                {
+                    foodList.length > 0 ?
+                        <List>
+                            {foodList
+                                .filter(value => search === "" || (value.name.toLowerCase().includes(search.toLowerCase()) || value.barcode.includes(search)))
+                                .map((item) => {
+                                    return <div key={item.id} style={{padding: 8}}>
+                                        <Paper variant="outlined"
+                                               className={currentFood !== undefined && item.id === currentFood.id ? "list-item-selected" : "list-item"}>
+                                            <SimpleItemRowComponent mainText={item.name}
+                                                                    subText={`${item.availableQuantity} ${item.unit}`}
+                                                                    onClick={() => {
+                                                                        onFoodClicked(item)
+                                                                    }}/>
+                                    </Paper>
+                                </div>
+                            })}
+                        </List> : <ListLoadingComponent listItemNumber={8} />
+                }
             </Grid>
             <Grid item xs={8}>
                 <Grid container columns={8}>
                     <Grid item xs={4} className="center">
                         {
-                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>Previous</Button>
+                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>Skip</Button>
+                            props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>{strings.skipButtonLabel}</Button>
                         }
                         {
-                            props.isNextAvailable && <Button color={"secondary"} onClick={next}>Next</Button>
+                            props.isNextAvailable && <Button color={"secondary"} onClick={next}>{strings.nextButtonLabel}</Button>
                         }
                     </Grid>
                 </Grid>

@@ -1,6 +1,16 @@
-import {FormControl, Grid, InputAdornment, InputLabel, OutlinedInput, TextField, Typography} from "@mui/material";
+import {
+    FormControl,
+    Grid,
+    InputAdornment,
+    InputLabel,
+    MenuItem,
+    OutlinedInput,
+    TextField,
+    Typography
+} from "@mui/material";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {strings} from "../localization/strings";
 
 
 export interface TransactionDataDisplayComponentProps {
@@ -8,6 +18,8 @@ export interface TransactionDataDisplayComponentProps {
     onSellerChange : (v: string) => void
     quantity ?: number
     onQuantityChange : (v: number) => void
+    availableQuantity ?: number
+    onAvailableQuantityChange ?: (v: number) => void
     unit ?: string
     onUnitChange : (v: string) => void
     quantityGram ?: number
@@ -22,12 +34,14 @@ export interface TransactionDataDisplayComponentProps {
 
 export const TransactionDataDisplayComponent = (props: TransactionDataDisplayComponentProps) => {
 
+    const availableUnit = process.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
+
     return <div>
         <Grid item xs={8}>
             <TextField
                 required
                 id="outlined"
-                label="Seller"
+                label={strings.transactionSellerLabel}
                 value={props.seller}
                 onChange={(event) => props.onSellerChange(event.target.value)}
             />
@@ -36,7 +50,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
             <TextField
                 required
                 id="outlined"
-                label="Quantity"
+                label={strings.transactionQuantityLabel}
                 type="number"
                 value={props.quantity}
                 onChange={(event) => props.onQuantityChange(Number.parseFloat(event.target.value))}
@@ -45,27 +59,48 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
         <Grid item xs={8}>
             <TextField
                 required
+                select
                 id="outlined"
-                label="Unit"
+                label={strings.transactionUnitLabel}
                 value={props.unit}
                 onChange={(event) => props.onUnitChange(event.target.value)}
-            />
+            >
+                {availableUnit.map((unit) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
+            </TextField>
         </Grid>
         {
-            "g" !== props.unit ?
+            props.onAvailableQuantityChange ? 
+                <Grid item xs={8}>
+                    <TextField
+                        required
+                        id="outlined"
+                        label={strings.transactionAvailableQuantityLabel}
+                        type="number"
+                        value={props.availableQuantity}
+                        onChange={(event) => {
+                            if (props.onAvailableQuantityChange) {
+                                props.onAvailableQuantityChange(Number.parseFloat(event.target.value))
+                            }
+                        }}
+                    />
+                </Grid>
+            : null
+        }
+        {
+            ("g" !== props.unit) && ("ml" !== props.unit) ?
                 <Grid item xs={8}>
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                        <InputLabel htmlFor="quantity-g-required">Quantity in grams</InputLabel>
+                        <InputLabel htmlFor="quantity-g-required">{strings.transactionQuantityGramsLabel}</InputLabel>
                         <OutlinedInput
                             required
                             id="quantity-g-required"
-                            label="Quantity in grams"
+                            label={strings.transactionQuantityGramsLabel}
                             value={props.quantityGram}
                             type={"number"}
                             onChange={(event) => props.onQuantityGramChange(Number.parseFloat(event.target.value))}
                             endAdornment={
                                 <InputAdornment position="end">
-                                    <Typography>g</Typography>
+                                    <Typography>g/ml</Typography>
                                 </InputAdornment>
                             }
                         />
@@ -77,7 +112,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
             <TextField
                 required
                 id="outlined"
-                label="Price"
+                label={strings.transactionPriceLabel}
                 type="number"
                 value={props.price}
                 onChange={(event) => props.onPriceChange(Number.parseFloat(event.target.value))}
@@ -86,7 +121,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
         <Grid item xs={8}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                    label="Expiration date"
+                    label={strings.transactionExpirationDateLabel}
                     value={props.expirationDate}
                     minDate={new Date()}
                     inputFormat="DD/MM/YYYY"
@@ -102,7 +137,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
         <Grid item xs={8}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                    label="Purchase date"
+                    label={strings.transactionPurchaseDateLabel}
                     value={props.purchaseDate}
                     maxDate={new Date()}
                     inputFormat="DD/MM/YYYY"

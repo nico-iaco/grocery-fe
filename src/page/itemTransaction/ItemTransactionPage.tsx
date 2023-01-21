@@ -10,6 +10,7 @@ import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {useTransactionList} from "../../hooks/useTransactionList";
 import {useItemDetail} from "../../hooks/useItemDetail";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 function ItemTransactionPage() {
     const navigate = useNavigate();
@@ -41,12 +42,12 @@ function ItemTransactionPage() {
         <Grid container>
             <Grid item xs={12}>
                 <AppBarComponent
-                    title={currentItem?.name + " transactions"}
+                    title={currentItem?.name || ""}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
-                    rightButton={<Button onClick={goToEditItemPage} color="inherit">Edit</Button>}
+                    rightButton={<Button onClick={goToEditItemPage} color="inherit">{strings.editButtonLabel}</Button>}
                 />
             </Grid>
             <Container className="container">
@@ -77,7 +78,7 @@ function ItemTransactionPage() {
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 62, right: 8}}
+                    className={"fab"}
                     onClick={goToAddTransactionPage}
                 >
                     <Add/>

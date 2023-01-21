@@ -1,27 +1,29 @@
-import {Container, Fab, Grid, IconButton, List, Skeleton, Stack} from "@mui/material";
+import {Container, Fab, Grid, IconButton, List} from "@mui/material";
 import {Meal} from "../../model/meal";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
 import {Add, CalendarMonth} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {setCurrentMeal, setCurrentTabIndex} from "../../action/Action";
+import {setCurrentMeal, setCurrentMealDate, setCurrentTabIndex} from "../../action/Action";
 import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {format} from "date-fns";
-import {getUser} from "../../selector/Selector";
+import {getCurrentMealDate, getUser} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useMealList} from "../../hooks/useMealList";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {ListLoadingComponent} from "../../component/ListLoadingComponent";
+import {strings} from "../../localization/strings";
 
 
 const MealDashboardPage = () => {
 
     const [date, setDate] = useState<Date>(new Date());
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [formattedDate, setFormattedDate] = useState<string>(format(new Date(), "dd-MM-yyyy"));
+    const selectedDate = useSelector(getCurrentMealDate);
+    const [formattedDate, setFormattedDate] = useState<string>(format(new Date(selectedDate), "dd-MM-yyyy"));
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
     const currentUser = useSelector(getUser);
     const {mealList, isDataAvailable} = useMealList(currentUser?.id || "", selectedDate, selectedDate);
@@ -33,7 +35,7 @@ const MealDashboardPage = () => {
 
     const handleDateChange = (date: Date | null) => {
         if (date) {
-            setSelectedDate(date);
+            dispatch(setCurrentMealDate(date));
             setFormattedDate(format(new Date(date), "dd-MM-yyyy"));
         }
     }
@@ -61,7 +63,7 @@ const MealDashboardPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Meals of " + formattedDate}
+                    title={strings.formatString(strings.mealsTitle, formattedDate).toString()}
                     rightButton={<IconButton
                         size="large"
                         color={"inherit"}
@@ -95,9 +97,9 @@ const MealDashboardPage = () => {
                 <Grid item xs={8}>
                     <MealStatisticsComponent
                         mealStatistics={mealStatistic}
-                        mealKcalChartLabel={"Kcal per meal type"}
-                        kcalLabel={"Total kcal of the day"}
-                        costLabel={"Total cost of the day"}
+                        mealKcalChartLabel={strings.mealStatisticsKcalPerMealTypeTitle}
+                        kcalLabel={strings.mealStatisticsSumKcalPerDayLabel}
+                        costLabel={strings.mealStatisticsSumCostPerDayLabel}
                     />
                 </Grid>
                 <Grid item xs={8}>
@@ -119,18 +121,13 @@ const MealDashboardPage = () => {
                                         onButtonClick={() => goToEditMeal(meal)}
                                     />
                                 }) : <NoDataAvailableComponent/>)
-                            :   <Stack spacing={1}>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                    <Skeleton variant="rectangular" height={80}/>
-                                </Stack>
+                            :   <ListLoadingComponent listItemNumber={8} />
                         }
                     </List>
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 62, right: 8}}
+                    className={"fab"}
                     onClick={goToAddMeal}
                 >
                     <Add/>

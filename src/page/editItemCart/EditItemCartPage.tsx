@@ -8,9 +8,10 @@ import {useState} from "react";
 import {getCurrentShoppingItem, getUser} from "../../selector/Selector";
 import {Item} from "../../model/item";
 import {Transaction} from "../../model/transaction";
-import {updateShoppingList} from "../../action/Action";
+import {removeFromShoppingList, updateShoppingList} from "../../action/Action";
 import {ArrowBack} from "@mui/icons-material";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 
 const EditItemCartPage = () => {
@@ -71,17 +72,25 @@ const EditItemCartPage = () => {
 
     }
 
+    const deleteItemFromCart = () => {
+        if (currentShoppingItem) {
+            dispatch(removeFromShoppingList(currentShoppingItem))
+            navigate(-1);
+        }
+    }
+
     return (
         <Grid container columns={8} sx={{
             '& .MuiTextField-root': {m: 1, width: '25ch'},
         }}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Edit Item"}
+                    title={strings.editItemCartTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
+                    rightButton={<Button onClick={deleteItemFromCart} color="inherit">{strings.deleteButtonLabel}</Button>}
                 />
             </Grid>
             <Container className="container">
@@ -110,7 +119,7 @@ const EditItemCartPage = () => {
                     onPurchaseDateChange={setPurchaseDate}
                 />
                 <Grid item xs={8}>
-                    <Button variant="contained" color="success" onClick={editItem}>Edit</Button>
+                    <Button variant="contained" color="success" onClick={editItem}>{strings.editButtonLabel}</Button>
                 </Grid>
             </Container>
         </Grid>

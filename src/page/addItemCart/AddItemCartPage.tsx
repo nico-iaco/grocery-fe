@@ -11,6 +11,7 @@ import {Transaction} from "../../model/transaction";
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addToShoppingList} from "../../action/Action";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const AddItemCartPage = () => {
     const navigate = useNavigate();
@@ -73,14 +74,14 @@ const AddItemCartPage = () => {
         }}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Add to cart"}
+                    title={strings.addItemCartTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
                     }}
                 />
             </Grid>
-            <Container className="container">
+            <Container className="container text-center">
                 <ItemDataDisplayComponent
                     name={name}
                     onNameChange={(v) => setName(v)}
@@ -106,7 +107,9 @@ const AddItemCartPage = () => {
                     onPurchaseDateChange={setPurchaseDate}
                 />
                 <Grid item xs={8}>
-                    <Button variant="contained" color="success" onClick={addToCart}>Add to cart</Button>
+                    <Button variant="contained" color="secondary" onClick={addToCart}>
+                        {strings.addToCartButtonLabel}
+                    </Button>
                 </Grid>
             </Container>
         </Grid>

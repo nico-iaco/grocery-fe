@@ -9,6 +9,7 @@ import {clearShoppingList, setCurrentShoppingItem, setError} from "../../action/
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addShoppingItemList} from "../../api/itemApis";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const LiveGroceryShoppingPage = () => {
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ const LiveGroceryShoppingPage = () => {
         <Grid container columns={8}>
             <Grid item xs={8}>
                 <AppBarComponent
-                    title={"Grocery shopping"}
+                    title={strings.liveGroceryShoppingTitle}
                     leftButton={{
                         icon: <ArrowBack/>,
                         onClick: goBack
@@ -77,16 +78,26 @@ const LiveGroceryShoppingPage = () => {
                 </Grid>
                 <Grid item xs={8} className="container">
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        <b>Total:</b> {total} €
+                        <b>{strings.shoppingCartTotalLabel}</b> {total} €
                     </Typography>
                 </Grid>
                 <Grid item xs={8} className="container">
-                    <Button variant="contained" color="success" onClick={applyShoppingList}>Apply</Button>
-                    <Button variant="contained" color="error" onClick={clearCart}>Discard</Button>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6} className={"center"}>
+                            <Button variant="contained" color="success" onClick={applyShoppingList}>
+                                {strings.shoppingCartApplyButtonLabel}
+                            </Button>
+                        </Grid>
+                        <Grid item xs={6} className={"center"}>
+                            <Button variant="contained" color="error" onClick={clearCart}>
+                                {strings.shoppingCartDiscardButtonLabel}
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Fab
                     color="secondary"
-                    sx={{position: 'fixed', bottom: 62, right: 8}}
+                    className={"fab"}
                     onClick={goToAddItemToCart}
                 >
                     <Add/>

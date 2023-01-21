@@ -1,25 +1,21 @@
 import {
     Action,
     ADD_TO_SHOPPING_LIST_TYPE,
-    CLEAR_CURRENT_SHOPPING_ITEM_TYPE,
     CLEAR_ERROR_TYPE,
     CLEAR_SHOPPING_LIST_TYPE,
     CLEAR_USER_TYPE,
     REMOVE_FROM_SHOPPING_LIST_TYPE,
     SET_CURRENT_FOOD_CONSUMPTION_TYPE,
     SET_CURRENT_ITEM_TYPE,
+    SET_CURRENT_MEAL_DATE_TYPE,
     SET_CURRENT_MEAL_TYPE,
     SET_CURRENT_SHOPPING_ITEM_TYPE,
     SET_CURRENT_TAB_INDEX_TYPE,
     SET_CURRENT_TRANSACTION_TYPE,
     SET_ERROR_TYPE,
+    SET_LANGUAGE_TYPE,
     SET_IS_USER_PERSISTED_TYPE,
-    SET_SHOPPING_LIST_TYPE,
     SET_USER_TYPE,
-    UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE,
-    UPDATE_CURRENT_ITEM_TYPE,
-    UPDATE_CURRENT_MEAL_TYPE,
-    UPDATE_CURRENT_TRANSACTION_TYPE,
     UPDATE_SHOPPING_LIST_TYPE
 } from "../action/Action";
 import {Item} from "../model/item";
@@ -39,8 +35,10 @@ export interface GroceryState {
     currentShoppingItem: ShoppingItem | undefined;
     shoppingList: ShoppingItem[];
     user: User | undefined;
+    currentMealDate: Date;
     isUserPersisted: boolean;
     error: AppError | undefined;
+    language: string | undefined;
 }
 
 export const initialState: GroceryState = {
@@ -52,8 +50,10 @@ export const initialState: GroceryState = {
     currentShoppingItem: undefined,
     shoppingList: [],
     user: undefined,
+    currentMealDate: new Date(),
+    error: undefined,
+    language: undefined,
     isUserPersisted: false,
-    error: undefined
 }
 
 export function eventReducer(state: GroceryState = initialState, action: Action): GroceryState {
@@ -63,17 +63,7 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 currentItem: action.payload
             }
-        case UPDATE_CURRENT_ITEM_TYPE:
-            return {
-                ...state,
-                currentItem: action.payload
-            }
         case SET_CURRENT_TRANSACTION_TYPE:
-            return {
-                ...state,
-                currentTransaction: action.payload
-            }
-        case UPDATE_CURRENT_TRANSACTION_TYPE:
             return {
                 ...state,
                 currentTransaction: action.payload
@@ -83,17 +73,7 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 currentMeal: action.payload
             }
-        case UPDATE_CURRENT_MEAL_TYPE:
-            return {
-                ...state,
-                currentMeal: action.payload
-            }
         case SET_CURRENT_FOOD_CONSUMPTION_TYPE:
-            return {
-                ...state,
-                currentFoodConsumption: action.payload
-            }
-        case UPDATE_CURRENT_FOOD_CONSUMPTION_TYPE:
             return {
                 ...state,
                 currentFoodConsumption: action.payload
@@ -126,11 +106,6 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 user: undefined
             }
-        case SET_SHOPPING_LIST_TYPE:
-            return {
-                ...state,
-                shoppingList: action.payload
-            }
         case ADD_TO_SHOPPING_LIST_TYPE:
             return {
                 ...state,
@@ -139,7 +114,7 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
         case UPDATE_SHOPPING_LIST_TYPE:
             return {
                 ...state,
-                shoppingList: [...state.shoppingList.filter(shoppingItem => shoppingItem.item.id !== action.payload.item.id), action.payload]
+                shoppingList: [...state.shoppingList.filter(shoppingItem => shoppingItem.item.name !== action.payload.item.name), action.payload]
             }
         case REMOVE_FROM_SHOPPING_LIST_TYPE:
             return {
@@ -156,10 +131,15 @@ export function eventReducer(state: GroceryState = initialState, action: Action)
                 ...state,
                 currentShoppingItem: action.payload
             }
-        case CLEAR_CURRENT_SHOPPING_ITEM_TYPE:
+        case SET_CURRENT_MEAL_DATE_TYPE:
             return {
                 ...state,
-                currentShoppingItem: undefined
+                currentMealDate: action.payload
+            }
+        case SET_LANGUAGE_TYPE:
+            return {
+                ...state,
+                language: action.payload
             }
         case SET_IS_USER_PERSISTED_TYPE:
             return {

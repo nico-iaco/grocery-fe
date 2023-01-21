@@ -13,8 +13,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentTabIndex, getError, isUserPersisted} from "../selector/Selector";
-import {clearError, setCurrentItem, setCurrentTabIndex} from "../action/Action";
+import {clearError, setCurrentItem, setCurrentMealDate, setCurrentTabIndex} from "../action/Action";
 import {lazy, Suspense} from "react";
+import {strings} from "../localization/strings";
 import {useIsUserAuthenticated} from "../hooks/useIsUserAuthenticated";
 import { getAuth } from 'firebase/auth';
 
@@ -36,8 +37,8 @@ const RegistrationPage = lazy(() => import('./register/RegistrationPage'));
 const LoginPage = lazy(() => import('./login/LoginPage'));
 const NoAuthComponent = lazy(() => import('./noAuth/NoAuthPage'));
 const LiveGroceryShoppingPage = lazy(() => import('./liveGroceryShopping/LiveGroceryShoppingPage'));
-const AddItemCartPage = lazy(() => import('./addCartItem/AddItemCartPage'));
-const EditItemCartPage = lazy(() => import('./editCartItem/EditItemCartPage'));
+const AddItemCartPage = lazy(() => import('./addItemCart/AddItemCartPage'));
+const EditItemCartPage = lazy(() => import('./editItemCart/EditItemCartPage'));
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
@@ -57,7 +58,7 @@ function App() {
             console.log("User signed out");
         }
     });
-    
+
 
     let theme = createTheme({
         palette: {
@@ -140,18 +141,19 @@ function App() {
                         {error?.message}
                     </Alert>
                 </Snackbar>
-                <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+                <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0, paddingBottom: '8px'}} elevation={3}>
                     <BottomNavigation
                         showLabels
                         value={currentIndex}
                         onChange={(event, newValue) => {
+                            dispatch(setCurrentMealDate(new Date()));
                             dispatch(setCurrentTabIndex(newValue));
                         }}
                     >
-                        <BottomNavigationAction label="Home" icon={<House/>} onClick={goToHome}/>
-                        <BottomNavigationAction label="Meal" icon={<Fastfood/>} onClick={goToMealDashboard}/>
-                        <BottomNavigationAction label="Grocery" icon={<FoodBank/>} onClick={goToItemDashboard}/>
-                        <BottomNavigationAction label="Profile" icon={<Person/>} onClick={goToProfile}/>
+                        <BottomNavigationAction label={strings.homeTab} icon={<House/>} onClick={goToHome}/>
+                        <BottomNavigationAction label={strings.mealsTab} icon={<Fastfood/>} onClick={goToMealDashboard}/>
+                        <BottomNavigationAction label={strings.groceryTab} icon={<FoodBank/>} onClick={goToItemDashboard}/>
+                        <BottomNavigationAction label={strings.profileTab} icon={<Person/>} onClick={goToProfile}/>
                     </BottomNavigation>
                 </Paper>
             </ThemeProvider>

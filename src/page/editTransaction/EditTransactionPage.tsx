@@ -9,6 +9,7 @@ import {getCurrentTransaction, getUser} from "../../selector/Selector";
 import {setCurrentTransaction, setError} from "../../action/Action";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const EditTransactionPage = () => {
     const {itemId} = useParams();
@@ -17,6 +18,7 @@ const EditTransactionPage = () => {
     const dispatch = useDispatch();
     const [seller, setSeller] = useState(currentTransaction?.seller || "");
     const [quantity, setQuantity] = useState(currentTransaction?.quantity || 0);
+    const [availableQuantity, setAvailableQuantity] = useState(currentTransaction?.availableQuantity || 0);
     const [unit, setUnit] = useState(currentTransaction?.unit || "");
     const [quantityStd, setQuantityStd] = useState(currentTransaction?.quantityStd || 0);
     const [price, setPrice] = useState(currentTransaction?.price || 0);
@@ -36,7 +38,7 @@ const EditTransactionPage = () => {
             seller,
             quantity,
             quantityStd,
-            availableQuantity: currentTransaction?.availableQuantity || 0,
+            availableQuantity,
             unit,
             price,
             expirationDate,
@@ -81,12 +83,12 @@ const EditTransactionPage = () => {
     }}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Edit Transaction"}
+                title={strings.editTransactionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack
                 }}
-                rightButton={<Button onClick={deleteCurrentTransaction} color="inherit">Delete</Button>}
+                rightButton={<Button onClick={deleteCurrentTransaction} color="inherit">{strings.deleteButtonLabel}</Button>}
             />
         </Grid>
         <Container className="container">
@@ -95,6 +97,8 @@ const EditTransactionPage = () => {
                 onSellerChange={setSeller}
                 quantity={quantity}
                 onQuantityChange={setQuantity}
+                availableQuantity={availableQuantity}
+                onAvailableQuantityChange={setAvailableQuantity}
                 unit={unit}
                 onUnitChange={setUnit}
                 quantityGram={quantityStd}
@@ -105,7 +109,7 @@ const EditTransactionPage = () => {
                 onExpirationDateChange={setExpirationDate}
                 purchaseDate={purchaseDate}
                 onPurchaseDateChange={setPurchaseDate}
-                buttonText="Update"
+                buttonText={strings.editButtonLabel}
                 onButtonClick={updateTransactionToBe}/>
         </Container>
     </Grid>

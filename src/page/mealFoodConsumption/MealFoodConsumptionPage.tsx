@@ -8,6 +8,7 @@ import {FoodConsumption} from "../../model/foodConsumption";
 import {FoodConsumptionRowComponent} from "../../component/FoodConsumptionRowComponent";
 import {useFoodConsumptionList} from "../../hooks/useFoodConsumptionList";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const MealFoodConsumptionPage = () => {
     const currentMeal = useSelector(getCurrentMeal);
@@ -37,12 +38,12 @@ const MealFoodConsumptionPage = () => {
     return <Grid container columns={8}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Meal consumption"}
+                title={strings.mealFoodConsumptionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack
                 }}
-                rightButton={<Button onClick={goToEditMealPage} color="inherit">Edit</Button>}
+                rightButton={<Button onClick={goToEditMealPage} color="inherit">{strings.editButtonLabel}</Button>}
             />
         </Grid>
         <Container className="container">
@@ -64,7 +65,7 @@ const MealFoodConsumptionPage = () => {
             </Grid>
             <Fab
                 color="secondary"
-                sx={{position: 'fixed', bottom: 62, right: 8}}
+                className={"fab"}
                 onClick={goToAddFoodConsumptionPage}
             >
                 <Add/>

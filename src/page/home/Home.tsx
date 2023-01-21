@@ -10,6 +10,7 @@ import {getUser} from "../../selector/Selector";
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useItemStatistics} from "../../hooks/useItemStatistics";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 
 function Home() {
@@ -49,44 +50,44 @@ function Home() {
     return <Grid container columns={8}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Foody"}
+                title={strings.homeTitle}
             />
         </Grid>
         <Container className="container">
             <Grid item xs={8} className="container">
                 <MealStatisticsComponent
                     mealStatistics={mealStatistics}
-                    mealKcalChartLabel={"Average calories per meal type"}
-                    kcalLabel={"Average calories per week"}
-                    costLabel={"Average cost per week"}
+                    mealKcalChartLabel={strings.mealStatisticsAvgKcalPerMealTypeTitle}
+                    kcalLabel={strings.mealStatisticsAvgKcalPerWeekLabel}
+                    costLabel={strings.mealStatisticsAvgCostPerWeekLabel}
                 />
             </Grid>
             <Grid item xs={8} className="container">
                 <ItemStatisticsComponent itemStatistics={itemStatistics}/>
             </Grid>
             <SpeedDial
-                sx={{position: 'fixed', bottom: 62, right: 8}}
+                className={"fab"}
                 FabProps={fabProps}
                 icon={<Add/>}
                 ariaLabel={"Add"}
             >
                 <SpeedDialAction
                     FabProps={fabProps}
-                    tooltipTitle="Live grocery shopping"
+                    tooltipTitle={strings.fabLiveGroceryShoppingLabel}
                     onClick={goToLiveShopping}
                     tooltipOpen
                     icon={<LocalGroceryStore/>}
                 />
                 <SpeedDialAction
                     FabProps={fabProps}
-                    tooltipTitle="Add meal"
+                    tooltipTitle={strings.fabAddMealLabel}
                     onClick={goToAddMeal}
                     tooltipOpen
                     icon={<Fastfood/>}
                 />
                 <SpeedDialAction
                     FabProps={fabProps}
-                    tooltipTitle="Add food"
+                    tooltipTitle={strings.fabAddItemLabel}
                     onClick={goToAddFood}
                     tooltipOpen
                     icon={<FoodBank/>}

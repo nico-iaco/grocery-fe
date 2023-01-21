@@ -5,12 +5,12 @@ import {useNavigate} from "react-router-dom";
 import {ArrowBack} from "@mui/icons-material";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const ChooseFoodComponent = React.lazy(() => import("../../component/ChooseFoodComponent"));
 const ChooseFoodTransactionComponent = React.lazy(() => import("../../component/ChooseFoodTransactionComponent"));
 const CompleteFoodConsumptionComponent = React.lazy(() => import("../../component/CompleteFoodConsumptionComponent"));
 
-const steps = ['Select food', 'Select transaction', 'Complete'];
 
 const _renderStepContent = (step: number, onNextClicked: () => void, onPreviousClicked: () => void, onSkipClicked: () => void) => {
     switch (step) {
@@ -61,6 +61,12 @@ const AddFoodConsumptionPage = () => {
 
     const [activeStep, setActiveStep] = useState(0);
 
+    const steps = [
+        strings.addFoodConsumptionSelectFoodStepTitle,
+        strings.addFoodConsumptionSelectTransactionStepTitle,
+        strings.addFoodConsumptionCompleteStepTitle
+    ];
+
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
@@ -84,7 +90,7 @@ const AddFoodConsumptionPage = () => {
     }}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Add food consumption"}
+                title={strings.addFoodConsumptionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack

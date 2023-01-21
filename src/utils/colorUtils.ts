@@ -42,6 +42,10 @@ export function stringAvatar(name: string) {
     return {
         sx: {
             bgcolor: stringToColor(name),
+            width: 56,
+            height: 56,
+            fontSize: 24,
+            marginRight: 2
         },
         children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };

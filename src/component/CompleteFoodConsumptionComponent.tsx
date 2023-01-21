@@ -10,6 +10,7 @@ import {FoodConsumption} from "../model/foodConsumption";
 import {addMealFoodConsumption} from "../api/mealApis";
 import {logEvent} from "firebase/analytics";
 import {analytics} from "../utils/firebaseUtils";
+import {strings} from "../localization/strings";
 
 const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentMeal = useSelector(getCurrentMeal);
@@ -18,6 +19,7 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentTransaction = useSelector(getCurrentTransaction);
     const [foodName, setFoodName] = useState("");
     const [quantity, setQuantity] = useState<number>(0);
+    const [unit, setUnit] = useState("");
     const [quantityGram, setQuantityGram] = useState<number>(0);
     const [kcals, setKcals] = useState<number>(0);
     const [cost, setCost] = useState<number>(0);
@@ -34,7 +36,7 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
             mealId: currentMeal?.id || "",
             foodName: currentFood?.name || foodName,
             quantityUsed: quantity,
-            unit: currentFood?.unit || "",
+            unit: currentFood?.unit || unit,
             quantityUsedStd: quantityGram,
             kcal: kcals,
             cost: cost
@@ -64,12 +66,13 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
                     foodName={currentFood ? undefined : foodName}
                     foodId={currentFood?.id || ""}
                     quantity={quantity}
-                    unit={currentTransaction?.unit || ""}
+                    unit={currentTransaction ? currentTransaction.unit : unit}
                     quantityGram={quantityGram}
                     kcals={kcals}
                     cost={currentFood ? undefined : cost}
                     onFoodNameChanged={setFoodName}
                     onQuantityChanged={setQuantity}
+                    onUnitChanged={setUnit}
                     onQuantityGramChanged={setQuantityGram}
                     onKcalsChanged={setKcals}
                     onCostChanged={setCost}
@@ -79,12 +82,12 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
                 <Grid container columns={8}>
                     <Grid item xs={4} className="center">
                         {
-                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>Previous</Button>
+                            props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
                     </Grid>
                     <Grid item xs={4} className="center">
                         {
-                            props.isNextAvailable && <Button color={"secondary"} onClick={onCompleted}>Add</Button>
+                            props.isNextAvailable && <Button color={"secondary"} onClick={onCompleted}>{strings.doneButtonLabel}</Button>
                         }
                     </Grid>
                 </Grid>

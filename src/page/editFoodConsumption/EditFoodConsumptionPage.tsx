@@ -9,6 +9,7 @@ import {FoodConsumption} from "../../model/foodConsumption";
 import {ArrowBack} from "@mui/icons-material";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
+import {strings} from "../../localization/strings";
 
 const EditFoodConsumptionPage = () => {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ const EditFoodConsumptionPage = () => {
 
     const [foodName, setFoodName] = useState( currentFoodConsumption?.foodName || "");
     const [quantity, setQuantity] = useState<number>(currentFoodConsumption?.quantityUsed || 0);
+    const [unit, setUnit] = useState(currentFoodConsumption?.unit || "");
     const [quantityGram, setQuantityGram] = useState<number>(currentFoodConsumption?.quantityUsedStd || 0);
     const [kcals, setKcals] = useState<number>(currentFoodConsumption?.kcal || 0);
     const [cost, setCost] = useState<number>(currentFoodConsumption?.cost || 0);
@@ -33,9 +35,10 @@ const EditFoodConsumptionPage = () => {
             const foodConsumption: FoodConsumption = {
                 ...currentFoodConsumption,
                 foodName: foodName,
-                quantityUsed: quantity || 0,
-                quantityUsedStd: quantityGram || 0,
-                kcal: kcals || 0,
+                quantityUsed: quantity,
+                unit: unit,
+                quantityUsedStd: quantityGram,
+                kcal: kcals,
                 cost: cost
             }
             const controller = new AbortController();
@@ -68,7 +71,7 @@ const EditFoodConsumptionPage = () => {
     return <Grid container columns={8}>
         <Grid item xs={8}>
             <AppBarComponent
-                title={"Edit Food Consumption"}
+                title={strings.editFoodConsumptionTitle}
                 leftButton={{
                     icon: <ArrowBack/>,
                     onClick: goBack
@@ -83,13 +86,14 @@ const EditFoodConsumptionPage = () => {
                         <FoodConsumptionDataComponent
                             foodName={currentFoodConsumption?.foodId !== "00000000-0000-0000-0000-000000000000" ? undefined : foodName}
                             foodId={currentFoodConsumption?.foodId || ""}
-                            quantity={quantity || 0}
-                            unit={currentFoodConsumption?.unit || ""}
-                            quantityGram={quantityGram || 0}
-                            kcals={kcals || 0}
+                            quantity={quantity}
+                            unit={unit}
+                            quantityGram={quantityGram}
+                            kcals={kcals}
                             cost={currentFoodConsumption?.foodId !== "00000000-0000-0000-0000-000000000000" ? undefined : cost}
                             onFoodNameChanged={setFoodName}
                             onQuantityChanged={setQuantity}
+                            onUnitChanged={setUnit}
                             onQuantityGramChanged={setQuantityGram}
                             onKcalsChanged={setKcals}
                             onCostChanged={setCost}
@@ -106,7 +110,7 @@ const EditFoodConsumptionPage = () => {
                                         color={"secondary"}
                                         onClick={editFoodConsumption}
                                     >
-                                        Edit
+                                        {strings.editButtonLabel}
                                     </Button>
                                 }
                             </Grid>

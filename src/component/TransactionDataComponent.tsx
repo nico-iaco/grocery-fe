@@ -6,6 +6,8 @@ export interface TransactionDataComponentProps {
     onSellerChange : (v: string) => void
     quantity ?: number
     onQuantityChange : (v: number) => void
+    availableQuantity ?: number
+    onAvailableQuantityChange ?: (v: number) => void
     unit ?: string
     onUnitChange : (v: string) => void
     quantityGram ?: number
@@ -21,13 +23,15 @@ export interface TransactionDataComponentProps {
 }
 
 export const TransactionDataComponent = (props: TransactionDataComponentProps) => {
-  return <Grid container columns={8}>
+  return <Grid container columns={8} className={"text-center"}>
       <Container>
           <TransactionDataDisplayComponent
               seller={props.seller}
               onSellerChange={props.onSellerChange}
               quantity={props.quantity}
               onQuantityChange={props.onQuantityChange}
+              availableQuantity={props.availableQuantity}
+              onAvailableQuantityChange={props.onAvailableQuantityChange}
               unit={props.unit}
               onUnitChange={props.onUnitChange}
               quantityGram={props.quantityGram}
