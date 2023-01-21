@@ -11,7 +11,7 @@ import {
     ListItemText
 } from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {getLanguage, getUser} from "../../selector/Selector";
+import {getLanguage, getUser, isUserPersisted} from "../../selector/Selector";
 import {getAuth} from "firebase/auth";
 import {clearUser, setCurrentTabIndex, setError, setLanguage} from "../../action/Action";
 import {stringAvatar} from "../../utils/colorUtils";
@@ -25,6 +25,7 @@ import LanguageSelectionDialogComponent from "../../component/LanguageSelectionD
 const ProfilePage = () => {
     const currentUser = useSelector(getUser);
     const currentLanguage = useSelector(getLanguage);
+    const isPersisted = useSelector(isUserPersisted);
     const dispatch = useDispatch();
     dispatch(setCurrentTabIndex(3));
     const [open, setOpen] = useState(false);
@@ -35,6 +36,9 @@ const ProfilePage = () => {
         auth.signOut()
             .then(() => {
                 dispatch(clearUser());
+                if (isPersisted) {
+                    localStorage.removeItem("user");
+                }
             })
             .catch((error) => {
                 console.error(error)

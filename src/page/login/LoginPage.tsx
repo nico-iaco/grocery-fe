@@ -38,7 +38,7 @@ const LoginPage = () => {
     const [isPersistent, setIsPersistent] = useState(false);
 
 
-    const setCurrentUser = (fUser: UserCredential) => {
+    const setCurrentUser = (fUser: UserCredential, persist: boolean) => {
         const firebaseUser = fUser.user;
         if (firebaseUser) {
             const user: User = {
@@ -48,6 +48,9 @@ const LoginPage = () => {
             }
             logEvent(analytics, 'login', user);
             dispatch(setUser(user));
+            if (persist) {
+                localStorage.setItem("user", JSON.stringify(fUser));
+            }
             navigate(-1);
         }
     }
@@ -61,7 +64,7 @@ const LoginPage = () => {
                     return signInWithEmailAndPassword(auth, email, password)
                 })
                 .then((userCredential) => {
-                    setCurrentUser(userCredential);
+                    setCurrentUser(userCredential, true);
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
@@ -70,7 +73,7 @@ const LoginPage = () => {
         } else {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    setCurrentUser(userCredential);
+                    setCurrentUser(userCredential, false);
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
@@ -101,8 +104,8 @@ const LoginPage = () => {
                         <OutlinedInput
                             required
                             id="email-required"
-                            label="Email"
-                            value={strings.emailLabel}
+                            label={strings.emailLabel}
+                            value={email}
                             type={"email"}
                             onChange={(event) => setEmail(event.target.value)}
                             endAdornment={

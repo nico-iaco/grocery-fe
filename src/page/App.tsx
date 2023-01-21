@@ -12,12 +12,11 @@ import {
 import CircularProgress from '@mui/material/CircularProgress';
 import {Fastfood, FoodBank, House, Person} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentTabIndex, getError, isUserPersisted} from "../selector/Selector";
+import {getCurrentTabIndex, getError} from "../selector/Selector";
 import {clearError, setCurrentItem, setCurrentMealDate, setCurrentTabIndex} from "../action/Action";
 import {lazy, Suspense} from "react";
 import {strings} from "../localization/strings";
 import {useIsUserAuthenticated} from "../hooks/useIsUserAuthenticated";
-import { getAuth } from 'firebase/auth';
 
 const Home = lazy(() => import('./home/Home'));
 const AddItemPage = lazy(() => import('./addItem/AddItemPage'));
@@ -42,22 +41,10 @@ const EditItemCartPage = lazy(() => import('./editItemCart/EditItemCartPage'));
 
 function App() {
     const currentIndex = useSelector(getCurrentTabIndex);
-    const isPersisted = useSelector(isUserPersisted);
     const error = useSelector(getError);
     const isUserAuthenticated = useIsUserAuthenticated();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-
-    getAuth().onAuthStateChanged((user) => {
-        if (user) {
-            if (isPersisted) {
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-        } else {
-            localStorage.removeItem('user');
-            console.log("User signed out");
-        }
-    });
 
 
     let theme = createTheme({

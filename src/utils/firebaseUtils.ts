@@ -32,4 +32,8 @@ export const refreshFirebaseUser = async (user: User | null) => {
     return getAuth().updateCurrentUser(user);
 }
 
+export const isFirebaseUser = (user: any): user is User => {
+    return "uid" in user;
+}
+
 
