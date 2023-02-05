@@ -28,7 +28,7 @@ const ProfilePage = () => {
     const dispatch = useDispatch();
     dispatch(setCurrentTabIndex(3));
     const [open, setOpen] = useState(false);
-    const appVersionDetail = import.meta.env.REACT_APP_VERSION;
+    const appVersionDetail = import.meta.env.VITE_VERSION;
 
     const logout = () => {
         const auth = getAuth();
