@@ -34,7 +34,7 @@ export interface TransactionDataDisplayComponentProps {
 
 export const TransactionDataDisplayComponent = (props: TransactionDataDisplayComponentProps) => {
 
-    const availableUnit = process.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
+    const availableUnit = import.meta.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
 
     return <div>
         <Grid item xs={8}>
@@ -65,7 +65,7 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                 value={props.unit}
                 onChange={(event) => props.onUnitChange(event.target.value)}
             >
-                {availableUnit.map((unit) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
+                {availableUnit.map((unit: string) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
             </TextField>
         </Grid>
         {

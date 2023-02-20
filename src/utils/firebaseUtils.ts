@@ -3,10 +3,10 @@ import {initializeApp} from "firebase/app";
 import {getAuth, User as FirebaseUser} from "firebase/auth";
 import {User} from "../model/user";
 
-const apiKey = process.env.REACT_APP_API_KEY;
-const messagingSenderId = process.env.REACT_APP_MESSAGING_SENDER_ID;
-const appId = process.env.REACT_APP_APP_ID;
-const measurementId = process.env.REACT_APP_MEASUREMENT_ID;
+const apiKey = import.meta.env.VITE_API_KEY;
+const messagingSenderId = import.meta.env.VITE_MESSAGING_SENDER_ID;
+const appId = import.meta.env.VITE_APP_ID;
+const measurementId = import.meta.env.VITE_MEASUREMENT_ID;
 
 const firebaseConfig = {
     apiKey,

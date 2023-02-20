@@ -7,7 +7,7 @@ import {format} from "date-fns";
 import {getFirebaseUserToken} from "../utils/firebaseUtils";
 
 
-export const baseUrl = process.env.REACT_APP_BASE_URL_FT;
+export const baseUrl = import.meta.env.VITE_BASE_URL_FT
 
 export const addMeal = async (meal: Meal, controller: AbortController) => {
     const url = `${baseUrl}/meal/`;

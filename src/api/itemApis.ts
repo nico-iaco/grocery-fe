@@ -7,7 +7,7 @@ import {ItemStatistics} from "../model/itemStatistics";
 import {ShoppingItem} from "../model/shoppingItem";
 import {getFirebaseUserToken} from "../utils/firebaseUtils";
 
-export const baseUrl = process.env.REACT_APP_BASE_URL
+export const baseUrl = import.meta.env.VITE_BASE_URL
 
 export const addItem = async (item: Item, controller: AbortController) => {
     const url = `${baseUrl}/item/`;

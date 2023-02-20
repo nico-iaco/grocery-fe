@@ -36,7 +36,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
 
-    const availableUnit = process.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
+    const availableUnit = import.meta.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
@@ -115,7 +115,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                                 }
                             }}
                         >
-                            {availableUnit.map((unit) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
+                            {availableUnit.map((unit: string) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
                         </TextField>
                     </Grid> : null
             }
