@@ -1,9 +1,9 @@
 import {
-    Action,
     ADD_TO_SHOPPING_LIST_TYPE,
     CLEAR_ERROR_TYPE,
     CLEAR_SHOPPING_LIST_TYPE,
     CLEAR_USER_TYPE,
+    CustomAction,
     REMOVE_FROM_SHOPPING_LIST_TYPE,
     SET_CURRENT_FOOD_CONSUMPTION_TYPE,
     SET_CURRENT_ITEM_TYPE,
@@ -55,7 +55,7 @@ export const initialState: GroceryState = {
     isUserPersisted: false,
 }
 
-export function eventReducer(state: GroceryState = initialState, action: Action): GroceryState {
+export function eventReducer(state: GroceryState = initialState, action: CustomAction): GroceryState {
     switch (action.type) {
         case SET_CURRENT_ITEM_TYPE:
             return {
