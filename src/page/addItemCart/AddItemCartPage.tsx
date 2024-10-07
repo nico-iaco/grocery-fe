@@ -1,4 +1,4 @@
-import {Button, Container, Grid} from "@mui/material";
+import {Button, Container, Grid2} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {ItemDataDisplayComponent} from "../../component/ItemDataDisplayComponent";
@@ -69,10 +69,10 @@ const AddItemCartPage = () => {
     }
 
     return (
-        <Grid container columns={8} sx={{
+        <Grid2 container columns={8} sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}>
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.addItemCartTitle}
                     leftButton={{
@@ -80,7 +80,7 @@ const AddItemCartPage = () => {
                         onClick: goBack
                     }}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container text-center">
                 <ItemDataDisplayComponent
                     name={name}
@@ -106,13 +106,13 @@ const AddItemCartPage = () => {
                     purchaseDate={purchaseDate}
                     onPurchaseDateChange={setPurchaseDate}
                 />
-                <Grid item xs={8}>
+                <Grid2 size={8}>
                     <Button variant="contained" color="secondary" onClick={addToCart}>
                         {strings.addToCartButtonLabel}
                     </Button>
-                </Grid>
+                </Grid2>
             </Container>
-        </Grid>
+        </Grid2>
     );
 }
 

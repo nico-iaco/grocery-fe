@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {Container, Grid, SpeedDial, SpeedDialAction, useTheme} from "@mui/material";
+import {Container, Grid2, SpeedDial, SpeedDialAction, useTheme} from "@mui/material";
 import {Add, Fastfood, FoodBank, LocalGroceryStore} from "@mui/icons-material";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
@@ -47,24 +47,24 @@ function Home() {
     }
 
 
-    return <Grid container columns={8}>
-        <Grid item xs={8}>
+    return <Grid2 container columns={8}>
+        <Grid2 size={8}>
             <AppBarComponent
                 title={strings.homeTitle}
             />
-        </Grid>
+        </Grid2>
         <Container className="container">
-            <Grid item xs={8} className="container">
+            <Grid2 size={8} className="container">
                 <MealStatisticsComponent
                     mealStatistics={mealStatistics}
                     mealKcalChartLabel={strings.mealStatisticsAvgKcalPerMealTypeTitle}
                     kcalLabel={strings.mealStatisticsAvgKcalPerWeekLabel}
                     costLabel={strings.mealStatisticsAvgCostPerWeekLabel}
                 />
-            </Grid>
-            <Grid item xs={8} className="container">
+            </Grid2>
+            <Grid2 size={8} className="container">
                 <ItemStatisticsComponent itemStatistics={itemStatistics}/>
-            </Grid>
+            </Grid2>
             <SpeedDial
                 className={"fab"}
                 FabProps={fabProps}
@@ -94,7 +94,7 @@ function Home() {
                 />
             </SpeedDial>
         </Container>
-    </Grid>
+    </Grid2>
 }
 
 export default Home;

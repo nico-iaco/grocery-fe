@@ -2,7 +2,7 @@ import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumpti
 import {getCurrentItem, getCurrentMeal, getCurrentTransaction, getUser} from "../selector/Selector";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
-import {Button, Grid} from "@mui/material";
+import {Button, Grid2} from "@mui/material";
 import {FoodConsumptionDataComponent} from "./FoodConsumptionDataComponent";
 import {useNavigate} from "react-router-dom";
 import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action";
@@ -59,9 +59,9 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     }
 
 
-    return <Grid item xs={8}>
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+    return <Grid2 size={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <FoodConsumptionDataComponent
                     foodName={currentFood ? undefined : foodName}
                     foodId={currentFood?.id || ""}
@@ -77,23 +77,23 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
                     onKcalsChanged={setKcals}
                     onCostChanged={setCost}
                 />
-            </Grid>
-            <Grid item xs={8}>
-                <Grid container columns={8}>
-                    <Grid item xs={4} className="center">
+            </Grid2>
+            <Grid2 size={8}>
+                <Grid2 container columns={8}>
+                    <Grid2 size={4} className="center">
                         {
                             props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
-                    </Grid>
-                    <Grid item xs={4} className="center">
+                    </Grid2>
+                    <Grid2 size={4} className="center">
                         {
                             props.isNextAvailable && <Button color={"secondary"} onClick={onCompleted}>{strings.doneButtonLabel}</Button>
                         }
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid>
-    </Grid>
+                    </Grid2>
+                </Grid2>
+            </Grid2>
+        </Grid2>
+    </Grid2>
 }
 
 export default CompleteFoodConsumptionComponent;

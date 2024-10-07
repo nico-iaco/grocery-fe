@@ -1,7 +1,7 @@
 import {Item} from "../model/item";
 import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
-import {Button, Grid, List, Paper} from "@mui/material";
+import {Button, Grid2, List, Paper} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {setCurrentItem, setError} from "../action/Action";
 import {getCurrentItem, getUser} from "../selector/Selector";
@@ -37,13 +37,13 @@ const ChooseFoodComponent = (props: StepperComponentProps) => {
         props.onSkipClicked();
     }
 
-    return <Grid item xs={8}>
-        <Grid container columns={8}>
+    return <Grid2 size={8}>
+        <Grid2 container columns={8}>
             <SearchComponent
                 search={search}
                 onSearchChanged={setSearch}
             />
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 {
                     foodList.length > 0 ?
                         <List>
@@ -63,26 +63,26 @@ const ChooseFoodComponent = (props: StepperComponentProps) => {
                             })}
                         </List> : <ListLoadingComponent listItemNumber={8} />
                 }
-            </Grid>
-            <Grid item xs={8}>
-                <Grid container columns={8}>
-                    <Grid item xs={4} className="center">
+            </Grid2>
+            <Grid2 size={8}>
+                <Grid2 container columns={8}>
+                    <Grid2 size={4} className="center">
                         {
                             props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
-                    </Grid>
-                    <Grid item xs={4} className="center">
+                    </Grid2>
+                    <Grid2 size={4} className="center">
                         {
                             props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>{strings.skipButtonLabel}</Button>
                         }
                         {
                             props.isNextAvailable && <Button color={"secondary"} onClick={next}>{strings.nextButtonLabel}</Button>
                         }
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid>
-    </Grid>
+                    </Grid2>
+                </Grid2>
+            </Grid2>
+        </Grid2>
+    </Grid2>
 }
 
 export default ChooseFoodComponent;

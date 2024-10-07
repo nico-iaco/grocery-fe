@@ -3,7 +3,7 @@ import {
     Button,
     Container,
     Divider,
-    Grid,
+    Grid2,
     List,
     ListItem,
     ListItemButton,
@@ -61,25 +61,25 @@ const ProfilePage = () => {
     }, [])
 
     return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.profileTitle}
                     rightButton={<Button color={"inherit"} onClick={logout}>{strings.logoutButtonLabel}</Button>}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container">
-                <Grid item xs={8} container columns={8} className="container">
-                    <Grid item xs={2} className={"center"}>
+                <Grid2 size={8} container columns={8} className="container">
+                    <Grid2 size={2} className={"center"}>
                         <Avatar
                             {...stringAvatar(currentUser?.displayName || "")}
                         />
-                    </Grid>
-                    <Grid item xs={6}>
+                    </Grid2>
+                    <Grid2 size={6}>
                         <h2 className={"lobster-font"}>{strings.formatString(strings.profileGreetingsLabel, currentUser?.displayName || "")}</h2>
-                    </Grid>
-                </Grid>
-                <Grid item xs={8} className="container">
+                    </Grid2>
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <List>
                         <ListItem >
                             <ListItemIcon>
@@ -119,13 +119,13 @@ const ProfilePage = () => {
                         </ListItem>
                         <Divider />
                     </List>
-                </Grid>
-                <Grid item xs={8} className="container footer lobster-font">
+                </Grid2>
+                <Grid2 size={8} className="container footer lobster-font">
                     <p>Made with 💙 by <b><a className={"footer-link"} target={'_blank'} href={"https://github.com/nico-iaco"}>nico-iaco</a></b></p>
-                </Grid>
+                </Grid2>
             </Container>
             <LanguageSelectionDialogComponent open={open} onClose={handleLanguageChange} selectedValue={currentLanguage || 'en'}/>
-        </Grid>
+        </Grid2>
     );
 }
 

@@ -1,4 +1,4 @@
-import {Button, Grid, List, Paper} from "@mui/material";
+import {Button, Grid2, List, Paper} from "@mui/material";
 import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {useDispatch, useSelector} from "react-redux";
@@ -37,9 +37,9 @@ const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
         props.onSkipClicked();
     }
 
-    return <Grid item xs={8}>
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+    return <Grid2 size={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 {
                     transactionList.length > 0 ?
                         <List>
@@ -53,26 +53,26 @@ const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
                             })}
                         </List> : <ListLoadingComponent listItemNumber={8} />
                 }
-            </Grid>
-            <Grid item xs={8}>
-                <Grid container columns={8}>
-                    <Grid item xs={4} className="center">
+            </Grid2>
+            <Grid2 size={8}>
+                <Grid2 container columns={8}>
+                    <Grid2 size={4} className="center">
                         {
                             props.isPreviousAvailable && <Button color={"secondary"} onClick={props.onPreviousClicked}>{strings.previousButtonLabel}</Button>
                         }
-                    </Grid>
-                    <Grid item xs={4} className="center">
+                    </Grid2>
+                    <Grid2 size={4} className="center">
                         {
                             props.isSkipAvailable && <Button color={"secondary"} onClick={skip}>{strings.skipButtonLabel}</Button>
                         }
                         {
                             props.isNextAvailable && <Button color={"secondary"} onClick={next}>{strings.nextButtonLabel}</Button>
                         }
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid>
-    </Grid>
+                    </Grid2>
+                </Grid2>
+            </Grid2>
+        </Grid2>
+    </Grid2>
 }
 
 export default ChooseFoodTransactionComponent;

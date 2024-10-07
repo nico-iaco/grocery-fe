@@ -1,4 +1,4 @@
-import {Button, Container, Grid,} from "@mui/material";
+import {Button, Container, Grid2,} from "@mui/material";
 import {TransactionDataDisplayComponent} from "./TransactionDataDisplayComponent";
 
 export interface TransactionDataComponentProps {
@@ -23,7 +23,7 @@ export interface TransactionDataComponentProps {
 }
 
 export const TransactionDataComponent = (props: TransactionDataComponentProps) => {
-  return <Grid container columns={8} className={"text-center"}>
+  return <Grid2 container columns={8} className={"text-center"}>
       <Container>
           <TransactionDataDisplayComponent
               seller={props.seller}
@@ -43,7 +43,7 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
               purchaseDate={props.purchaseDate}
               onPurchaseDateChange={props.onPurchaseDateChange}
           />
-          <Grid item xs={8}>
+          <Grid2 size={8}>
               <Button
                   variant="contained"
                   color={"secondary"}
@@ -51,7 +51,7 @@ export const TransactionDataComponent = (props: TransactionDataComponentProps) =
               >
                   {props.buttonText}
               </Button>
-          </Grid>
+          </Grid2>
       </Container>
-  </Grid>
+  </Grid2>
 }

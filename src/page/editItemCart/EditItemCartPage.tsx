@@ -1,5 +1,5 @@
 import {ShoppingItem} from "../../model/shoppingItem";
-import {Button, Container, Grid} from "@mui/material";
+import {Button, Container, Grid2} from "@mui/material";
 import {ItemDataDisplayComponent} from "../../component/ItemDataDisplayComponent";
 import {TransactionDataDisplayComponent} from "../../component/TransactionDataDisplayComponent";
 import {useNavigate} from "react-router-dom";
@@ -80,10 +80,10 @@ const EditItemCartPage = () => {
     }
 
     return (
-        <Grid container columns={8} sx={{
+        <Grid2 container columns={8} sx={{
             '& .MuiTextField-root': {m: 1, width: '25ch'},
         }}>
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.editItemCartTitle}
                     leftButton={{
@@ -92,7 +92,7 @@ const EditItemCartPage = () => {
                     }}
                     rightButton={<Button onClick={deleteItemFromCart} color="inherit">{strings.deleteButtonLabel}</Button>}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container">
                 <ItemDataDisplayComponent
                     name={name}
@@ -118,11 +118,11 @@ const EditItemCartPage = () => {
                     purchaseDate={purchaseDate}
                     onPurchaseDateChange={setPurchaseDate}
                 />
-                <Grid item xs={8}>
+                <Grid2 size={8}>
                     <Button variant="contained" color="success" onClick={editItem}>{strings.editButtonLabel}</Button>
-                </Grid>
+                </Grid2>
             </Container>
-        </Grid>
+        </Grid2>
     )
 }
 

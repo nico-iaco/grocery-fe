@@ -1,4 +1,4 @@
-import {Grid, Typography} from "@mui/material";
+import {Grid2, Typography} from "@mui/material";
 
 export interface SimpleItemRowComponentProps {
     mainText: string
@@ -7,14 +7,14 @@ export interface SimpleItemRowComponentProps {
 }
 
 export const SimpleItemRowComponent = (props: SimpleItemRowComponentProps) => {
-    return <Grid item xs={8} onClick={props.onClick}>
-        <Grid container columns={8}>
-            <Grid item xs={8} className={"center"}>
+    return <Grid2 size={8} onClick={props.onClick}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8} className={"center"}>
                 <Typography variant="h5">{props.mainText}</Typography>
-            </Grid>
-            <Grid item xs={8} className="center">
+            </Grid2>
+            <Grid2 size={8} className="center">
                 <Typography variant="subtitle1">{props.subText}</Typography>
-            </Grid>
-        </Grid>
-    </Grid>
+            </Grid2>
+        </Grid2>
+    </Grid2>
 }

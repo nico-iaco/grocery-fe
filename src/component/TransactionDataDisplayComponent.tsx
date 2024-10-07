@@ -1,6 +1,6 @@
 import {
     FormControl,
-    Grid,
+    Grid2,
     InputAdornment,
     InputLabel,
     MenuItem,
@@ -11,6 +11,7 @@ import {
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {strings} from "../localization/strings";
+import dayjs from "dayjs";
 
 
 export interface TransactionDataDisplayComponentProps {
@@ -34,10 +35,10 @@ export interface TransactionDataDisplayComponentProps {
 
 export const TransactionDataDisplayComponent = (props: TransactionDataDisplayComponentProps) => {
 
-    const availableUnit = import.meta.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
+    const availableUnit = import.meta.env.VITE_AVAILABLE_UNITS?.split(",") || [];
 
     return <div>
-        <Grid item xs={8}>
+        <Grid2 size={8}>
             <TextField
                 required
                 id="outlined"
@@ -45,8 +46,8 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                 value={props.seller}
                 onChange={(event) => props.onSellerChange(event.target.value)}
             />
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <TextField
                 required
                 id="outlined"
@@ -55,8 +56,8 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                 value={props.quantity}
                 onChange={(event) => props.onQuantityChange(Number.parseFloat(event.target.value))}
             />
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <TextField
                 required
                 select
@@ -67,10 +68,10 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
             >
                 {availableUnit.map((unit: string) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
             </TextField>
-        </Grid>
+        </Grid2>
         {
             props.onAvailableQuantityChange ? 
-                <Grid item xs={8}>
+                <Grid2 size={8}>
                     <TextField
                         required
                         id="outlined"
@@ -83,12 +84,12 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                             }
                         }}
                     />
-                </Grid>
+                </Grid2>
             : null
         }
         {
             ("g" !== props.unit) && ("ml" !== props.unit) ?
-                <Grid item xs={8}>
+                <Grid2 size={8}>
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="quantity-g-required">{strings.transactionQuantityGramsLabel}</InputLabel>
                         <OutlinedInput
@@ -105,10 +106,10 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                             }
                         />
                     </FormControl>
-                </Grid>
+                </Grid2>
                 : null
         }
-        <Grid item xs={8}>
+        <Grid2 size={8}>
             <TextField
                 required
                 id="outlined"
@@ -117,38 +118,40 @@ export const TransactionDataDisplayComponent = (props: TransactionDataDisplayCom
                 value={props.price}
                 onChange={(event) => props.onPriceChange(Number.parseFloat(event.target.value))}
             />
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     label={strings.transactionExpirationDateLabel}
-                    value={props.expirationDate}
-                    minDate={new Date()}
-                    inputFormat="DD/MM/YYYY"
+                    value={dayjs(props.expirationDate)}
+                    minDate={dayjs()}
+                    format={"DD/MM/YYYY"}
+                    //inputFormat="DD/MM/YYYY"
                     onChange={(newValue) => {
                         if (newValue !== null) {
-                            props.onExpirationDateChange(new Date(newValue));
+                            props.onExpirationDateChange(newValue.toDate());
                         }
                     }}
-                    renderInput={(params) => <TextField {...params} />}
+                    //renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     label={strings.transactionPurchaseDateLabel}
-                    value={props.purchaseDate}
-                    maxDate={new Date()}
-                    inputFormat="DD/MM/YYYY"
+                    value={dayjs(props.purchaseDate)}
+                    maxDate={dayjs()}
+                    format={"DD/MM/YYYY"}
+                    //inputFormat="DD/MM/YYYY"
                     onChange={(newValue) => {
                         if (newValue !== null) {
-                            props.onPurchaseDateChange(new Date(newValue));
+                            props.onPurchaseDateChange(newValue.toDate());
                         }
                     }}
-                    renderInput={(params) => <TextField {...params} />}
+                    //renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>
-        </Grid>
+        </Grid2>
     </div>
 }

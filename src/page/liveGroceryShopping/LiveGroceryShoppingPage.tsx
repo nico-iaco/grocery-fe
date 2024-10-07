@@ -1,4 +1,4 @@
-import {Button, Container, Fab, Grid, Typography} from "@mui/material";
+import {Button, Container, Fab, Grid2, Typography} from "@mui/material";
 import {Add, ArrowBack, Edit} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -49,8 +49,8 @@ const LiveGroceryShoppingPage = () => {
 
 
     return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.liveGroceryShoppingTitle}
                     leftButton={{
@@ -58,9 +58,9 @@ const LiveGroceryShoppingPage = () => {
                         onClick: goBack
                     }}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container">
-                <Grid item xs={8} className="container">
+                <Grid2 size={8} className="container">
                     {
                         itemList.length > 0 ?
                             itemList
@@ -75,26 +75,26 @@ const LiveGroceryShoppingPage = () => {
                                 })
                             : <NoDataAvailableComponent/>
                     }
-                </Grid>
-                <Grid item xs={8} className="container">
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         <b>{strings.shoppingCartTotalLabel}</b> {total} €
                     </Typography>
-                </Grid>
-                <Grid item xs={8} className="container">
-                    <Grid container spacing={2}>
-                        <Grid item xs={6} className={"center"}>
+                </Grid2>
+                <Grid2 size={8} className="container">
+                    <Grid2 container spacing={2}>
+                        <Grid2 size={6} className={"center"}>
                             <Button variant="contained" color="success" onClick={applyShoppingList}>
                                 {strings.shoppingCartApplyButtonLabel}
                             </Button>
-                        </Grid>
-                        <Grid item xs={6} className={"center"}>
+                        </Grid2>
+                        <Grid2 size={6} className={"center"}>
                             <Button variant="contained" color="error" onClick={clearCart}>
                                 {strings.shoppingCartDiscardButtonLabel}
                             </Button>
-                        </Grid>
-                    </Grid>
-                </Grid>
+                        </Grid2>
+                    </Grid2>
+                </Grid2>
                 <Fab
                     color="secondary"
                     className={"fab"}
@@ -103,7 +103,7 @@ const LiveGroceryShoppingPage = () => {
                     <Add/>
                 </Fab>
             </Container>
-        </Grid>
+        </Grid2>
     )
 }
 

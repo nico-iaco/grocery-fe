@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Item} from "../../model/item";
 import {addItem} from "../../api/itemApis";
-import {Container, Grid} from "@mui/material";
+import {Container, Grid2} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {useDispatch, useSelector} from "react-redux";
@@ -49,10 +49,10 @@ function AddItemPage () {
 
 
     return (
-            <Grid container columns={8} sx={{
+            <Grid2 container columns={8} sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}>
-                <Grid item xs={8}>
+                <Grid2 size={8}>
                     <AppBarComponent
                         title={strings.addItemTitle}
                         leftButton={{
@@ -60,7 +60,7 @@ function AddItemPage () {
                             onClick: goBack
                         }}
                     />
-                </Grid>
+                </Grid2>
                 <Container className="container">
                     <ItemDataComponent
                         name={name}
@@ -73,7 +73,7 @@ function AddItemPage () {
                         onButtonClick={sendItemToBe}
                     />
                 </Container>
-            </Grid>
+            </Grid2>
     );
 }
 

@@ -1,5 +1,5 @@
 import {ItemStatistics} from "../model/itemStatistics";
-import {Container, Grid, List, Paper, Typography} from "@mui/material";
+import {Container, Grid2, List, Paper, Typography} from "@mui/material";
 import {Item} from "../model/item";
 import {setCurrentItem, setCurrentTabIndex} from "../action/Action";
 import {useDispatch} from "react-redux";
@@ -26,8 +26,8 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
 
 
     return <Paper>
-        <Grid container>
-            <Grid item xs={12} md={6} className="container">
+        <Grid2 container>
+            <Grid2 size={{xs: 12, md:6}} className="container">
                 <Container>
                     <Typography variant="h5" component="div">
                         <b>{strings.itemStatisticsFoodInExpirationTitle}</b>
@@ -46,8 +46,8 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                         }) : <ListLoadingComponent listItemNumber={3} />}
                     </List>
                 </Container>
-            </Grid>
-            <Grid item xs={12} md={6} className="container">
+            </Grid2>
+            <Grid2 size={{xs: 12, md:6}} className="container">
                 <Container>
                     <Typography variant="h5" component="div">
                         <b>{strings.itemStatisticsFoodAlmostFinishedTitle}</b>
@@ -65,7 +65,7 @@ export const ItemStatisticsComponent = (props: ItemStatisticsComponentProps) => 
                         }) : <ListLoadingComponent listItemNumber={3} />}
                     </List>
                 </Container>
-            </Grid>
-        </Grid>
+            </Grid2>
+        </Grid2>
     </Paper>;
 }

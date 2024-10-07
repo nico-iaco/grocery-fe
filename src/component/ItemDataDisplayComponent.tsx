@@ -1,4 +1,4 @@
-import {Box, FormControl, Grid, IconButton, InputAdornment, InputLabel, Modal, OutlinedInput} from "@mui/material";
+import {Box, FormControl, Grid2, IconButton, InputAdornment, InputLabel, Modal, OutlinedInput} from "@mui/material";
 import {CameraAlt, StoreOutlined} from "@mui/icons-material";
 import {BarcodeComponent} from "./BarcodeComponent";
 import {useState} from "react";
@@ -19,7 +19,7 @@ export const ItemDataDisplayComponent = (props: ItemDataDisplayComponentProps) =
 
     return (
         <div>
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                     <InputLabel htmlFor="name-required">{strings.itemNameLabel}</InputLabel>
                     <OutlinedInput
@@ -30,8 +30,8 @@ export const ItemDataDisplayComponent = (props: ItemDataDisplayComponentProps) =
                         onChange={(event) => props.onNameChange(event.target.value)}
                     />
                 </FormControl>
-            </Grid>
-            <Grid item xs={8}>
+            </Grid2>
+            <Grid2 size={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                     <InputLabel htmlFor="barcode-required">{strings.itemBarcodeLabel}</InputLabel>
                     <OutlinedInput
@@ -53,8 +53,8 @@ export const ItemDataDisplayComponent = (props: ItemDataDisplayComponentProps) =
                         }
                     />
                 </FormControl>
-            </Grid>
-            <Grid item xs={8}>
+            </Grid2>
+            <Grid2 size={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                     <InputLabel htmlFor="vendor-required">{strings.itemVendorLabel}</InputLabel>
                     <OutlinedInput
@@ -70,7 +70,7 @@ export const ItemDataDisplayComponent = (props: ItemDataDisplayComponentProps) =
                         }
                     />
                 </FormControl>
-            </Grid>
+            </Grid2>
             <Modal
                 open={isBarcodeReaderVisible}
                 onClose={() => setIsBarcodeReaderVisible(false)}

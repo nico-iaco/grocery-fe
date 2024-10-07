@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from "react";
-import {Container, Grid, Step, StepLabel, Stepper} from "@mui/material";
+import {Container, Grid2, Step, StepLabel, Stepper} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {ArrowBack} from "@mui/icons-material";
@@ -85,10 +85,10 @@ const AddFoodConsumptionPage = () => {
         navigate(-1);
     }
 
-    return <Grid container columns={8} sx={{
+    return <Grid2 container columns={8} sx={{
         '& .MuiTextField-root': {m: 1, width: '25ch'},
     }}>
-        <Grid item xs={8}>
+        <Grid2 size={8}>
             <AppBarComponent
                 title={strings.addFoodConsumptionTitle}
                 leftButton={{
@@ -96,9 +96,9 @@ const AddFoodConsumptionPage = () => {
                     onClick: goBack
                 }}
             />
-        </Grid>
+        </Grid2>
         <Container className="container">
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <Stepper activeStep={activeStep} alternativeLabel>
                     {steps.map(label => (
                         <Step key={label}>
@@ -111,9 +111,9 @@ const AddFoodConsumptionPage = () => {
                         _renderStepContent(activeStep, handleNext, handleBack, handleSkip)
                     }
                 </Fragment>
-            </Grid>
+            </Grid2>
         </Container>
-    </Grid>
+    </Grid2>
 
 }
 

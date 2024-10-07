@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {Item} from "../../model/item";
 import {useNavigate} from "react-router-dom";
 import {setCurrentItem, setCurrentTabIndex} from "../../action/Action";
-import {Container, Fab, Grid, List} from "@mui/material";
+import {Container, Fab, Grid2, List} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
 import {Add} from "@mui/icons-material";
 import {getUser} from "../../selector/Selector";
@@ -41,18 +41,19 @@ const ItemDashboardPage = () => {
 
 
     return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.groceryTitle}
                 />
-            </Grid>
+
+            </Grid2>
             <Container className="container">
                 <SearchComponent
                     search={search}
                     onSearchChanged={setSearch}
                 />
-                <Grid item xs={8}>
+                <Grid2 size={8}>
                     <List className="list-container">
                         {
                             isDataAvailable ?
@@ -74,7 +75,7 @@ const ItemDashboardPage = () => {
                                 : <ListLoadingComponent listItemNumber={8} />
                         }
                     </List>
-                </Grid>
+                </Grid2>
                 <Fab
                     color="secondary"
                     className={"fab"}
@@ -83,7 +84,7 @@ const ItemDashboardPage = () => {
                     <Add/>
                 </Fab>
             </Container>
-        </Grid>
+        </Grid2>
     );
 }
 

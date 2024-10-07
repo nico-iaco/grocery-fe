@@ -1,4 +1,4 @@
-import {Container, Grid} from "@mui/material";
+import {Container, Grid2} from "@mui/material";
 import {useState} from "react";
 import {Transaction} from "../../model/transaction";
 import {useNavigate, useParams} from "react-router-dom";
@@ -60,10 +60,10 @@ function AddTransactionPage() {
 
     }
 
-    return <Grid container columns={8} sx={{
+    return <Grid2 container columns={8} sx={{
         '& .MuiTextField-root': {m: 1, width: '25ch'},
     }}>
-        <Grid item xs={8}>
+        <Grid2 size={8}>
             <AppBarComponent
                 title={strings.addTransactionTitle}
                 leftButton={{
@@ -71,7 +71,7 @@ function AddTransactionPage() {
                     onClick: goBack
                 }}
             />
-        </Grid>
+        </Grid2>
         <Container className="container">
             <TransactionDataComponent
                 seller={seller}
@@ -92,7 +92,7 @@ function AddTransactionPage() {
                 onButtonClick={sendTransactionToBe}/>
         </Container>
 
-    </Grid>
+    </Grid2>
 }
 
 export default AddTransactionPage;

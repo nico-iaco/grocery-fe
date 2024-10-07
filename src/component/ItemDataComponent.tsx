@@ -1,4 +1,4 @@
-import {Button, Container, Grid,} from "@mui/material";
+import {Button, Container, Grid2,} from "@mui/material";
 import {ItemDataDisplayComponent} from "./ItemDataDisplayComponent";
 
 export interface ItemDataComponentProps {
@@ -14,7 +14,7 @@ export interface ItemDataComponentProps {
 
 export const ItemDataComponent = (props: ItemDataComponentProps) => {
 
-    return <Grid container columns={8} className={"text-center"}>
+    return <Grid2 container columns={8} className={"text-center"}>
         <Container>
             <ItemDataDisplayComponent
                 onNameChange={props.onNameChange}
@@ -24,7 +24,7 @@ export const ItemDataComponent = (props: ItemDataComponentProps) => {
                 barcode={props.barcode}
                 vendor={props.vendor}
             />
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <Button
                     variant="contained"
                     color={"secondary"}
@@ -32,7 +32,7 @@ export const ItemDataComponent = (props: ItemDataComponentProps) => {
                 >
                     {props.buttonText}
                 </Button>
-            </Grid>
+            </Grid2>
         </Container>
-    </Grid>
+    </Grid2>
 }

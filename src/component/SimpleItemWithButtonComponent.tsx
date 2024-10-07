@@ -1,4 +1,4 @@
-import {Grid, IconButton, Paper} from "@mui/material";
+import {Grid2, IconButton, Paper} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 
 
@@ -18,18 +18,18 @@ export const SimpleItemWithButtonComponent = (props: SimpleItemWithButtonCompone
             <Paper variant="outlined" style={{
                 padding: 8
             }}>
-                <Grid container columns={10}>
+                <Grid2 container columns={10}>
                     <SimpleItemRowComponent
                         mainText={props.mainText}
                         subText={props.subText}
                         onClick={props.onItemClicked}
                     />
-                    <Grid item xs={2} className="center">
+                    <Grid2 size={2} className="center">
                         <IconButton edge="end" aria-label="delete" onClick={props.onButtonClicked}>
                             {props.icon}
                         </IconButton>
-                    </Grid>
-                </Grid>
+                    </Grid2>
+                </Grid2>
             </Paper>
 
         </div>)

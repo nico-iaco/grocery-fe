@@ -5,7 +5,7 @@ import {
     FormControl,
     FormControlLabel,
     FormGroup,
-    Grid,
+    Grid2,
     InputAdornment,
     InputLabel,
     OutlinedInput
@@ -62,8 +62,8 @@ const LoginPage = () => {
     }
 
     return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.loginTitle}
                     leftButton={{
@@ -71,9 +71,9 @@ const LoginPage = () => {
                         onClick: goBack
                     }}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container text-center">
-                <Grid item xs={8} className="container">
+                <Grid2 size={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="email-required">{strings.emailLabel}</InputLabel>
                         <OutlinedInput
@@ -90,8 +90,8 @@ const LoginPage = () => {
                             }
                         />
                     </FormControl>
-                </Grid>
-                <Grid item xs={8} className="container">
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="password-required">{strings.passwordLabel}</InputLabel>
                         <OutlinedInput
@@ -108,8 +108,8 @@ const LoginPage = () => {
                             }
                         />
                     </FormControl>
-                </Grid>
-                <Grid item xs={8} className="container">
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <FormGroup>
                             <FormControlLabel
@@ -124,8 +124,8 @@ const LoginPage = () => {
                             />
                         </FormGroup>
                     </FormControl>
-                </Grid>
-                <Grid item xs={8} className="container text-center">
+                </Grid2>
+                <Grid2 size={8} className="container text-center">
                     <Button
                         variant="contained"
                         color={"secondary"}
@@ -133,9 +133,9 @@ const LoginPage = () => {
                     >
                         {strings.loginButtonLabel}
                     </Button>
-                </Grid>
+                </Grid2>
             </Container>
-        </Grid>
+        </Grid2>
     );
 }
 

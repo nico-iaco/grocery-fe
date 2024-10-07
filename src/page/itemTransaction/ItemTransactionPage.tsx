@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {Button, Container, Fab, Grid, List, Skeleton} from "@mui/material";
+import {Button, Container, Fab, Grid2, List, Skeleton} from "@mui/material";
 import {Transaction} from "../../model/transaction";
 import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -39,8 +39,8 @@ function ItemTransactionPage() {
     }
 
     return (
-        <Grid container>
-            <Grid item xs={12}>
+        <Grid2 container>
+            <Grid2 size={12}>
                 <AppBarComponent
                     title={currentItem?.name || ""}
                     leftButton={{
@@ -49,9 +49,9 @@ function ItemTransactionPage() {
                     }}
                     rightButton={<Button onClick={goToEditItemPage} color="inherit">{strings.editButtonLabel}</Button>}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container">
-                <Grid item xs={12}>
+                <Grid2 size={12}>
                     {
                         itemDetails?.image_nutrition_url ?
                             <img src={itemDetails?.image_nutrition_url} className="content-image" alt="nutrition-table"
@@ -75,7 +75,7 @@ function ItemTransactionPage() {
                             />
                         })}
                     </List>
-                </Grid>
+                </Grid2>
                 <Fab
                     color="secondary"
                     className={"fab"}
@@ -84,7 +84,7 @@ function ItemTransactionPage() {
                     <Add/>
                 </Fab>
             </Container>
-        </Grid>);
+        </Grid2>);
 }
 
 export default ItemTransactionPage;

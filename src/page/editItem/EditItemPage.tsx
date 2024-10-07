@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {deleteItem, updateItem} from "../../api/itemApis";
-import {Button, Container, Grid} from "@mui/material";
+import {Button, Container, Grid2} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {Item} from "../../model/item";
@@ -55,10 +55,10 @@ const EditItemPage = () => {
             });
     }
 
-    return <Grid container columns={8} sx={{
+    return <Grid2 container columns={8} sx={{
         '& .MuiTextField-root': {m: 1, width: '25ch'},
     }}>
-        <Grid item xs={8}>
+        <Grid2 size={8}>
             <AppBarComponent
                 title={strings.formatString(strings.editItemTitle, currentItem?.name || "").toString()}
                 leftButton={{
@@ -67,7 +67,7 @@ const EditItemPage = () => {
                 }}
                 rightButton={<Button onClick={deleteItemFromServer} color="inherit">{strings.deleteButtonLabel}</Button>}
             />
-        </Grid>
+        </Grid2>
         <Container className="container">
             <ItemDataComponent
                 name={name}
@@ -80,7 +80,7 @@ const EditItemPage = () => {
                 onButtonClick={updateItemToBe}
             />
         </Container>
-    </Grid>
+    </Grid2>
 }
 
 export default EditItemPage;

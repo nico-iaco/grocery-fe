@@ -1,6 +1,6 @@
 import {
     FormControl,
-    Grid,
+    Grid2,
     IconButton,
     InputAdornment,
     InputLabel,
@@ -58,15 +58,15 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
 
     }
 
-    return <Grid item xs={8} className={"text-center"}>
-        <Grid container columns={8}>
+    return <Grid2 size={8} className={"text-center"}>
+        <Grid2 container columns={8}>
             {
                 /**
                  * When props.foodName is undefined, the food name is not editable because it is already set by
                  * grocery-be service
                  */
                 props.foodName !== undefined ?
-                    <Grid item xs={8}>
+                    <Grid2 size={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                             <InputLabel htmlFor="food-name-required">{strings.foodConsumptionNameLabel}</InputLabel>
                             <OutlinedInput
@@ -77,9 +77,9 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                                 onChange={(event) => props.onFoodNameChanged(event.target.value)}
                             />
                         </FormControl>
-                    </Grid> : <div/>
+                    </Grid2> : <div/>
             }
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                     <InputLabel htmlFor="quantity-required">{strings.foodConsumptionQuantityLabel}</InputLabel>
                     <OutlinedInput
@@ -96,13 +96,13 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                         }
                     />
                 </FormControl>
-            </Grid>
+            </Grid2>
             {
                 /**
                  * when props.foodName is undefined, it means that is an external food so the unit can be edited
                  */
                 (props.foodName !== undefined) ?
-                    <Grid item xs={8}>
+                    <Grid2 size={8}>
                         <TextField
                             required
                             select
@@ -117,11 +117,11 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                         >
                             {availableUnit.map((unit: string) => <MenuItem key={unit} value={unit}>{unit}</MenuItem>)}
                         </TextField>
-                    </Grid> : null
+                    </Grid2> : null
             }
             {
                 (props.unit !== 'g') && (props.unit !== 'ml') ?
-                    <Grid item xs={8}>
+                    <Grid2 size={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                             <InputLabel htmlFor="quantity-g-required">{strings.foodConsumptionQuantityGramsLabel}</InputLabel>
                             <OutlinedInput
@@ -138,9 +138,9 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                                 }
                             />
                         </FormControl>
-                    </Grid> : null
+                    </Grid2> : null
             }
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                     <InputLabel htmlFor="kcals-required">{strings.foodConsumptionKcalLabel}</InputLabel>
                     <OutlinedInput
@@ -162,14 +162,14 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                         }
                     />
                 </FormControl>
-            </Grid>
+            </Grid2>
             {
                 /**
                  * When props.cost is undefined, the cost is not editable because it is already set by
                  * grocery-be service
                  */
                 props.cost !== undefined ?
-                    <Grid item xs={8}>
+                    <Grid2 size={8}>
                         <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                             <InputLabel htmlFor="cost-required">{strings.foodConsumptionCostLabel}</InputLabel>
                             <OutlinedInput
@@ -191,8 +191,8 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
                                 }
                             />
                         </FormControl>
-                    </Grid> : <div/>
+                    </Grid2> : <div/>
             }
-        </Grid>
-    </Grid>
+        </Grid2>
+    </Grid2>
 }

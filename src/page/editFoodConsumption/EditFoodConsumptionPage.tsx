@@ -2,7 +2,7 @@ import {setCurrentFoodConsumption, setError} from "../../action/Action";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentFoodConsumption, getCurrentMeal, getUser} from "../../selector/Selector";
 import {useNavigate} from "react-router-dom";
-import {Button, Container, Grid} from "@mui/material";
+import {Button, Container, Grid2} from "@mui/material";
 import {FoodConsumptionDataComponent} from "../../component/FoodConsumptionDataComponent";
 import {deleteMealFoodConsumption, updateMealFoodConsumption} from "../../api/mealApis";
 import {FoodConsumption} from "../../model/foodConsumption";
@@ -68,8 +68,8 @@ const EditFoodConsumptionPage = () => {
     }
 
 
-    return <Grid container columns={8}>
-        <Grid item xs={8}>
+    return <Grid2 container columns={8}>
+        <Grid2 size={8}>
             <AppBarComponent
                 title={strings.editFoodConsumptionTitle}
                 leftButton={{
@@ -78,11 +78,11 @@ const EditFoodConsumptionPage = () => {
                 }}
                 rightButton={<Button onClick={deleteFoodConsumptionFromServer} color="inherit">Delete</Button>}
             />
-        </Grid>
+        </Grid2>
         <Container className="container">
-            <Grid item xs={8}>
-                <Grid container columns={8}>
-                    <Grid item xs={8}>
+            <Grid2 size={8}>
+                <Grid2 container columns={8}>
+                    <Grid2 size={8}>
                         <FoodConsumptionDataComponent
                             foodName={currentFoodConsumption?.foodId !== "00000000-0000-0000-0000-000000000000" ? undefined : foodName}
                             foodId={currentFoodConsumption?.foodId || ""}
@@ -98,13 +98,13 @@ const EditFoodConsumptionPage = () => {
                             onKcalsChanged={setKcals}
                             onCostChanged={setCost}
                         />
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Grid container columns={8}>
-                            <Grid item xs={4} className="center">
+                    </Grid2>
+                    <Grid2 size={8}>
+                        <Grid2 container columns={8}>
+                            <Grid2 size={4} className="center">
 
-                            </Grid>
-                            <Grid item xs={4} className="center">
+                            </Grid2>
+                            <Grid2 size={4} className="center">
                                 {
                                     <Button
                                         color={"secondary"}
@@ -113,13 +113,13 @@ const EditFoodConsumptionPage = () => {
                                         {strings.editButtonLabel}
                                     </Button>
                                 }
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
+                            </Grid2>
+                        </Grid2>
+                    </Grid2>
+                </Grid2>
+            </Grid2>
         </Container>
-    </Grid>
+    </Grid2>
 
 }
 

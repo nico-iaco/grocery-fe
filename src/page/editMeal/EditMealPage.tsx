@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal, getUser} from "../../selector/Selector";
-import {Button, Container, Grid} from "@mui/material";
+import {Button, Container, Grid2} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {MealDataComponent} from "../../component/MealDataComponent";
@@ -65,10 +65,10 @@ const EditMealPage = () => {
 
 
     return (
-        <Grid container columns={8} sx={{
+        <Grid2 container columns={8} sx={{
             '& .MuiTextField-root': {m: 1, width: '25ch'},
         }}>
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.editMealTitle}
                     leftButton={{
@@ -77,7 +77,7 @@ const EditMealPage = () => {
                     }}
                     rightButton={<Button onClick={deleteMealFromServer} color="inherit">{strings.deleteButtonLabel}</Button>}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container">
                 <MealDataComponent
                     name={mealName}
@@ -91,7 +91,7 @@ const EditMealPage = () => {
                     buttonText={strings.editButtonLabel}
                     onButtonClick={saveMeal}/>
             </Container>
-        </Grid>)
+        </Grid2>)
 
 }
 

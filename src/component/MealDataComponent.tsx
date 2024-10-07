@@ -1,8 +1,9 @@
 import {MealType} from "../model/meal";
-import {Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Button, FormControl, Grid2, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {strings} from "../localization/strings";
+import dayjs from "dayjs";
 
 export interface MealDataComponentProps {
     name?: string
@@ -18,8 +19,8 @@ export interface MealDataComponentProps {
 }
 
 export const MealDataComponent = (props: MealDataComponentProps) => {
-    return <Grid container columns={8} className={"text-center"}>
-        <Grid item xs={8}>
+    return <Grid2 container columns={8} className={"text-center"}>
+        <Grid2 size={8}>
             <TextField
                 required
                 id="outlined"
@@ -27,8 +28,8 @@ export const MealDataComponent = (props: MealDataComponentProps) => {
                 value={props.name}
                 onChange={(event) => props.onNameChange(event.target.value)}
             />
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <TextField
                 required
                 id="outlined"
@@ -36,8 +37,8 @@ export const MealDataComponent = (props: MealDataComponentProps) => {
                 value={props.description}
                 onChange={(event) => props.onDescriptionChange(event.target.value)}
             />
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                 <InputLabel id="meal-type-select-label">{strings.mealTypeLabel}</InputLabel>
                 <Select
@@ -47,6 +48,7 @@ export const MealDataComponent = (props: MealDataComponentProps) => {
                     label={strings.mealTypeLabel}
                     value={props.mealType}
                     onChange={(event) => props.onMealTypeChange(event.target.value as MealType)}
+                    variant={"filled"}
                 >
                     <MenuItem value={MealType.BREAKFAST}>{strings.mealTypeBreakfastLabel}</MenuItem>
                     <MenuItem value={MealType.LUNCH}>{strings.mealTypeLunchLabel}</MenuItem>
@@ -55,24 +57,24 @@ export const MealDataComponent = (props: MealDataComponentProps) => {
                 </Select>
             </FormControl>
 
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
                     label={strings.mealDateLabel}
-                    value={props.date}
-                    maxDate={new Date()}
-                    inputFormat="DD/MM/YYYY HH:mm"
+                    value={dayjs(props.date)}
+                    maxDate={dayjs()}
+                    //inputFormat="DD/MM/YYYY HH:mm"
                     onChange={(newValue) => {
                         if (newValue !== null) {
-                            props.onDateChange(new Date(newValue));
+                            props.onDateChange(newValue.toDate());
                         }
                     }}
-                    renderInput={(params) => <TextField {...params} />}
+                    //renderInput={(params) => <TextField {...params} />}
                 />
             </LocalizationProvider>
-        </Grid>
-        <Grid item xs={8}>
+        </Grid2>
+        <Grid2 size={8}>
             <Button
                 variant="contained"
                 color={"secondary"}
@@ -80,7 +82,7 @@ export const MealDataComponent = (props: MealDataComponentProps) => {
             >
                 {props.buttonText}
             </Button>
-        </Grid>
-    </Grid>
+        </Grid2>
+    </Grid2>
 
 }

@@ -1,5 +1,5 @@
 import {MealStatistic} from "../model/mealStatistic";
-import {Container, Grid, Paper, Typography} from "@mui/material";
+import {Container, Grid2, Paper, Typography} from "@mui/material";
 import {getMealTypeColor} from "../utils/colorUtils";
 import {WarningAmber} from "@mui/icons-material";
 import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
@@ -29,8 +29,8 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
 
 
     return <Paper>
-        <Grid container>
-            <Grid item xs={12} md={6} className={"container"}>
+        <Grid2 container>
+            <Grid2 size={{xs: 12, md:6}} className={"container"}>
                 <Container>
                     <Typography variant="h6" className={"text-center"}>
                         <b>{props.mealKcalChartLabel}</b>
@@ -81,31 +81,31 @@ export const MealStatisticsComponent = (props: MealStatisticsProps) => {
                             </div>
                     }
                 </Container>
-            </Grid>
-            <Grid item xs={12} md={6} className={"container"}>
+            </Grid2>
+            <Grid2 size={{xs: 12, md:6}} className={"container"}>
                 <Container>
-                    <Grid container className={"center"}>
-                        <Grid item xs={12}>
+                    <Grid2 container className={"center"}>
+                        <Grid2>
                             <Typography variant="body1" component="div">
                                 <b>{props.kcalLabel}:</b> {props.mealStatistics.averageWeekCalories.toFixed(2)} kcal
                             </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
+                        </Grid2>
+                        <Grid2>
                             <Typography variant="body1" component="div">
                                 <b>{props.costLabel}:</b> {props.mealStatistics.averageWeekFoodCost.toFixed(2)} €
                             </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
+                        </Grid2>
+                        <Grid2>
                             <Typography variant="body1" component="div">
                                 <b>{strings.mealStatisticsMostEatenFoodLabel}</b> {props.mealStatistics.mostConsumedFood.foodName !== "" ?
                                 props.mealStatistics.mostConsumedFood.foodName + "  " + props.mealStatistics.mostConsumedFood.quantityUsed + "  " + props.mealStatistics.mostConsumedFood.unit
                                 : "N/A"
                             }
                             </Typography>
-                        </Grid>
-                    </Grid>
+                        </Grid2>
+                    </Grid2>
                 </Container>
-            </Grid>
-        </Grid>
+            </Grid2>
+        </Grid2>
     </Paper>
 }

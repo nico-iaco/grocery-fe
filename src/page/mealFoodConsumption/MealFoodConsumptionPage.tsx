@@ -1,4 +1,4 @@
-import {Button, Container, Fab, Grid, List} from "@mui/material";
+import {Button, Container, Fab, Grid2, List} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentMeal, getUser} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
@@ -35,8 +35,8 @@ const MealFoodConsumptionPage = () => {
         navigate(`/meal/${currentMeal?.id}/edit`);
     }
 
-    return <Grid container columns={8}>
-        <Grid item xs={8}>
+    return <Grid2 container columns={8}>
+        <Grid2 size={8}>
             <AppBarComponent
                 title={strings.mealFoodConsumptionTitle}
                 leftButton={{
@@ -45,9 +45,9 @@ const MealFoodConsumptionPage = () => {
                 }}
                 rightButton={<Button onClick={goToEditMealPage} color="inherit">{strings.editButtonLabel}</Button>}
             />
-        </Grid>
+        </Grid2>
         <Container className="container">
-            <Grid item xs={8}>
+            <Grid2 size={8}>
                 <List>
                     {
                         mealFoodConsumptionList.map(value =>
@@ -62,7 +62,7 @@ const MealFoodConsumptionPage = () => {
                             />)
                     }
                 </List>
-            </Grid>
+            </Grid2>
             <Fab
                 color="secondary"
                 className={"fab"}
@@ -71,7 +71,7 @@ const MealFoodConsumptionPage = () => {
                 <Add/>
             </Fab>
         </Container>
-    </Grid>
+    </Grid2>
 }
 
 export default MealFoodConsumptionPage;

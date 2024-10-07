@@ -1,4 +1,4 @@
-import {FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
+import {FormControl, Grid2, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {strings} from "../localization/strings";
 import {Search} from "@mui/icons-material";
 
@@ -8,7 +8,7 @@ export interface SearchComponentProps {
 }
 
 const SearchComponent = (props: SearchComponentProps) => {
-    return <Grid item xs={8}>
+    return <Grid2 size={8}>
         <FormControl variant="outlined" fullWidth>
             <InputLabel htmlFor="outlined-adornment-search">{strings.searchLabel}</InputLabel>
             <OutlinedInput
@@ -28,7 +28,7 @@ const SearchComponent = (props: SearchComponentProps) => {
                 label={strings.searchLabel}
             />
         </FormControl>
-    </Grid>
+    </Grid2>
 }
 
 export default SearchComponent;

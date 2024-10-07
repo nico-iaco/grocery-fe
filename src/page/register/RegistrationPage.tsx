@@ -1,4 +1,4 @@
-import {Button, Container, FormControl, Grid, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
+import {Button, Container, FormControl, Grid2, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
 import {ArrowBack, EmailOutlined, Key, Person, VisibilityOffOutlined, VisibilityOutlined} from "@mui/icons-material";
 import {createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
@@ -48,8 +48,8 @@ const RegistrationPage = () => {
     }
 
     return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.registerTitle}
                     leftButton={{
@@ -57,9 +57,9 @@ const RegistrationPage = () => {
                         onClick: goBack,
                     }}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container text-center">
-                <Grid item xs={8} className="container">
+                <Grid2 size={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="name-required">{strings.registrationNameLabel}</InputLabel>
                         <OutlinedInput
@@ -76,8 +76,8 @@ const RegistrationPage = () => {
                             }
                         />
                     </FormControl>
-                </Grid>
-                <Grid item xs={8} className="container">
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="email-required">{strings.registrationEmailLabel}</InputLabel>
                         <OutlinedInput
@@ -94,8 +94,8 @@ const RegistrationPage = () => {
                             }
                         />
                     </FormControl>
-                </Grid>
-                <Grid item xs={8} className="container">
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
                         <InputLabel htmlFor="password-required">{strings.registrationPasswordLabel}</InputLabel>
                         <OutlinedInput
@@ -118,8 +118,8 @@ const RegistrationPage = () => {
                             }
                         />
                     </FormControl>
-                </Grid>
-                <Grid item xs={8} className="container text-center">
+                </Grid2>
+                <Grid2 size={8} className="container text-center">
                     <Button
                         variant="contained"
                         color={"secondary"}
@@ -127,9 +127,9 @@ const RegistrationPage = () => {
                     >
                         {strings.registerButtonLabel}
                     </Button>
-                </Grid>
+                </Grid2>
             </Container>
-        </Grid>
+        </Grid2>
     );
 }
 

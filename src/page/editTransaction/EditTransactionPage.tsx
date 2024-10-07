@@ -1,4 +1,4 @@
-import {Button, Container, Grid} from "@mui/material";
+import {Button, Container, Grid2} from "@mui/material";
 import {ArrowBack} from "@mui/icons-material";
 import {TransactionDataComponent} from "../../component/TransactionDataComponent";
 import {useNavigate, useParams} from "react-router-dom";
@@ -78,10 +78,10 @@ const EditTransactionPage = () => {
             });
     }
 
-    return <Grid container columns={8} sx={{
+    return <Grid2 container columns={8} sx={{
         '& .MuiTextField-root': {m: 1, width: '25ch'},
     }}>
-        <Grid item xs={8}>
+        <Grid2 size={8}>
             <AppBarComponent
                 title={strings.editTransactionTitle}
                 leftButton={{
@@ -90,7 +90,7 @@ const EditTransactionPage = () => {
                 }}
                 rightButton={<Button onClick={deleteCurrentTransaction} color="inherit">{strings.deleteButtonLabel}</Button>}
             />
-        </Grid>
+        </Grid2>
         <Container className="container">
             <TransactionDataComponent
                 seller={seller}
@@ -112,7 +112,7 @@ const EditTransactionPage = () => {
                 buttonText={strings.editButtonLabel}
                 onButtonClick={updateTransactionToBe}/>
         </Container>
-    </Grid>
+    </Grid2>
 }
 
 export default EditTransactionPage;

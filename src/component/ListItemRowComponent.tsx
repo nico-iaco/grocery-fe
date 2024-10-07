@@ -1,4 +1,4 @@
-import {Chip, Grid, Paper, Typography} from "@mui/material";
+import {Chip, Grid2, Paper, Typography} from "@mui/material";
 
 
 export interface ListItemRowComponentProps {
@@ -20,23 +20,23 @@ export const ListItemRowComponent = (props: ListItemRowComponentProps) => {
                 borderRadius: '16px',
                 padding: '8px',
             }}>
-                <Grid container alignItems="center" onClick={props.onItemClicked}>
-                    <Grid item xs={2} className={"center"}>
+                <Grid2 container alignItems="center" onClick={props.onItemClicked}>
+                    <Grid2 size={2} className={"center"}>
                         {props.leftIcon}
-                    </Grid>
-                    <Grid item xs={8}>
-                        <Grid container direction="column">
-                            <Grid item>
+                    </Grid2>
+                    <Grid2 size={8}>
+                        <Grid2 container direction="column">
+                            <Grid2>
                                 <Typography variant="h5">
                                     {props.title}
                                 </Typography>
-                            </Grid>
-                            <Grid item>
+                            </Grid2>
+                            <Grid2>
                                 <Typography variant="subtitle1">
                                     {props.subtitle}
                                 </Typography>
-                            </Grid>
-                            <Grid item className={"center"}>
+                            </Grid2>
+                            <Grid2 className={"center"}>
                                 {props.tagList.map((tag) => {
                                     return (
                                         <Chip 
@@ -47,13 +47,13 @@ export const ListItemRowComponent = (props: ListItemRowComponentProps) => {
                                         />
                                     )
                                 })}
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={2} className={"center"} onClick={props.onRightIconClicked}>
+                            </Grid2>
+                        </Grid2>
+                    </Grid2>
+                    <Grid2 size={2} className={"center"} onClick={props.onRightIconClicked}>
                         {props.rightIcon}
-                    </Grid>
-                </Grid>
+                    </Grid2>
+                </Grid2>
             </Paper>
         </div>
     );

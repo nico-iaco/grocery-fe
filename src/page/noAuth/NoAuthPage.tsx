@@ -1,4 +1,4 @@
-import {Button, Container, Grid, Typography} from "@mui/material";
+import {Button, Container, Grid2, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {strings} from "../../localization/strings";
@@ -15,19 +15,19 @@ const NoAuthPage = () => {
     }
 
     return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.homeTitle}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container text-center">
-                <Grid item xs={8} className="container">
+                <Grid2 size={8} className="container">
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {strings.noAuthMainTitle}
                     </Typography>
-                </Grid>
-                <Grid item xs={8} className="container">
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <Button
                         variant="contained"
                         color={"secondary"}
@@ -35,8 +35,8 @@ const NoAuthPage = () => {
                     >
                         {strings.registerButtonLabel}
                     </Button>
-                </Grid>
-                <Grid item xs={8} className="container">
+                </Grid2>
+                <Grid2 size={8} className="container">
                     <Button
                         variant="contained"
                         color={"secondary"}
@@ -44,9 +44,9 @@ const NoAuthPage = () => {
                     >
                         {strings.loginButtonLabel}
                     </Button>
-                </Grid>
+                </Grid2>
             </Container>
-        </Grid>
+        </Grid2>
     );
 }
 

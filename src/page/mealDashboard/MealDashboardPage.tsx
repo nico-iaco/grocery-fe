@@ -1,9 +1,10 @@
-import {Container, Fab, Grid, IconButton, List} from "@mui/material";
+import {Container, Fab, Grid2, IconButton, List} from "@mui/material";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {Meal} from "../../model/meal";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {MealRowComponent} from "../../component/MealRowComponent";
-import {Add, CalendarMonth} from "@mui/icons-material";
+import {Add} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentMeal, setCurrentMealDate, setCurrentTabIndex} from "../../action/Action";
 import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
@@ -17,11 +18,12 @@ import {useMealList} from "../../hooks/useMealList";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {ListLoadingComponent} from "../../component/ListLoadingComponent";
 import {strings} from "../../localization/strings";
+import dayjs, {Dayjs} from "dayjs";
 
 
 const MealDashboardPage = () => {
 
-    const [date, setDate] = useState<Date>(new Date());
+    const [date, setDate] = useState<Dayjs>(dayjs());
     const selectedDate = useSelector(getCurrentMealDate);
     const [formattedDate, setFormattedDate] = useState<string>(format(new Date(selectedDate), "dd-MM-yyyy"));
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
@@ -33,10 +35,10 @@ const MealDashboardPage = () => {
     const dispatch = useDispatch();
 
 
-    const handleDateChange = (date: Date | null) => {
+    const handleDateChange = (date: Dayjs | null) => {
         if (date) {
-            dispatch(setCurrentMealDate(date));
-            setFormattedDate(format(new Date(date), "dd-MM-yyyy"));
+            dispatch(setCurrentMealDate(date.toDate()));
+            setFormattedDate(date.format("DD-MM-YYYY"));
         }
     }
 
@@ -60,8 +62,8 @@ const MealDashboardPage = () => {
 
 
     return (
-        <Grid container columns={8}>
-            <Grid item xs={8}>
+        <Grid2 container columns={8}>
+            <Grid2 size={8}>
                 <AppBarComponent
                     title={strings.formatString(strings.mealsTitle, formattedDate).toString()}
                     rightButton={<IconButton
@@ -70,39 +72,20 @@ const MealDashboardPage = () => {
                         edge={"end"}
                         sx={{mr: 2}}
                     >
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <MobileDatePicker
-                                label="Date picker"
-                                value={date}
-                                open={isPickerOpen}
-                                onOpen={() => setIsPickerOpen(true)}
-                                onClose={() => setIsPickerOpen(false)}
-                                onChange={(newValue) => {
-                                    if (newValue) {
-                                        setDate(newValue);
-                                    }
-                                }}
-                                onAccept={(newValue) => {
-                                    if (newValue) {
-                                        handleDateChange(newValue);
-                                    }
-                                }}
-                                renderInput={(params) => <CalendarMonth onClick={() => setIsPickerOpen(true)}/>}
-                            />
-                        </LocalizationProvider>
+                        <CalendarMonthIcon onClick={() => setIsPickerOpen(true)}/>
                     </IconButton>}
                 />
-            </Grid>
+            </Grid2>
             <Container className="container">
-                <Grid item xs={8}>
+                <Grid2 size={8}>
                     <MealStatisticsComponent
                         mealStatistics={mealStatistic}
                         mealKcalChartLabel={strings.mealStatisticsKcalPerMealTypeTitle}
                         kcalLabel={strings.mealStatisticsSumKcalPerDayLabel}
                         costLabel={strings.mealStatisticsSumCostPerDayLabel}
                     />
-                </Grid>
-                <Grid item xs={8}>
+                </Grid2>
+                <Grid2 size={8}>
                     <List>
                         {
                             isDataAvailable ?
@@ -124,7 +107,7 @@ const MealDashboardPage = () => {
                             :   <ListLoadingComponent listItemNumber={8} />
                         }
                     </List>
-                </Grid>
+                </Grid2>
                 <Fab
                     color="secondary"
                     className={"fab"}
@@ -133,7 +116,28 @@ const MealDashboardPage = () => {
                     <Add/>
                 </Fab>
             </Container>
-        </Grid>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <MobileDatePicker
+                    sx={{display: "none"}}
+                    label="Date picker"
+                    value={dayjs(date)}
+                    open={isPickerOpen}
+                    format={"DD-MM-YYYY"}
+                    onOpen={() => setIsPickerOpen(true)}
+                    onClose={() => setIsPickerOpen(false)}
+                    onChange={(newValue) => {
+                        if (newValue) {
+                            setDate(newValue);
+                        }
+                    }}
+                    onAccept={(newValue) => {
+                        if (newValue) {
+                            handleDateChange(newValue);
+                        }
+                    }}
+                />
+            </LocalizationProvider>
+        </Grid2>
     )
 
 }
