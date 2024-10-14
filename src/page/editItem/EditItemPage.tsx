@@ -30,7 +30,7 @@ const EditItemPage = () => {
             vendor
         }
         const controller = new AbortController();
-        updateItem(updatedItem, user?.id || "", controller)
+        updateItem(updatedItem, pantry?.id || "", controller)
             .then(goBack)
             .catch(reason => {
                 console.error(reason)
@@ -44,7 +44,7 @@ const EditItemPage = () => {
 
     const deleteItemFromServer = () => {
         const controller = new AbortController();
-        deleteItem(currentItem?.id || "", user?.id || "", controller)
+        deleteItem(currentItem?.id || "", pantry?.id || "", controller)
             .then(v => {
                 console.log(v);
                 dispatch(setCurrentItem(undefined));

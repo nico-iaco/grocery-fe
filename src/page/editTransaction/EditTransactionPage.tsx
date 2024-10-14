@@ -5,7 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {deleteItemTransaction, updateItemTransaction} from "../../api/itemApis";
 import {Transaction} from "../../model/transaction";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentTransaction, getUser} from "../../selector/Selector";
+import {getCurrentPantry, getCurrentTransaction} from "../../selector/Selector";
 import {setCurrentTransaction, setError} from "../../action/Action";
 import {useState} from "react";
 import {AppBarComponent} from "../../component/AppBarComponent";
@@ -14,7 +14,7 @@ import {strings} from "../../localization/strings";
 const EditTransactionPage = () => {
     const {itemId} = useParams();
     const currentTransaction = useSelector(getCurrentTransaction);
-    const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry)
     const dispatch = useDispatch();
     const [seller, setSeller] = useState(currentTransaction?.seller || "");
     const [quantity, setQuantity] = useState(currentTransaction?.quantity || 0);
@@ -49,7 +49,7 @@ const EditTransactionPage = () => {
 
         updateItemTransaction(itemId || "",
             updatedTransaction,
-            currentUser?.id || "",
+            currentPantry?.id || "",
             controller)
             .then(value => {
                 console.log(value);
@@ -65,7 +65,7 @@ const EditTransactionPage = () => {
         const controller = new AbortController();
         deleteItemTransaction(itemId || "",
             currentTransaction?.id || "",
-            currentUser?.id || "",
+            currentPantry?.id || "",
             controller)
             .then(result => {
                 console.log(result);

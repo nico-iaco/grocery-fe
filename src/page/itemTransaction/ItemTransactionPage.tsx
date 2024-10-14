@@ -5,7 +5,7 @@ import {TransactionRowComponent} from "../../component/TransactionRowComponent";
 import {Add, ArrowBack} from "@mui/icons-material";
 import "./ItemTransactionPage.css";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentItem, getUser} from "../../selector/Selector";
+import {getCurrentItem, getCurrentPantry, getUser} from "../../selector/Selector";
 import {setCurrentItem, setCurrentTransaction} from "../../action/Action";
 import {useTransactionList} from "../../hooks/useTransactionList";
 import {useItemDetail} from "../../hooks/useItemDetail";
@@ -17,8 +17,9 @@ function ItemTransactionPage() {
     const dispatch = useDispatch();
     const currentItem = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
-    const itemTransactionList = useTransactionList(currentUser?.id || "", currentItem?.id || "", false);
-    const itemDetails = useItemDetail(currentItem?.id || "", currentUser?.id || "");
+    const currentPantry = useSelector(getCurrentPantry);
+    const itemTransactionList = useTransactionList(currentPantry?.id || "", currentItem?.id || "", false);
+    const itemDetails = useItemDetail(currentPantry?.id || "", currentUser?.id || "");
 
     const goToAddTransactionPage = () => {
         navigate(`/item/${currentItem?.id}/transaction/add`);

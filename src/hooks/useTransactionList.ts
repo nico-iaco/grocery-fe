@@ -4,7 +4,7 @@ import {getAllItemTransaction} from "../api/itemApis";
 import {setError} from "../action/Action";
 import {useDispatch} from "react-redux";
 
-export const useTransactionList = (userId: string, foodId: string, onlyAvailable: boolean) => {
+export const useTransactionList = (pantryId: string, foodId: string, onlyAvailable: boolean) => {
     const [transactionList, setTransactionList] = useState<Transaction[]>([]);
 
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export const useTransactionList = (userId: string, foodId: string, onlyAvailable
         const controller = new AbortController();
         getAllItemTransaction(foodId || "" ,
             onlyAvailable,
-            userId,
+            pantryId,
             controller)
             .then((transactions) => {
                 setTransactionList(transactions || []);

@@ -13,7 +13,7 @@ import {Calculate, Euro} from "@mui/icons-material";
 import {getFoodKcal} from "../api/itemApis";
 import {useDispatch, useSelector} from "react-redux";
 import {setError} from "../action/Action";
-import {getUser} from "../selector/Selector";
+import {getCurrentPantry, getUser} from "../selector/Selector";
 import {strings} from "../localization/strings";
 
 export interface FoodConsumptionDataComponentProps {
@@ -35,8 +35,9 @@ export interface FoodConsumptionDataComponentProps {
 export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponentProps) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry);
 
-    const availableUnit = import.meta.env.REACT_APP_AVAILABLE_UNITS?.split(",") || [];
+    const availableUnit = import.meta.env.VITE_AVAILABLE_UNITS?.split(",") || [];
 
     const getKcals = () => {
         const quantity = props.unit === "g" ? props.quantity : props.quantityGram;
@@ -44,7 +45,7 @@ export const FoodConsumptionDataComponent = (props: FoodConsumptionDataComponent
         if (props.foodId && currentUser) {
             getFoodKcal(props.foodId,
                 quantity,
-                currentUser.id,
+                currentPantry?.id || "",
                 controller)
                 .then((response) => {
                     props.onKcalsChanged(response || 0)
