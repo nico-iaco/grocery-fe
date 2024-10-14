@@ -6,6 +6,11 @@ import {FoodConsumption} from "../model/foodConsumption";
 import {AppError} from "../model/appError";
 import {User} from "../model/user";
 import {ShoppingItem} from "../model/shoppingItem";
+import {Pantry} from "../model/pantry";
+
+export const getCurrentPantry = (state: GroceryState) : Pantry | undefined => {
+    return state.currentPantry;
+}
 
 export const getCurrentItem = (state: GroceryState) : Item | undefined => {
     return state.currentItem;

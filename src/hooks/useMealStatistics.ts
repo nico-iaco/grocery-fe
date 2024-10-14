@@ -4,7 +4,7 @@ import {getMealStatistics, getMealStatisticsInDateRange} from "../api/mealApis";
 import {setError} from "../action/Action";
 import {useDispatch} from "react-redux";
 
-export const useMealStatistics = (userId: string, startRange?: Date, endRange?: Date) => {
+export const useMealStatistics = (startRange?: Date, endRange?: Date) => {
     const initialStatistics: MealStatistic = {
         averageWeekFoodCost: 0,
         sumWeekCost: 0,
@@ -26,7 +26,7 @@ export const useMealStatistics = (userId: string, startRange?: Date, endRange?: 
     useEffect(() => {
         const controller = new AbortController();
         if (endRange && startRange) {
-            getMealStatisticsInDateRange(startRange, endRange, userId, controller)
+            getMealStatisticsInDateRange(startRange, endRange, controller)
                 .then(value => {
                     if (value) {
                         setMealStatistics(value)
@@ -38,7 +38,7 @@ export const useMealStatistics = (userId: string, startRange?: Date, endRange?: 
                     setMealStatistics(initialStatistics)
                 });
         } else {
-            getMealStatistics(userId || "", controller)
+            getMealStatistics(controller)
                 .then(value => {
                     if (value) {
                         setMealStatistics(value);

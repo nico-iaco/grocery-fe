@@ -6,7 +6,7 @@ import {setCurrentItem, setCurrentTabIndex} from "../../action/Action";
 import {Container, Fab, Grid2, List} from "@mui/material";
 import {ItemRowComponent} from "../../component/ItemRowComponent";
 import {Add} from "@mui/icons-material";
-import {getUser} from "../../selector/Selector";
+import {getCurrentPantry} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useItemList} from "../../hooks/useItemList";
 import {AppBarComponent} from "../../component/AppBarComponent";
@@ -17,9 +17,9 @@ import SearchComponent from "../../component/SearchComponent";
 const ItemDashboardPage = () => {
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
-    const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry);
     const navigate = useNavigate();
-    const {itemList, isDataAvailable} = useItemList(false, currentUser?.id || "");
+    const {itemList, isDataAvailable} = useItemList(false, currentPantry?.id || "");
 
     useEffect(() => {
         dispatch(setCurrentTabIndex(2));

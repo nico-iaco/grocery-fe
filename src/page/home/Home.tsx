@@ -6,7 +6,7 @@ import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {ItemStatisticsComponent} from "../../component/ItemStatisticsComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentTabIndex} from "../../action/Action";
-import {getUser} from "../../selector/Selector";
+import {getCurrentPantry} from "../../selector/Selector";
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useItemStatistics} from "../../hooks/useItemStatistics";
 import {AppBarComponent} from "../../component/AppBarComponent";
@@ -17,9 +17,9 @@ function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const theme = useTheme();
-    const currentUser = useSelector(getUser);
-    const mealStatistics = useMealStatistics(currentUser?.id || "");
-    const itemStatistics = useItemStatistics(currentUser?.id || "");
+    const currentPantry = useSelector(getCurrentPantry);
+    const mealStatistics = useMealStatistics();
+    const itemStatistics = useItemStatistics(currentPantry?.id || "");
 
     const fabProps = {
         style: {

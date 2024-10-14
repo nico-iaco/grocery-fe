@@ -5,7 +5,7 @@ import {TransactionDataDisplayComponent} from "../../component/TransactionDataDi
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
-import {getCurrentShoppingItem, getUser} from "../../selector/Selector";
+import {getCurrentPantry, getCurrentShoppingItem} from "../../selector/Selector";
 import {Item} from "../../model/item";
 import {Transaction} from "../../model/transaction";
 import {removeFromShoppingList, updateShoppingList} from "../../action/Action";
@@ -32,7 +32,7 @@ const EditItemCartPage = () => {
     const [expirationDate, setExpirationDate] = useState<Date>(currentShoppingItem?.transaction.expirationDate || new Date());
     const [purchaseDate, setPurchaseDate] = useState<Date>(currentShoppingItem?.transaction.purchaseDate || new Date());
 
-    const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry);
 
 
     const goBack = () => {
@@ -44,7 +44,7 @@ const EditItemCartPage = () => {
 
         const item: Item = {
             id: currentShoppingItem?.item.id || "",
-            userId: currentUser?.id || "",
+            pantryId: currentPantry?.id || "",
             name: name,
             barcode: barcode,
             vendor: vendor

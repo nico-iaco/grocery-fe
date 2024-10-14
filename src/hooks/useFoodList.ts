@@ -5,14 +5,14 @@ import {setError} from "../action/Action";
 import {useDispatch} from "react-redux";
 
 
-export const useFoodList = (onlyAvailable: boolean, userId: string) => {
+export const useFoodList = (onlyAvailable: boolean, pantryId: string) => {
     const [foodList, setFoodList] = useState<Item[]>([]);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         const controller = new AbortController();
-        getAllItems(onlyAvailable, userId || "", controller)
+        getAllItems(onlyAvailable, pantryId, controller)
             .then((items) => {
                 setFoodList(items || []);
             })

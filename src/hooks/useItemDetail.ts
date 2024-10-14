@@ -4,14 +4,14 @@ import {getItemDetail} from "../api/itemApis";
 import {setError} from "../action/Action";
 import {useDispatch} from "react-redux";
 
-export const useItemDetail = (foodId: string, userId: string) => {
+export const useItemDetail = (foodId: string, pantryId: string) => {
     const [itemDetails, setItemDetails] = useState<FoodDetail>();
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         const controller = new AbortController();
-        getItemDetail(foodId, userId, controller)
+        getItemDetail(foodId, pantryId, controller)
             .then(value => {
                 setItemDetails(value);
             })
@@ -20,7 +20,7 @@ export const useItemDetail = (foodId: string, userId: string) => {
                 dispatch(setError(reason.message));
             });
         return () => controller.abort();
-    }, [userId]);
+    }, [pantryId]);
 
     return itemDetails;
 }

@@ -1,6 +1,6 @@
 import {Button, Container, Fab, Grid2, List} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentMeal, getUser} from "../../selector/Selector";
+import {getCurrentMeal} from "../../selector/Selector";
 import {Add, ArrowBack} from "@mui/icons-material";
 import {setCurrentFoodConsumption, setCurrentMeal} from "../../action/Action";
 import {useNavigate} from "react-router-dom";
@@ -12,8 +12,7 @@ import {strings} from "../../localization/strings";
 
 const MealFoodConsumptionPage = () => {
     const currentMeal = useSelector(getCurrentMeal);
-    const currentUser = useSelector(getUser);
-    const mealFoodConsumptionList = useFoodConsumptionList(currentUser?.id || "", currentMeal?.id || "");
+    const mealFoodConsumptionList = useFoodConsumptionList(currentMeal?.id || "");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

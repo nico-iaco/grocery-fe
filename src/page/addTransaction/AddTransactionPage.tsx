@@ -7,7 +7,7 @@ import {ArrowBack} from "@mui/icons-material";
 import {TransactionDataComponent} from "../../component/TransactionDataComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {setError} from "../../action/Action";
-import {getUser} from "../../selector/Selector";
+import {getCurrentPantry} from "../../selector/Selector";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {strings} from "../../localization/strings";
 
@@ -17,7 +17,7 @@ function AddTransactionPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry);
 
     const [seller, setSeller] = useState("")
     const [quantity, setQuantity] = useState(0)
@@ -49,7 +49,7 @@ function AddTransactionPage() {
 
         addTransactionToItem(itemId || "",
             transaction,
-            currentUser?.id || "",
+            currentPantry?.id || "",
             controller)
             .then(goBack)
             .catch(reason => {

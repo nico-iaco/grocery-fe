@@ -6,7 +6,7 @@ import {useState} from "react";
 import {TransactionDataDisplayComponent} from "../../component/TransactionDataDisplayComponent";
 import {Item} from "../../model/item";
 import {useDispatch, useSelector} from "react-redux";
-import {getUser} from "../../selector/Selector";
+import {getCurrentPantry} from "../../selector/Selector";
 import {Transaction} from "../../model/transaction";
 import {ShoppingItem} from "../../model/shoppingItem";
 import {addToShoppingList} from "../../action/Action";
@@ -28,7 +28,7 @@ const AddItemCartPage = () => {
     const [expirationDate, setExpirationDate] = useState<Date>(new Date());
     const [purchaseDate, setPurchaseDate] = useState<Date>(new Date());
 
-    const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry);
 
 
     const goBack = () => {
@@ -40,7 +40,7 @@ const AddItemCartPage = () => {
 
         const item: Item = {
             id: "",
-            userId: currentUser?.id || "",
+            pantryId: currentPantry?.id || "",
             name: name,
             barcode: barcode,
             vendor: vendor

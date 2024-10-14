@@ -4,7 +4,7 @@ import {getItemStatistics} from "../api/itemApis";
 import {setError} from "../action/Action";
 import {useDispatch} from "react-redux";
 
-export const useItemStatistics = (userId: string) => {
+export const useItemStatistics = (pantryId: string) => {
     const [itemStatistics, setItemStatistics] = useState<ItemStatistics>({
         itemsAlmostFinished: null,
         itemsInExpiration: null,
@@ -14,7 +14,7 @@ export const useItemStatistics = (userId: string) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getItemStatistics(userId, controller)
+        getItemStatistics(pantryId, controller)
             .then(value => {
                 if (value) {
                     setItemStatistics(value);
