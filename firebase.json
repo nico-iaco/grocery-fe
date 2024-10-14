@@ -20,6 +20,12 @@
         }
       },
       {
+        "source": "/api/pantry/**",
+        "run": {
+          "serviceId": "grocery-be"
+        }
+      },
+      {
         "source": "/api/meal/**",
         "run": {
           "serviceId": "food-track-be"

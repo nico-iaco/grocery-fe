@@ -4,7 +4,7 @@ import {getMealFoodConsumptions} from "../api/mealApis";
 import {setError} from "../action/Action";
 import {useDispatch} from "react-redux";
 
-export const useFoodConsumptionList = (userId: string, mealId: string) => {
+export const useFoodConsumptionList = (mealId: string) => {
     const [mealFoodConsumptionList, setMealFoodConsumptionList] = useState<FoodConsumption[]>([])
 
     const dispatch = useDispatch();
@@ -12,7 +12,6 @@ export const useFoodConsumptionList = (userId: string, mealId: string) => {
     useEffect(() => {
         const controller = new AbortController();
         getMealFoodConsumptions(mealId,
-            userId,
             controller)
             .then(mealFoodConsumptionList => setMealFoodConsumptionList(mealFoodConsumptionList || []))
             .catch(reason => {

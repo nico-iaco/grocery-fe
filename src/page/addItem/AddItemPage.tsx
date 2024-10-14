@@ -7,7 +7,7 @@ import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {setCurrentItem, setError} from "../../action/Action";
-import {getUser} from "../../selector/Selector";
+import {getCurrentPantry} from "../../selector/Selector";
 import {getAnalytics, logEvent} from "firebase/analytics";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {strings} from "../../localization/strings";
@@ -18,7 +18,7 @@ function AddItemPage () {
     const [barcode, setBarcode] = useState("");
     const [vendor, setVendor] = useState("");
     const navigate = useNavigate();
-    const user = useSelector(getUser);
+    const pantry = useSelector(getCurrentPantry);
 
     const analytics = getAnalytics();
 
@@ -29,7 +29,7 @@ function AddItemPage () {
     const sendItemToBe = () => {
       const item: Item = {
           id: "",
-          userId: user?.id || "",
+          pantryId: pantry?.id || "",
           name,
           barcode,
           vendor

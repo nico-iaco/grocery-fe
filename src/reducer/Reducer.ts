@@ -9,6 +9,7 @@ import {
     SET_CURRENT_ITEM_TYPE,
     SET_CURRENT_MEAL_DATE_TYPE,
     SET_CURRENT_MEAL_TYPE,
+    SET_CURRENT_PANTRY_TYPE,
     SET_CURRENT_SHOPPING_ITEM_TYPE,
     SET_CURRENT_TAB_INDEX_TYPE,
     SET_CURRENT_TRANSACTION_TYPE,
@@ -24,8 +25,10 @@ import {FoodConsumption} from "../model/foodConsumption";
 import {AppError} from "../model/appError";
 import {User} from "../model/user";
 import {ShoppingItem} from "../model/shoppingItem";
+import {Pantry} from "../model/pantry";
 
 export interface GroceryState {
+    currentPantry: Pantry | undefined;
     currentItem: Item | undefined;
     currentTransaction: Transaction | undefined;
     currentMeal: Meal | undefined;
@@ -41,6 +44,7 @@ export interface GroceryState {
 }
 
 export const initialState: GroceryState = {
+    currentPantry: undefined,
     currentItem: undefined,
     currentTransaction: undefined,
     currentMeal: undefined,
@@ -57,6 +61,11 @@ export const initialState: GroceryState = {
 
 export function eventReducer(state: GroceryState = initialState, action: CustomAction): GroceryState {
     switch (action.type) {
+        case SET_CURRENT_PANTRY_TYPE:
+            return {
+                ...state,
+                currentPantry: action.payload
+            }
         case SET_CURRENT_ITEM_TYPE:
             return {
                 ...state,

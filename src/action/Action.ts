@@ -5,10 +5,13 @@ import {FoodConsumption} from "../model/foodConsumption";
 import {User} from "../model/user";
 import {ShoppingItem} from "../model/shoppingItem";
 import {UnknownAction} from "redux";
+import {Pantry} from "../model/pantry";
 
 export interface CustomAction extends UnknownAction{
     payload?: any;
 }
+
+export const SET_CURRENT_PANTRY_TYPE = "SET_CURRENT_PANTRY";
 
 export const SET_CURRENT_ITEM_TYPE = "SET_CURRENT_ITEM";
 
@@ -37,6 +40,13 @@ export const SET_CURRENT_MEAL_DATE_TYPE = "SET_CURRENT_MEAL_DATE";
 
 export const SET_LANGUAGE_TYPE = "SET_LANGUAGE";
 
+
+export const setCurrentPantry = (pantry?: Pantry): CustomAction => {
+    return {
+        type: SET_CURRENT_PANTRY_TYPE,
+        payload: pantry
+    };
+}
 
 export const setCurrentItem = (item?: Item): CustomAction => {
     return {

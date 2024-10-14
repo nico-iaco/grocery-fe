@@ -4,7 +4,7 @@ import {setError} from "../action/Action";
 import {getAllMealInDateRange} from "../api/mealApis";
 import {useDispatch} from "react-redux";
 
-export const useMealList = (userId: string, startRange: Date, endRange: Date) => {
+export const useMealList = (startRange: Date, endRange: Date) => {
     const [mealList, setMealList] = useState<Meal[]>([])
     const [isDataAvailable, setIsDataAvailable] = useState<boolean>(false);
 
@@ -13,7 +13,7 @@ export const useMealList = (userId: string, startRange: Date, endRange: Date) =>
     useEffect(() => {
         setIsDataAvailable(false);
         const controller = new AbortController();
-        getAllMealInDateRange(startRange, endRange, userId, controller)
+        getAllMealInDateRange(startRange, endRange, controller)
             .then(value => {
                 setMealList(value || [])
                 setIsDataAvailable(true);

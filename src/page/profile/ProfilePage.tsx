@@ -4,6 +4,7 @@ import {
     Container,
     Divider,
     Grid2,
+    IconButton,
     List,
     ListItem,
     ListItemButton,
@@ -11,9 +12,9 @@ import {
     ListItemText
 } from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {getLanguage, getUser} from "../../selector/Selector";
+import {getCurrentPantry, getLanguage, getUser} from "../../selector/Selector";
 import {getAuth} from "firebase/auth";
-import {clearUser, setCurrentTabIndex, setError, setLanguage} from "../../action/Action";
+import {clearUser, setCurrentPantry, setCurrentTabIndex, setError, setLanguage} from "../../action/Action";
 import {stringAvatar} from "../../utils/colorUtils";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {BugReport, Email, Info, Language} from "@mui/icons-material";
@@ -21,13 +22,23 @@ import './ProfilePage.css';
 import {useEffect, useState} from "react";
 import {strings} from "../../localization/strings";
 import LanguageSelectionDialogComponent from "../../component/LanguageSelectionDialogComponent";
+import PantrySelectionDialogComponent from "../../component/PantrySelectionDialogComponent";
+import KitchenIcon from '@mui/icons-material/Kitchen';
+import IosShareIcon from '@mui/icons-material/IosShare';
+import {Pantry} from "../../model/pantry";
+import PantryShareDialogComponent from "../../component/PantryShareDialogComponent";
 
 const ProfilePage = () => {
     const currentUser = useSelector(getUser);
     const currentLanguage = useSelector(getLanguage);
+    const currentPantry = useSelector(getCurrentPantry);
     const dispatch = useDispatch();
     dispatch(setCurrentTabIndex(3));
+
     const [open, setOpen] = useState(false);
+    const [pantrySelectionDialogOpen, setPantrySelectionDialogOpen] = useState(false);
+    const [pantryShareDialogOpen, setPantryShareDialogOpen] = useState(false);
+
     const appVersionDetail = import.meta.env.VITE_VERSION;
 
     const logout = () => {
@@ -50,6 +61,15 @@ const ProfilePage = () => {
         strings.setLanguage(language);
         dispatch(setLanguage(language));
         setOpen(false);
+    }
+
+    const handlePantryChooserOpen = () => {
+        setPantrySelectionDialogOpen(true);
+    }
+
+    const handlePantryChooserClose = (p: Pantry | undefined) => {
+        dispatch(setCurrentPantry(p));
+        setPantrySelectionDialogOpen(false);
     }
 
 
@@ -81,7 +101,7 @@ const ProfilePage = () => {
                 </Grid2>
                 <Grid2 size={8} className="container">
                     <List>
-                        <ListItem >
+                        <ListItem>
                             <ListItemIcon>
                                 <Email/>
                             </ListItemIcon>
@@ -96,8 +116,21 @@ const ProfilePage = () => {
                                 <ListItemText primary={strings.profileLanguageLabel} secondary={currentLanguage}/>
                             </ListItemButton>
                         </ListItem>
-                        <Divider />
-                        <ListItem >
+                        <Divider/>
+                        <ListItem disablePadding secondaryAction={
+                            <IconButton edge="end" aria-label="delete" onClick={() => setPantryShareDialogOpen(true)}>
+                                <IosShareIcon/>
+                            </IconButton>
+                        }>
+                            <ListItemButton onClick={handlePantryChooserOpen}>
+                                <ListItemIcon>
+                                    <KitchenIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary={strings.selectedPantryLabel} secondary={currentPantry?.name}/>
+                            </ListItemButton>
+                        </ListItem>
+                        <Divider/>
+                        <ListItem>
                             <ListItemIcon>
                                 <BugReport/>
                             </ListItemIcon>
@@ -107,8 +140,8 @@ const ProfilePage = () => {
                                 onClick={() => window.open("https://github.com/nico-iaco/grocery-fe/issues/new?assignees=&labels=bug&template=bug_report.md&title=BUG+-+", "_blank")}
                             />
                         </ListItem>
-                        <Divider />
-                        <ListItem >
+                        <Divider/>
+                        <ListItem>
                             <ListItemIcon>
                                 <Info/>
                             </ListItemIcon>
@@ -117,14 +150,26 @@ const ProfilePage = () => {
                                 secondary={`v2.0.0-${appVersionDetail}`}
                             />
                         </ListItem>
-                        <Divider />
+                        <Divider/>
                     </List>
                 </Grid2>
                 <Grid2 size={8} className="container footer lobster-font">
-                    <p>Made with 💙 by <b><a className={"footer-link"} target={'_blank'} href={"https://github.com/nico-iaco"}>nico-iaco</a></b></p>
+                    <p>Made with 💙 by <b><a className={"footer-link"} target={'_blank'}
+                                            href={"https://github.com/nico-iaco"}>nico-iaco</a></b></p>
                 </Grid2>
             </Container>
-            <LanguageSelectionDialogComponent open={open} onClose={handleLanguageChange} selectedValue={currentLanguage || 'en'}/>
+            <LanguageSelectionDialogComponent open={open} onClose={handleLanguageChange}
+                                              selectedValue={currentLanguage || 'en'}/>
+            {pantrySelectionDialogOpen ?
+                <PantrySelectionDialogComponent open={pantrySelectionDialogOpen} onClose={handlePantryChooserClose}
+                                                selectedValue={currentPantry}/>
+                : <div/>
+            }
+            {pantryShareDialogOpen ?
+                <PantryShareDialogComponent open={pantryShareDialogOpen} onClose={() => setPantryShareDialogOpen(false)}
+                                            pantryId={currentPantry?.id || ""}/>
+                : <div/>
+            }
         </Grid2>
     );
 }

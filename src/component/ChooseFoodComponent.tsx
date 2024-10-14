@@ -4,7 +4,7 @@ import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumpti
 import {Button, Grid2, List, Paper} from "@mui/material";
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {setCurrentItem, setError} from "../action/Action";
-import {getCurrentItem, getUser} from "../selector/Selector";
+import {getCurrentItem, getCurrentPantry} from "../selector/Selector";
 import {useFoodList} from "../hooks/useFoodList";
 import {ListLoadingComponent} from "./ListLoadingComponent";
 import {strings} from "../localization/strings";
@@ -15,10 +15,10 @@ import SearchComponent from "./SearchComponent";
 const ChooseFoodComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
-    const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry);
     const [search, setSearch] = useState("");
 
-    const foodList = useFoodList( true, currentUser?.id || "");
+    const foodList = useFoodList( true, currentPantry?.id || "");
 
     const onFoodClicked = (item: Item) => {
         dispatch(setCurrentItem(item));

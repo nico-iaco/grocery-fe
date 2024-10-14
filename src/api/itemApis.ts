@@ -46,8 +46,8 @@ export const addShoppingItemList = async (shoppingItemList: ShoppingItem[], cont
     return baseResponse.body;
 }
 
-export const getAllItems = async (onlyAvailable: boolean = false, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/?onlyAvailable=${onlyAvailable}`;
+export const getAllItems = async (onlyAvailable: boolean = false, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/?onlyAvailable=${onlyAvailable}&pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.get(url, {
         headers: {

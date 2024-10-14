@@ -6,7 +6,7 @@ import {ArrowBack} from "@mui/icons-material";
 import {ItemDataComponent} from "../../component/ItemDataComponent";
 import {Item} from "../../model/item";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentItem, getUser} from "../../selector/Selector";
+import {getCurrentItem, getCurrentPantry, getUser} from "../../selector/Selector";
 import {setCurrentItem, setError} from "../../action/Action";
 import {AppBarComponent} from "../../component/AppBarComponent";
 import {strings} from "../../localization/strings";
@@ -14,6 +14,7 @@ import {strings} from "../../localization/strings";
 const EditItemPage = () => {
     const currentItem = useSelector(getCurrentItem);
     const user = useSelector(getUser);
+    const pantry = useSelector(getCurrentPantry);
     const [name, setName] = useState(currentItem?.name || "");
     const [barcode, setBarcode] = useState(currentItem?.barcode || "");
     const [vendor, setVendor] = useState(currentItem?.vendor || "");
@@ -23,7 +24,7 @@ const EditItemPage = () => {
     const updateItemToBe = () => {
         const updatedItem: Item = {
             id: currentItem?.id || "",
-            userId: user?.id || "",
+            pantryId: pantry?.id || "",
             name,
             barcode,
             vendor
