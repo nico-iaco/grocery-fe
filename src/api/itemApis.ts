@@ -27,7 +27,7 @@ export const addItem = async (item: Item, controller: AbortController) => {
 }
 
 export const addShoppingItemList = async (shoppingItemList: ShoppingItem[], pantryId: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/all`;
+    const url = `${baseUrl}/item/all?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const request = {
         shoppingItems: shoppingItemList
