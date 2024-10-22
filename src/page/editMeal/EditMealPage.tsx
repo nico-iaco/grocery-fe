@@ -36,7 +36,6 @@ const EditMealPage = () => {
                     mealType,
                     date: mealDate
                 },
-                currentUser?.id || "",
                 controller)
                 .then(goBack)
                 .catch(reason => {
@@ -50,7 +49,6 @@ const EditMealPage = () => {
         if (currentMeal) {
             const controller = new AbortController();
             deleteMeal(currentMeal.id || "",
-                currentUser?.id || "",
                 controller)
                 .then(() => {
                     dispatch(setCurrentMeal(undefined));

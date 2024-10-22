@@ -11,7 +11,7 @@ import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {MealStatisticsComponent} from "../../component/MealStatisticsComponent";
 import {format} from "date-fns";
-import {getCurrentMealDate, getUser} from "../../selector/Selector";
+import {getCurrentMealDate} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {useMealStatistics} from "../../hooks/useMealStatistics";
 import {useMealList} from "../../hooks/useMealList";
@@ -27,9 +27,8 @@ const MealDashboardPage = () => {
     const selectedDate = useSelector(getCurrentMealDate);
     const [formattedDate, setFormattedDate] = useState<string>(format(new Date(selectedDate), "dd-MM-yyyy"));
     const [isPickerOpen, setIsPickerOpen] = useState<boolean>(false);
-    const currentUser = useSelector(getUser);
-    const {mealList, isDataAvailable} = useMealList(currentUser?.id || "", selectedDate, selectedDate);
-    const mealStatistic = useMealStatistics(currentUser?.id || "", selectedDate, selectedDate)
+    const {mealList, isDataAvailable} = useMealList(selectedDate, selectedDate);
+    const mealStatistic = useMealStatistics(selectedDate, selectedDate)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();

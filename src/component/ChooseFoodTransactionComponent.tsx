@@ -3,7 +3,7 @@ import {setCurrentItem, setCurrentTransaction, setError} from "../action/Action"
 import {SimpleItemRowComponent} from "./SimpleItemRowComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
-import {getCurrentItem, getCurrentTransaction, getUser} from "../selector/Selector";
+import {getCurrentItem, getCurrentPantry, getCurrentTransaction, getUser} from "../selector/Selector";
 import {Transaction} from "../model/transaction";
 import {format} from "date-fns";
 import {useTransactionList} from "../hooks/useTransactionList";
@@ -14,8 +14,9 @@ const ChooseFoodTransactionComponent = (props: StepperComponentProps) => {
     const dispatch = useDispatch();
     const currentFood = useSelector(getCurrentItem);
     const currentUser = useSelector(getUser);
+    const currentPantry = useSelector(getCurrentPantry);
     const currentTransaction = useSelector(getCurrentTransaction);
-    const transactionList = useTransactionList(currentUser?.id || "", currentFood?.id || "", true);
+    const transactionList = useTransactionList(currentPantry?.id || "", currentFood?.id || "", true);
 
 
 

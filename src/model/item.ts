@@ -1,7 +1,7 @@
 
 export interface Item {
     id: string
-    userId: string
+    pantryId: string
     name: string
     vendor: string
     barcode: string

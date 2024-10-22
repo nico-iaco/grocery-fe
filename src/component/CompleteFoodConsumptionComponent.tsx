@@ -1,5 +1,5 @@
 import {StepperComponentProps} from "../page/addFoodConsumption/AddFoodConsumptionPage";
-import {getCurrentItem, getCurrentMeal, getCurrentTransaction, getUser} from "../selector/Selector";
+import {getCurrentItem, getCurrentMeal, getCurrentTransaction} from "../selector/Selector";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import {Button, Grid2} from "@mui/material";
@@ -15,8 +15,8 @@ import {strings} from "../localization/strings";
 const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const currentMeal = useSelector(getCurrentMeal);
     const currentFood = useSelector(getCurrentItem);
-    const currentUser = useSelector(getUser);
     const currentTransaction = useSelector(getCurrentTransaction);
+
     const [foodName, setFoodName] = useState("");
     const [quantity, setQuantity] = useState<number>(0);
     const [unit, setUnit] = useState("");
@@ -44,7 +44,6 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
         const controller = new AbortController();
         addMealFoodConsumption(currentMeal?.id || "",
             foodConsumption,
-            currentUser?.id || "",
             controller)
             .then(() => {
                 logEvent(analytics, 'add_food_consumption', foodConsumption);

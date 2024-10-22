@@ -46,8 +46,8 @@ export const addShoppingItemList = async (shoppingItemList: ShoppingItem[], cont
     return baseResponse.body;
 }
 
-export const getAllItems = async (onlyAvailable: boolean = false, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/?onlyAvailable=${onlyAvailable}`;
+export const getAllItems = async (onlyAvailable: boolean = false, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/?onlyAvailable=${onlyAvailable}&pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.get(url, {
         headers: {
@@ -62,8 +62,8 @@ export const getAllItems = async (onlyAvailable: boolean = false, userid: string
     return baseResponse.body;
 }
 
-export const getItemStatistics = async (userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/statistics`;
+export const getItemStatistics = async (pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/statistics?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.get(url, {
         headers: {
@@ -78,8 +78,8 @@ export const getItemStatistics = async (userid: string, controller: AbortControl
     return baseResponse.body;
 }
 
-export const getItemDetail = async (itemId: string, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${itemId}/detail`;
+export const getItemDetail = async (itemId: string, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${itemId}/detail?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.get(url, {
         headers: {
@@ -94,8 +94,8 @@ export const getItemDetail = async (itemId: string, userid: string, controller: 
     return baseResponse.body;
 }
 
-export const updateItem = async (item: Item, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${item.id}`;
+export const updateItem = async (item: Item, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${item.id}?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.patch(url, item, {
         headers: {
@@ -110,8 +110,8 @@ export const updateItem = async (item: Item, userid: string, controller: AbortCo
     return baseResponse.body;
 }
 
-export const deleteItem = async (id: string, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${id}`;
+export const deleteItem = async (id: string, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${id}?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.delete(url, {
         headers: {
@@ -126,8 +126,8 @@ export const deleteItem = async (id: string, userid: string, controller: AbortCo
     return baseResponse.body;
 }
 
-export const getFoodKcal = async (foodId: string, quantity: number, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${foodId}/kcal?quantity=${quantity}`;
+export const getFoodKcal = async (foodId: string, quantity: number, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${foodId}/kcal?quantity=${quantity}?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.get(url, {
         headers: {
@@ -142,8 +142,8 @@ export const getFoodKcal = async (foodId: string, quantity: number, userid: stri
     return baseResponse.body;
 }
 
-export const addTransactionToItem = async (itemId: string, transaction: Transaction, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${itemId}/transaction`;
+export const addTransactionToItem = async (itemId: string, transaction: Transaction, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${itemId}/transaction?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.post(url, transaction, {
         headers: {
@@ -158,8 +158,8 @@ export const addTransactionToItem = async (itemId: string, transaction: Transact
     return baseResponse.body;
 }
 
-export const getAllItemTransaction = async (itemId: string, onlyAvailable: boolean = false, userId: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${itemId}/transaction?onlyAvailable=${onlyAvailable}`;
+export const getAllItemTransaction = async (itemId: string, onlyAvailable: boolean = false, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${itemId}/transaction?onlyAvailable=${onlyAvailable}&pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.get(url, {
         headers: {
@@ -174,8 +174,8 @@ export const getAllItemTransaction = async (itemId: string, onlyAvailable: boole
     return baseResponse.body;
 }
 
-export const updateItemTransaction = async (itemId: string, transaction: Transaction, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${itemId}/transaction`;
+export const updateItemTransaction = async (itemId: string, transaction: Transaction, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${itemId}/transaction?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.patch(url, transaction, {
         headers: {
@@ -190,8 +190,8 @@ export const updateItemTransaction = async (itemId: string, transaction: Transac
     return baseResponse.body;
 }
 
-export const deleteItemTransaction = async (itemId: string, transactionId: string, userid: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${itemId}/transaction/${transactionId}`;
+export const deleteItemTransaction = async (itemId: string, transactionId: string, pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/${itemId}/transaction/${transactionId}?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.delete(url, {
         headers: {

@@ -17,6 +17,8 @@ import {clearError, clearUser, setCurrentItem, setCurrentMealDate, setCurrentTab
 import {lazy, Suspense} from "react";
 import {strings} from "../localization/strings";
 import {auth, mapFirebaseUserToUser} from "../utils/firebaseUtils";
+import AddPantryPage from "./addPantry/AddPantryPage";
+import ImportPantryPage from "./importPantry/ImportPantryPage";
 
 const Home = lazy(() => import('./home/Home'));
 const AddItemPage = lazy(() => import('./addItem/AddItemPage'));
@@ -125,6 +127,8 @@ function App() {
                             <Route path="/live/add" element={currentUser ? <AddItemCartPage/> : <NoAuthComponent/>}/>
                             <Route path="/live/edit/:barcode"
                                    element={currentUser ? <EditItemCartPage/> : <NoAuthComponent/>}/>
+                            <Route path="/pantry/add" element={currentUser ? <AddPantryPage/> : <NoAuthComponent/>}/>
+                            <Route path="/pantry/import" element={currentUser ? <ImportPantryPage/> : <NoAuthComponent/>}/>
                         </Routes>
                     </Suspense>
 

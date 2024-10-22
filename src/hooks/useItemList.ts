@@ -4,7 +4,7 @@ import {setError} from "../action/Action";
 import {getAllItems} from "../api/itemApis";
 import {useDispatch} from "react-redux";
 
-export const useItemList = (onlyAvailable: boolean, userId: string) => {
+export const useItemList = (onlyAvailable: boolean, pantryId: string) => {
     const [itemList, setItemList] = useState<Item[]>([])
     const [isDataAvailable, setIsDataAvailable] = useState<boolean>(false);
 
@@ -13,7 +13,7 @@ export const useItemList = (onlyAvailable: boolean, userId: string) => {
     useEffect(() => {
         setIsDataAvailable(false);
         const controller = new AbortController();
-        getAllItems(onlyAvailable, userId, controller)
+        getAllItems(onlyAvailable, pantryId, controller)
             .then(value => {
                 if (value) {
                     setItemList(value)

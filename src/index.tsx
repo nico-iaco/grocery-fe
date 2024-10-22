@@ -6,8 +6,6 @@ import {Provider} from "react-redux";
 import {eventReducer} from "./reducer/Reducer";
 import {configureStore} from "@reduxjs/toolkit";
 import {AnalyticsComponent} from './component/AnalyticsComponent';
-import {onCLS, onINP, onLCP} from 'web-vitals';
-import {sendToAnalytics} from "./utils/analyticsUtils";
 import React from 'react';
 
 
@@ -35,6 +33,6 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-onCLS(sendToAnalytics);
-onINP(sendToAnalytics);
-onLCP(sendToAnalytics);
+//onCLS(sendToAnalytics);
+//onINP(sendToAnalytics);
+//onLCP(sendToAnalytics);

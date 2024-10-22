@@ -42,7 +42,7 @@ export const getAllMeals = async (controller: AbortController) => {
     return baseResponse.body;
 }
 
-export const getAllMealInDateRange = async (startDate: Date, endDate: Date, userid: string, controller: AbortController) => {
+export const getAllMealInDateRange = async (startDate: Date, endDate: Date, controller: AbortController) => {
     const formattedStartDate = format(new Date(startDate), "dd-MM-yyyy")
     const formattedEndDate = format(new Date(endDate), "dd-MM-yyyy")
     const url = `${baseUrl}/meal/?startRange=${formattedStartDate}&endRange=${formattedEndDate}`;
@@ -60,7 +60,7 @@ export const getAllMealInDateRange = async (startDate: Date, endDate: Date, user
     return baseResponse.body;
 }
 
-export const getMealStatistics = async (userid: string, controller: AbortController) => {
+export const getMealStatistics = async (controller: AbortController) => {
     const url = `${baseUrl}/meal/statistics/`;
     const token = await getFirebaseUserToken();
     const axiosResponse = await axios.get(url, {
@@ -76,7 +76,7 @@ export const getMealStatistics = async (userid: string, controller: AbortControl
     return baseResponse.body;
 }
 
-export const getMealStatisticsInDateRange = async (startDate: Date, endDate: Date, userid: string, controller: AbortController) => {
+export const getMealStatisticsInDateRange = async (startDate: Date, endDate: Date, controller: AbortController) => {
     const formattedStartDate = format(new Date(startDate), "dd-MM-yyyy")
     const formattedEndDate = format(new Date(endDate), "dd-MM-yyyy")
     const token = await getFirebaseUserToken();
@@ -94,7 +94,7 @@ export const getMealStatisticsInDateRange = async (startDate: Date, endDate: Dat
     return baseResponse.body;
 }
 
-export const updateMeal = async (meal: Meal, userid: string, controller: AbortController) => {
+export const updateMeal = async (meal: Meal, controller: AbortController) => {
     const url = `${baseUrl}/meal/${meal.id}/`;
     const token = await getFirebaseUserToken();
     const axiosResponse = await axios.patch(url, meal, {
@@ -110,7 +110,7 @@ export const updateMeal = async (meal: Meal, userid: string, controller: AbortCo
     return baseResponse.body;
 }
 
-export const deleteMeal = async (id: string, userid: string, controller: AbortController) => {
+export const deleteMeal = async (id: string, controller: AbortController) => {
     const url = `${baseUrl}/meal/${id}/`;
     const token = await getFirebaseUserToken();
     const axiosResponse = await axios.delete(url, {
@@ -126,7 +126,7 @@ export const deleteMeal = async (id: string, userid: string, controller: AbortCo
     return baseResponse.body;
 }
 
-export const getMealFoodConsumptions = async (mealId: string, userid: string, controller: AbortController) => {
+export const getMealFoodConsumptions = async (mealId: string, controller: AbortController) => {
     const url = `${baseUrl}/meal/${mealId}/consumption/`;
     const token = await getFirebaseUserToken();
     const axiosResponse = await axios.get(url, {
@@ -142,7 +142,7 @@ export const getMealFoodConsumptions = async (mealId: string, userid: string, co
     return baseResponse.body;
 }
 
-export const addMealFoodConsumption = async (mealId: string, foodConsumption: FoodConsumption, userid: string, controller: AbortController) => {
+export const addMealFoodConsumption = async (mealId: string, foodConsumption: FoodConsumption, controller: AbortController) => {
     const url = `${baseUrl}/meal/${mealId}/consumption/`;
     const token = await getFirebaseUserToken();
     const axiosResponse = await axios.post(
@@ -162,7 +162,7 @@ export const addMealFoodConsumption = async (mealId: string, foodConsumption: Fo
     return baseResponse.body;
 }
 
-export const updateMealFoodConsumption = async (mealId: string, foodConsumption: FoodConsumption, userid: string, controller: AbortController) => {
+export const updateMealFoodConsumption = async (mealId: string, foodConsumption: FoodConsumption, controller: AbortController) => {
     const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumption.id}/`;
     const token = await getFirebaseUserToken();
     const axiosResponse = await axios.patch(url, foodConsumption, {
@@ -178,7 +178,7 @@ export const updateMealFoodConsumption = async (mealId: string, foodConsumption:
     return baseResponse.body;
 }
 
-export const deleteMealFoodConsumption = async (mealId: string, foodConsumptionId: string, userid: string, controller: AbortController) => {
+export const deleteMealFoodConsumption = async (mealId: string, foodConsumptionId: string, controller: AbortController) => {
     const token = await getFirebaseUserToken();
     const url = `${baseUrl}/meal/${mealId}/consumption/${foodConsumptionId}/`;
     const axiosResponse = await axios.delete(url, {

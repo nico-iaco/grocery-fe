@@ -13,6 +13,7 @@ export interface IStrings extends LocalizedStringsMethods {
     addFoodConsumptionTitle: string;
     addItemTitle: string;
     addMealTitle: string;
+    addPantryTitle: string;
     addTransactionTitle: string;
     editItemCartTitle: string;
     editFoodConsumptionTitle: string;
@@ -97,6 +98,13 @@ export interface IStrings extends LocalizedStringsMethods {
     registrationNameLabel: string;
     registrationEmailLabel: string;
     registrationPasswordLabel: string;
+    selectedPantryLabel: string;
+    pantrySelectionDialogTitle: string;
+    createPantryDialogLabel: string;
+    pantryShareDialogTitle: string;
+    importPantryDialogLabel: string;
+    importPantryTitle: string;
+    importButtonLabel: string;
 }
 
 
@@ -114,6 +122,7 @@ export const strings: IStrings = new LocalizedStrings({
         addFoodConsumptionTitle: 'Add food consumption',
         addItemTitle: 'Add food',
         addMealTitle: 'Add meal',
+        addPantryTitle: 'Add pantry',
         addTransactionTitle: 'Add transaction',
         editItemCartTitle: 'Edit item',
         editFoodConsumptionTitle: 'Edit food consumption',
@@ -198,6 +207,13 @@ export const strings: IStrings = new LocalizedStrings({
         registrationNameLabel: 'Name',
         registrationEmailLabel: 'Email',
         registrationPasswordLabel: 'Password',
+        selectedPantryLabel: 'Selected pantry',
+        pantrySelectionDialogTitle: 'Select pantry',
+        createPantryDialogLabel: 'Create new pantry',
+        pantryShareDialogTitle: 'Share pantry',
+        importPantryDialogLabel: 'Import pantry',
+        importPantryTitle: 'Import pantry',
+        importButtonLabel: 'Import',
     },
     it: {
         homeTab: 'Home',
@@ -212,6 +228,7 @@ export const strings: IStrings = new LocalizedStrings({
         addFoodConsumptionTitle: 'Aggiungi consumo',
         addItemTitle: 'Aggiungi cibo',
         addMealTitle: 'Aggiungi pasto',
+        addPantryTitle: 'Aggiungi dispensa',
         addTransactionTitle: 'Aggiungi transazione',
         editItemCartTitle: 'Modifica elemento',
         editFoodConsumptionTitle: 'Modifica consumo',
@@ -296,5 +313,12 @@ export const strings: IStrings = new LocalizedStrings({
         registrationNameLabel: 'Nome',
         registrationEmailLabel: 'Email',
         registrationPasswordLabel: 'Password',
+        selectedPantryLabel: 'Dispensa selezionata',
+        pantrySelectionDialogTitle: 'Seleziona dispensa',
+        createPantryDialogLabel: 'Crea nuova dispensa',
+        pantryShareDialogTitle: 'Condividi dispensa',
+        importPantryDialogLabel: 'Importa dispensa',
+        importPantryTitle: 'Importa dispensa',
+        importButtonLabel: 'Importa',
     }
 });
