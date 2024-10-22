@@ -1,6 +1,7 @@
 import {initializeAnalytics} from "firebase/analytics";
 import {initializeApp} from "firebase/app";
 import {getAuth, User as FirebaseUser} from "firebase/auth";
+import {getPerformance} from "firebase/performance";
 import {User} from "../model/user";
 
 const apiKey = import.meta.env.VITE_API_KEY;
@@ -21,6 +22,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const analytics = initializeAnalytics(app);
 export const auth = getAuth();
+export const perf = getPerformance(app);
 
 export const getFirebaseUserToken = async () => {
     const user = getAuth().currentUser;
