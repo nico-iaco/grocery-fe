@@ -2,7 +2,7 @@ import {Button, Container, Fab, Grid2, Typography} from "@mui/material";
 import {Add, ArrowBack, Edit} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {getShoppingList} from "../../selector/Selector";
+import {getCurrentPantry, getShoppingList} from "../../selector/Selector";
 import {NoDataAvailableComponent} from "../../component/NoDataAvailableComponent";
 import {SimpleItemWithButtonComponent} from "../../component/SimpleItemWithButtonComponent";
 import {clearShoppingList, setCurrentShoppingItem, setError} from "../../action/Action";
@@ -15,6 +15,7 @@ const LiveGroceryShoppingPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const itemList = useSelector(getShoppingList);
+    const currentPantry = useSelector(getCurrentPantry);
     const total = itemList.reduce((acc, item) => acc + item.transaction.price, 0);
 
     const goToAddItemToCart = () => {
@@ -32,7 +33,9 @@ const LiveGroceryShoppingPage = () => {
 
     const applyShoppingList = () => {
         const controller = new AbortController();
-        addShoppingItemList(itemList, controller)
+        addShoppingItemList(itemList,
+            currentPantry?.id || "",
+            controller)
             .then(() => {
                 dispatch(clearShoppingList());
                 navigate(-1);
