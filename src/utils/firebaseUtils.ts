@@ -10,13 +10,12 @@ const appId = import.meta.env.VITE_APP_ID;
 const measurementId = import.meta.env.VITE_MEASUREMENT_ID;
 
 const firebaseConfig = {
-    apiKey,
+    apiKey: apiKey,
     authDomain: "foody-me.firebaseapp.com",
     projectId: "foody-me",
     storageBucket: "foody-me.appspot.com",
-    messagingSenderId,
-    appId,
-    measurementId,
+    messagingSenderId: messagingSenderId,
+    appId: appId
 };
 
 export const app = initializeApp(firebaseConfig);
