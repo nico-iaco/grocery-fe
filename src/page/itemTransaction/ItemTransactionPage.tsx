@@ -53,7 +53,7 @@ function ItemTransactionPage() {
             <Container className="container">
                 <Grid2 size={12}>
                     {
-                        itemDetails?.image_nutrition_url ?
+                        itemDetails?.image_nutrition_url || itemDetails?.image_url ?
                             <img src={itemDetails?.image_nutrition_url !== "" ? itemDetails?.image_nutrition_url : itemDetails?.image_url} className="content-image" alt="nutrition-table"
                                  height={320}/>
                             : <Skeleton variant="rectangular" height={320}/>
