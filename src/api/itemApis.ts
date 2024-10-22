@@ -10,7 +10,7 @@ import {getFirebaseUserToken} from "../utils/firebaseUtils";
 export const baseUrl = import.meta.env.VITE_BASE_URL
 
 export const addItem = async (item: Item, controller: AbortController) => {
-    const url = `${baseUrl}/item/`;
+    const url = `${baseUrl}/item/?pantryId=${item.pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.post(
         url,
@@ -26,8 +26,8 @@ export const addItem = async (item: Item, controller: AbortController) => {
     return baseResponse.body;
 }
 
-export const addShoppingItemList = async (shoppingItemList: ShoppingItem[], controller: AbortController) => {
-    const url = `${baseUrl}/item/all`;
+export const addShoppingItemList = async (shoppingItemList: ShoppingItem[], pantryId: string, controller: AbortController) => {
+    const url = `${baseUrl}/item/all?pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const request = {
         shoppingItems: shoppingItemList
