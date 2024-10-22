@@ -18,7 +18,7 @@ function ItemTransactionPage() {
     const currentItem = useSelector(getCurrentItem);
     const currentPantry = useSelector(getCurrentPantry);
     const itemTransactionList = useTransactionList(currentPantry?.id || "", currentItem?.id || "", false);
-    const itemDetails = useItemDetail(currentPantry?.id || "", currentPantry?.id || "");
+    const itemDetails = useItemDetail(currentItem?.id || "", currentPantry?.id || "");
 
     const goToAddTransactionPage = () => {
         navigate(`/item/${currentItem?.id}/transaction/add`);
