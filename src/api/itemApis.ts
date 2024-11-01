@@ -127,7 +127,7 @@ export const deleteItem = async (id: string, pantryId: string, controller: Abort
 }
 
 export const getFoodKcal = async (foodId: string, quantity: number, pantryId: string, controller: AbortController) => {
-    const url = `${baseUrl}/item/${foodId}/kcal?quantity=${quantity}?pantryId=${pantryId}`;
+    const url = `${baseUrl}/item/${foodId}/kcal?quantity=${quantity}&pantryId=${pantryId}`;
     const token = await getFirebaseUserToken()
     const axiosResponse = await axios.get(url, {
         headers: {

@@ -22,7 +22,7 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
     const [unit, setUnit] = useState("");
     const [quantityGram, setQuantityGram] = useState<number>(0);
     const [kcals, setKcals] = useState<number>(0);
-    const [cost, setCost] = useState<number>(0);
+    const [cost, setCost] = useState<number>(currentTransaction?.price || 0);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const CompleteFoodConsumptionComponent = (props: StepperComponentProps) => {
                     unit={currentTransaction ? currentTransaction.unit : unit}
                     quantityGram={quantityGram}
                     kcals={kcals}
-                    cost={currentFood ? undefined : cost}
+                    cost={cost}
                     onFoodNameChanged={setFoodName}
                     onQuantityChanged={setQuantity}
                     onUnitChanged={setUnit}
